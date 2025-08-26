@@ -9,7 +9,7 @@ import {
   inputStyles,
   primaryButtonStyles,
   outlineButtonStyles
-} from "../../styles/styled";
+} from "../../styles/styled-components";
 
 interface TimelineFilterProps {
   startDateTime: string;
@@ -109,7 +109,7 @@ const Button = styled.button<{
       case "outline":
         return outlineButtonStyles(props.theme);
       default:
-        return primaryButtonStyles;
+        return primaryButtonStyles(props.theme);
     }
   }}
 
