@@ -1207,3 +1207,182 @@ export const TimelineFilterButtonGrid = css`
 export const TimelineFilterButton = css`
   flex: 1;
 `;
+
+// Additional styled components for inline styles
+export const FilterModalHeaderTitle = styled.h2`
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+export const FilterModalSearchIconStyled = styled.div`
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+`;
+
+export const FilterModalSearchInputStyled = styled.input`
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+`;
+
+export const FilterModalSectionContentStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+`;
+
+export const FilterModalItemTitleStyled = styled.span`
+  font-size: 16px;
+  font-weight: 400;
+`;
+
+export const FilterModalItemTitleActiveStyled = styled.span`
+  font-size: 16px;
+  font-weight: 600;
+`;
+
+export const FilterModalItemCountStyled = styled.span`
+  margin-left: 8px;
+  font-size: 12px;
+  background-color: hsl(var(--primary));
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+`;
+
+export const FilterModalSectionSearchIconStyled = styled.div`
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+`;
+
+export const FilterModalSectionSearchInputStyled = styled.input`
+  width: 100%;
+  padding-left: 36px;
+  padding-right: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+  font-size: 13px;
+  background-color: hsl(var(--muted));
+  color: hsl(var(--foreground));
+`;
+
+export const FilterModalOptionItemStyled = styled.div<{ isSelected?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: ${props => props.isSelected ? "hsl(var(--accent))" : "transparent"};
+  margin-bottom: 2px;
+`;
+
+export const FilterModalOptionTextStyled = styled.span`
+  font-size: 14px;
+`;
+
+export const FilterModalCheckIconStyled = styled.svg`
+  color: white;
+`;
+
+export const FilterModalFooterClearButtonStyled = styled(Button)`
+  margin-bottom: 8px;
+  width: 100%;
+`;
+
+export const FilterModalFooterApplyButtonStyled = styled(Button)`
+  width: 100%;
+`;
+
+export const TableCellClickableStyled = styled(TableCell)`
+  cursor: pointer;
+`;
+
+export const TableEmptyStateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+`;
+
+export const TableEmptyStateIcon = styled.div`
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 16px;
+`;
+
+export const TableEmptyStateTitle = styled.div`
+  font-size: 18px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin-bottom: 8px;
+`;
+
+export const TableEmptyStateDescription = styled.div`
+  font-size: 14px;
+  color: hsl(var(--muted-foreground));
+`;
+
+export const TimelineFilterContentStyled = styled(SelectContent)`
+  width: 380px;
+  padding: 16px;
+`;
+
+export const TimelineFilterSectionStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+export const TimelineFilterLabelStyled = styled.label`
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+`;
+
+export const TimelineFilterInputGridStyled = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+`;
+
+export const TimelineFilterNoteStyled = styled.div`
+  font-size: 12px;
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+`;
+
+export const TimelineFilterButtonGridStyled = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
+export const TimelineFilterButtonStyled = styled(Button)`
+  flex: 1;
+`;
+
+export const FilterModalSearchContainerWithMargin = styled(MainFilterSearch)`
+  margin-bottom: 24px;
+`;
+
+export const FilterModalSearchContainerSmallMargin = styled(MainFilterSearch)`
+  margin-bottom: 12px;
+`;
