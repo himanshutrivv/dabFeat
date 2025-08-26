@@ -27,14 +27,9 @@ import {
   FilterResults,
   ErrorContainer,
   ErrorText,
+  AllFiltersButton,
+  ClearAllFiltersButton,
   RetryButton,
-  AllFiltersButtonStyle,
-  AllFiltersButtonHoverStyle,
-  AllFiltersButtonLeaveStyle,
-  ClearAllFilterButtonStyle,
-  ClearAllFilterButtonHoverStyle,
-  ClearAllFilterButtonLeaveStyle,
-  RetryButtonStyle,
 } from "./style";
 
 import DashboardTable from "./table";
