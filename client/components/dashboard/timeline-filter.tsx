@@ -112,7 +112,9 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
           <TimelineFilterContentStyled className="filter-content">
             <TimelineFilterSectionStyled>
               <div>
-                <TimelineFilterLabelStyled>Start Date & Time</TimelineFilterLabelStyled>
+                <TimelineFilterLabelStyled>
+                  Start Date & Time
+                </TimelineFilterLabelStyled>
                 <TimelineFilterInputGridStyled>
                   <TimelineFilterInput
                     type="date"
@@ -142,7 +144,9 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                 </TimelineFilterInputGridStyled>
               </div>
               <div>
-                <TimelineFilterLabelStyled>End Date & Time</TimelineFilterLabelStyled>
+                <TimelineFilterLabelStyled>
+                  End Date & Time
+                </TimelineFilterLabelStyled>
                 <TimelineFilterInputGridStyled>
                   <TimelineFilterInput
                     type="date"

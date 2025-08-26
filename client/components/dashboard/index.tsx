@@ -94,7 +94,8 @@ export default function TaskManagementDashboard() {
         target.closest("[data-dropdown-container]") ||
         target.closest("[data-modal-container]") ||
         target.closest(".filter-content") ||
-        (target.closest("button") && target.closest("[data-dropdown-container]"))
+        (target.closest("button") &&
+          target.closest("[data-dropdown-container]"))
       ) {
         return;
       }
@@ -145,7 +146,10 @@ export default function TaskManagementDashboard() {
       }
     };
 
-    console.log("Dashboard effect triggered, selectedBusiness:", selectedBusiness);
+    console.log(
+      "Dashboard effect triggered, selectedBusiness:",
+      selectedBusiness,
+    );
     fetchData();
   }, []);
 
@@ -501,11 +505,13 @@ export default function TaskManagementDashboard() {
                     ))}
 
                   <FilterGroup>
-                    <AllFiltersButton onClick={() => {
-                      setOpenFilterDropdowns({});
-                      setShowTimelineFilter(false);
-                      setShowMainFilter(true);
-                    }}>
+                    <AllFiltersButton
+                      onClick={() => {
+                        setOpenFilterDropdowns({});
+                        setShowTimelineFilter(false);
+                        setShowMainFilter(true);
+                      }}
+                    >
                       <Filter size={16} />
                       <span>All Filters</span>
                     </AllFiltersButton>

@@ -165,7 +165,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
                         </FilterModalItemCountStyled>
                       </FilterModalItemTitleActiveStyled>
                     ) : (
-                      <FilterModalItemTitleStyled>{label}</FilterModalItemTitleStyled>
+                      <FilterModalItemTitleStyled>
+                        {label}
+                      </FilterModalItemTitleStyled>
                     )}
                     <FilterModalExpandIcon isExpanded={isExpanded}>
                       {isExpanded ? (
@@ -216,7 +218,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
                               <FilterModalOptionTextStyled>
                                 {option}
                               </FilterModalOptionTextStyled>
-                              <FilterModalCheckboxContainer selected={isSelected}>
+                              <FilterModalCheckboxContainer
+                                selected={isSelected}
+                              >
                                 {isSelected && (
                                   <FilterModalCheckIconStyled
                                     width={12}
@@ -250,7 +254,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
               Clear all ({activeFilters.length})
             </FilterModalButton>
           )}
-          <FilterModalButton onClick={handleApplyFilters}>Apply Filters</FilterModalButton>
+          <FilterModalButton onClick={handleApplyFilters}>
+            Apply Filters
+          </FilterModalButton>
         </FilterModalFooterContainer>
       </FilterModalContainer>
     </>

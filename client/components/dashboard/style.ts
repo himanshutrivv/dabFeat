@@ -764,7 +764,7 @@ export const TableCell = styled.td`
 
 export const TableCellClickableStyled = styled(TableCell)`
   cursor: pointer;
-  
+
   &:hover {
     background-color: hsl(var(--accent) / 0.5);
   }
@@ -866,7 +866,9 @@ export const FilterModalListItem = styled.div`
   }
 `;
 
-export const FilterModalItemHeaderContainer = styled.div<{ isActive?: boolean }>`
+export const FilterModalItemHeaderContainer = styled.div<{
+  isActive?: boolean;
+}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
