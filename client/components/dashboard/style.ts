@@ -198,11 +198,6 @@ export const ErrorText = styled.div`
   font-size: 16px;
 `;
 
-export const RetryButton = css`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
 
 export const EmptyState = css`
   display: flex;
