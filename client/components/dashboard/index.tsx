@@ -117,11 +117,14 @@ export default function TaskManagementDashboard() {
         setError(null);
 
         const bussId = selectedBusiness?.bussId || "1";
+        console.log("Fetching dashboard data for business:", bussId);
 
         const response = await srGetDashboardTableData({
           bussId: bussId,
           filterData: null,
         });
+
+        console.log("Dashboard data received:", response);
         setData(response);
         setFilteredData(response.tableData);
 
@@ -132,16 +135,19 @@ export default function TaskManagementDashboard() {
           }
         });
         setFilters(initialFilters);
+        console.log("Dashboard initialized successfully");
       } catch (err) {
         console.error("Dashboard fetch error:", err);
         setError("Failed to initialize dashboard data.");
       } finally {
         setLoading(false);
+        console.log("Loading set to false");
       }
     };
 
+    console.log("Dashboard effect triggered, selectedBusiness:", selectedBusiness);
     fetchData();
-  }, [selectedBusiness]);
+  }, []);
 
   // Apply filters and search
   useEffect(() => {
