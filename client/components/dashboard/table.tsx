@@ -1,5 +1,4 @@
 "use client";
-/** @jsxImportSource @emotion/react */
 import React from "react";
 import {
   TableContainer,
@@ -16,7 +15,6 @@ import {
   EmptyIcon,
   EmptyTitle,
   EmptyDescription,
-  TableCellClickable,
 } from "./style";
 import { Database } from "lucide-react";
 
@@ -76,7 +74,7 @@ const DashboardTable: React.FC<DashboardTableProps> = ({
                           e.preventDefault();
                           onCellClick(row[column.key] || "");
                         }}
-                        css={TableCellClickable}
+                        style={{ cursor: "pointer" }}
                         title={`Click to copy: ${cellValue}`}
                       >
                         {cellValue}
@@ -90,12 +88,23 @@ const DashboardTable: React.FC<DashboardTableProps> = ({
         </TableScrollContainer>
 
         {data.length === 0 && (
-          <div css={EmptyState}>
-            <div css={EmptyIcon}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "60px 24px",
+              textAlign: "center",
+            }}
+          >
+            <div style={{ color: "hsl(var(--muted-foreground))", marginBottom: 16 }}>
               <Database size={48} />
             </div>
-            <div css={EmptyTitle}>No transactions found</div>
-            <div css={EmptyDescription}>
+            <div style={{ fontSize: 18, fontWeight: 600, color: "hsl(var(--foreground))", marginBottom: 8 }}>
+              No transactions found
+            </div>
+            <div style={{ fontSize: 14, color: "hsl(var(--muted-foreground))" }}>
               Try adjusting your search criteria or filters
             </div>
           </div>
