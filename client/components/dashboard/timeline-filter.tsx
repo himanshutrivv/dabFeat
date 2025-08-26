@@ -1,7 +1,6 @@
 "use client";
-/** @jsxImportSource @emotion/react */
 import React, { useCallback } from "react";
-import { Filter, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import {
   FilterGroup,
   SelectContainer,
@@ -10,13 +9,6 @@ import {
   SelectContent,
   TimelineInput,
   Button,
-  TimelineFilterContent,
-  TimelineFilterSection,
-  TimelineFilterLabel,
-  TimelineFilterInputGrid,
-  TimelineFilterNote,
-  TimelineFilterButtonGrid,
-  TimelineFilterButton,
 } from "./style";
 
 interface TimelineFilterProps {
@@ -103,13 +95,13 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
           <ChevronDown size={16} />
         </SelectTrigger>
         {isOpen && (
-          <SelectContent css={TimelineFilterContent}>
-            <div css={TimelineFilterSection}>
+          <SelectContent style={{ width: "380px", padding: "16px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <div>
-                <label css={TimelineFilterLabel}>
+                <label style={{ fontSize: "14px", fontWeight: 500, marginBottom: "8px", display: "block" }}>
                   Start Date & Time
                 </label>
-                <div css={TimelineFilterInputGrid}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
                   <TimelineInput
                     type="date"
                     value={startDateTime ? startDateTime.split(" ")[0].split("/").reverse().join("-") : ""}
@@ -126,10 +118,10 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                 </div>
               </div>
               <div>
-                <label css={TimelineFilterLabel}>
+                <label style={{ fontSize: "14px", fontWeight: 500, marginBottom: "8px", display: "block" }}>
                   End Date & Time
                 </label>
-                <div css={TimelineFilterInputGrid}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
                   <TimelineInput
                     type="date"
                     value={endDateTime ? endDateTime.split(" ")[0].split("/").reverse().join("-") : ""}
@@ -145,22 +137,22 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                   />
                 </div>
               </div>
-              <div css={TimelineFilterNote}>
+              <div style={{ fontSize: "12px", color: "hsl(var(--muted-foreground))", textAlign: "center" }}>
                 Maximum time range: 5 minutes
               </div>
-              <div css={TimelineFilterButtonGrid}>
+              <div style={{ display: "flex", gap: "8px" }}>
                 <Button
                   size="sm"
                   variant="outline"
                   onClick={(e) => handleButtonClick(e, "reset")}
-                  css={TimelineFilterButton}
+                  style={{ flex: 1 }}
                 >
                   Reset
                 </Button>
                 <Button
                   size="sm"
                   onClick={(e) => handleButtonClick(e, "apply")}
-                  css={TimelineFilterButton}
+                  style={{ flex: 1 }}
                 >
                   Apply
                 </Button>
