@@ -109,7 +109,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
           <ChevronDown size={16} />
         </TimelineFilterSelectTrigger>
         {isOpen && (
-          <TimelineFilterContentStyled>
+          <TimelineFilterContentStyled className="filter-content">
             <TimelineFilterSectionStyled>
               <div>
                 <TimelineFilterLabelStyled>Start Date & Time</TimelineFilterLabelStyled>
