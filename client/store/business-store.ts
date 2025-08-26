@@ -1,16 +1,12 @@
-import { create } from 'zustand';
-
-interface Business {
+// Simple business store hook
+export interface Business {
   bussId: string;
   name: string;
 }
 
-interface BusinessStore {
-  selectedBusiness: Business | null;
-  setSelectedBusiness: (business: Business) => void;
-}
-
-export const useBusinessStore = create<BusinessStore>((set) => ({
-  selectedBusiness: { bussId: '1', name: 'Default Business' },
-  setSelectedBusiness: (business) => set({ selectedBusiness: business }),
-}));
+// Mock business store hook
+export const useBusinessStore = () => {
+  return {
+    selectedBusiness: { bussId: '1', name: 'Default Business' } as Business | null,
+  };
+};
