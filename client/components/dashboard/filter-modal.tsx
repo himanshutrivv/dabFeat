@@ -108,11 +108,17 @@ const FilterModal: React.FC<FilterModalProps> = ({
   );
 
   const handleApplyFilters = useCallback(
-    (e: React.MouseEvent) => {
+    async (e: React.MouseEvent) => {
       e.stopPropagation();
-      onClose();
+      try {
+        await onApplyFilters();
+        onClose();
+      } catch (error) {
+        console.error("Error applying filters:", error);
+        // Keep modal open if there's an error
+      }
     },
-    [onClose],
+    [onApplyFilters, onClose],
   );
 
   if (!isOpen) return null;
