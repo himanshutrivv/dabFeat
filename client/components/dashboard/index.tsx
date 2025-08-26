@@ -67,6 +67,14 @@ export interface DashboardResponse {
   columnData: ColumnData;
 }
 
+export interface FilterDataItem {
+  key: string;
+  operator: "EQUALS" | "IN" | "BETWEEN" | "LIKE";
+  value?: string | string[];
+  from?: string;
+  to?: string;
+}
+
 export default function TaskManagementDashboard() {
   const [data, setData] = useState<DashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
