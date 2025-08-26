@@ -11,10 +11,11 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  EmptyState,
-  EmptyIcon,
-  EmptyTitle,
-  EmptyDescription,
+  TableCellClickableStyled,
+  TableEmptyStateContainer,
+  TableEmptyStateIcon,
+  TableEmptyStateTitle,
+  TableEmptyStateDescription,
 } from "./style";
 import { Database } from "lucide-react";
 
@@ -67,18 +68,17 @@ const DashboardTable: React.FC<DashboardTableProps> = ({
                   {visibleColumns.map((column) => {
                     const cellValue = row[column.key] || "-";
                     return (
-                      <TableCell
+                      <TableCellClickableStyled
                         key={column.key}
                         onClick={(e) => {
                           e.stopPropagation();
                           e.preventDefault();
                           onCellClick(row[column.key] || "");
                         }}
-                        style={{ cursor: "pointer" }}
                         title={`Click to copy: ${cellValue}`}
                       >
                         {cellValue}
-                      </TableCell>
+                      </TableCellClickableStyled>
                     );
                   })}
                 </TableRow>
@@ -88,26 +88,15 @@ const DashboardTable: React.FC<DashboardTableProps> = ({
         </TableScrollContainer>
 
         {data.length === 0 && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "60px 24px",
-              textAlign: "center",
-            }}
-          >
-            <div style={{ color: "hsl(var(--muted-foreground))", marginBottom: 16 }}>
+          <TableEmptyStateContainer>
+            <TableEmptyStateIcon>
               <Database size={48} />
-            </div>
-            <div style={{ fontSize: 18, fontWeight: 600, color: "hsl(var(--foreground))", marginBottom: 8 }}>
-              No transactions found
-            </div>
-            <div style={{ fontSize: 14, color: "hsl(var(--muted-foreground))" }}>
+            </TableEmptyStateIcon>
+            <TableEmptyStateTitle>No transactions found</TableEmptyStateTitle>
+            <TableEmptyStateDescription>
               Try adjusting your search criteria or filters
-            </div>
-          </div>
+            </TableEmptyStateDescription>
+          </TableEmptyStateContainer>
         )}
       </TableWrapper>
     </TableContainer>
