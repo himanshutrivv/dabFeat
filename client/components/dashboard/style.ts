@@ -1044,14 +1044,7 @@ export const FilterModalOptionItemSelected = css`
 
 
 
-export const FilterModalFooterClearButton = css`
-  margin-bottom: 8px;
-  width: 100%;
-`;
 
-export const FilterModalFooterApplyButton = css`
-  width: 100%;
-`;
 
 export const DashboardMainFilterButton = css`
   display: flex;
@@ -1128,10 +1121,6 @@ export const TimelineFilterNote = css`
   text-align: center;
 `;
 
-export const TimelineFilterButtonGrid = css`
-  display: flex;
-  gap: 8px;
-`;
 
 
 // Additional styled components for inline styles
