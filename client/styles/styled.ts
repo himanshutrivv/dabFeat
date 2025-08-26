@@ -55,7 +55,7 @@ export const buttonBaseStyles = css`
 `;
 
 const buttonVariant = (bg: string, fg: string) => css`
-  ${buttonBaseStyles()}
+  ${buttonBaseStyles}
   background-color: ${bg};
   color: ${fg};
 
@@ -80,7 +80,7 @@ export const secondaryButtonStyles = () => buttonVariant(
 );
 
 export const outlineButtonStyles = (themeParam?: Theme) => css`
-  ${buttonBaseStyles()}
+  ${buttonBaseStyles}
   border: 1px solid ${(themeParam || theme).colors?.border};
   background-color: ${(themeParam || theme).colors?.background};
   color: ${(themeParam || theme).colors?.foreground};
@@ -92,7 +92,7 @@ export const outlineButtonStyles = (themeParam?: Theme) => css`
 `;
 
 export const ghostButtonStyles = () => css`
-  ${buttonBaseStyles()}
+  ${buttonBaseStyles}
   background-color: transparent;
   color: ${theme.colors?.foreground};
 
