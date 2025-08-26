@@ -601,6 +601,10 @@ export const SelectContent = styled.div`
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
+  &.filter-content {
+    /* Additional styling for filter content identification */
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -1098,6 +1102,10 @@ export const FilterDropdownSelectContent = styled.div`
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
+  &.filter-content {
+    /* Additional styling for filter content identification */
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -1216,6 +1224,10 @@ export const TimelineFilterContentStyled = styled(SelectContent)`
   max-width: calc(100vw - 32px);
   right: auto;
   min-width: 320px;
+
+  &.filter-content {
+    /* Timeline filter specific styling */
+  }
 
   @media (max-width: 768px) {
     width: 300px;
