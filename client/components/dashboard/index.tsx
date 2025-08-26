@@ -27,14 +27,17 @@ import {
   FilterResults,
   ErrorContainer,
   ErrorText,
-  RetryButton,
+  RetryButton
+} from "./style";
+import {
   AllFiltersButtonStyle,
   AllFiltersButtonHoverStyle,
   AllFiltersButtonLeaveStyle,
   ClearAllFilterButtonStyle,
   ClearAllFilterButtonHoverStyle,
-  ClearAllFilterButtonLeaveStyle
-} from "./style";
+  ClearAllFilterButtonLeaveStyle,
+  RetryButtonStyle
+} from "./index.styles";
 
 import DashboardTable from "./table";
 import FilterDropdown from "./filter-dropdown";
@@ -438,7 +441,7 @@ export default function TaskManagementDashboard() {
         <Global styles={globalStyles(appTheme)} />
         <ErrorContainer>
           <ErrorText>Error: {error}</ErrorText>
-          <Button css={RetryButton} onClick={() => window.location.reload()}>
+          <Button css={RetryButtonStyle} onClick={() => window.location.reload()}>
             <RefreshCw size={16} />
             Retry
           </Button>
