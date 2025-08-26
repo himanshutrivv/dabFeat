@@ -34,7 +34,7 @@ import {
   ClearAllFilterButtonStyle,
   ClearAllFilterButtonHoverStyle,
   ClearAllFilterButtonLeaveStyle,
-  RetryButtonStyle
+  RetryButtonStyle,
 } from "./style";
 
 import DashboardTable from "./table";
@@ -171,7 +171,7 @@ export default function TaskManagementDashboard() {
     Object.entries(filters).forEach(([filterKey, filterValues]) => {
       if (filterValues && filterValues.length > 0) {
         filtered = filtered.filter((row) =>
-          filterValues.includes(row[filterKey] || "")
+          filterValues.includes(row[filterKey] || ""),
         );
       }
     });
@@ -223,7 +223,7 @@ export default function TaskManagementDashboard() {
         return newState;
       });
     },
-    [data]
+    [data],
   );
 
   const toggleTimelineDropdown = useCallback(() => {
@@ -264,7 +264,7 @@ export default function TaskManagementDashboard() {
         .map((val) => val.trim())
         .filter((val) => val.length > 0);
     },
-    [data]
+    [data],
   );
 
   const getMainFilterOptions = useCallback(() => {
@@ -358,7 +358,7 @@ export default function TaskManagementDashboard() {
       parseInt(day),
       parseInt(hours),
       parseInt(minutes),
-      parseInt(seconds)
+      parseInt(seconds),
     );
   }, []);
 
@@ -398,7 +398,7 @@ export default function TaskManagementDashboard() {
 
       return { start, end };
     },
-    [parseDateTimeFromInput, formatDateTimeForInput]
+    [parseDateTimeFromInput, formatDateTimeForInput],
   );
 
   const handleStartDateTimeChange = useCallback(
@@ -407,7 +407,7 @@ export default function TaskManagementDashboard() {
       setStartDateTime(adjusted.start);
       setEndDateTime(adjusted.end);
     },
-    [endDateTime, validateAndAdjustTimeRange]
+    [endDateTime, validateAndAdjustTimeRange],
   );
 
   const handleEndDateTimeChange = useCallback(
@@ -416,7 +416,7 @@ export default function TaskManagementDashboard() {
       setStartDateTime(adjusted.start);
       setEndDateTime(adjusted.end);
     },
-    [startDateTime, validateAndAdjustTimeRange]
+    [startDateTime, validateAndAdjustTimeRange],
   );
 
   const initializeDefaultTimeRange = useCallback(() => {
@@ -439,7 +439,10 @@ export default function TaskManagementDashboard() {
         <Global styles={globalStyles(appTheme)} />
         <ErrorContainer>
           <ErrorText>Error: {error}</ErrorText>
-          <Button css={RetryButtonStyle} onClick={() => window.location.reload()}>
+          <Button
+            css={RetryButtonStyle}
+            onClick={() => window.location.reload()}
+          >
             <RefreshCw size={16} />
             Retry
           </Button>
@@ -454,10 +457,10 @@ export default function TaskManagementDashboard() {
 
   const activeFilters = getActiveFilters();
   const hasSearchableColumns = Object.values(data?.columnData || []).some(
-    (col) => col.searchable
+    (col) => col.searchable,
   );
   const hasFilterableColumns = Object.values(data?.columnData || []).some(
-    (col) => col.filterable
+    (col) => col.filterable,
   );
 
   return (
@@ -502,10 +505,16 @@ export default function TaskManagementDashboard() {
                       onClick={() => setShowMainFilter(true)}
                       style={AllFiltersButtonStyle}
                       onMouseEnter={(e) => {
-                        Object.assign(e.currentTarget.style, AllFiltersButtonHoverStyle);
+                        Object.assign(
+                          e.currentTarget.style,
+                          AllFiltersButtonHoverStyle,
+                        );
                       }}
                       onMouseLeave={(e) => {
-                        Object.assign(e.currentTarget.style, AllFiltersButtonLeaveStyle);
+                        Object.assign(
+                          e.currentTarget.style,
+                          AllFiltersButtonLeaveStyle,
+                        );
                       }}
                     >
                       <Filter size={16} />
@@ -559,10 +568,16 @@ export default function TaskManagementDashboard() {
                         }}
                         style={ClearAllFilterButtonStyle}
                         onMouseEnter={(e) => {
-                          Object.assign(e.currentTarget.style, ClearAllFilterButtonHoverStyle);
+                          Object.assign(
+                            e.currentTarget.style,
+                            ClearAllFilterButtonHoverStyle,
+                          );
                         }}
                         onMouseLeave={(e) => {
-                          Object.assign(e.currentTarget.style, ClearAllFilterButtonLeaveStyle);
+                          Object.assign(
+                            e.currentTarget.style,
+                            ClearAllFilterButtonLeaveStyle,
+                          );
                         }}
                       >
                         <X size={12} />
@@ -573,7 +588,8 @@ export default function TaskManagementDashboard() {
                 )}
 
                 <FilterResults>
-                  Showing {filteredData.length} of {data?.tableData?.length} results
+                  Showing {filteredData.length} of {data?.tableData?.length}{" "}
+                  results
                 </FilterResults>
               </FilterContainer>
             )}

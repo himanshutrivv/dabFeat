@@ -1484,7 +1484,10 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
   outline: none;
   transition: ${({ theme }) => theme.transitions.all};
   color: ${({ theme }) => theme.colors.foreground};
-  font-weight: ${(props) => props.selected ? props.theme.fontWeights.semibold : props.theme.fontWeights.normal};
+  font-weight: ${(props) =>
+    props.selected
+      ? props.theme.fontWeights.semibold
+      : props.theme.fontWeights.normal};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.accent};
@@ -1558,8 +1561,13 @@ export const TimelineFilterInput = styled.input`
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   color: hsl(var(--foreground));
-  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  transition:
+    color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family:
+    ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo,
+    monospace;
 
   &::placeholder {
     color: hsl(var(--muted-foreground));
@@ -1589,7 +1597,10 @@ export const TimelineFilterButton = styled.button<{
   border-radius: 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
-  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: none;
   text-decoration: none;
@@ -1715,7 +1726,9 @@ export const FilterModalListItem = styled.div`
   }
 `;
 
-export const FilterModalItemHeaderContainer = styled.div<{ isActive?: boolean }>`
+export const FilterModalItemHeaderContainer = styled.div<{
+  isActive?: boolean;
+}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1723,7 +1736,9 @@ export const FilterModalItemHeaderContainer = styled.div<{ isActive?: boolean }>
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.all};
   color: ${(props) =>
-    props.isActive ? props.theme.colors.primary : props.theme.colors.foreground};
+    props.isActive
+      ? props.theme.colors.primary
+      : props.theme.colors.foreground};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.muted};
@@ -1762,7 +1777,7 @@ export const FilterModalCheckboxContainer = styled.div<{ selected: boolean }>`
   height: 20px;
   border: 2px solid
     ${(props) =>
-    props.selected ? props.theme.colors.primary : props.theme.colors.border};
+      props.selected ? props.theme.colors.primary : props.theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   background-color: ${(props) =>
     props.selected ? props.theme.colors.primary : "transparent"};
@@ -1789,7 +1804,10 @@ export const FilterModalButton = styled.button<{
   border-radius: 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
-  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: none;
   text-decoration: none;
@@ -1852,16 +1870,16 @@ export const AllFiltersButtonStyle = {
   fontSize: "14px",
   boxShadow: "0 4px 12px rgba(139, 92, 246, 0.25)",
   transition: "all 0.2s ease",
-  cursor: "pointer"
+  cursor: "pointer",
 };
 
 export const AllFiltersButtonHoverStyle = {
   transform: "translateY(-1px)",
-  boxShadow: "0 6px 16px rgba(139, 92, 246, 0.35)"
+  boxShadow: "0 6px 16px rgba(139, 92, 246, 0.35)",
 };
 
 export const AllFiltersButtonLeaveStyle = {
-  ...AllFiltersButtonStyle
+  ...AllFiltersButtonStyle,
 };
 
 export const ClearAllFilterButtonStyle = {
@@ -1876,15 +1894,15 @@ export const ClearAllFilterButtonStyle = {
   cursor: "pointer",
   fontSize: "14px",
   fontWeight: "500",
-  transition: "all 0.2s"
+  transition: "all 0.2s",
 };
 
 export const ClearAllFilterButtonHoverStyle = {
-  backgroundColor: "hsl(var(--destructive) / 0.1)"
+  backgroundColor: "hsl(var(--destructive) / 0.1)",
 };
 
 export const ClearAllFilterButtonLeaveStyle = {
-  ...ClearAllFilterButtonStyle
+  ...ClearAllFilterButtonStyle,
 };
 
 export const RetryButtonStyle = css`

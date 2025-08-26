@@ -27,7 +27,7 @@ import {
   FilterModalOptionTextStyled as FilterModalOptionText,
   FilterModalCheckIconStyled as FilterModalCheckIcon,
   FilterModalSearchContainerWithMargin as FilterModalSearchContainer,
-  FilterModalSearchContainerSmallMargin as FilterModalSearchContainerSmall
+  FilterModalSearchContainerSmallMargin as FilterModalSearchContainerSmall,
 } from "./style";
 
 interface FilterState {
@@ -57,7 +57,6 @@ interface FilterModalProps {
   onClearAllFilters: () => void;
   onToggleFilterSection: (key: string) => void;
 }
-
 
 const FilterModal: React.FC<FilterModalProps> = ({
   isOpen,
@@ -166,9 +165,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                         </FilterModalItemCount>
                       </FilterModalItemTitleActive>
                     ) : (
-                      <FilterModalItemTitle>
-                        {label}
-                      </FilterModalItemTitle>
+                      <FilterModalItemTitle>{label}</FilterModalItemTitle>
                     )}
                     <MainFilterExpandIcon isExpanded={isExpanded}>
                       {isExpanded ? (
@@ -253,9 +250,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
               Clear all ({activeFilters.length})
             </Button>
           )}
-          <Button onClick={handleApplyFilters}>
-            Apply Filters
-          </Button>
+          <Button onClick={handleApplyFilters}>Apply Filters</Button>
         </MainFilterFooter>
       </MainFilterModal>
     </>

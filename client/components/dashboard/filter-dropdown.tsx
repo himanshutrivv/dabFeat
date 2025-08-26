@@ -8,7 +8,7 @@ import {
   FilterDropdownSelectValue as SelectValue,
   FilterDropdownSelectContent as SelectContent,
   SelectItemsContainer,
-  FilterDropdownSelectItem as SelectItem
+  FilterDropdownSelectItem as SelectItem,
 } from "./style";
 
 interface FilterDropdownProps {
