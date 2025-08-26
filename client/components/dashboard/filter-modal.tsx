@@ -146,7 +146,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
             />
           </FilterModalSearchContainerWithMargin>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+          <FilterModalSectionContentStyled>
             {filterOptions.map(({ key, label, options }) => {
               const hasActiveFilters = filters[key]?.length > 0;
               const isExpanded = openFilterDropdowns[`modal-${key}`] || false;
@@ -227,7 +227,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 </MainFilterListItem>
               );
             })}
-          </div>
+          </FilterModalSectionContentStyled>
         </MainFilterContent>
 
         <MainFilterFooter>
