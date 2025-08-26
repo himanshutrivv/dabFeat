@@ -56,6 +56,7 @@ interface FilterModalProps {
   onFilterChange: (columnKey: string, value: string) => void;
   onClearAllFilters: () => void;
   onToggleFilterSection: (key: string) => void;
+  onApplyFilters: () => Promise<void>;
 }
 
 const FilterModal: React.FC<FilterModalProps> = ({
