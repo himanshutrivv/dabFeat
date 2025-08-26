@@ -677,10 +677,38 @@ export default function TaskManagementDashboard() {
             )}
           </Header>
 
-          <DashboardTable
-            data={filteredData}
-            columnData={data?.columnData || {}}
-          />
+          {isFilterLoading ? (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '450px' }}>
+              <Loader size="lg" />
+            </div>
+          ) : filteredData.length === 0 ? (
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: '450px',
+              padding: '2rem',
+              textAlign: 'center',
+              color: 'var(--muted-foreground)'
+            }}>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📊</div>
+              <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.125rem', fontWeight: '600' }}>
+                No data found
+              </h3>
+              <p style={{ margin: 0, fontSize: '0.875rem' }}>
+                {(Object.values(filters).some(f => f.length > 0) || searchTerm || (startDateTime && endDateTime))
+                  ? "Try adjusting your filters or search criteria"
+                  : "No data available to display"
+                }
+              </p>
+            </div>
+          ) : (
+            <DashboardTable
+              data={filteredData}
+              columnData={data?.columnData || {}}
+            />
+          )}
         </MainContent>
 
         <FilterModal
