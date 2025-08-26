@@ -1028,101 +1028,21 @@ export const FilterDropdownSelectItemStyle = css`
   margin-bottom: 8px;
 `;
 
-export const FilterModalHeaderTitle = css`
-  margin: 0;
-  font-size: 20px;
-  font-weight: 600;
-`;
 
-export const FilterModalSearchInput = css`
-  width: 100%;
-  padding-left: 40px;
-  padding-right: 12px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  border: 1px solid hsl(var(--border));
-  border-radius: 8px;
-  font-size: 14px;
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-`;
 
-export const FilterModalSearchIcon = css`
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: hsl(var(--muted-foreground));
-`;
 
-export const FilterModalSectionContent = css`
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-`;
 
-export const FilterModalItemTitle = css`
-  font-size: 16px;
-  font-weight: 400;
-`;
 
-export const FilterModalItemTitleActive = css`
-  font-size: 16px;
-  font-weight: 600;
-`;
 
-export const FilterModalItemCount = css`
-  margin-left: 8px;
-  font-size: 12px;
-  background-color: hsl(var(--primary));
-  color: white;
-  padding: 2px 6px;
-  border-radius: 10px;
-`;
 
-export const FilterModalSectionSearchInput = css`
-  width: 100%;
-  padding-left: 36px;
-  padding-right: 12px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border: 1px solid hsl(var(--border));
-  border-radius: 6px;
-  font-size: 13px;
-  background-color: hsl(var(--muted));
-  color: hsl(var(--foreground));
-`;
 
-export const FilterModalSectionSearchIcon = css`
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: hsl(var(--muted-foreground));
-`;
 
-export const FilterModalOptionItem = css`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 4px;
-  background-color: transparent;
-  margin-bottom: 2px;
-`;
 
 export const FilterModalOptionItemSelected = css`
   background-color: hsl(var(--accent));
 `;
 
-export const FilterModalOptionText = css`
-  font-size: 14px;
-`;
 
-export const FilterModalCheckIcon = css`
-  color: white;
-`;
 
 export const FilterModalFooterClearButton = css`
   margin-bottom: 8px;
@@ -1213,9 +1133,6 @@ export const TimelineFilterButtonGrid = css`
   gap: 8px;
 `;
 
-export const TimelineFilterButton = css`
-  flex: 1;
-`;
 
 // Additional styled components for inline styles
 export const FilterModalHeaderTitle = styled.h2`
