@@ -110,7 +110,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
         onMouseUp={handleModalClick}
       >
         <MainFilterHeader>
-          <h2 css={FilterModalHeaderTitle}>Filters</h2>
+          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 600 }}>Filters</h2>
           <Button variant="ghost" size="icon" onClick={onClose}>
             <X size={20} />
           </Button>
@@ -120,7 +120,13 @@ const FilterModal: React.FC<FilterModalProps> = ({
           <MainFilterSearch style={{ marginBottom: 24 }}>
             <Search
               size={16}
-              css={FilterModalSearchIcon}
+              style={{
+                position: "absolute",
+                left: 12,
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "hsl(var(--muted-foreground))",
+              }}
             />
             <input
               type="text"
@@ -128,11 +134,22 @@ const FilterModal: React.FC<FilterModalProps> = ({
               onClick={handleInputInteraction}
               onFocus={handleInputInteraction}
               onChange={(e) => e.stopPropagation()}
-              css={FilterModalSearchInput}
+              style={{
+                width: "100%",
+                paddingLeft: 40,
+                paddingRight: 12,
+                paddingTop: 12,
+                paddingBottom: 12,
+                border: "1px solid hsl(var(--border))",
+                borderRadius: 8,
+                fontSize: 14,
+                backgroundColor: "hsl(var(--background))",
+                color: "hsl(var(--foreground))",
+              }}
             />
           </MainFilterSearch>
 
-          <div css={FilterModalSectionContent}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
             {filterOptions.map(({ key, label, options }) => {
               const hasActiveFilters = filters[key]?.length > 0;
               const isExpanded = openFilterDropdowns[`modal-${key}`] || false;
@@ -144,11 +161,18 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     onMouseDown={handleModalClick}
                     isActive={hasActiveFilters}
                   >
-                    <span css={hasActiveFilters ? FilterModalItemTitleActive : FilterModalItemTitle}>
+                    <span style={{ fontSize: 16, fontWeight: hasActiveFilters ? 600 : 400 }}>
                       {label}
                       {hasActiveFilters && (
                         <span
-                          css={FilterModalItemCount}
+                          style={{
+                            marginLeft: 8,
+                            fontSize: 12,
+                            backgroundColor: "hsl(var(--primary))",
+                            color: "white",
+                            padding: "2px 6px",
+                            borderRadius: 10,
+                          }}
                         >
                           {filters[key]?.length}
                         </span>
@@ -171,7 +195,13 @@ const FilterModal: React.FC<FilterModalProps> = ({
                       <MainFilterSearch style={{ marginBottom: 12 }}>
                         <Search
                           size={14}
-                          css={FilterModalSectionSearchIcon}
+                          style={{
+                            position: "absolute",
+                            left: 12,
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            color: "hsl(var(--muted-foreground))",
+                          }}
                         />
                         <input
                           type="text"
@@ -179,7 +209,18 @@ const FilterModal: React.FC<FilterModalProps> = ({
                           onClick={handleInputInteraction}
                           onFocus={handleInputInteraction}
                           onChange={(e) => e.stopPropagation()}
-                          css={FilterModalSectionSearchInput}
+                          style={{
+                            width: "100%",
+                            paddingLeft: 36,
+                            paddingRight: 12,
+                            paddingTop: 8,
+                            paddingBottom: 8,
+                            border: "1px solid hsl(var(--border))",
+                            borderRadius: 6,
+                            fontSize: 13,
+                            backgroundColor: "hsl(var(--muted))",
+                            color: "hsl(var(--foreground))",
+                          }}
                         />
                       </MainFilterSearch>
 
@@ -190,15 +231,21 @@ const FilterModal: React.FC<FilterModalProps> = ({
                             <MainFilterOption
                               key={option}
                               onClick={(e) => handleFilterOptionClick(e, key, option)}
-                              css={[
-                                FilterModalOptionItem,
-                                isSelected && FilterModalOptionItemSelected
-                              ]}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                padding: "8px 12px",
+                                cursor: "pointer",
+                                borderRadius: 4,
+                                backgroundColor: isSelected ? "hsl(var(--accent))" : "transparent",
+                                marginBottom: 2,
+                              }}
                             >
-                              <span css={FilterModalOptionText}>{option}</span>
+                              <span style={{ fontSize: 14 }}>{option}</span>
                               <MainFilterCheckbox selected={isSelected}>
                                 {isSelected && (
-                                  <svg width={12} height={12} viewBox="0 0 20 20" fill="currentColor" css={FilterModalCheckIcon}>
+                                  <svg width={12} height={12} viewBox="0 0 20 20" fill="currentColor" style={{ color: "white" }}>
                                     <path
                                       fillRule="evenodd"
                                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -221,11 +268,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
         <MainFilterFooter>
           {activeFilters.length > 0 && (
-            <Button variant="outline" onClick={handleClearAll} css={FilterModalFooterClearButton}>
+            <Button variant="outline" onClick={handleClearAll} style={{ marginBottom: 8, width: "100%" }}>
               Clear all ({activeFilters.length})
             </Button>
           )}
-          <Button onClick={handleApplyFilters} css={FilterModalFooterApplyButton}>
+          <Button onClick={handleApplyFilters} style={{ width: "100%" }}>
             Apply Filters
           </Button>
         </MainFilterFooter>
