@@ -664,8 +664,11 @@ export default function TaskManagementDashboard() {
                 )}
 
                 <FilterResults>
-                  Showing {filteredData.length} of {data?.tableData?.length}{" "}
-                  results
+                  {filteredData.length === 0 && (data?.tableData?.length || 0) > 0 ? (
+                    "No results found for current filters"
+                  ) : (
+                    <>Showing {filteredData.length} of {data?.tableData?.length || 0} results</>
+                  )}
                 </FilterResults>
               </FilterContainer>
             )}
