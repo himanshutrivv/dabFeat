@@ -4,8 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import { ThemeControllerProvider } from "@/styles/ThemeControllerProvider";
-import { globalStyles } from "@/styles/global";
+import { ThemeControllerProvider } from "../../styles/theme-controller";
+import { globalStyles } from "../../styles/global-styles";
 import { appTheme } from "../../styles/themes";
 import {
   DashboardContainer,
@@ -32,12 +32,11 @@ import {
   RetryButton,
 } from "./style";
 
-import { Table } from "../common/table";
 import FilterDropdown from "./filter-dropdown";
 import FilterModal from "./filter-modal";
 import TimelineFilter from "./timeline-filter";
-import { useBusinessStore } from "@/store/business-store";
-import { srGetDashboardTableData } from "@/sources/dashboard";
+import { useBusinessStore } from "../../store/business-store";
+import { srGetDashboardTableData } from "../../sources/dashboard";
 import Loader from "../common/loader";
 
 interface FilterState {
