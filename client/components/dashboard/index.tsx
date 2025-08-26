@@ -162,6 +162,7 @@ export default function TaskManagementDashboard() {
     [key: string]: boolean;
   }>({});
   const [isFilterLoading, setIsFilterLoading] = useState(false);
+  const [isUsingServerFiltering, setIsUsingServerFiltering] = useState(false);
   const { selectedBusiness } = useBusinessStore();
 
   // Function to apply filters and fetch data from API
@@ -190,7 +191,8 @@ export default function TaskManagementDashboard() {
 
       console.log("Filtered dashboard data received:", response);
       setData(response);
-      setFilteredData(response.tableData);
+      setFilteredData(response.tableData || []);
+      setIsUsingServerFiltering(true);
     } catch (err) {
       console.error("Filter fetch error:", err);
       setError("Failed to apply filters and fetch data.");
@@ -237,7 +239,8 @@ export default function TaskManagementDashboard() {
           filterData: null,
         });
         setData(response);
-        setFilteredData(response.tableData);
+        setFilteredData(response.tableData || []);
+        setIsUsingServerFiltering(false);
 
         const initialFilters: FilterState = {};
         Object.keys(response.columnData).forEach((key) => {
@@ -256,11 +259,11 @@ export default function TaskManagementDashboard() {
     fetchData();
   }, [selectedBusiness]);
 
-  // Apply filters and search
+  // Apply filters and search (only for local/client-side filtering)
   useEffect(() => {
-    if (!data) return;
+    if (!data || isUsingServerFiltering) return;
 
-    let filtered = data.tableData;
+    let filtered = data.tableData || [];
 
     // Apply search
     if (searchTerm) {
@@ -287,7 +290,7 @@ export default function TaskManagementDashboard() {
     });
 
     setFilteredData(filtered);
-  }, [data, filters, searchTerm]);
+  }, [data, filters, searchTerm, isUsingServerFiltering]);
 
   const handleFilterChange = useCallback((columnKey: string, value: string) => {
     if (value === "all") {
@@ -349,7 +352,11 @@ export default function TaskManagementDashboard() {
     });
     setFilters(clearedFilters);
     setSearchTerm("");
+    setStartDateTime("");
+    setEndDateTime("");
     setOpenFilterDropdowns({});
+    setIsUsingServerFiltering(false);
+    initializeDefaultTimeRange();
   }, [filters]);
 
   const clearIndividualFilter = useCallback((filterKey: string) => {
@@ -357,6 +364,7 @@ export default function TaskManagementDashboard() {
       ...prev,
       [filterKey]: [],
     }));
+    setIsUsingServerFiltering(false);
   }, []);
 
   const getFilterOptions = useCallback(
