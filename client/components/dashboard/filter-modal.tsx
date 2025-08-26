@@ -1,5 +1,4 @@
 "use client";
-/** @jsxImportSource @emotion/react */
 import React, { useCallback } from "react";
 import { Search, X } from "lucide-react";
 import {
@@ -17,21 +16,6 @@ import {
   MainFilterCheckbox,
   MainFilterFooter,
   Button,
-  FilterModalHeaderTitle,
-  FilterModalSearchInput,
-  FilterModalSearchIcon,
-  FilterModalSectionContent,
-  FilterModalItemTitle,
-  FilterModalItemTitleActive,
-  FilterModalItemCount,
-  FilterModalSectionSearchInput,
-  FilterModalSectionSearchIcon,
-  FilterModalOptionItem,
-  FilterModalOptionItemSelected,
-  FilterModalOptionText,
-  FilterModalCheckIcon,
-  FilterModalFooterClearButton,
-  FilterModalFooterApplyButton,
 } from "./style";
 
 interface FilterState {
