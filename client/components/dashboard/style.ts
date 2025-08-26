@@ -818,13 +818,13 @@ export const FilterModalBackdrop = styled.div`
 export const FilterModalContainer = styled.div`
   position: fixed;
   top: 0;
-  right: 0;
-  width: 33.333333%;
-  height: 100vh;
+  right: 24px;
+  width: calc(33.333333% - 24px);
+  height: calc(100vh - 48px);
+  top: 24px;
   background-color: white;
-  border-left: 1px solid hsl(var(--border));
-  border-top-left-radius: 24px;
-  border-bottom-left-radius: 24px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 24px;
   box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
   z-index: 9999;
   display: flex;
