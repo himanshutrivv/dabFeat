@@ -172,14 +172,14 @@ const MainFilterFooter = styled.div`
 const Button = styled.button<{
   variant?: "default" | "outline";
 }>`
-  ${buttonBaseStyles}
+  ${buttonBaseStyles()}
 
   ${(props) => {
     switch (props.variant) {
       case "outline":
         return outlineButtonStyles(props.theme);
       default:
-        return primaryButtonStyles();
+        return primaryButtonStyles(props.theme);
     }
   }}
 
@@ -207,7 +207,7 @@ const FilterModalSearchIcon = styled.div`
 `;
 
 const FilterModalSearchInput = styled.input`
-  ${inputStyles}
+  ${inputStyles()}
   padding-left: ${({ theme }) => theme.spacing[10]};
 `;
 
@@ -244,7 +244,7 @@ const FilterModalSectionSearchIcon = styled.div`
 `;
 
 const FilterModalSectionSearchInput = styled.input`
-  ${inputStyles}
+  ${inputStyles()}
   padding-left: ${({ theme }) => theme.spacing[9]};
   font-size: ${({ theme }) => theme.fontSizes.xs};
   background-color: ${({ theme }) => theme.colors.muted};
