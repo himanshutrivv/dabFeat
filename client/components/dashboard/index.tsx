@@ -37,7 +37,7 @@ import FilterDropdown from "./filter-dropdown";
 import FilterModal from "./filter-modal";
 import TimelineFilter from "./timeline-filter";
 import { useBusinessStore } from "@/store/business-store";
-import { srGetDashboardTableData } from "../../sources/dashboard";
+import { srGetDashboardTableData } from "@/sources/dashboard";
 import Loader from "../common/loader";
 
 interface FilterState {
