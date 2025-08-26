@@ -2,18 +2,18 @@
 import React, { useCallback } from "react";
 import { ChevronDown } from "lucide-react";
 import {
-  TimelineFilterGroup as FilterGroup,
-  TimelineFilterSelectContainer as SelectContainer,
-  TimelineFilterSelectTrigger as SelectTrigger,
-  TimelineFilterSelectValue as SelectValue,
-  TimelineFilterInput as TimelineInput,
-  TimelineFilterButton as Button,
-  TimelineFilterContentStyled as TimelineFilterContent,
-  TimelineFilterSectionStyled as TimelineFilterSection,
-  TimelineFilterLabelStyled as TimelineFilterLabel,
-  TimelineFilterInputGridStyled as TimelineFilterInputGrid,
-  TimelineFilterNoteStyled as TimelineFilterNote,
-  TimelineFilterButtonGridStyled as TimelineFilterButtonGrid,
+  TimelineFilterGroup,
+  TimelineFilterSelectContainer,
+  TimelineFilterSelectTrigger,
+  TimelineFilterSelectValue,
+  TimelineFilterInput,
+  TimelineFilterButton,
+  TimelineFilterContentStyled,
+  TimelineFilterSectionStyled,
+  TimelineFilterLabelStyled,
+  TimelineFilterInputGridStyled,
+  TimelineFilterNoteStyled,
+  TimelineFilterButtonGridStyled,
 } from "./style";
 
 interface TimelineFilterProps {
@@ -98,23 +98,25 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
   );
 
   return (
-    <FilterGroup>
-      <SelectContainer data-dropdown-container>
-        <SelectTrigger onClick={onToggle}>
-          <SelectValue>
+    <TimelineFilterGroup>
+      <TimelineFilterSelectContainer data-dropdown-container>
+        <TimelineFilterSelectTrigger onClick={onToggle}>
+          <TimelineFilterSelectValue>
             {startDateTime && endDateTime
               ? "Custom Range"
               : "Select Time Range"}
-          </SelectValue>
+          </TimelineFilterSelectValue>
           <ChevronDown size={16} />
-        </SelectTrigger>
+        </TimelineFilterSelectTrigger>
         {isOpen && (
-          <TimelineFilterContent>
-            <TimelineFilterSection>
+          <TimelineFilterContentStyled className="filter-content">
+            <TimelineFilterSectionStyled>
               <div>
-                <TimelineFilterLabel>Start Date & Time</TimelineFilterLabel>
-                <TimelineFilterInputGrid>
-                  <TimelineInput
+                <TimelineFilterLabelStyled>
+                  Start Date & Time
+                </TimelineFilterLabelStyled>
+                <TimelineFilterInputGridStyled>
+                  <TimelineFilterInput
                     type="date"
                     value={
                       startDateTime
@@ -128,7 +130,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleDateChange(e, true)}
                   />
-                  <TimelineInput
+                  <TimelineFilterInput
                     type="time"
                     step="1"
                     value={
@@ -139,12 +141,14 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleTimeChange(e, true)}
                   />
-                </TimelineFilterInputGrid>
+                </TimelineFilterInputGridStyled>
               </div>
               <div>
-                <TimelineFilterLabel>End Date & Time</TimelineFilterLabel>
-                <TimelineFilterInputGrid>
-                  <TimelineInput
+                <TimelineFilterLabelStyled>
+                  End Date & Time
+                </TimelineFilterLabelStyled>
+                <TimelineFilterInputGridStyled>
+                  <TimelineFilterInput
                     type="date"
                     value={
                       endDateTime
@@ -158,7 +162,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleDateChange(e, false)}
                   />
-                  <TimelineInput
+                  <TimelineFilterInput
                     type="time"
                     step="1"
                     value={
@@ -167,31 +171,31 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleTimeChange(e, false)}
                   />
-                </TimelineFilterInputGrid>
+                </TimelineFilterInputGridStyled>
               </div>
-              <TimelineFilterNote>
+              <TimelineFilterNoteStyled>
                 Maximum time range: 5 minutes
-              </TimelineFilterNote>
-              <TimelineFilterButtonGrid>
-                <Button
+              </TimelineFilterNoteStyled>
+              <TimelineFilterButtonGridStyled>
+                <TimelineFilterButton
                   size="sm"
                   variant="outline"
                   onClick={(e) => handleButtonClick(e, "reset")}
                 >
                   Reset
-                </Button>
-                <Button
+                </TimelineFilterButton>
+                <TimelineFilterButton
                   size="sm"
                   onClick={(e) => handleButtonClick(e, "apply")}
                 >
                   Apply
-                </Button>
-              </TimelineFilterButtonGrid>
-            </TimelineFilterSection>
-          </TimelineFilterContent>
+                </TimelineFilterButton>
+              </TimelineFilterButtonGridStyled>
+            </TimelineFilterSectionStyled>
+          </TimelineFilterContentStyled>
         )}
-      </SelectContainer>
-    </FilterGroup>
+      </TimelineFilterSelectContainer>
+    </TimelineFilterGroup>
   );
 };
 

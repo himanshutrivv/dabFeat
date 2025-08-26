@@ -68,6 +68,96 @@ export interface DashboardResponse {
   columnData: ColumnData;
 }
 
+export interface FilterDataItem {
+  key: string;
+  operator: "EQUALS" | "IN" | "BETWEEN" | "LIKE";
+  value?: string | string[];
+  from?: string;
+  to?: string;
+}
+
+// Transform filters state to API format
+const transformFiltersToAPIFormat = (
+  filters: FilterState,
+  searchTerm: string,
+  startDateTime: string,
+  endDateTime: string,
+): FilterDataItem[] => {
+  const filterData: FilterDataItem[] = [];
+
+  // Add regular filters
+  Object.entries(filters).forEach(([key, values]) => {
+    if (values && values.length > 0) {
+      if (values.length === 1) {
+        // Single value - use EQUALS
+        filterData.push({
+          key,
+          operator: "EQUALS",
+          value: values[0],
+        });
+      } else {
+        // Multiple values - use IN
+        filterData.push({
+          key,
+          operator: "IN",
+          value: values,
+        });
+      }
+    }
+  });
+
+  // Add search term if present
+  if (searchTerm.trim()) {
+    filterData.push({
+      key: "search",
+      operator: "LIKE",
+      value: searchTerm.trim(),
+    });
+  }
+
+  // Add date range if both start and end are present
+  if (startDateTime && endDateTime) {
+    const startDate = parseDateTimeToISO(startDateTime);
+    const endDate = parseDateTimeToISO(endDateTime);
+
+    if (startDate && endDate) {
+      filterData.push({
+        key: "created_at",
+        operator: "BETWEEN",
+        from: startDate,
+        to: endDate,
+      });
+    }
+  }
+
+  return filterData;
+};
+
+// Helper function to convert datetime input format to ISO string
+const parseDateTimeToISO = (dateTimeString: string): string | null => {
+  try {
+    const [datePart, timePart] = dateTimeString.split(" ");
+    if (!datePart || !timePart) return null;
+
+    const [day, month, year] = datePart.split("/");
+    const [hours, minutes, seconds] = timePart.split(":");
+
+    const date = new Date(
+      parseInt(year),
+      parseInt(month) - 1,
+      parseInt(day),
+      parseInt(hours),
+      parseInt(minutes),
+      parseInt(seconds),
+    );
+
+    return date.toISOString();
+  } catch (error) {
+    console.error("Error parsing datetime:", error);
+    return null;
+  }
+};
+
 export default function TaskManagementDashboard() {
   const [data, setData] = useState<DashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
@@ -82,23 +172,61 @@ export default function TaskManagementDashboard() {
   const [openFilterDropdowns, setOpenFilterDropdowns] = useState<{
     [key: string]: boolean;
   }>({});
+  const [isFilterLoading, setIsFilterLoading] = useState(false);
   const { selectedBusiness } = useBusinessStore();
+
+  // Function to apply filters and fetch data from API
+  const applyFiltersAndFetchData = useCallback(async () => {
+    try {
+      setIsFilterLoading(true);
+      setError(null);
+
+      const bussId = selectedBusiness?.bussId || "1";
+      const filterData = transformFiltersToAPIFormat(
+        filters,
+        searchTerm,
+        startDateTime,
+        endDateTime,
+      );
+
+      console.log("Applying filters with data:", {
+        bussId,
+        filterData,
+      });
+
+      const response = await srGetDashboardTableData({
+        bussId,
+        filterData: filterData.length > 0 ? filterData : null,
+      });
+
+      console.log("Filtered dashboard data received:", response);
+      setData(response);
+      setFilteredData(response.tableData);
+    } catch (err) {
+      console.error("Filter fetch error:", err);
+      setError("Failed to apply filters and fetch data.");
+    } finally {
+      setIsFilterLoading(false);
+    }
+  }, [filters, searchTerm, startDateTime, endDateTime, selectedBusiness]);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
 
-      // Don't close if clicking inside modal or dropdown containers
+      // Don't close if clicking inside modal, dropdown containers, or filter-related elements
       if (
         target.closest("[data-dropdown-container]") ||
         target.closest("[data-modal-container]") ||
-        target.closest("input") ||
-        target.closest("button")
+        target.closest(".filter-content") ||
+        (target.closest("button") &&
+          target.closest("[data-dropdown-container]"))
       ) {
         return;
       }
 
+      // Close all dropdowns when clicking outside
       setOpenFilterDropdowns({});
       setShowTimelineFilter(false);
     };
@@ -111,16 +239,19 @@ export default function TaskManagementDashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bussId = selectedBusiness?.bussId;
-      if (!bussId) return;
       try {
         setLoading(true);
         setError(null);
 
+        const bussId = selectedBusiness?.bussId || "1";
+        console.log("Fetching dashboard data for business:", bussId);
+
         const response = await srGetDashboardTableData({
-          bussId: selectedBusiness?.bussId,
+          bussId: bussId,
           filterData: null,
         });
+
+        console.log("Dashboard data received:", response);
         setData(response);
         setFilteredData(response.tableData);
 
@@ -131,15 +262,22 @@ export default function TaskManagementDashboard() {
           }
         });
         setFilters(initialFilters);
+        console.log("Dashboard initialized successfully");
       } catch (err) {
+        console.error("Dashboard fetch error:", err);
         setError("Failed to initialize dashboard data.");
       } finally {
         setLoading(false);
+        console.log("Loading set to false");
       }
     };
 
+    console.log(
+      "Dashboard effect triggered, selectedBusiness:",
+      selectedBusiness,
+    );
     fetchData();
-  }, [selectedBusiness]);
+  }, []);
 
   // Apply filters and search
   useEffect(() => {
@@ -493,7 +631,13 @@ export default function TaskManagementDashboard() {
                     ))}
 
                   <FilterGroup>
-                    <AllFiltersButton onClick={() => setShowMainFilter(true)}>
+                    <AllFiltersButton
+                      onClick={() => {
+                        setOpenFilterDropdowns({});
+                        setShowTimelineFilter(false);
+                        setShowMainFilter(true);
+                      }}
+                    >
                       <Filter size={16} />
                       <span>All Filters</span>
                     </AllFiltersButton>
@@ -580,6 +724,7 @@ export default function TaskManagementDashboard() {
               [key]: !prev[key],
             }));
           }}
+          onApplyFilters={applyFiltersAndFetchData}
         />
       </DashboardContainer>
     </ThemeControllerProvider>
