@@ -315,12 +315,12 @@ export const FilterResults = styled.div`
 // Button components
 export const Button = styled.button<{
   variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link";
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link";
   size?: "default" | "sm" | "lg" | "icon";
 }>`
   display: inline-flex;
@@ -764,7 +764,7 @@ export const TableCell = styled.td`
 
 export const TableCellClickableStyled = styled(TableCell)`
   cursor: pointer;
-
+  
   &:hover {
     background-color: hsl(var(--accent) / 0.5);
   }
@@ -818,13 +818,13 @@ export const FilterModalBackdrop = styled.div`
 export const FilterModalContainer = styled.div`
   position: fixed;
   top: 0;
-  right: 24px;
-  width: calc(33.333333% - 24px);
-  height: calc(100vh - 48px);
-  top: 24px;
+  right: 0;
+  width: 33.333333%;
+  height: 100vh;
   background-color: white;
-  border: 1px solid hsl(var(--border));
-  border-radius: 24px;
+  border-left: 1px solid hsl(var(--border));
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
   box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
   z-index: 9999;
   display: flex;
@@ -866,9 +866,7 @@ export const FilterModalListItem = styled.div`
   }
 `;
 
-export const FilterModalItemHeaderContainer = styled.div<{
-  isActive?: boolean;
-}>`
+export const FilterModalItemHeaderContainer = styled.div<{ isActive?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -915,7 +913,7 @@ export const FilterModalCheckboxContainer = styled.div<{ selected: boolean }>`
   height: 20px;
   border: 2px solid
     ${(props) =>
-      props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
+    props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected ? "hsl(var(--primary))" : "transparent"};
