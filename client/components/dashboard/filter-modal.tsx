@@ -69,6 +69,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   onFilterChange,
   onClearAllFilters,
   onToggleFilterSection,
+  onApplyFilters,
 }) => {
   const handleModalClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
