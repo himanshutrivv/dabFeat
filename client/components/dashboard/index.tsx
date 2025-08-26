@@ -540,30 +540,16 @@ export default function TaskManagementDashboard() {
                           </FilterBadgeClose>
                         </FilterBadge>
                       ))}
-                      <button
-                        css={ClearAllButton}
+                      <ClearAllFiltersButton
                         onClick={(e) => {
                           e.stopPropagation();
                           e.preventDefault();
                           clearAllFilters();
                         }}
-                        style={ClearAllFilterButtonStyle}
-                        onMouseEnter={(e) => {
-                          Object.assign(
-                            e.currentTarget.style,
-                            ClearAllFilterButtonHoverStyle,
-                          );
-                        }}
-                        onMouseLeave={(e) => {
-                          Object.assign(
-                            e.currentTarget.style,
-                            ClearAllFilterButtonLeaveStyle,
-                          );
-                        }}
                       >
                         <X size={12} />
                         Clear All
-                      </button>
+                      </ClearAllFiltersButton>
                     </ActiveFiltersContainer>
                   </ActiveFiltersSection>
                 )}
