@@ -1,4 +1,4 @@
-import { appTheme as theme } from "@/styles/themes";
+import { appTheme as theme } from "../../../styles/themes";
 import styled from "@emotion/styled";
 
 // Styled Components

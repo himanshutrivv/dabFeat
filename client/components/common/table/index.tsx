@@ -1,6 +1,6 @@
 import React, { useState, useMemo, ReactNode, useCallback } from "react";
 import { ThemeProvider } from "@emotion/react";
-import { appTheme as theme } from "@/styles/themes";
+import { appTheme as theme } from "../../../styles/themes";
 
 import {
   CopyToast,
