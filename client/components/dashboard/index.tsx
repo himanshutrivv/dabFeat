@@ -89,16 +89,17 @@ export default function TaskManagementDashboard() {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
 
-      // Don't close if clicking inside modal or dropdown containers
+      // Don't close if clicking inside modal, dropdown containers, or filter-related elements
       if (
         target.closest("[data-dropdown-container]") ||
         target.closest("[data-modal-container]") ||
-        target.closest("input") ||
-        target.closest("button")
+        target.closest(".filter-content") ||
+        (target.closest("button") && target.closest("[data-dropdown-container]"))
       ) {
         return;
       }
 
+      // Close all dropdowns when clicking outside
       setOpenFilterDropdowns({});
       setShowTimelineFilter(false);
     };
