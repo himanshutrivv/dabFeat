@@ -493,7 +493,11 @@ export default function TaskManagementDashboard() {
                     ))}
 
                   <FilterGroup>
-                    <AllFiltersButton onClick={() => setShowMainFilter(true)}>
+                    <AllFiltersButton onClick={() => {
+                      setOpenFilterDropdowns({});
+                      setShowTimelineFilter(false);
+                      setShowMainFilter(true);
+                    }}>
                       <Filter size={16} />
                       <span>All Filters</span>
                     </AllFiltersButton>
