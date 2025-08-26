@@ -171,7 +171,43 @@ export default function TaskManagementDashboard() {
   const [openFilterDropdowns, setOpenFilterDropdowns] = useState<{
     [key: string]: boolean;
   }>({});
+  const [isFilterLoading, setIsFilterLoading] = useState(false);
   const { selectedBusiness } = useBusinessStore();
+
+  // Function to apply filters and fetch data from API
+  const applyFiltersAndFetchData = useCallback(async () => {
+    try {
+      setIsFilterLoading(true);
+      setError(null);
+
+      const bussId = selectedBusiness?.bussId || "TESTORG2";
+      const filterData = transformFiltersToAPIFormat(
+        filters,
+        searchTerm,
+        startDateTime,
+        endDateTime,
+      );
+
+      console.log("Applying filters with data:", {
+        bussId,
+        filterData,
+      });
+
+      const response = await srGetDashboardTableData({
+        bussId,
+        filterData: filterData.length > 0 ? filterData : null,
+      });
+
+      console.log("Filtered dashboard data received:", response);
+      setData(response);
+      setFilteredData(response.tableData);
+    } catch (err) {
+      console.error("Filter fetch error:", err);
+      setError("Failed to apply filters and fetch data.");
+    } finally {
+      setIsFilterLoading(false);
+    }
+  }, [filters, searchTerm, startDateTime, endDateTime, selectedBusiness]);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
