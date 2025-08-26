@@ -27,9 +27,7 @@ import {
   FilterResults,
   ErrorContainer,
   ErrorText,
-  RetryButton
-} from "./style";
-import {
+  RetryButton,
   AllFiltersButtonStyle,
   AllFiltersButtonHoverStyle,
   AllFiltersButtonLeaveStyle,
@@ -37,7 +35,7 @@ import {
   ClearAllFilterButtonHoverStyle,
   ClearAllFilterButtonLeaveStyle,
   RetryButtonStyle
-} from "./index.styles";
+} from "./style";
 
 import DashboardTable from "./table";
 import FilterDropdown from "./filter-dropdown";

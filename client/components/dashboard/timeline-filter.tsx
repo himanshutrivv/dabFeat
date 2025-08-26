@@ -2,19 +2,19 @@
 import React, { useCallback } from "react";
 import { ChevronDown } from "lucide-react";
 import {
-  FilterGroup,
-  SelectContainer,
-  SelectTrigger,
-  SelectValue,
-  TimelineInput,
-  Button,
-  TimelineFilterContent,
-  TimelineFilterSection,
-  TimelineFilterLabel,
-  TimelineFilterInputGrid,
-  TimelineFilterNote,
-  TimelineFilterButtonGrid
-} from "./timeline-filter.styles";
+  TimelineFilterGroup as FilterGroup,
+  TimelineFilterSelectContainer as SelectContainer,
+  TimelineFilterSelectTrigger as SelectTrigger,
+  TimelineFilterSelectValue as SelectValue,
+  TimelineFilterInput as TimelineInput,
+  TimelineFilterButton as Button,
+  TimelineFilterContentStyled as TimelineFilterContent,
+  TimelineFilterSectionStyled as TimelineFilterSection,
+  TimelineFilterLabelStyled as TimelineFilterLabel,
+  TimelineFilterInputGridStyled as TimelineFilterInputGrid,
+  TimelineFilterNoteStyled as TimelineFilterNote,
+  TimelineFilterButtonGridStyled as TimelineFilterButtonGrid
+} from "./style";
 
 interface TimelineFilterProps {
   startDateTime: string;
