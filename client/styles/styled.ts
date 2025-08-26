@@ -26,7 +26,7 @@ export const flexColumn = `
   flex-direction: column;
 `;
 
-export const cardStyles = () => css`
+export const cardStyles = css`
   background-color: ${theme.colors?.card};
   color: ${theme.colors?.cardForeground};
   border: 1px solid ${theme.colors?.border};
@@ -34,7 +34,7 @@ export const cardStyles = () => css`
   box-shadow: ${theme.shadows?.sm};
 `;
 
-export const buttonBaseStyles = () => css`
+export const buttonBaseStyles = css`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -107,7 +107,7 @@ export const destructiveButtonStyles = () => buttonVariant(
   theme.colors?.destructiveForeground!
 );
 
-export const inputStyles = () => css`
+export const inputStyles = css`
   display: flex;
   width: 100%;
   border-radius: ${theme.borderRadius?.md};
