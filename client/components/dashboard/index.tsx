@@ -622,7 +622,10 @@ export default function TaskManagementDashboard() {
                       type="text"
                       placeholder="Search records..."
                       value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
+                      onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                        setIsUsingServerFiltering(false);
+                      }}
                     />
                   </SearchBarContainer>
                 )}
