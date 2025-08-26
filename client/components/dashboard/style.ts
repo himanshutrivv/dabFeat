@@ -800,9 +800,10 @@ export const TableEmptyStateDescription = styled.div`
 export const FilterModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 9998;
   animation: fadeIn 0.3s ease-out;
+  opacity: 1;
 
   @keyframes fadeIn {
     from {
@@ -820,7 +821,7 @@ export const FilterModalContainer = styled.div`
   right: 0;
   width: 33.333333%;
   height: 100vh;
-  background-color: hsl(var(--background));
+  background-color: white;
   border-left: 1px solid hsl(var(--border));
   border-top-left-radius: 24px;
   border-bottom-left-radius: 24px;
@@ -829,6 +830,7 @@ export const FilterModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   animation: slideInFromRight 0.3s ease-out;
+  opacity: 1;
 
   @keyframes slideInFromRight {
     from {
