@@ -2,13 +2,13 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
 import {
-  FilterDropdownFilterGroup as FilterGroup,
-  FilterDropdownSelectContainer as SelectContainer,
-  FilterDropdownSelectTrigger as SelectTrigger,
-  FilterDropdownSelectValue as SelectValue,
-  FilterDropdownSelectContent as SelectContent,
+  FilterDropdownFilterGroup,
+  FilterDropdownSelectContainer,
+  FilterDropdownSelectTrigger,
+  FilterDropdownSelectValue,
+  FilterDropdownSelectContent,
   SelectItemsContainer,
-  FilterDropdownSelectItem as SelectItem,
+  FilterDropdownSelectItem,
 } from "./style";
 
 interface FilterDropdownProps {
@@ -31,26 +31,26 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   onFilterChange,
 }) => {
   return (
-    <FilterGroup>
-      <SelectContainer data-dropdown-container>
-        <SelectTrigger
+    <FilterDropdownFilterGroup>
+      <FilterDropdownSelectContainer data-dropdown-container>
+        <FilterDropdownSelectTrigger
           onClick={(e) => {
             e.stopPropagation();
             onToggle(columnKey);
           }}
         >
-          <SelectValue>
+          <FilterDropdownSelectValue>
             {selectedValues.length === 0
               ? `All ${label}`
               : `${selectedValues.length} selected`}
-          </SelectValue>
+          </FilterDropdownSelectValue>
           <ChevronDown size={16} />
-        </SelectTrigger>
+        </FilterDropdownSelectTrigger>
 
         {isOpen && (
-          <SelectContent>
+          <FilterDropdownSelectContent>
             <SelectItemsContainer>
-              <SelectItem
+              <FilterDropdownSelectItem
                 onClick={(e) => {
                   e.stopPropagation();
                   onFilterChange(columnKey, "all");
@@ -58,12 +58,12 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
                 selected={selectedValues.length === 0}
               >
                 All {label}
-              </SelectItem>
+              </FilterDropdownSelectItem>
 
               {options.map((option) => {
                 const isSelected = selectedValues.includes(option);
                 return (
-                  <SelectItem
+                  <FilterDropdownSelectItem
                     key={option}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -72,14 +72,14 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
                     selected={isSelected}
                   >
                     {option}
-                  </SelectItem>
+                  </FilterDropdownSelectItem>
                 );
               })}
             </SelectItemsContainer>
-          </SelectContent>
+          </FilterDropdownSelectContent>
         )}
-      </SelectContainer>
-    </FilterGroup>
+      </FilterDropdownSelectContainer>
+    </FilterDropdownFilterGroup>
   );
 };
 
