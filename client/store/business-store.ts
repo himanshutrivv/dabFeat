@@ -7,6 +7,9 @@ export interface Business {
 // Mock business store hook
 export const useBusinessStore = () => {
   return {
-    selectedBusiness: { bussId: '1', name: 'Default Business' } as Business | null,
+    selectedBusiness: {
+      bussId: "1",
+      name: "Default Business",
+    } as Business | null,
   };
 };

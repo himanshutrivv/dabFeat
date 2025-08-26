@@ -434,9 +434,7 @@ export default function TaskManagementDashboard() {
         <Global styles={globalStyles(appTheme)} />
         <ErrorContainer>
           <ErrorText>Error: {error}</ErrorText>
-          <RetryButton
-            onClick={() => window.location.reload()}
-          >
+          <RetryButton onClick={() => window.location.reload()}>
             <RefreshCw size={16} />
             Retry
           </RetryButton>
@@ -495,9 +493,7 @@ export default function TaskManagementDashboard() {
                     ))}
 
                   <FilterGroup>
-                    <AllFiltersButton
-                      onClick={() => setShowMainFilter(true)}
-                    >
+                    <AllFiltersButton onClick={() => setShowMainFilter(true)}>
                       <Filter size={16} />
                       <span>All Filters</span>
                     </AllFiltersButton>

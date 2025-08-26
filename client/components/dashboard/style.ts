@@ -10,23 +10,30 @@ export const LoaderContainer = styled.div`
   background-color: hsl(var(--background));
 `;
 
-export const LoaderSpinner = styled.div<{ size?: 'sm' | 'md' | 'lg' }>`
+export const LoaderSpinner = styled.div<{ size?: "sm" | "md" | "lg" }>`
   border-radius: 50%;
   border: 2px solid hsl(var(--border));
   border-top-color: hsl(var(--primary));
   animation: spin 1s linear infinite;
 
-  ${props => {
+  ${(props) => {
     switch (props.size) {
-      case 'sm': return 'width: 1rem; height: 1rem;';
-      case 'lg': return 'width: 2rem; height: 2rem;';
-      default: return 'width: 1.5rem; height: 1.5rem;';
+      case "sm":
+        return "width: 1rem; height: 1rem;";
+      case "lg":
+        return "width: 2rem; height: 2rem;";
+      default:
+        return "width: 1.5rem; height: 1.5rem;";
     }
   }}
 
   @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -197,7 +204,6 @@ export const ErrorText = styled.div`
   color: hsl(var(--destructive));
   font-size: 16px;
 `;
-
 
 export const EmptyState = css`
   display: flex;
@@ -1100,23 +1106,9 @@ export const FilterDropdownSelectItemStyle = css`
   margin-bottom: 8px;
 `;
 
-
-
-
-
-
-
-
-
-
-
 export const FilterModalOptionItemSelected = css`
   background-color: hsl(var(--accent));
 `;
-
-
-
-
 
 export const DashboardMainFilterButton = css`
   display: flex;
@@ -1192,8 +1184,6 @@ export const TimelineFilterNote = css`
   color: hsl(var(--muted-foreground));
   text-align: center;
 `;
-
-
 
 // Additional styled components for inline styles
 export const FilterModalHeaderTitle = styled.h2`
