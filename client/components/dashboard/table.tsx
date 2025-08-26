@@ -1,106 +1,78 @@
-// "use client";
-// import React from "react";
-// import {
-//   TableContainer,
-//   TableWrapper,
-//   TableScrollContainer,
-//   Table,
-//   TableHead,
-//   TableHeaderRow,
-//   TableHeader,
-//   TableBody,
-//   TableRow,
-//   TableCell,
-//   TableCellClickableStyled,
-//   TableEmptyStateContainer,
-//   TableEmptyStateIcon,
-//   TableEmptyStateTitle,
-//   TableEmptyStateDescription,
-// } from "./style";
-// import { Database } from "lucide-react";
+"use client";
+import React, { useCallback } from "react";
+import { Table } from "../common/table";
+import { toast } from "sonner";
 
-// export interface TableDataRow {
-//   [key: string]: string | null;
-// }
+export interface TableDataRow {
+  [key: string]: string | null;
+}
 
-// export interface ColumnMetadata {
-//   label: string;
-//   filterable: boolean;
-//   searchable: boolean;
-//   hidden: boolean;
-//   filerValues?: string;
-// }
+export interface ColumnMetadata {
+  label: string;
+  filterable: boolean;
+  searchable: boolean;
+  hidden: boolean;
+  filerValues?: string;
+}
 
-// interface DashboardTableProps {
-//   data: TableDataRow[];
-//   columnData: { [key: string]: ColumnMetadata };
-//   onCellClick: (text: string) => void;
-// }
+interface DashboardTableProps {
+  data: TableDataRow[];
+  columnData: { [key: string]: ColumnMetadata };
+}
 
-// const DashboardTable: React.FC<DashboardTableProps> = ({
-//   data,
-//   columnData,
-//   onCellClick,
-// }) => {
-//   const getVisibleColumns = () => {
-//     return Object.entries(columnData)
-//       .filter(([, columnInfo]) => columnInfo && !columnInfo.hidden)
-//       .map(([key, columnInfo]) => ({ key, ...columnInfo }));
-//   };
+const DashboardTable: React.FC<DashboardTableProps> = ({
+  data,
+  columnData,
+}) => {
+  const copyToClipboard = useCallback((text: string) => {
+    // Use setTimeout to ensure toast is called outside of render cycle
+    setTimeout(() => {
+      try {
+        const textToCopy = text || "";
+        // Create a temporary textarea element
+        const textarea = document.createElement("textarea");
+        textarea.value = textToCopy;
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        textarea.style.top = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        const success = document.execCommand("copy");
+        document.body.removeChild(textarea);
 
-//   const visibleColumns = getVisibleColumns();
+        // Show success message
+        if (success) {
+          toast.success("Text copied!");
+        } else {
+          toast.error("Failed to copy text");
+        }
+      } catch (error) {
+        console.error("Copy failed:", error);
+        toast.error("Failed to copy text");
+      }
+    }, 0);
+  }, []);
 
-//   return (
-//     <TableContainer>
-//       <TableWrapper>
-//         <TableScrollContainer>
-//           <Table>
-//             <TableHead>
-//               <TableHeaderRow>
-//                 {visibleColumns.map((column) => (
-//                   <TableHeader key={column.key}>{column.label}</TableHeader>
-//                 ))}
-//               </TableHeaderRow>
-//             </TableHead>
-//             <TableBody>
-//               {data.map((row, index) => (
-//                 <TableRow key={index}>
-//                   {visibleColumns.map((column) => {
-//                     const cellValue = row[column.key] || "-";
-//                     return (
-//                       <TableCellClickableStyled
-//                         key={column.key}
-//                         onClick={(e) => {
-//                           e.stopPropagation();
-//                           e.preventDefault();
-//                           onCellClick(row[column.key] || "");
-//                         }}
-//                         title={`Click to copy: ${cellValue}`}
-//                       >
-//                         {cellValue}
-//                       </TableCellClickableStyled>
-//                     );
-//                   })}
-//                 </TableRow>
-//               ))}
-//             </TableBody>
-//           </Table>
-//         </TableScrollContainer>
+  return (
+    <Table
+      columns={Object.entries(columnData || {})
+        .filter(([, columnInfo]) => columnInfo && !columnInfo.hidden)
+        .map(([key, columnInfo]) => ({
+          key,
+          label: columnInfo.label,
+          minWidth: "150px",
+        }))}
+      data={data}
+      showPagination={true}
+      pageSize={5}
+      onCellClick={(value, rowData, columnKey) => {
+        const textValue =
+          typeof value === "string" ? value : String(value || "");
+        copyToClipboard(textValue);
+      }}
+      minHeight="450px"
+    />
+  );
+};
 
-//         {data.length === 0 && (
-//           <TableEmptyStateContainer>
-//             <TableEmptyStateIcon>
-//               <Database size={48} />
-//             </TableEmptyStateIcon>
-//             <TableEmptyStateTitle>No transactions found</TableEmptyStateTitle>
-//             <TableEmptyStateDescription>
-//               Try adjusting your search criteria or filters
-//             </TableEmptyStateDescription>
-//           </TableEmptyStateContainer>
-//         )}
-//       </TableWrapper>
-//     </TableContainer>
-//   );
-// };
-
-// export default DashboardTable;
+export default DashboardTable;
