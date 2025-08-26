@@ -68,6 +68,96 @@ export interface DashboardResponse {
   columnData: ColumnData;
 }
 
+export interface FilterDataItem {
+  key: string;
+  operator: "EQUALS" | "IN" | "BETWEEN" | "LIKE";
+  value?: string | string[];
+  from?: string;
+  to?: string;
+}
+
+// Transform filters state to API format
+const transformFiltersToAPIFormat = (
+  filters: FilterState,
+  searchTerm: string,
+  startDateTime: string,
+  endDateTime: string
+): FilterDataItem[] => {
+  const filterData: FilterDataItem[] = [];
+
+  // Add regular filters
+  Object.entries(filters).forEach(([key, values]) => {
+    if (values && values.length > 0) {
+      if (values.length === 1) {
+        // Single value - use EQUALS
+        filterData.push({
+          key,
+          operator: "EQUALS",
+          value: values[0]
+        });
+      } else {
+        // Multiple values - use IN
+        filterData.push({
+          key,
+          operator: "IN",
+          value: values
+        });
+      }
+    }
+  });
+
+  // Add search term if present
+  if (searchTerm.trim()) {
+    filterData.push({
+      key: "search",
+      operator: "LIKE",
+      value: searchTerm.trim()
+    });
+  }
+
+  // Add date range if both start and end are present
+  if (startDateTime && endDateTime) {
+    const startDate = parseDateTimeToISO(startDateTime);
+    const endDate = parseDateTimeToISO(endDateTime);
+
+    if (startDate && endDate) {
+      filterData.push({
+        key: "created_at",
+        operator: "BETWEEN",
+        from: startDate,
+        to: endDate
+      });
+    }
+  }
+
+  return filterData;
+};
+
+// Helper function to convert datetime input format to ISO string
+const parseDateTimeToISO = (dateTimeString: string): string | null => {
+  try {
+    const [datePart, timePart] = dateTimeString.split(" ");
+    if (!datePart || !timePart) return null;
+
+    const [day, month, year] = datePart.split("/");
+    const [hours, minutes, seconds] = timePart.split(":");
+
+    const date = new Date(
+      parseInt(year),
+      parseInt(month) - 1,
+      parseInt(day),
+      parseInt(hours),
+      parseInt(minutes),
+      parseInt(seconds)
+    );
+
+    return date.toISOString();
+  } catch (error) {
+    console.error("Error parsing datetime:", error);
+    return null;
+  }
+};
+
 export default function TaskManagementDashboard() {
   const [data, setData] = useState<DashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
