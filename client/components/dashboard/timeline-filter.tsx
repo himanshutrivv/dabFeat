@@ -2,20 +2,18 @@
 import React, { useCallback } from "react";
 import { ChevronDown } from "lucide-react";
 import {
-  FilterGroup,
-  SelectContainer,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  TimelineInput,
-  Button,
-  TimelineFilterContentStyled,
-  TimelineFilterSectionStyled,
-  TimelineFilterLabelStyled,
-  TimelineFilterInputGridStyled,
-  TimelineFilterNoteStyled,
-  TimelineFilterButtonGridStyled,
-  TimelineFilterButtonStyled,
+  TimelineFilterGroup as FilterGroup,
+  TimelineFilterSelectContainer as SelectContainer,
+  TimelineFilterSelectTrigger as SelectTrigger,
+  TimelineFilterSelectValue as SelectValue,
+  TimelineFilterInput as TimelineInput,
+  TimelineFilterButton as Button,
+  TimelineFilterContentStyled as TimelineFilterContent,
+  TimelineFilterSectionStyled as TimelineFilterSection,
+  TimelineFilterLabelStyled as TimelineFilterLabel,
+  TimelineFilterInputGridStyled as TimelineFilterInputGrid,
+  TimelineFilterNoteStyled as TimelineFilterNote,
+  TimelineFilterButtonGridStyled as TimelineFilterButtonGrid,
 } from "./style";
 
 interface TimelineFilterProps {
@@ -111,13 +109,11 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
           <ChevronDown size={16} />
         </SelectTrigger>
         {isOpen && (
-          <TimelineFilterContentStyled>
-            <TimelineFilterSectionStyled>
+          <TimelineFilterContent>
+            <TimelineFilterSection>
               <div>
-                <TimelineFilterLabelStyled>
-                  Start Date & Time
-                </TimelineFilterLabelStyled>
-                <TimelineFilterInputGridStyled>
+                <TimelineFilterLabel>Start Date & Time</TimelineFilterLabel>
+                <TimelineFilterInputGrid>
                   <TimelineInput
                     type="date"
                     value={
@@ -143,13 +139,11 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleTimeChange(e, true)}
                   />
-                </TimelineFilterInputGridStyled>
+                </TimelineFilterInputGrid>
               </div>
               <div>
-                <TimelineFilterLabelStyled>
-                  End Date & Time
-                </TimelineFilterLabelStyled>
-                <TimelineFilterInputGridStyled>
+                <TimelineFilterLabel>End Date & Time</TimelineFilterLabel>
+                <TimelineFilterInputGrid>
                   <TimelineInput
                     type="date"
                     value={
@@ -173,28 +167,28 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleTimeChange(e, false)}
                   />
-                </TimelineFilterInputGridStyled>
+                </TimelineFilterInputGrid>
               </div>
-              <TimelineFilterNoteStyled>
+              <TimelineFilterNote>
                 Maximum time range: 5 minutes
-              </TimelineFilterNoteStyled>
-              <TimelineFilterButtonGridStyled>
-                <TimelineFilterButtonStyled
+              </TimelineFilterNote>
+              <TimelineFilterButtonGrid>
+                <Button
                   size="sm"
                   variant="outline"
                   onClick={(e) => handleButtonClick(e, "reset")}
                 >
                   Reset
-                </TimelineFilterButtonStyled>
-                <TimelineFilterButtonStyled
+                </Button>
+                <Button
                   size="sm"
                   onClick={(e) => handleButtonClick(e, "apply")}
                 >
                   Apply
-                </TimelineFilterButtonStyled>
-              </TimelineFilterButtonGridStyled>
-            </TimelineFilterSectionStyled>
-          </TimelineFilterContentStyled>
+                </Button>
+              </TimelineFilterButtonGrid>
+            </TimelineFilterSection>
+          </TimelineFilterContent>
         )}
       </SelectContainer>
     </FilterGroup>

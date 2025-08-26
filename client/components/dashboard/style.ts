@@ -1396,3 +1396,517 @@ export const FilterModalSearchContainerWithMargin = styled(MainFilterSearch)`
 export const FilterModalSearchContainerSmallMargin = styled(MainFilterSearch)`
   margin-bottom: 12px;
 `;
+
+// Filter Dropdown Components
+export const FilterDropdownFilterGroup = styled.div``;
+
+export const FilterDropdownSelectContainer = styled.div`
+  position: relative;
+  z-index: 20;
+`;
+
+export const FilterDropdownSelectTrigger = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  width: 100%;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  border: 1px solid ${({ theme }) => theme.colors.input};
+  background-color: ${({ theme }) => theme.colors.background};
+  padding: 0 ${({ theme }) => theme.spacing[3]};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.foreground};
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.all};
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.ring};
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.accentForeground};
+  }
+`;
+
+export const FilterDropdownSelectValue = styled.span`
+  color: ${({ theme }) => theme.colors.foreground};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+`;
+
+export const FilterDropdownSelectContent = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  max-height: 384px;
+  min-width: 200px;
+  overflow-y: auto;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => theme.colors.card};
+  color: ${({ theme }) => theme.colors.cardForeground};
+  box-shadow: ${({ theme }) => theme.shadows.xl};
+  margin-top: ${({ theme }) => theme.spacing[1]};
+  animation: fadeIn 0.2s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+`;
+
+export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
+  position: relative;
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[3]};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  outline: none;
+  transition: ${({ theme }) => theme.transitions.all};
+  color: ${({ theme }) => theme.colors.foreground};
+  font-weight: ${(props) =>
+    props.selected
+      ? props.theme.fontWeights.semibold
+      : props.theme.fontWeights.normal};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.accentForeground};
+  }
+
+  &:focus {
+    background-color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.accentForeground};
+  }
+
+  ${(props) =>
+    props.selected &&
+    `
+      background-color: ${props.theme.colors.accent};
+      color: ${props.theme.colors.accentForeground};
+    `}
+`;
+
+// Timeline Filter Components
+export const TimelineFilterGroup = styled.div``;
+
+export const TimelineFilterSelectContainer = styled.div`
+  position: relative;
+  z-index: 20;
+`;
+
+export const TimelineFilterSelectTrigger = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  width: 100%;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  border: 1px solid ${({ theme }) => theme.colors.input};
+  background-color: ${({ theme }) => theme.colors.background};
+  padding: 0 ${({ theme }) => theme.spacing[3]};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.foreground};
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.all};
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.ring};
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.accentForeground};
+  }
+`;
+
+export const TimelineFilterSelectValue = styled.span`
+  color: ${({ theme }) => theme.colors.foreground};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+`;
+
+export const TimelineFilterInput = styled.input`
+  display: flex;
+  width: 100%;
+  border-radius: calc(0.75rem - 2px);
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--background));
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: hsl(var(--foreground));
+  transition:
+    color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family:
+    ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo,
+    monospace;
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
+  &:focus {
+    outline: none;
+    border-color: hsl(215, 25%, 27%);
+    box-shadow: 0 0 0 2px hsl(215, 25%, 27%);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+`;
+
+export const TimelineFilterButton = styled.button<{
+  variant?: "default" | "outline";
+  size?: "default" | "sm";
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition:
+    color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  flex: 1;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  ${(props) => {
+    switch (props.variant) {
+      case "outline":
+        return `
+          border: 1px solid ${props.theme.colors?.border};
+          background-color: ${props.theme.colors?.background};
+          color: ${props.theme.colors?.foreground};
+
+          &:hover:not(:disabled) {
+            background-color: ${props.theme.colors?.accent};
+            color: ${props.theme.colors?.accentForeground};
+          }
+        `;
+      default:
+        return `
+          background-color: hsl(215, 25%, 27%);
+          color: hsl(0, 0%, 98%);
+
+          &:hover:not(:disabled) {
+            opacity: 0.9;
+          }
+
+          &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 2px hsl(215, 25%, 27%);
+          }
+        `;
+    }
+  }}
+
+  ${(props) => {
+    switch (props.size) {
+      case "sm":
+        return `
+          height: 36px;
+          border-radius: calc(0.75rem - 2px);
+          padding: 0 ${props.theme.spacing[3]};
+          font-size: ${props.theme.fontSizes.xs};
+        `;
+      default:
+        return `
+          height: 40px;
+          padding: 0 ${props.theme.spacing[4]};
+        `;
+    }
+  }}
+`;
+
+// Filter Modal Components
+export const FilterModalBackdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9998;
+  animation: fadeIn 0.3s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
+export const FilterModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 33.333333%;
+  height: 100vh;
+  background-color: ${({ theme }) => theme.colors.background};
+  border-left: 1px solid ${({ theme }) => theme.colors.border};
+  border-top-left-radius: ${({ theme }) => theme.borderRadius["3xl"]};
+  border-bottom-left-radius: ${({ theme }) => theme.borderRadius["3xl"]};
+  box-shadow: ${({ theme }) => theme.shadows.xl};
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  animation: slideInFromRight 0.3s ease-out;
+
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+`;
+
+export const FilterModalHeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: ${({ theme }) => theme.spacing[6]};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  flex-shrink: 0;
+`;
+
+export const FilterModalContentContainer = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  padding: ${({ theme }) => theme.spacing[6]};
+`;
+
+export const FilterModalListItem = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+export const FilterModalItemHeaderContainer = styled.div<{
+  isActive?: boolean;
+}>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: ${({ theme }) => theme.spacing[4]} 0;
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.all};
+  color: ${(props) =>
+    props.isActive
+      ? props.theme.colors.primary
+      : props.theme.colors.foreground};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.muted};
+    margin: 0 -${({ theme }) => theme.spacing[6]};
+    padding-left: ${({ theme }) => theme.spacing[6]};
+    padding-right: ${({ theme }) => theme.spacing[6]};
+  }
+`;
+
+export const FilterModalExpandIcon = styled.div<{ isExpanded: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: ${(props) =>
+    props.isExpanded ? props.theme.colors.primary : props.theme.colors.muted};
+  color: ${(props) =>
+    props.isExpanded ? "white" : props.theme.colors.mutedForeground};
+  transition: ${({ theme }) => theme.transitions.all};
+`;
+
+export const FilterModalOptionsContainer = styled.div`
+  padding: 0 0 ${({ theme }) => theme.spacing[4]} 0;
+  margin-top: -${({ theme }) => theme.spacing[2]};
+`;
+
+export const FilterModalOptions = styled.div`
+  max-height: 256px;
+  overflow-y: auto;
+`;
+
+export const FilterModalCheckboxContainer = styled.div<{ selected: boolean }>`
+  width: 20px;
+  height: 20px;
+  border: 2px solid
+    ${(props) =>
+      props.selected ? props.theme.colors.primary : props.theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  background-color: ${(props) =>
+    props.selected ? props.theme.colors.primary : "transparent"};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: ${({ theme }) => theme.transitions.all};
+`;
+
+export const FilterModalFooterContainer = styled.div`
+  padding: ${({ theme }) => theme.spacing[6]};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+  flex-shrink: 0;
+`;
+
+export const FilterModalButton = styled.button<{
+  variant?: "default" | "outline";
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition:
+    color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  width: 100%;
+  margin-bottom: ${({ theme }) => theme.spacing[2]};
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  ${(props) => {
+    switch (props.variant) {
+      case "outline":
+        return `
+          border: 1px solid ${props.theme.colors?.border};
+          background-color: ${props.theme.colors?.background};
+          color: ${props.theme.colors?.foreground};
+
+          &:hover:not(:disabled) {
+            background-color: ${props.theme.colors?.accent};
+            color: ${props.theme.colors?.accentForeground};
+          }
+        `;
+      default:
+        return `
+          background-color: hsl(215, 25%, 27%);
+          color: hsl(0, 0%, 98%);
+
+          &:hover:not(:disabled) {
+            opacity: 0.9;
+          }
+
+          &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 2px hsl(215, 25%, 27%);
+          }
+        `;
+    }
+  }}
+`;
+
+// Index Inline Styles
+export const AllFiltersButtonStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+  width: "100%",
+  justifyContent: "center",
+  background: "hsl(215, 25%, 27%)",
+  color: "white",
+  border: "none",
+  borderRadius: "8px",
+  padding: "10px 16px",
+  fontWeight: "500",
+  fontSize: "14px",
+  boxShadow: "0 4px 12px rgba(139, 92, 246, 0.25)",
+  transition: "all 0.2s ease",
+  cursor: "pointer",
+};
+
+export const AllFiltersButtonHoverStyle = {
+  transform: "translateY(-1px)",
+  boxShadow: "0 6px 16px rgba(139, 92, 246, 0.35)",
+};
+
+export const AllFiltersButtonLeaveStyle = {
+  ...AllFiltersButtonStyle,
+};
+
+export const ClearAllFilterButtonStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+  padding: "8px 12px",
+  backgroundColor: "transparent",
+  color: "hsl(var(--destructive))",
+  border: "none",
+  borderRadius: "6px",
+  cursor: "pointer",
+  fontSize: "14px",
+  fontWeight: "500",
+  transition: "all 0.2s",
+};
+
+export const ClearAllFilterButtonHoverStyle = {
+  backgroundColor: "hsl(var(--destructive) / 0.1)",
+};
+
+export const ClearAllFilterButtonLeaveStyle = {
+  ...ClearAllFilterButtonStyle,
+};
+
+export const RetryButtonStyle = css`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;

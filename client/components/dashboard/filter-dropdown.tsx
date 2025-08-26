@@ -2,13 +2,13 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
 import {
-  FilterGroup,
-  SelectContainer,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
+  FilterDropdownFilterGroup as FilterGroup,
+  FilterDropdownSelectContainer as SelectContainer,
+  FilterDropdownSelectTrigger as SelectTrigger,
+  FilterDropdownSelectValue as SelectValue,
+  FilterDropdownSelectContent as SelectContent,
   SelectItemsContainer,
-  SelectItem,
+  FilterDropdownSelectItem as SelectItem,
 } from "./style";
 
 interface FilterDropdownProps {

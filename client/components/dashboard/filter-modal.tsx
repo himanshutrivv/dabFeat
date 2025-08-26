@@ -2,36 +2,32 @@
 import React, { useCallback } from "react";
 import { Search, X } from "lucide-react";
 import {
-  MainFilterBackdrop,
-  MainFilterModal,
-  MainFilterHeader,
-  MainFilterContent,
-  MainFilterSearch,
-  MainFilterListItem,
-  MainFilterItemHeader,
-  MainFilterExpandIcon,
-  MainFilterOptionsContainer,
-  MainFilterOptions,
-  MainFilterOption,
-  MainFilterCheckbox,
-  MainFilterFooter,
-  Button,
-  FilterModalHeaderTitle,
-  FilterModalSearchIconStyled,
-  FilterModalSearchInputStyled,
-  FilterModalSectionContentStyled,
-  FilterModalItemTitleStyled,
-  FilterModalItemTitleActiveStyled,
-  FilterModalItemCountStyled,
-  FilterModalSectionSearchIconStyled,
-  FilterModalSectionSearchInputStyled,
-  FilterModalOptionItemStyled,
-  FilterModalOptionTextStyled,
-  FilterModalCheckIconStyled,
-  FilterModalFooterClearButtonStyled,
-  FilterModalFooterApplyButtonStyled,
-  FilterModalSearchContainerWithMargin,
-  FilterModalSearchContainerSmallMargin,
+  FilterModalBackdrop as MainFilterBackdrop,
+  FilterModalContainer as MainFilterModal,
+  FilterModalHeaderContainer as MainFilterHeader,
+  FilterModalContentContainer as MainFilterContent,
+  FilterModalListItem as MainFilterListItem,
+  FilterModalItemHeaderContainer as MainFilterItemHeader,
+  FilterModalExpandIcon as MainFilterExpandIcon,
+  FilterModalOptionsContainer as MainFilterOptionsContainer,
+  FilterModalOptions as MainFilterOptions,
+  FilterModalCheckboxContainer as MainFilterCheckbox,
+  FilterModalFooterContainer as MainFilterFooter,
+  FilterModalButton as Button,
+  FilterModalHeaderTitleStyled as FilterModalHeaderTitle,
+  FilterModalSearchIconStyled as FilterModalSearchIcon,
+  FilterModalSearchInputStyled as FilterModalSearchInput,
+  FilterModalSectionContentStyled as FilterModalSectionContent,
+  FilterModalItemTitleStyled as FilterModalItemTitle,
+  FilterModalItemTitleActiveStyled as FilterModalItemTitleActive,
+  FilterModalItemCountStyled as FilterModalItemCount,
+  FilterModalSectionSearchIconStyled as FilterModalSectionSearchIcon,
+  FilterModalSectionSearchInputStyled as FilterModalSectionSearchInput,
+  FilterModalOptionItemStyled as FilterModalOptionItem,
+  FilterModalOptionTextStyled as FilterModalOptionText,
+  FilterModalCheckIconStyled as FilterModalCheckIcon,
+  FilterModalSearchContainerWithMargin as FilterModalSearchContainer,
+  FilterModalSearchContainerSmallMargin as FilterModalSearchContainerSmall,
 } from "./style";
 
 interface FilterState {
@@ -130,26 +126,26 @@ const FilterModal: React.FC<FilterModalProps> = ({
       >
         <MainFilterHeader>
           <FilterModalHeaderTitle>Filters</FilterModalHeaderTitle>
-          <Button variant="ghost" size="icon" onClick={onClose}>
+          <Button variant="outline" onClick={onClose}>
             <X size={20} />
           </Button>
         </MainFilterHeader>
 
         <MainFilterContent>
-          <FilterModalSearchContainerWithMargin>
-            <FilterModalSearchIconStyled>
+          <FilterModalSearchContainer>
+            <FilterModalSearchIcon>
               <Search size={16} />
-            </FilterModalSearchIconStyled>
-            <FilterModalSearchInputStyled
+            </FilterModalSearchIcon>
+            <FilterModalSearchInput
               type="text"
               placeholder="Search all filters..."
               onClick={handleInputInteraction}
               onFocus={handleInputInteraction}
               onChange={(e) => e.stopPropagation()}
             />
-          </FilterModalSearchContainerWithMargin>
+          </FilterModalSearchContainer>
 
-          <FilterModalSectionContentStyled>
+          <FilterModalSectionContent>
             {filterOptions.map(({ key, label, options }) => {
               const hasActiveFilters = filters[key]?.length > 0;
               const isExpanded = openFilterDropdowns[`modal-${key}`] || false;
@@ -162,16 +158,14 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     isActive={hasActiveFilters}
                   >
                     {hasActiveFilters ? (
-                      <FilterModalItemTitleActiveStyled>
+                      <FilterModalItemTitleActive>
                         {label}
-                        <FilterModalItemCountStyled>
+                        <FilterModalItemCount>
                           {filters[key]?.length}
-                        </FilterModalItemCountStyled>
-                      </FilterModalItemTitleActiveStyled>
+                        </FilterModalItemCount>
+                      </FilterModalItemTitleActive>
                     ) : (
-                      <FilterModalItemTitleStyled>
-                        {label}
-                      </FilterModalItemTitleStyled>
+                      <FilterModalItemTitle>{label}</FilterModalItemTitle>
                     )}
                     <MainFilterExpandIcon isExpanded={isExpanded}>
                       {isExpanded ? (
@@ -194,37 +188,37 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
                   {isExpanded && (
                     <MainFilterOptionsContainer>
-                      <FilterModalSearchContainerSmallMargin>
-                        <FilterModalSectionSearchIconStyled>
+                      <FilterModalSearchContainerSmall>
+                        <FilterModalSectionSearchIcon>
                           <Search size={14} />
-                        </FilterModalSectionSearchIconStyled>
-                        <FilterModalSectionSearchInputStyled
+                        </FilterModalSectionSearchIcon>
+                        <FilterModalSectionSearchInput
                           type="text"
                           placeholder={`Search ${label.toLowerCase()}...`}
                           onClick={handleInputInteraction}
                           onFocus={handleInputInteraction}
                           onChange={(e) => e.stopPropagation()}
                         />
-                      </FilterModalSearchContainerSmallMargin>
+                      </FilterModalSearchContainerSmall>
 
                       <MainFilterOptions>
                         {options.map((option) => {
                           const isSelected =
                             filters[key]?.includes(option) || false;
                           return (
-                            <FilterModalOptionItemStyled
+                            <FilterModalOptionItem
                               key={option}
                               onClick={(e) =>
                                 handleFilterOptionClick(e, key, option)
                               }
                               isSelected={isSelected}
                             >
-                              <FilterModalOptionTextStyled>
+                              <FilterModalOptionText>
                                 {option}
-                              </FilterModalOptionTextStyled>
+                              </FilterModalOptionText>
                               <MainFilterCheckbox selected={isSelected}>
                                 {isSelected && (
-                                  <FilterModalCheckIconStyled
+                                  <FilterModalCheckIcon
                                     width={12}
                                     height={12}
                                     viewBox="0 0 20 20"
@@ -235,10 +229,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
                                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                       clipRule="evenodd"
                                     />
-                                  </FilterModalCheckIconStyled>
+                                  </FilterModalCheckIcon>
                                 )}
                               </MainFilterCheckbox>
-                            </FilterModalOptionItemStyled>
+                            </FilterModalOptionItem>
                           );
                         })}
                       </MainFilterOptions>
@@ -247,21 +241,16 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 </MainFilterListItem>
               );
             })}
-          </FilterModalSectionContentStyled>
+          </FilterModalSectionContent>
         </MainFilterContent>
 
         <MainFilterFooter>
           {activeFilters.length > 0 && (
-            <FilterModalFooterClearButtonStyled
-              variant="outline"
-              onClick={handleClearAll}
-            >
+            <Button variant="outline" onClick={handleClearAll}>
               Clear all ({activeFilters.length})
-            </FilterModalFooterClearButtonStyled>
+            </Button>
           )}
-          <FilterModalFooterApplyButtonStyled onClick={handleApplyFilters}>
-            Apply Filters
-          </FilterModalFooterApplyButtonStyled>
+          <Button onClick={handleApplyFilters}>Apply Filters</Button>
         </MainFilterFooter>
       </MainFilterModal>
     </>
