@@ -5,7 +5,7 @@ import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast, Toaster } from "sonner";
 import { ThemeControllerProvider } from "@/styles/theme-controller";
-import { globalStyles } from "../../styles/global-styles";
+import { globalStyles } from "@/styles/global-styles";
 import { appTheme } from "../../styles/themes";
 import {
   DashboardContainer,
