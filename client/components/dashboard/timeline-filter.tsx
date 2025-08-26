@@ -39,16 +39,21 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
   onReset,
   onApply,
 }) => {
-  const handleInputInteraction = useCallback((e: React.MouseEvent | React.FocusEvent) => {
-    e.stopPropagation();
-  }, []);
+  const handleInputInteraction = useCallback(
+    (e: React.MouseEvent | React.FocusEvent) => {
+      e.stopPropagation();
+    },
+    [],
+  );
 
   const handleDateChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, isStart: boolean) => {
       e.stopPropagation();
       if (e.target.value) {
         const currentDateTime = isStart ? startDateTime : endDateTime;
-        const timePart = currentDateTime ? currentDateTime.split(" ")[1] || "00:00:00" : "00:00:00";
+        const timePart = currentDateTime
+          ? currentDateTime.split(" ")[1] || "00:00:00"
+          : "00:00:00";
         const [year, month, day] = e.target.value.split("-");
         const newDateTime = `${day}/${month}/${year} ${timePart}`;
 
@@ -59,7 +64,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
         }
       }
     },
-    [startDateTime, endDateTime, onStartDateTimeChange, onEndDateTimeChange]
+    [startDateTime, endDateTime, onStartDateTimeChange, onEndDateTimeChange],
   );
 
   const handleTimeChange = useCallback(
@@ -67,7 +72,9 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
       e.stopPropagation();
       if (e.target.value) {
         const currentDateTime = isStart ? startDateTime : endDateTime;
-        const datePart = currentDateTime ? currentDateTime.split(" ")[0] : new Date().toLocaleDateString("en-GB");
+        const datePart = currentDateTime
+          ? currentDateTime.split(" ")[0]
+          : new Date().toLocaleDateString("en-GB");
         const newDateTime = `${datePart} ${e.target.value}`;
 
         if (isStart) {
@@ -77,7 +84,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
         }
       }
     },
-    [startDateTime, endDateTime, onStartDateTimeChange, onEndDateTimeChange]
+    [startDateTime, endDateTime, onStartDateTimeChange, onEndDateTimeChange],
   );
 
   const handleButtonClick = useCallback(
@@ -89,7 +96,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
         onApply();
       }
     },
-    [onReset, onApply]
+    [onReset, onApply],
   );
 
   return (
@@ -97,7 +104,9 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
       <SelectContainer data-dropdown-container>
         <SelectTrigger onClick={onToggle}>
           <SelectValue>
-            {startDateTime && endDateTime ? "Custom Range" : "Select Time Range"}
+            {startDateTime && endDateTime
+              ? "Custom Range"
+              : "Select Time Range"}
           </SelectValue>
           <ChevronDown size={16} />
         </SelectTrigger>
@@ -111,14 +120,26 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                 <TimelineFilterInputGridStyled>
                   <TimelineInput
                     type="date"
-                    value={startDateTime ? startDateTime.split(" ")[0].split("/").reverse().join("-") : ""}
+                    value={
+                      startDateTime
+                        ? startDateTime
+                            .split(" ")[0]
+                            .split("/")
+                            .reverse()
+                            .join("-")
+                        : ""
+                    }
                     onClick={handleInputInteraction}
                     onChange={(e) => handleDateChange(e, true)}
                   />
                   <TimelineInput
                     type="time"
                     step="1"
-                    value={startDateTime ? startDateTime.split(" ")[1] || "00:00:00" : ""}
+                    value={
+                      startDateTime
+                        ? startDateTime.split(" ")[1] || "00:00:00"
+                        : ""
+                    }
                     onClick={handleInputInteraction}
                     onChange={(e) => handleTimeChange(e, true)}
                   />
@@ -131,14 +152,24 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                 <TimelineFilterInputGridStyled>
                   <TimelineInput
                     type="date"
-                    value={endDateTime ? endDateTime.split(" ")[0].split("/").reverse().join("-") : ""}
+                    value={
+                      endDateTime
+                        ? endDateTime
+                            .split(" ")[0]
+                            .split("/")
+                            .reverse()
+                            .join("-")
+                        : ""
+                    }
                     onClick={handleInputInteraction}
                     onChange={(e) => handleDateChange(e, false)}
                   />
                   <TimelineInput
                     type="time"
                     step="1"
-                    value={endDateTime ? endDateTime.split(" ")[1] || "00:00:00" : ""}
+                    value={
+                      endDateTime ? endDateTime.split(" ")[1] || "00:00:00" : ""
+                    }
                     onClick={handleInputInteraction}
                     onChange={(e) => handleTimeChange(e, false)}
                   />

@@ -70,11 +70,14 @@ export const globalTheme = css`
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-      "Helvetica Neue", sans-serif;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
   }
 
   h1,
@@ -106,7 +109,9 @@ export const globalTheme = css`
 
   input[type="time"]:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgb(59 130 246 / 0.1), 0 0 0 4px rgb(59 130 246 / 0.2);
+    box-shadow:
+      0 0 0 2px rgb(59 130 246 / 0.1),
+      0 0 0 4px rgb(59 130 246 / 0.2);
   }
 
   @keyframes spin {
@@ -768,7 +773,9 @@ export const SearchButton = styled(Button)`
   color: white;
   padding: 12px 24px;
   border-radius: 16px;
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.2);
+  box-shadow:
+    0 0 20px rgba(139, 92, 246, 0.4),
+    0 0 40px rgba(139, 92, 246, 0.2);
 
   &:hover {
     opacity: 0.9;
@@ -960,7 +967,9 @@ export const SelectContent = styled.div`
   border: 1px solid hsl(var(--border));
   background-color: hsl(var(--card));
   color: hsl(var(--card-foreground));
-  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.3), 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 16px 64px rgba(0, 0, 0, 0.3),
+    0 8px 32px rgba(0, 0, 0, 0.2);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
@@ -1289,7 +1298,8 @@ export const FilterModalOptionItemStyled = styled.div<{ isSelected?: boolean }>`
   padding: 8px 12px;
   cursor: pointer;
   border-radius: 4px;
-  background-color: ${props => props.isSelected ? "hsl(var(--accent))" : "transparent"};
+  background-color: ${(props) =>
+    props.isSelected ? "hsl(var(--accent))" : "transparent"};
   margin-bottom: 2px;
 `;
 
