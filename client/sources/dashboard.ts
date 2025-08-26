@@ -137,7 +137,8 @@ export const srGetDashboardTableData = async ({
         filterable: true,
         searchable: true,
         hidden: false,
-        filerValues: "admin_user,test_user,admin,power_user,admin_test,guest_user",
+        filerValues:
+          "admin_user,test_user,admin,power_user,admin_test,guest_user",
       },
     },
   };

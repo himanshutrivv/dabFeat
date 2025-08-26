@@ -695,7 +695,8 @@ export default function TaskManagementDashboard() {
             showPagination={true}
             pageSize={5}
             onCellClick={(value, rowData, columnKey) => {
-              const textValue = typeof value === "string" ? value : String(value || "");
+              const textValue =
+                typeof value === "string" ? value : String(value || "");
               copyToClipboard(textValue);
             }}
             minHeight="450px"

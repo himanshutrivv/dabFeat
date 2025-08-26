@@ -10,7 +10,7 @@ import {
   buttonBaseStyles,
   inputStyles,
   primaryButtonStyles,
-  outlineButtonStyles
+  outlineButtonStyles,
 } from "../../styles/styled-components";
 
 interface FilterState {
@@ -116,7 +116,9 @@ const MainFilterItemHeader = styled.div<{ isActive?: boolean }>`
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.all};
   color: ${(props) =>
-    props.isActive ? props.theme.colors.primary : props.theme.colors.foreground};
+    props.isActive
+      ? props.theme.colors.primary
+      : props.theme.colors.foreground};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.muted};
@@ -153,7 +155,7 @@ const MainFilterCheckbox = styled.div<{ selected: boolean }>`
   height: 20px;
   border: 2px solid
     ${(props) =>
-    props.selected ? props.theme.colors.primary : props.theme.colors.border};
+      props.selected ? props.theme.colors.primary : props.theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   background-color: ${(props) =>
     props.selected ? props.theme.colors.primary : "transparent"};
@@ -252,7 +254,8 @@ const FilterModalSectionSearchInput = styled.input`
 
 const FilterModalOptionItem = styled.div<{ isSelected?: boolean }>`
   ${flexBetween}
-  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[3]};
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) =>
+    theme.spacing[3]};
   cursor: pointer;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   background-color: ${(props) =>
@@ -411,9 +414,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                         </FilterModalItemCount>
                       </FilterModalItemTitleActive>
                     ) : (
-                      <FilterModalItemTitle>
-                        {label}
-                      </FilterModalItemTitle>
+                      <FilterModalItemTitle>{label}</FilterModalItemTitle>
                     )}
                     <MainFilterExpandIcon isExpanded={isExpanded}>
                       {isExpanded ? (
@@ -498,9 +499,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
               Clear all ({activeFilters.length})
             </Button>
           )}
-          <Button onClick={handleApplyFilters}>
-            Apply Filters
-          </Button>
+          <Button onClick={handleApplyFilters}>Apply Filters</Button>
         </MainFilterFooter>
       </MainFilterModal>
     </>
