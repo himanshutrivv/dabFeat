@@ -592,8 +592,9 @@ export const SelectContent = styled.div`
   overflow-y: auto;
   border-radius: 8px;
   border: 1px solid hsl(var(--border));
-  background-color: hsl(var(--card));
+  background-color: white;
   color: hsl(var(--card-foreground));
+  opacity: 1;
   box-shadow:
     0 20px 80px rgba(0, 0, 0, 0.4),
     0 12px 40px rgba(0, 0, 0, 0.3),
@@ -602,7 +603,8 @@ export const SelectContent = styled.div`
   animation: fadeIn 0.2s ease-out;
 
   &.filter-content {
-    /* Additional styling for filter content identification */
+    background-color: white !important;
+    opacity: 1 !important;
   }
 
   @keyframes fadeIn {
@@ -1093,8 +1095,9 @@ export const FilterDropdownSelectContent = styled.div`
   overflow-y: auto;
   border-radius: 8px;
   border: 1px solid hsl(var(--border));
-  background-color: hsl(var(--card));
+  background-color: white;
   color: hsl(var(--card-foreground));
+  opacity: 1;
   box-shadow:
     0 20px 80px rgba(0, 0, 0, 0.4),
     0 12px 40px rgba(0, 0, 0, 0.3),
@@ -1103,7 +1106,8 @@ export const FilterDropdownSelectContent = styled.div`
   animation: fadeIn 0.2s ease-out;
 
   &.filter-content {
-    /* Additional styling for filter content identification */
+    background-color: white !important;
+    opacity: 1 !important;
   }
 
   @keyframes fadeIn {
@@ -1224,9 +1228,12 @@ export const TimelineFilterContentStyled = styled(SelectContent)`
   max-width: calc(100vw - 32px);
   right: auto;
   min-width: 320px;
+  background-color: white !important;
+  opacity: 1 !important;
 
   &.filter-content {
-    /* Timeline filter specific styling */
+    background-color: white !important;
+    opacity: 1 !important;
   }
 
   @media (max-width: 768px) {
