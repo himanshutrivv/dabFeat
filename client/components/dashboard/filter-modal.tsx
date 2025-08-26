@@ -245,7 +245,7 @@ const FilterModalSectionSearchIcon = styled.div`
 
 const FilterModalSectionSearchInput = styled.input`
   ${inputStyles()}
-  padding-left: ${({ theme }) => theme.spacing[9]};
+  padding-left: ${({ theme }) => theme.spacing[10]};
   font-size: ${({ theme }) => theme.fontSizes.xs};
   background-color: ${({ theme }) => theme.colors.muted};
 `;
