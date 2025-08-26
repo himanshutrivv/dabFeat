@@ -1,7 +1,6 @@
 "use client";
-/** @jsxImportSource @emotion/react */
 import React from "react";
-import { Filter, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import {
   FilterGroup,
   SelectContainer,
@@ -10,7 +9,6 @@ import {
   SelectContent,
   SelectItemsContainer,
   SelectItem,
-  FilterDropdownSelectItemStyle,
 } from "./style";
 
 interface FilterDropdownProps {
@@ -57,7 +55,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
                   e.stopPropagation();
                   onFilterChange(columnKey, "all");
                 }}
-                css={selectedValues.length === 0 ? FilterDropdownSelectItemStyle : undefined}
+                selected={selectedValues.length === 0}
               >
                 All {label}
               </SelectItem>
