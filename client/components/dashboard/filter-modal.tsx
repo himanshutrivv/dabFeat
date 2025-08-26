@@ -172,14 +172,14 @@ const MainFilterFooter = styled.div`
 const Button = styled.button<{
   variant?: "default" | "outline";
 }>`
-  ${buttonBaseStyles()}
+  ${buttonBaseStyles}
 
   ${(props) => {
     switch (props.variant) {
       case "outline":
         return outlineButtonStyles(props.theme);
       default:
-        return primaryButtonStyles;
+        return primaryButtonStyles();
     }
   }}
 
