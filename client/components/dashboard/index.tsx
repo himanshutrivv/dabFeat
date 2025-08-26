@@ -292,6 +292,22 @@ export default function TaskManagementDashboard() {
     setFilteredData(filtered);
   }, [data, filters, searchTerm, isUsingServerFiltering]);
 
+  // Auto-apply server filtering when filters, search, or date range change
+  useEffect(() => {
+    const hasActiveFilters = Object.values(filters).some(filterValues => filterValues.length > 0);
+    const hasSearchTerm = searchTerm.trim().length > 0;
+    const hasDateRange = startDateTime && endDateTime;
+
+    if ((hasActiveFilters || hasSearchTerm || hasDateRange) && !isUsingServerFiltering) {
+      // Debounce the API call to avoid too many requests
+      const timeoutId = setTimeout(() => {
+        applyFiltersAndFetchData();
+      }, 300);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [filters, searchTerm, startDateTime, endDateTime, isUsingServerFiltering, applyFiltersAndFetchData]);
+
   const handleFilterChange = useCallback((columnKey: string, value: string) => {
     if (value === "all") {
       // Clear all selections for this filter
