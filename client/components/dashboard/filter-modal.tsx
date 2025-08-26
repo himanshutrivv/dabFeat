@@ -207,7 +207,7 @@ const FilterModalSearchIcon = styled.div`
 `;
 
 const FilterModalSearchInput = styled.input`
-  ${inputStyles()}
+  ${inputStyles}
   padding-left: ${({ theme }) => theme.spacing[10]};
 `;
 
@@ -244,7 +244,7 @@ const FilterModalSectionSearchIcon = styled.div`
 `;
 
 const FilterModalSectionSearchInput = styled.input`
-  ${inputStyles()}
+  ${inputStyles}
   padding-left: ${({ theme }) => theme.spacing[9]};
   font-size: ${({ theme }) => theme.fontSizes.xs};
   background-color: ${({ theme }) => theme.colors.muted};
