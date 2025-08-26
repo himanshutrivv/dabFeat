@@ -111,7 +111,7 @@ export const srGetDashboardTableData = async ({
         filterable: true,
         searchable: false,
         hidden: false,
-        filerValues: "Success,Pending,Failed",
+        filerValues: "success,pending,failed",
       },
       date: {
         label: "Date & Time",
@@ -124,6 +124,20 @@ export const srGetDashboardTableData = async ({
         filterable: false,
         searchable: true,
         hidden: false,
+      },
+      region: {
+        label: "Region",
+        filterable: true,
+        searchable: true,
+        hidden: false,
+        filerValues: "us-west,eu-central,ap-south",
+      },
+      username: {
+        label: "Username",
+        filterable: true,
+        searchable: true,
+        hidden: false,
+        filerValues: "admin_user,test_user,admin,power_user,admin_test,guest_user",
       },
     },
   };
