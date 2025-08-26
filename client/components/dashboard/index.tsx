@@ -32,7 +32,7 @@ import {
   RetryButton,
 } from "./style";
 
-import DashboardTable from "./table";
+import DashboardTable, { TableDataRow, ColumnMetadata } from "./table";
 import FilterDropdown from "./filter-dropdown";
 import FilterModal from "./filter-modal";
 import TimelineFilter from "./timeline-filter";
