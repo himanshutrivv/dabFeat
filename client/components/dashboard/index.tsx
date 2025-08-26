@@ -32,6 +32,7 @@ import {
   RetryButton,
 } from "./style";
 
+import { Table } from "../common/table";
 import FilterDropdown from "./filter-dropdown";
 import FilterModal from "./filter-modal";
 import TimelineFilter from "./timeline-filter";
