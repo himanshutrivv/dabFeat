@@ -181,7 +181,7 @@ export const Header = styled.div`
   padding: 0 32px;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 50;
   flex-shrink: 0;
 `;
 
@@ -595,19 +595,20 @@ export const SelectContent = styled.div`
   background-color: hsl(var(--card));
   color: hsl(var(--card-foreground));
   box-shadow:
-    0 16px 64px rgba(0, 0, 0, 0.3),
-    0 8px 32px rgba(0, 0, 0, 0.2);
+    0 20px 80px rgba(0, 0, 0, 0.4),
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 4px 16px rgba(0, 0, 0, 0.2);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: scale(0.95);
+      transform: translateY(-8px) scale(0.95);
     }
     to {
       opacity: 1;
-      transform: scale(1);
+      transform: translateY(0) scale(1);
     }
   }
 `;
@@ -658,6 +659,7 @@ export const TableContainer = styled.div`
   flex-direction: column;
   position: relative;
   z-index: 1;
+  background-color: hsl(var(--background));
 `;
 
 export const TableWrapper = styled.div`
@@ -1090,19 +1092,20 @@ export const FilterDropdownSelectContent = styled.div`
   background-color: hsl(var(--card));
   color: hsl(var(--card-foreground));
   box-shadow:
-    0 16px 64px rgba(0, 0, 0, 0.3),
-    0 8px 32px rgba(0, 0, 0, 0.2);
+    0 20px 80px rgba(0, 0, 0, 0.4),
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 4px 16px rgba(0, 0, 0, 0.2);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: scale(0.95);
+      transform: translateY(-8px) scale(0.95);
     }
     to {
       opacity: 1;
-      transform: scale(1);
+      transform: translateY(0) scale(1);
     }
   }
 `;
@@ -1210,6 +1213,14 @@ export const TimelineFilterButton = styled(Button)``;
 export const TimelineFilterContentStyled = styled(SelectContent)`
   width: 380px;
   padding: 16px;
+  max-width: calc(100vw - 32px);
+  right: auto;
+  min-width: 320px;
+
+  @media (max-width: 768px) {
+    width: 300px;
+    min-width: 280px;
+  }
 `;
 
 export const TimelineFilterSectionStyled = styled.div`
