@@ -495,25 +495,12 @@ export default function TaskManagementDashboard() {
                     ))}
 
                   <FilterGroup>
-                    <Button
+                    <AllFiltersButton
                       onClick={() => setShowMainFilter(true)}
-                      style={AllFiltersButtonStyle}
-                      onMouseEnter={(e) => {
-                        Object.assign(
-                          e.currentTarget.style,
-                          AllFiltersButtonHoverStyle,
-                        );
-                      }}
-                      onMouseLeave={(e) => {
-                        Object.assign(
-                          e.currentTarget.style,
-                          AllFiltersButtonLeaveStyle,
-                        );
-                      }}
                     >
                       <Filter size={16} />
                       <span>All Filters</span>
-                    </Button>
+                    </AllFiltersButton>
                   </FilterGroup>
                 </FilterGrid>
 
