@@ -32,7 +32,7 @@ import {
   FilterModalCheckIcon,
   FilterModalFooterClearButton,
   FilterModalFooterApplyButton,
-} from "./styles";
+} from "./style";
 
 interface FilterState {
   [key: string]: string[];

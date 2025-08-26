@@ -17,7 +17,7 @@ import {
   TimelineFilterNote,
   TimelineFilterButtonGrid,
   TimelineFilterButton,
-} from "./styles";
+} from "./style";
 
 interface TimelineFilterProps {
   startDateTime: string;

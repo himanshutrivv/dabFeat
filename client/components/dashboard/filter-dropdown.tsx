@@ -11,7 +11,7 @@ import {
   SelectItemsContainer,
   SelectItem,
   FilterDropdownSelectItemStyle,
-} from "./styles";
+} from "./style";
 
 interface FilterDropdownProps {
   label: string;

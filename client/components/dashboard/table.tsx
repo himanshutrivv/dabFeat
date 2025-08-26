@@ -17,7 +17,7 @@ import {
   EmptyTitle,
   EmptyDescription,
   TableCellClickable,
-} from "./styles";
+} from "./style";
 import { Database } from "lucide-react";
 
 export interface TableDataRow {
