@@ -1,6 +1,42 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
+// Loader components
+export const LoaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: hsl(var(--background));
+`;
+
+export const LoaderSpinner = styled.div<{ size?: "sm" | "md" | "lg" }>`
+  border-radius: 50%;
+  border: 2px solid hsl(var(--border));
+  border-top-color: hsl(var(--primary));
+  animation: spin 1s linear infinite;
+
+  ${(props) => {
+    switch (props.size) {
+      case "sm":
+        return "width: 1rem; height: 1rem;";
+      case "lg":
+        return "width: 2rem; height: 2rem;";
+      default:
+        return "width: 1.5rem; height: 1.5rem;";
+    }
+  }}
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
 export const globalTheme = css`
   :root {
     --background: 0 0% 100%;
@@ -167,12 +203,6 @@ export const ErrorContainer = styled.div`
 export const ErrorText = styled.div`
   color: hsl(var(--destructive));
   font-size: 16px;
-`;
-
-export const RetryButton = css`
-  display: flex;
-  align-items: center;
-  gap: 8px;
 `;
 
 export const EmptyState = css`
@@ -768,6 +798,54 @@ export const Button = styled.button<{
   }}
 `;
 
+// Dashboard specific button components
+export const AllFiltersButton = styled(Button)`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+  background: hsl(215, 25%, 27%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
+  }
+`;
+
+export const ClearAllFiltersButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: transparent;
+  color: hsl(var(--destructive));
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: hsl(var(--destructive) / 0.1);
+  }
+`;
+
+export const RetryButton = styled(Button)`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
 export const SearchButton = styled(Button)`
   background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
   color: white;
@@ -1028,109 +1106,8 @@ export const FilterDropdownSelectItemStyle = css`
   margin-bottom: 8px;
 `;
 
-export const FilterModalHeaderTitle = css`
-  margin: 0;
-  font-size: 20px;
-  font-weight: 600;
-`;
-
-export const FilterModalSearchInput = css`
-  width: 100%;
-  padding-left: 40px;
-  padding-right: 12px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  border: 1px solid hsl(var(--border));
-  border-radius: 8px;
-  font-size: 14px;
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-`;
-
-export const FilterModalSearchIcon = css`
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: hsl(var(--muted-foreground));
-`;
-
-export const FilterModalSectionContent = css`
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-`;
-
-export const FilterModalItemTitle = css`
-  font-size: 16px;
-  font-weight: 400;
-`;
-
-export const FilterModalItemTitleActive = css`
-  font-size: 16px;
-  font-weight: 600;
-`;
-
-export const FilterModalItemCount = css`
-  margin-left: 8px;
-  font-size: 12px;
-  background-color: hsl(var(--primary));
-  color: white;
-  padding: 2px 6px;
-  border-radius: 10px;
-`;
-
-export const FilterModalSectionSearchInput = css`
-  width: 100%;
-  padding-left: 36px;
-  padding-right: 12px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border: 1px solid hsl(var(--border));
-  border-radius: 6px;
-  font-size: 13px;
-  background-color: hsl(var(--muted));
-  color: hsl(var(--foreground));
-`;
-
-export const FilterModalSectionSearchIcon = css`
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: hsl(var(--muted-foreground));
-`;
-
-export const FilterModalOptionItem = css`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 4px;
-  background-color: transparent;
-  margin-bottom: 2px;
-`;
-
 export const FilterModalOptionItemSelected = css`
   background-color: hsl(var(--accent));
-`;
-
-export const FilterModalOptionText = css`
-  font-size: 14px;
-`;
-
-export const FilterModalCheckIcon = css`
-  color: white;
-`;
-
-export const FilterModalFooterClearButton = css`
-  margin-bottom: 8px;
-  width: 100%;
-`;
-
-export const FilterModalFooterApplyButton = css`
-  width: 100%;
 `;
 
 export const DashboardMainFilterButton = css`
@@ -1206,15 +1183,6 @@ export const TimelineFilterNote = css`
   font-size: 12px;
   color: hsl(var(--muted-foreground));
   text-align: center;
-`;
-
-export const TimelineFilterButtonGrid = css`
-  display: flex;
-  gap: 8px;
-`;
-
-export const TimelineFilterButton = css`
-  flex: 1;
 `;
 
 // Additional styled components for inline styles
@@ -1852,61 +1820,4 @@ export const FilterModalButton = styled.button<{
         `;
     }
   }}
-`;
-
-// Index Inline Styles
-export const AllFiltersButtonStyle = {
-  display: "flex",
-  alignItems: "center",
-  gap: "8px",
-  width: "100%",
-  justifyContent: "center",
-  background: "hsl(215, 25%, 27%)",
-  color: "white",
-  border: "none",
-  borderRadius: "8px",
-  padding: "10px 16px",
-  fontWeight: "500",
-  fontSize: "14px",
-  boxShadow: "0 4px 12px rgba(139, 92, 246, 0.25)",
-  transition: "all 0.2s ease",
-  cursor: "pointer",
-};
-
-export const AllFiltersButtonHoverStyle = {
-  transform: "translateY(-1px)",
-  boxShadow: "0 6px 16px rgba(139, 92, 246, 0.35)",
-};
-
-export const AllFiltersButtonLeaveStyle = {
-  ...AllFiltersButtonStyle,
-};
-
-export const ClearAllFilterButtonStyle = {
-  display: "flex",
-  alignItems: "center",
-  gap: "6px",
-  padding: "8px 12px",
-  backgroundColor: "transparent",
-  color: "hsl(var(--destructive))",
-  border: "none",
-  borderRadius: "6px",
-  cursor: "pointer",
-  fontSize: "14px",
-  fontWeight: "500",
-  transition: "all 0.2s",
-};
-
-export const ClearAllFilterButtonHoverStyle = {
-  backgroundColor: "hsl(var(--destructive) / 0.1)",
-};
-
-export const ClearAllFilterButtonLeaveStyle = {
-  ...ClearAllFilterButtonStyle,
-};
-
-export const RetryButtonStyle = css`
-  display: flex;
-  align-items: center;
-  gap: 8px;
 `;

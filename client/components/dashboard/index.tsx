@@ -4,8 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import { ThemeControllerProvider } from "../../styles/ThemeControllerProvider";
-import { globalStyles } from "../../styles/global";
+import { ThemeControllerProvider } from "../../styles/theme-controller";
+import { globalStyles } from "../../styles/global-styles";
 import { appTheme } from "../../styles/themes";
 import {
   DashboardContainer,
@@ -27,14 +27,9 @@ import {
   FilterResults,
   ErrorContainer,
   ErrorText,
+  AllFiltersButton,
+  ClearAllFiltersButton,
   RetryButton,
-  AllFiltersButtonStyle,
-  AllFiltersButtonHoverStyle,
-  AllFiltersButtonLeaveStyle,
-  ClearAllFilterButtonStyle,
-  ClearAllFilterButtonHoverStyle,
-  ClearAllFilterButtonLeaveStyle,
-  RetryButtonStyle,
 } from "./style";
 
 import DashboardTable from "./table";
@@ -439,13 +434,10 @@ export default function TaskManagementDashboard() {
         <Global styles={globalStyles(appTheme)} />
         <ErrorContainer>
           <ErrorText>Error: {error}</ErrorText>
-          <Button
-            css={RetryButtonStyle}
-            onClick={() => window.location.reload()}
-          >
+          <RetryButton onClick={() => window.location.reload()}>
             <RefreshCw size={16} />
             Retry
-          </Button>
+          </RetryButton>
         </ErrorContainer>
       </ThemeControllerProvider>
     );
@@ -501,25 +493,10 @@ export default function TaskManagementDashboard() {
                     ))}
 
                   <FilterGroup>
-                    <Button
-                      onClick={() => setShowMainFilter(true)}
-                      style={AllFiltersButtonStyle}
-                      onMouseEnter={(e) => {
-                        Object.assign(
-                          e.currentTarget.style,
-                          AllFiltersButtonHoverStyle,
-                        );
-                      }}
-                      onMouseLeave={(e) => {
-                        Object.assign(
-                          e.currentTarget.style,
-                          AllFiltersButtonLeaveStyle,
-                        );
-                      }}
-                    >
+                    <AllFiltersButton onClick={() => setShowMainFilter(true)}>
                       <Filter size={16} />
                       <span>All Filters</span>
-                    </Button>
+                    </AllFiltersButton>
                   </FilterGroup>
                 </FilterGrid>
 
@@ -559,30 +536,16 @@ export default function TaskManagementDashboard() {
                           </FilterBadgeClose>
                         </FilterBadge>
                       ))}
-                      <button
-                        css={ClearAllButton}
+                      <ClearAllFiltersButton
                         onClick={(e) => {
                           e.stopPropagation();
                           e.preventDefault();
                           clearAllFilters();
                         }}
-                        style={ClearAllFilterButtonStyle}
-                        onMouseEnter={(e) => {
-                          Object.assign(
-                            e.currentTarget.style,
-                            ClearAllFilterButtonHoverStyle,
-                          );
-                        }}
-                        onMouseLeave={(e) => {
-                          Object.assign(
-                            e.currentTarget.style,
-                            ClearAllFilterButtonLeaveStyle,
-                          );
-                        }}
                       >
                         <X size={12} />
                         Clear All
-                      </button>
+                      </ClearAllFiltersButton>
                     </ActiveFiltersContainer>
                   </ActiveFiltersSection>
                 )}

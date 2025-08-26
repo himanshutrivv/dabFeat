@@ -14,7 +14,7 @@ import {
   FilterModalCheckboxContainer as MainFilterCheckbox,
   FilterModalFooterContainer as MainFilterFooter,
   FilterModalButton as Button,
-  FilterModalHeaderTitleStyled as FilterModalHeaderTitle,
+  FilterModalHeaderTitle,
   FilterModalSearchIconStyled as FilterModalSearchIcon,
   FilterModalSearchInputStyled as FilterModalSearchInput,
   FilterModalSectionContentStyled as FilterModalSectionContent,
