@@ -392,7 +392,7 @@ export default function TaskManagementDashboard() {
     } finally {
       setIsFilterLoading(false);
     }
-  }, [filters]);
+  }, [filters, selectedBusiness, initializeDefaultTimeRange]);
 
   const clearIndividualFilter = useCallback((filterKey: string) => {
     setFilters((prev) => ({
