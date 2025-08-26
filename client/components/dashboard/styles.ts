@@ -1,0 +1,1209 @@
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
+
+export const globalTheme = css`
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 262 83% 58%;
+    --radius: 1rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 262 83% 58%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 262 83% 58%;
+  }
+
+  .dark {
+    --background: 229 23% 11%;
+    --foreground: 210 40% 98%;
+    --card: 228 25% 13%;
+    --card-foreground: 210 40% 98%;
+    --popover: 228 25% 13%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 227 25% 15%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 227 25% 15%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 228 25% 18%;
+    --input: 228 25% 18%;
+    --ring: 262 83% 58%;
+    --sidebar-background: 227 25% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 262 83% 58%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 227 25% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 228 25% 18%;
+    --sidebar-ring: 262 83% 58%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: hsl(var(--muted));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  input[type="time"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(59 130 246 / 0.1), 0 0 0 4px rgb(59 130 246 / 0.2);
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+// Loading states
+export const LoadingContainer = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 16px;
+  background-color: hsl(var(--background));
+`;
+
+export const LoadingSpinner = css`
+  color: hsl(var(--primary));
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+export const LoadingText = css`
+  color: hsl(var(--muted-foreground));
+  font-size: 14px;
+`;
+
+export const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 16px;
+  background-color: hsl(var(--background));
+`;
+
+export const ErrorText = styled.div`
+  color: hsl(var(--destructive));
+  font-size: 16px;
+`;
+
+export const RetryButton = css`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const EmptyState = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+`;
+
+export const EmptyIcon = css`
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 16px;
+`;
+
+export const EmptyTitle = css`
+  font-size: 18px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin-bottom: 8px;
+`;
+
+export const EmptyDescription = css`
+  font-size: 14px;
+  color: hsl(var(--muted-foreground));
+`;
+
+export const CellContent = css`
+  color: hsl(var(--foreground));
+`;
+
+// Main layout components
+export const DashboardContainer = styled.div`
+  min-height: 100vh;
+  background-color: hsl(var(--background));
+  display: flex;
+`;
+
+export const MainContent = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+`;
+
+export const Header = styled.div`
+  background-color: hsl(var(--card));
+  border-bottom: 1px solid hsl(var(--border));
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  flex-shrink: 0;
+`;
+
+export const HeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const HeaderText = styled.div``;
+
+export const HeaderTitle = styled.h1`
+  font-size: 30px;
+  font-weight: bold;
+  color: hsl(var(--foreground));
+  margin-bottom: 8px;
+  margin: 0 0 8px 0;
+`;
+
+export const HeaderSubtitle = styled.p`
+  color: hsl(var(--muted-foreground));
+  font-size: 18px;
+  margin: 0;
+`;
+
+export const FilterContainer = styled.div<{ show: boolean }>`
+  margin-top: 24px;
+  padding: 0;
+  background: transparent;
+  display: ${(props) => (props.show ? "block" : "none")};
+  position: relative;
+  z-index: 10;
+`;
+
+export const SearchBarContainer = styled.div`
+  margin-bottom: 24px;
+  margin-top: 24px;
+  position: relative;
+`;
+
+export const SearchIcon = styled.div`
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+`;
+
+export const FilterGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+`;
+
+export const FilterGroup = styled.div``;
+
+export const FilterLabel = styled.label`
+  font-size: 14px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+`;
+
+export const FilterActions = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const ActiveFilters = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+`;
+
+export const FilterActions2 = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+export const TableContainer = styled.div`
+  flex: 1;
+  padding: 32px;
+  overflow: hidden;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+`;
+
+export const TableWrapper = styled.div`
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  overflow: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+`;
+
+export const TableScrollContainer = styled.div`
+  overflow: auto;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+`;
+
+export const Table = styled.table`
+  width: 100%;
+  min-width: max-content;
+  border-collapse: collapse;
+`;
+
+export const TableHead = styled.thead`
+  position: sticky;
+  top: 0;
+  z-index: 10;
+`;
+
+export const TableHeaderRow = styled.tr`
+  background: hsl(215, 25%, 27%);
+  border: none;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+`;
+
+export const TableHeader = styled.th`
+  text-align: left;
+  padding: 16px 24px;
+  font-weight: 600;
+  color: white;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  min-width: 150px;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(12px);
+  z-index: 5;
+  border: 1px solid #1d4ed8;
+  border-bottom: 2px solid #1e40af;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+`;
+
+export const TableBody = styled.tbody``;
+
+export const TableRow = styled.tr`
+  border-bottom: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+
+  &:nth-of-type(even) {
+    background-color: #f8fafc;
+  }
+
+  &:nth-of-type(odd) {
+    background-color: white;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+  }
+`;
+
+export const TableCell = styled.td`
+  padding: 16px 24px;
+  white-space: nowrap;
+  min-width: 150px;
+  color: #374151;
+  font-size: 14px;
+  border-right: 1px solid #f3f4f6;
+
+  &:last-child {
+    border-right: none;
+  }
+`;
+
+export const StatusBadge = styled.div<{
+  status: "Active" | "Down" | "Trouble";
+}>`
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+
+  ${(props) => {
+    switch (props.status) {
+      case "Active":
+        return css`
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        `;
+      case "Down":
+        return css`
+          background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+          box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        `;
+      case "Trouble":
+        return css`
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+          box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        `;
+      default:
+        return css`
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        `;
+    }
+  }}
+`;
+
+export const StatusDot = styled.div`
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 8px;
+`;
+
+export const DocumentCell = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const DocumentIcon = styled.div`
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DocumentIconInner = styled.div`
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 2px;
+`;
+
+export const DocumentLink = styled.span`
+  color: hsl(var(--primary));
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: hsl(var(--accent));
+  }
+`;
+
+// Main Filter Modal Styles
+export const MainFilterBackdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9998;
+  animation: fadeIn 0.3s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
+export const MainFilterModal = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 33.333333%;
+  height: 100vh;
+  background-color: hsl(var(--background));
+  border-left: 1px solid hsl(var(--border));
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  animation: slideInFromRight 0.3s ease-out;
+
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+`;
+
+export const MainFilterHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  border-bottom: 1px solid hsl(var(--border));
+  flex-shrink: 0;
+`;
+
+export const MainFilterContent = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+`;
+
+export const MainFilterSection = styled.div`
+  margin-bottom: 32px;
+`;
+
+export const MainFilterSearch = styled.div`
+  position: relative;
+  margin-bottom: 16px;
+`;
+
+export const MainFilterOptions = styled.div`
+  max-height: 256px;
+  overflow-y: auto;
+`;
+
+export const MainFilterOption = styled.div`
+  &:last-child {
+    border-bottom: none !important;
+  }
+`;
+
+export const MainFilterCheckbox = styled.div<{ selected: boolean }>`
+  width: 20px;
+  height: 20px;
+  border: 2px solid
+    ${(props) =>
+      props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
+  border-radius: 4px;
+  background-color: ${(props) =>
+    props.selected ? "hsl(var(--primary))" : "transparent"};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+`;
+
+export const MainFilterFooter = styled.div`
+  padding: 24px;
+  border-top: 1px solid hsl(var(--border));
+  flex-shrink: 0;
+`;
+
+export const MainFilterListItem = styled.div`
+  border-bottom: 1px solid hsl(var(--border));
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+export const MainFilterItemHeader = styled.div<{ isActive?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: ${(props) =>
+    props.isActive ? "hsl(var(--primary))" : "hsl(var(--foreground))"};
+
+  &:hover {
+    background-color: hsl(var(--muted) / 0.5);
+    margin: 0 -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+`;
+
+export const MainFilterExpandIcon = styled.div<{ isExpanded: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: ${(props) =>
+    props.isExpanded ? "hsl(var(--primary))" : "hsl(var(--muted))"};
+  color: ${(props) =>
+    props.isExpanded ? "white" : "hsl(var(--muted-foreground))"};
+  transition: all 0.2s ease;
+`;
+
+export const MainFilterOptionsContainer = styled.div`
+  padding: 0 0 16px 0;
+  margin-top: -8px;
+`;
+
+// Button components
+export const Button = styled.button<{
+  variant?:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
+  size?: "default" | "sm" | "lg" | "icon";
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  ${(props) => {
+    switch (props.variant) {
+      case "destructive":
+        return css`
+          background-color: hsl(var(--destructive));
+          color: hsl(var(--destructive-foreground));
+          &:hover {
+            background-color: hsl(var(--destructive) / 0.9);
+          }
+        `;
+      case "outline":
+        return css`
+          border: 1px solid hsl(var(--border));
+          background-color: hsl(var(--background));
+          color: hsl(var(--foreground));
+          &:hover {
+            background-color: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+          }
+        `;
+      case "secondary":
+        return css`
+          background-color: hsl(var(--secondary));
+          color: hsl(var(--secondary-foreground));
+          &:hover {
+            background-color: hsl(var(--secondary) / 0.8);
+          }
+        `;
+      case "ghost":
+        return css`
+          background-color: transparent;
+          color: hsl(var(--foreground));
+          &:hover {
+            background-color: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+          }
+        `;
+      case "link":
+        return css`
+          background-color: transparent;
+          color: hsl(var(--primary));
+          text-decoration: underline;
+          text-underline-offset: 4px;
+          &:hover {
+            text-decoration: underline;
+          }
+        `;
+      default:
+        return css`
+          background-color: hsl(var(--primary));
+          color: hsl(var(--primary-foreground));
+          &:hover {
+            background-color: hsl(var(--primary) / 0.9);
+          }
+        `;
+    }
+  }}
+
+  ${(props) => {
+    switch (props.size) {
+      case "sm":
+        return css`
+          height: 36px;
+          border-radius: 6px;
+          padding: 0 12px;
+        `;
+      case "lg":
+        return css`
+          height: 44px;
+          border-radius: 8px;
+          padding: 0 32px;
+        `;
+      case "icon":
+        return css`
+          height: 40px;
+          width: 40px;
+          padding: 0;
+        `;
+      default:
+        return css`
+          height: 40px;
+          padding: 0 16px;
+        `;
+    }
+  }}
+`;
+
+export const SearchButton = styled(Button)`
+  background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.2);
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+export const LogoImage = css`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+`;
+
+export const FilterCount = css`
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 4px;
+`;
+
+export const ActiveFiltersSection = styled.div`
+  margin-top: 16px;
+  padding: 0;
+  border-top: none;
+`;
+
+export const ActiveFiltersLabel = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin-bottom: 12px;
+`;
+
+export const ActiveFiltersContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+`;
+
+export const ClearAllButton = css`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: transparent;
+  color: hsl(var(--destructive));
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: hsl(var(--destructive) / 0.1);
+  }
+`;
+
+export const FilterResults = styled.div`
+  margin-top: 16px;
+  padding: 0;
+  border-top: none;
+  font-size: 14px;
+  color: hsl(var(--muted-foreground));
+  text-align: right;
+`;
+
+// Input components
+export const SearchInput = styled.input`
+  padding-left: 48px;
+  height: 48px;
+  width: 100%;
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: 16px;
+  color: hsl(var(--foreground));
+  font-size: 18px;
+
+  &:focus {
+    box-shadow: 0 0 0 2px hsl(var(--primary));
+    border-color: hsl(var(--primary));
+    outline: none;
+  }
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+`;
+
+export const TimelineInput = styled.input`
+  width: 100%;
+  padding: 8px 12px;
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+  color: hsl(var(--foreground));
+  font-size: 14px;
+  font-family: monospace;
+
+  &:focus {
+    box-shadow: 0 0 0 2px hsl(var(--primary));
+    border-color: hsl(var(--primary));
+    outline: none;
+  }
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+`;
+
+// Badge component
+export const FilterBadge = styled.div`
+  background-color: hsl(var(--primary) / 0.15);
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary) / 0.3);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+export const FilterBadgeClose = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 2px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: hsl(var(--primary) / 0.3);
+  }
+`;
+
+// Select components
+export const SelectContainer = styled.div`
+  position: relative;
+  z-index: 20;
+`;
+
+export const SelectTrigger = styled.button`
+  display: flex;
+  height: 40px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--input));
+  background-color: hsl(var(--background));
+  padding: 0 12px;
+  font-size: 14px;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+`;
+
+export const SelectValue = styled.span`
+  color: hsl(var(--foreground));
+`;
+
+export const SelectContent = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  max-height: 384px;
+  min-width: 200px;
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.3), 0 8px 32px rgba(0, 0, 0, 0.2);
+  margin-top: 4px;
+  animation: fadeIn 0.2s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+`;
+
+export const SelectItem = styled.div<{ selected?: boolean }>`
+  position: relative;
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+  color: hsl(var(--foreground));
+
+  &:hover {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  &:focus {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  ${(props) =>
+    props.selected &&
+    css`
+      background-color: hsl(var(--accent));
+      color: hsl(var(--accent-foreground));
+    `}
+`;
+
+export const SelectItemsContainer = styled.div`
+  padding: 4px;
+`;
+
+// Extracted inline styles from components
+export const FilterDropdownSelectItemStyle = css`
+  background-color: hsl(var(--accent));
+  font-weight: 500;
+  margin-bottom: 8px;
+`;
+
+export const FilterModalHeaderTitle = css`
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+export const FilterModalSearchInput = css`
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+`;
+
+export const FilterModalSearchIcon = css`
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+`;
+
+export const FilterModalSectionContent = css`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+`;
+
+export const FilterModalItemTitle = css`
+  font-size: 16px;
+  font-weight: 400;
+`;
+
+export const FilterModalItemTitleActive = css`
+  font-size: 16px;
+  font-weight: 600;
+`;
+
+export const FilterModalItemCount = css`
+  margin-left: 8px;
+  font-size: 12px;
+  background-color: hsl(var(--primary));
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+`;
+
+export const FilterModalSectionSearchInput = css`
+  width: 100%;
+  padding-left: 36px;
+  padding-right: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+  font-size: 13px;
+  background-color: hsl(var(--muted));
+  color: hsl(var(--foreground));
+`;
+
+export const FilterModalSectionSearchIcon = css`
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+`;
+
+export const FilterModalOptionItem = css`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: transparent;
+  margin-bottom: 2px;
+`;
+
+export const FilterModalOptionItemSelected = css`
+  background-color: hsl(var(--accent));
+`;
+
+export const FilterModalOptionText = css`
+  font-size: 14px;
+`;
+
+export const FilterModalCheckIcon = css`
+  color: white;
+`;
+
+export const FilterModalFooterClearButton = css`
+  margin-bottom: 8px;
+  width: 100%;
+`;
+
+export const FilterModalFooterApplyButton = css`
+  width: 100%;
+`;
+
+export const DashboardMainFilterButton = css`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+  background: hsl(215, 25%, 27%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+  transition: all 0.2s ease;
+`;
+
+export const DashboardMainFilterButtonHover = css`
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
+`;
+
+export const DashboardClearAllFilterButton = css`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: transparent;
+  color: hsl(var(--destructive));
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+`;
+
+export const DashboardClearAllFilterButtonHover = css`
+  background-color: hsl(var(--destructive) / 0.1);
+`;
+
+export const TableCellClickable = css`
+  cursor: pointer;
+`;
+
+export const TimelineFilterContent = css`
+  width: 380px;
+  padding: 16px;
+`;
+
+export const TimelineFilterSection = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+export const TimelineFilterLabel = css`
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+`;
+
+export const TimelineFilterInputGrid = css`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+`;
+
+export const TimelineFilterNote = css`
+  font-size: 12px;
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+`;
+
+export const TimelineFilterButtonGrid = css`
+  display: flex;
+  gap: 8px;
+`;
+
+export const TimelineFilterButton = css`
+  flex: 1;
+`;
