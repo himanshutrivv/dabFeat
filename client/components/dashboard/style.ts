@@ -797,6 +797,54 @@ export const Button = styled.button<{
   }}
 `;
 
+// Dashboard specific button components
+export const AllFiltersButton = styled(Button)`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+  background: hsl(215, 25%, 27%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
+  }
+`;
+
+export const ClearAllFiltersButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: transparent;
+  color: hsl(var(--destructive));
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: hsl(var(--destructive) / 0.1);
+  }
+`;
+
+export const RetryButton = styled(Button)`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
 export const SearchButton = styled(Button)`
   background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
   color: white;
