@@ -48,7 +48,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
         </FilterDropdownSelectTrigger>
 
         {isOpen && (
-          <FilterDropdownSelectContent>
+          <FilterDropdownSelectContent className="filter-content">
             <SelectItemsContainer>
               <FilterDropdownSelectItem
                 onClick={(e) => {
