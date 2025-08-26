@@ -725,6 +725,7 @@ export default function TaskManagementDashboard() {
               [key]: !prev[key],
             }));
           }}
+          onApplyFilters={applyFiltersAndFetchData}
         />
       </DashboardContainer>
     </ThemeControllerProvider>
