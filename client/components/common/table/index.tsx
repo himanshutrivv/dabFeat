@@ -35,7 +35,7 @@ export interface TableProps {
   onCellClick?: (
     value: any,
     rowData: Record<string, any>,
-    columnKey: string
+    columnKey: string,
   ) => void;
   minHeight?: string;
 }
@@ -86,7 +86,7 @@ export const Table: React.FC<TableProps> = ({
       value: any,
       rowData: Record<string, any>,
       columnKey: string,
-      event: React.MouseEvent
+      event: React.MouseEvent,
     ) => {
       // Call custom onCellClick handler if provided
       onCellClick?.(value, rowData, columnKey);
@@ -157,7 +157,7 @@ export const Table: React.FC<TableProps> = ({
         }
       }
     },
-    [onCellClick]
+    [onCellClick],
   );
 
   // Generate page numbers to display
@@ -222,7 +222,7 @@ export const Table: React.FC<TableProps> = ({
                   {columns.map((column) => {
                     const cellValue = row[column.key];
                     const hasTextContent = Boolean(
-                      extractTextContent(cellValue).trim()
+                      extractTextContent(cellValue).trim(),
                     );
 
                     return (
