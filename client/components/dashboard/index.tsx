@@ -434,13 +434,12 @@ export default function TaskManagementDashboard() {
         <Global styles={globalStyles(appTheme)} />
         <ErrorContainer>
           <ErrorText>Error: {error}</ErrorText>
-          <Button
-            css={RetryButtonStyle}
+          <RetryButton
             onClick={() => window.location.reload()}
           >
             <RefreshCw size={16} />
             Retry
-          </Button>
+          </RetryButton>
         </ErrorContainer>
       </ThemeControllerProvider>
     );
