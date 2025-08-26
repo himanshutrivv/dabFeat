@@ -22,8 +22,14 @@ export const srGetDashboardTableData = async ({
   bussId: string;
   filterData: any;
 }): Promise<DashboardResponse> => {
+  // Log the request for debugging
+  console.log("🚀 srGetDashboardTableData called with:", {
+    bussId,
+    filterData: filterData ? JSON.stringify(filterData, null, 2) : null,
+  });
+
   // Simulate API call delay
-  await new Promise((resolve) => setTimeout(resolve, 100));
+  await new Promise((resolve) => setTimeout(resolve, 300));
 
   // Mock data for demonstration
   return {
