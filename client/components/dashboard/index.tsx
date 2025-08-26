@@ -81,7 +81,7 @@ const transformFiltersToAPIFormat = (
   filters: FilterState,
   searchTerm: string,
   startDateTime: string,
-  endDateTime: string
+  endDateTime: string,
 ): FilterDataItem[] => {
   const filterData: FilterDataItem[] = [];
 
@@ -93,14 +93,14 @@ const transformFiltersToAPIFormat = (
         filterData.push({
           key,
           operator: "EQUALS",
-          value: values[0]
+          value: values[0],
         });
       } else {
         // Multiple values - use IN
         filterData.push({
           key,
           operator: "IN",
-          value: values
+          value: values,
         });
       }
     }
@@ -111,7 +111,7 @@ const transformFiltersToAPIFormat = (
     filterData.push({
       key: "search",
       operator: "LIKE",
-      value: searchTerm.trim()
+      value: searchTerm.trim(),
     });
   }
 
@@ -125,7 +125,7 @@ const transformFiltersToAPIFormat = (
         key: "created_at",
         operator: "BETWEEN",
         from: startDate,
-        to: endDate
+        to: endDate,
       });
     }
   }
@@ -148,7 +148,7 @@ const parseDateTimeToISO = (dateTimeString: string): string | null => {
       parseInt(day),
       parseInt(hours),
       parseInt(minutes),
-      parseInt(seconds)
+      parseInt(seconds),
     );
 
     return date.toISOString();
@@ -186,12 +186,12 @@ export default function TaskManagementDashboard() {
         filters,
         searchTerm,
         startDateTime,
-        endDateTime
+        endDateTime,
       );
 
       console.log("Applying filters with data:", {
         bussId,
-        filterData
+        filterData,
       });
 
       const response = await srGetDashboardTableData({
@@ -202,7 +202,6 @@ export default function TaskManagementDashboard() {
       console.log("Filtered dashboard data received:", response);
       setData(response);
       setFilteredData(response.tableData);
-
     } catch (err) {
       console.error("Filter fetch error:", err);
       setError("Failed to apply filters and fetch data.");
