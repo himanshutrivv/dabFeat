@@ -36,7 +36,7 @@ import DashboardTable, { TableDataRow, ColumnMetadata } from "./table";
 import FilterDropdown from "./filter-dropdown";
 import FilterModal from "./filter-modal";
 import TimelineFilter from "./timeline-filter";
-import { useBusinessStore } from "../../store/business-store";
+import { useBusinessStore } from "@/store/business-store";
 import { srGetDashboardTableData } from "../../sources/dashboard";
 import Loader from "../common/loader";
 
