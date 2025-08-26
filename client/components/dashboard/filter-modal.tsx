@@ -1,17 +1,34 @@
 "use client";
 import React, { useCallback } from "react";
-import styled from "@emotion/styled";
 import { Search, X } from "lucide-react";
 import {
-  flexBetween,
-  flexCenter,
-  flexColumn,
-  cardStyles,
-  buttonBaseStyles,
-  inputStyles,
-  primaryButtonStyles,
-  outlineButtonStyles
-} from "../../styles/styled-components";
+  MainFilterBackdrop,
+  MainFilterModal,
+  MainFilterHeader,
+  MainFilterContent,
+  MainFilterListItem,
+  MainFilterItemHeader,
+  MainFilterExpandIcon,
+  MainFilterOptionsContainer,
+  MainFilterOptions,
+  MainFilterCheckbox,
+  MainFilterFooter,
+  Button,
+  FilterModalHeaderTitle,
+  FilterModalSearchIcon,
+  FilterModalSearchInput,
+  FilterModalSectionContent,
+  FilterModalItemTitle,
+  FilterModalItemTitleActive,
+  FilterModalItemCount,
+  FilterModalSectionSearchIcon,
+  FilterModalSectionSearchInput,
+  FilterModalOptionItem,
+  FilterModalOptionText,
+  FilterModalCheckIcon,
+  FilterModalSearchContainer,
+  FilterModalSearchContainerSmall
+} from "./filter-modal.styles";
 
 interface FilterState {
   [key: string]: string[];
