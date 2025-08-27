@@ -243,7 +243,8 @@ export default function TaskManagementDashboard() {
           filterData: null,
         });
         setData(response);
-        setFilteredData(response.tableData);
+        setFilteredData(response.tableData || []);
+        setIsUsingServerFiltering(false);
 
         const initialFilters: FilterState = {};
         const searchableColumnsList: string[] = [];
