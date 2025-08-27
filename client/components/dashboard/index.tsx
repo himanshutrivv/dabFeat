@@ -245,12 +245,17 @@ export default function TaskManagementDashboard() {
         setFilteredData(response.tableData);
 
         const initialFilters: FilterState = {};
+        const searchableColumnsList: string[] = [];
         Object.keys(response.columnData).forEach((key) => {
           if (response.columnData[key].filterable) {
             initialFilters[key] = [];
           }
+          if (response.columnData[key].searchable) {
+            searchableColumnsList.push(response.columnData[key].label);
+          }
         });
         setFilters(initialFilters);
+        setSearchableColumns(searchableColumnsList);
       } catch (err) {
         setError("Failed to initialize dashboard data.");
       } finally {
