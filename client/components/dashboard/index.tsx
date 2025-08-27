@@ -232,16 +232,19 @@ export default function TaskManagementDashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bussId = selectedBusiness?.bussId;
-      if (!bussId) return;
       try {
         setLoading(true);
         setError(null);
 
+        const bussId = selectedBusiness?.bussId || "TESTORG2";
+        console.log("🚀 Dashboard fetching data for business:", bussId);
+
         const response = await srGetDashboardTableData({
-          bussId: selectedBusiness?.bussId,
+          bussId,
           filterData: null,
         });
+
+        console.log("✅ Dashboard data received:", response);
         setData(response);
         setFilteredData(response.tableData || []);
         setIsUsingServerFiltering(false);
@@ -259,6 +262,7 @@ export default function TaskManagementDashboard() {
         setFilters(initialFilters);
         setSearchableColumns(searchableColumnsList);
       } catch (err) {
+        console.error("❌ Dashboard data fetch error:", err);
         setError("Failed to initialize dashboard data.");
       } finally {
         setLoading(false);
