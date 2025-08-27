@@ -553,7 +553,7 @@ export default function TaskManagementDashboard() {
         <MainContent>
           <Header>
             {(hasSearchableColumns || hasFilterableColumns) && (
-              <FilterContainer show={true}>
+              <FilterCard show={true}>
                 <FilterGrid>
                   <TimelineFilter
                     startDateTime={startDateTime}
@@ -644,7 +644,7 @@ export default function TaskManagementDashboard() {
                   Showing {filteredData.length} of {data?.tableData?.length}{" "}
                   results
                 </FilterResults>
-              </FilterContainer>
+              </FilterCard>
             )}
           </Header>
 
