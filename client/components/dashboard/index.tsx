@@ -165,6 +165,8 @@ export default function TaskManagementDashboard() {
     [key: string]: boolean;
   }>({});
   const [isFilterLoading, setIsFilterLoading] = useState(false);
+  const [isUsingServerFiltering, setIsUsingServerFiltering] = useState(false);
+  const [searchableColumns, setSearchableColumns] = useState<string[]>([]);
   const { selectedBusiness } = useBusinessStore();
 
   // Function to apply filters and fetch data from API
