@@ -27,11 +27,7 @@ export const globalStyles = (theme: AppTheme) => css`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  input,
-  textarea,
-  select,
-  div,
-  span {
+  input, textarea, select, div, span {
     font: inherit;
   }
 
