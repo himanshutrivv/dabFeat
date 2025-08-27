@@ -185,9 +185,49 @@ export const Header = styled.div`
   flex-shrink: 0;
 `;
 
-export const FilterContainer = styled.div<{ show: boolean }>`
+export const FilterCard = styled.div`
+  background: white;
+  border-radius: 16px;
+  border: 1px solid hsl(var(--border));
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    0 2px 4px rgba(0, 0, 0, 0.08);
   margin-top: 24px;
-  padding: 0;
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.08),
+      0 4px 8px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+  }
+`;
+
+export const FilterCardHeader = styled.div`
+  padding: 24px 24px 0 24px;
+  border-bottom: 1px solid hsl(var(--border) / 0.5);
+`;
+
+export const FilterCardTitle = styled.h2`
+  font-size: 18px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin: 0 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const FilterCardSubtitle = styled.p`
+  font-size: 14px;
+  color: hsl(var(--muted-foreground));
+  margin: 0 0 16px 0;
+`;
+
+export const FilterContainer = styled.div<{ show: boolean }>`
+  padding: 24px;
   background: transparent;
   display: ${(props) => (props.show ? "block" : "none")};
   position: relative;
