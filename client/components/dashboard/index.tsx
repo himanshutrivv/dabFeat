@@ -370,21 +370,43 @@ export default function TaskManagementDashboard() {
     setShowTimelineFilter(!showTimelineFilter);
   }, [showTimelineFilter]);
 
-  const clearAllFilters = useCallback(() => {
+  const clearAllFilters = useCallback(async () => {
     const clearedFilters: FilterState = {};
     Object.keys(filters).forEach((key) => {
       clearedFilters[key] = [];
     });
     setFilters(clearedFilters);
     setSearchTerm("");
+    setStartDateTime("");
+    setEndDateTime("");
     setOpenFilterDropdowns({});
-  }, [filters]);
+    setIsUsingServerFiltering(false);
+    initializeDefaultTimeRange();
+
+    // Refetch original data without any filters
+    try {
+      setIsFilterLoading(true);
+      const bussId = selectedBusiness?.bussId || "TESTORG2";
+      const response = await srGetDashboardTableData({
+        bussId,
+        filterData: null,
+      });
+      setData(response);
+      setFilteredData(response.tableData || []);
+    } catch (err) {
+      console.error("Error refetching original data:", err);
+      toast.error("Failed to reset filters");
+    } finally {
+      setIsFilterLoading(false);
+    }
+  }, [filters, selectedBusiness, initializeDefaultTimeRange]);
 
   const clearIndividualFilter = useCallback((filterKey: string) => {
     setFilters((prev) => ({
       ...prev,
       [filterKey]: [],
     }));
+    setIsUsingServerFiltering(false);
   }, []);
 
   const getFilterOptions = useCallback(
