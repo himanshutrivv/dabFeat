@@ -574,6 +574,23 @@ export default function TaskManagementDashboard() {
                 </FilterCardHeader>
 
                 <FilterGrid>
+                  {hasSearchableColumns && (
+                    <SearchBarContainer>
+                      <SearchIcon>
+                        <Search size={20} />
+                      </SearchIcon>
+                      <SearchInput
+                        type="text"
+                        placeholder="Search records..."
+                        value={searchTerm}
+                        onChange={(e) => {
+                          setSearchTerm(e.target.value);
+                          setIsUsingServerFiltering(false);
+                        }}
+                      />
+                    </SearchBarContainer>
+                  )}
+
                   <TimelineFilter
                     startDateTime={startDateTime}
                     endDateTime={endDateTime}
