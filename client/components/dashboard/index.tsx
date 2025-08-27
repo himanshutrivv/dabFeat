@@ -195,7 +195,8 @@ export default function TaskManagementDashboard() {
 
       console.log("Filtered dashboard data received:", response);
       setData(response);
-      setFilteredData(response.tableData);
+      setFilteredData(response.tableData || []);
+      setIsUsingServerFiltering(true);
     } catch (err) {
       console.error("Filter fetch error:", err);
       setError("Failed to apply filters and fetch data.");
