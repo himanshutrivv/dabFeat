@@ -185,6 +185,37 @@ export const Header = styled.div`
   flex-shrink: 0;
 `;
 
+export const FilterCard = styled.div<{ show: boolean }>`
+  margin-top: 24px;
+  padding: 24px;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 12px;
+  box-shadow: 0 2px 8px hsl(var(--foreground) / 0.04);
+  display: ${(props) => (props.show ? "block" : "none")};
+  position: relative;
+  z-index: 100;
+`;
+
+export const FilterCardHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid hsl(var(--border));
+`;
+
+export const FilterCardTitle = styled.h3`
+  font-size: 18px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
 export const FilterContainer = styled.div<{ show: boolean }>`
   margin-top: 24px;
   padding: 0;
