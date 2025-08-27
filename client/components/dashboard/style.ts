@@ -243,7 +243,7 @@ export const FilterGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   position: relative;
   z-index: 100;
 
@@ -252,7 +252,7 @@ export const FilterGrid = styled.div`
   }
 
   @media (min-width: 1024px) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 
