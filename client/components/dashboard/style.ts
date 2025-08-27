@@ -185,37 +185,6 @@ export const Header = styled.div`
   flex-shrink: 0;
 `;
 
-export const FilterCard = styled.div<{ show: boolean }>`
-  margin-top: 24px;
-  padding: 24px;
-  background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: 12px;
-  box-shadow: 0 2px 8px hsl(var(--foreground) / 0.04);
-  display: ${(props) => (props.show ? "block" : "none")};
-  position: relative;
-  z-index: 100;
-`;
-
-export const FilterCardHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid hsl(var(--border));
-`;
-
-export const FilterCardTitle = styled.h3`
-  font-size: 18px;
-  font-weight: 600;
-  color: hsl(var(--foreground));
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
 export const FilterContainer = styled.div<{ show: boolean }>`
   margin-top: 24px;
   padding: 0;
@@ -226,9 +195,9 @@ export const FilterContainer = styled.div<{ show: boolean }>`
 `;
 
 export const SearchBarContainer = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  margin-top: 24px;
   position: relative;
-  grid-column: 1 / -1;
 `;
 
 export const SearchIcon = styled.div`
@@ -243,7 +212,7 @@ export const FilterGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   position: relative;
   z-index: 100;
 
@@ -252,7 +221,7 @@ export const FilterGrid = styled.div`
   }
 
   @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 `;
 
@@ -346,12 +315,12 @@ export const FilterResults = styled.div`
 // Button components
 export const Button = styled.button<{
   variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link";
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link";
   size?: "default" | "sm" | "lg" | "icon";
 }>`
   display: inline-flex;
@@ -515,18 +484,16 @@ export const RetryButton = styled(Button)`
 // Input components
 export const SearchInput = styled.input`
   padding-left: 48px;
-  padding-right: 16px;
-  height: 44px;
+  height: 48px;
   width: 100%;
   background-color: hsl(var(--background));
   border: 1px solid hsl(var(--border));
-  border-radius: 8px;
+  border-radius: 16px;
   color: hsl(var(--foreground));
-  font-size: 16px;
-  transition: all 0.2s ease;
+  font-size: 18px;
 
   &:focus {
-    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+    box-shadow: 0 0 0 2px hsl(var(--primary));
     border-color: hsl(var(--primary));
     outline: none;
   }
@@ -797,7 +764,7 @@ export const TableCell = styled.td`
 
 export const TableCellClickableStyled = styled(TableCell)`
   cursor: pointer;
-
+  
   &:hover {
     background-color: hsl(var(--accent) / 0.5);
   }
@@ -899,9 +866,7 @@ export const FilterModalListItem = styled.div`
   }
 `;
 
-export const FilterModalItemHeaderContainer = styled.div<{
-  isActive?: boolean;
-}>`
+export const FilterModalItemHeaderContainer = styled.div<{ isActive?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -948,7 +913,7 @@ export const FilterModalCheckboxContainer = styled.div<{ selected: boolean }>`
   height: 20px;
   border: 2px solid
     ${(props) =>
-      props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
+    props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected ? "hsl(var(--primary))" : "transparent"};
