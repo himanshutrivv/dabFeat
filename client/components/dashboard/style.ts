@@ -226,9 +226,9 @@ export const FilterContainer = styled.div<{ show: boolean }>`
 `;
 
 export const SearchBarContainer = styled.div`
-  margin-bottom: 24px;
-  margin-top: 24px;
+  margin-bottom: 20px;
   position: relative;
+  grid-column: 1 / -1;
 `;
 
 export const SearchIcon = styled.div`
