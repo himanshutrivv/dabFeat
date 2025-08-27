@@ -554,6 +554,25 @@ export default function TaskManagementDashboard() {
           <Header>
             {(hasSearchableColumns || hasFilterableColumns) && (
               <FilterCard show={true}>
+                <FilterCardHeader>
+                  <FilterCardTitle>
+                    <Filter size={18} />
+                    Filters & Search
+                  </FilterCardTitle>
+                  {activeFilters.length > 0 && (
+                    <ClearAllFiltersButton
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        clearAllFilters();
+                      }}
+                    >
+                      <X size={12} />
+                      Clear All
+                    </ClearAllFiltersButton>
+                  )}
+                </FilterCardHeader>
+
                 <FilterGrid>
                   <TimelineFilter
                     startDateTime={startDateTime}
