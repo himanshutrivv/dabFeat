@@ -604,7 +604,7 @@ export default function TaskManagementDashboard() {
 
                   {Object.entries(data?.columnData || [])
                     .filter(([, columnInfo]) => columnInfo.filterable === true)
-                    .slice(0, 3)
+                    .slice(0, 2)
                     .map(([columnKey, columnInfo]) => (
                       <FilterDropdown
                         key={columnKey}
