@@ -11,7 +11,7 @@ import {
   inputStyles,
   primaryButtonStyles,
   outlineButtonStyles,
-} from "../../styles/styled";
+} from "@/styles/styled-components";
 
 interface FilterState {
   [key: string]: string[];
