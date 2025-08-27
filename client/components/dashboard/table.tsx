@@ -64,7 +64,7 @@ const DashboardTable: React.FC<DashboardTableProps> = ({
         }))}
       data={data}
       showPagination={true}
-      pageSize={7}
+      pageSize={5}
       onCellClick={(value, rowData, columnKey) => {
         const textValue =
           typeof value === "string" ? value : String(value || "");
