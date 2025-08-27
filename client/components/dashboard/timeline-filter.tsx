@@ -8,7 +8,7 @@ import {
   buttonBaseStyles,
   inputStyles,
   primaryButtonStyles,
-  outlineButtonStyles
+  outlineButtonStyles,
 } from "@/styles/styled-components";
 
 interface TimelineFilterProps {
@@ -253,19 +253,17 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
           <TimelineFilterContent>
             <TimelineFilterSection>
               <div>
-                <TimelineFilterLabel>
-                  Start Date & Time
-                </TimelineFilterLabel>
+                <TimelineFilterLabel>Start Date & Time</TimelineFilterLabel>
                 <TimelineFilterInputGrid>
                   <TimelineInput
                     type="date"
                     value={
                       startDateTime
                         ? startDateTime
-                          .split(" ")[0]
-                          .split("/")
-                          .reverse()
-                          .join("-")
+                            .split(" ")[0]
+                            .split("/")
+                            .reverse()
+                            .join("-")
                         : ""
                     }
                     onClick={handleInputInteraction}
@@ -285,19 +283,17 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                 </TimelineFilterInputGrid>
               </div>
               <div>
-                <TimelineFilterLabel>
-                  End Date & Time
-                </TimelineFilterLabel>
+                <TimelineFilterLabel>End Date & Time</TimelineFilterLabel>
                 <TimelineFilterInputGrid>
                   <TimelineInput
                     type="date"
                     value={
                       endDateTime
                         ? endDateTime
-                          .split(" ")[0]
-                          .split("/")
-                          .reverse()
-                          .join("-")
+                            .split(" ")[0]
+                            .split("/")
+                            .reverse()
+                            .join("-")
                         : ""
                     }
                     onClick={handleInputInteraction}

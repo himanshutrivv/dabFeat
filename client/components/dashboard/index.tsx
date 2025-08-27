@@ -47,7 +47,6 @@ interface FilterState {
   [key: string]: string[];
 }
 
-
 export interface ColumnData {
   [key: string]: ColumnMetadata;
 }
@@ -307,11 +306,16 @@ export default function TaskManagementDashboard() {
 
   // Auto-apply server filtering when filters, search, or date range change
   useEffect(() => {
-    const hasActiveFilters = Object.values(filters).some(filterValues => filterValues.length > 0);
+    const hasActiveFilters = Object.values(filters).some(
+      (filterValues) => filterValues.length > 0,
+    );
     const hasSearchTerm = searchTerm.trim().length > 0;
     const hasDateRange = startDateTime && endDateTime;
 
-    if ((hasActiveFilters || hasSearchTerm || hasDateRange) && !isUsingServerFiltering) {
+    if (
+      (hasActiveFilters || hasSearchTerm || hasDateRange) &&
+      !isUsingServerFiltering
+    ) {
       // Debounce the API call to avoid too many requests
       const timeoutId = setTimeout(() => {
         applyFiltersAndFetchData();
@@ -319,7 +323,14 @@ export default function TaskManagementDashboard() {
 
       return () => clearTimeout(timeoutId);
     }
-  }, [filters, searchTerm, startDateTime, endDateTime, isUsingServerFiltering, applyFiltersAndFetchData]);
+  }, [
+    filters,
+    searchTerm,
+    startDateTime,
+    endDateTime,
+    isUsingServerFiltering,
+    applyFiltersAndFetchData,
+  ]);
 
   const handleFilterChange = useCallback((columnKey: string, value: string) => {
     if (value === "all") {
@@ -480,7 +491,6 @@ export default function TaskManagementDashboard() {
     }
     return `Search in ${searchableColumns.slice(0, 2).join(", ")} and ${searchableColumns.length - 2} more...`;
   }, [searchableColumns]);
-
 
   // Timeline Filter helpers
   const formatDateTimeForInput = useCallback((date: Date) => {
