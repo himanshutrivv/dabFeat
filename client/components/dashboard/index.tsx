@@ -425,6 +425,16 @@ export default function TaskManagementDashboard() {
     return activeFilters;
   }, [filters, searchTerm, data]);
 
+  const getSearchPlaceholder = useCallback(() => {
+    if (searchableColumns.length === 0) {
+      return "Search records...";
+    }
+    if (searchableColumns.length <= 3) {
+      return `Search in ${searchableColumns.join(", ")}...`;
+    }
+    return `Search in ${searchableColumns.slice(0, 2).join(", ")} and ${searchableColumns.length - 2} more...`;
+  }, [searchableColumns]);
+
 
   // Timeline Filter helpers
   const formatDateTimeForInput = useCallback((date: Date) => {
