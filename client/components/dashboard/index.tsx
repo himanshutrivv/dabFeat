@@ -266,11 +266,11 @@ export default function TaskManagementDashboard() {
     fetchData();
   }, [selectedBusiness]);
 
-  // Apply filters and search
+  // Apply filters and search (only for local/client-side filtering)
   useEffect(() => {
-    if (!data) return;
+    if (!data || isUsingServerFiltering) return;
 
-    let filtered = data.tableData;
+    let filtered = data.tableData || [];
 
     // Apply search
     if (searchTerm) {
@@ -297,7 +297,23 @@ export default function TaskManagementDashboard() {
     });
 
     setFilteredData(filtered);
-  }, [data, filters, searchTerm]);
+  }, [data, filters, searchTerm, isUsingServerFiltering]);
+
+  // Auto-apply server filtering when filters, search, or date range change
+  useEffect(() => {
+    const hasActiveFilters = Object.values(filters).some(filterValues => filterValues.length > 0);
+    const hasSearchTerm = searchTerm.trim().length > 0;
+    const hasDateRange = startDateTime && endDateTime;
+
+    if ((hasActiveFilters || hasSearchTerm || hasDateRange) && !isUsingServerFiltering) {
+      // Debounce the API call to avoid too many requests
+      const timeoutId = setTimeout(() => {
+        applyFiltersAndFetchData();
+      }, 300);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [filters, searchTerm, startDateTime, endDateTime, isUsingServerFiltering, applyFiltersAndFetchData]);
 
   const handleFilterChange = useCallback((columnKey: string, value: string) => {
     if (value === "all") {
