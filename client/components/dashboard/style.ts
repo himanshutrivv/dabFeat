@@ -515,16 +515,18 @@ export const RetryButton = styled(Button)`
 // Input components
 export const SearchInput = styled.input`
   padding-left: 48px;
-  height: 48px;
+  padding-right: 16px;
+  height: 44px;
   width: 100%;
   background-color: hsl(var(--background));
   border: 1px solid hsl(var(--border));
-  border-radius: 16px;
+  border-radius: 8px;
   color: hsl(var(--foreground));
-  font-size: 18px;
+  font-size: 16px;
+  transition: all 0.2s ease;
 
   &:focus {
-    box-shadow: 0 0 0 2px hsl(var(--primary));
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
     border-color: hsl(var(--primary));
     outline: none;
   }
