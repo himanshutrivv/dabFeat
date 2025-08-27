@@ -4,8 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import { ThemeControllerProvider } from "@/styles/theme-controller";
-import { globalStyles } from "@/styles/global-styles";
+import { ThemeControllerProvider } from "@/styles/ThemeControllerProvider";
+import { globalStyles } from "@/styles/global";
 import { appTheme } from "@/styles/themes";
 import {
   DashboardContainer,
@@ -162,7 +162,6 @@ export default function TaskManagementDashboard() {
     [key: string]: boolean;
   }>({});
   const [isFilterLoading, setIsFilterLoading] = useState(false);
-  const [isUsingServerFiltering, setIsUsingServerFiltering] = useState(false);
   const { selectedBusiness } = useBusinessStore();
 
   // Function to apply filters and fetch data from API
@@ -191,8 +190,7 @@ export default function TaskManagementDashboard() {
 
       console.log("Filtered dashboard data received:", response);
       setData(response);
-      setFilteredData(response.tableData || []);
-      setIsUsingServerFiltering(true);
+      setFilteredData(response.tableData);
     } catch (err) {
       console.error("Filter fetch error:", err);
       setError("Failed to apply filters and fetch data.");
@@ -239,8 +237,7 @@ export default function TaskManagementDashboard() {
           filterData: null,
         });
         setData(response);
-        setFilteredData(response.tableData || []);
-        setIsUsingServerFiltering(false);
+        setFilteredData(response.tableData);
 
         const initialFilters: FilterState = {};
         Object.keys(response.columnData).forEach((key) => {
@@ -259,11 +256,11 @@ export default function TaskManagementDashboard() {
     fetchData();
   }, [selectedBusiness]);
 
-  // Apply filters and search (only for local/client-side filtering)
+  // Apply filters and search
   useEffect(() => {
-    if (!data || isUsingServerFiltering) return;
+    if (!data) return;
 
-    let filtered = data.tableData || [];
+    let filtered = data.tableData;
 
     // Apply search
     if (searchTerm) {
@@ -290,23 +287,7 @@ export default function TaskManagementDashboard() {
     });
 
     setFilteredData(filtered);
-  }, [data, filters, searchTerm, isUsingServerFiltering]);
-
-  // Auto-apply server filtering when filters, search, or date range change
-  useEffect(() => {
-    const hasActiveFilters = Object.values(filters).some(filterValues => filterValues.length > 0);
-    const hasSearchTerm = searchTerm.trim().length > 0;
-    const hasDateRange = startDateTime && endDateTime;
-
-    if ((hasActiveFilters || hasSearchTerm || hasDateRange) && !isUsingServerFiltering) {
-      // Debounce the API call to avoid too many requests
-      const timeoutId = setTimeout(() => {
-        applyFiltersAndFetchData();
-      }, 300);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [filters, searchTerm, startDateTime, endDateTime, isUsingServerFiltering, applyFiltersAndFetchData]);
+  }, [data, filters, searchTerm]);
 
   const handleFilterChange = useCallback((columnKey: string, value: string) => {
     if (value === "all") {
@@ -329,8 +310,6 @@ export default function TaskManagementDashboard() {
         };
       });
     }
-    // Trigger server-side filtering after filter change
-    setIsUsingServerFiltering(false);
   }, []);
 
   const toggleFilterDropdown = useCallback(
@@ -363,43 +342,21 @@ export default function TaskManagementDashboard() {
     setShowTimelineFilter(!showTimelineFilter);
   }, [showTimelineFilter]);
 
-  const clearAllFilters = useCallback(async () => {
+  const clearAllFilters = useCallback(() => {
     const clearedFilters: FilterState = {};
     Object.keys(filters).forEach((key) => {
       clearedFilters[key] = [];
     });
     setFilters(clearedFilters);
     setSearchTerm("");
-    setStartDateTime("");
-    setEndDateTime("");
     setOpenFilterDropdowns({});
-    setIsUsingServerFiltering(false);
-    initializeDefaultTimeRange();
-
-    // Refetch original data without any filters
-    try {
-      setIsFilterLoading(true);
-      const bussId = selectedBusiness?.bussId || "TESTORG2";
-      const response = await srGetDashboardTableData({
-        bussId,
-        filterData: null,
-      });
-      setData(response);
-      setFilteredData(response.tableData || []);
-    } catch (err) {
-      console.error("Error refetching original data:", err);
-      toast.error("Failed to reset filters");
-    } finally {
-      setIsFilterLoading(false);
-    }
-  }, [filters, selectedBusiness, initializeDefaultTimeRange]);
+  }, [filters]);
 
   const clearIndividualFilter = useCallback((filterKey: string) => {
     setFilters((prev) => ({
       ...prev,
       [filterKey]: [],
     }));
-    setIsUsingServerFiltering(false);
   }, []);
 
   const getFilterOptions = useCallback(
@@ -639,10 +596,7 @@ export default function TaskManagementDashboard() {
                       type="text"
                       placeholder="Search records..."
                       value={searchTerm}
-                      onChange={(e) => {
-                        setSearchTerm(e.target.value);
-                        setIsUsingServerFiltering(false);
-                      }}
+                      onChange={(e) => setSearchTerm(e.target.value)}
                     />
                   </SearchBarContainer>
                 )}
@@ -684,48 +638,17 @@ export default function TaskManagementDashboard() {
                 )}
 
                 <FilterResults>
-                  {filteredData.length === 0 && (data?.tableData?.length || 0) > 0 ? (
-                    "No results found for current filters"
-                  ) : (
-                    <>Showing {filteredData.length} of {data?.tableData?.length || 0} results</>
-                  )}
+                  Showing {filteredData.length} of {data?.tableData?.length}{" "}
+                  results
                 </FilterResults>
               </FilterContainer>
             )}
           </Header>
 
-          {isFilterLoading ? (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '450px' }}>
-              <Loader size="lg" />
-            </div>
-          ) : filteredData.length === 0 ? (
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              minHeight: '450px',
-              padding: '2rem',
-              textAlign: 'center',
-              color: 'var(--muted-foreground)'
-            }}>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📊</div>
-              <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.125rem', fontWeight: '600' }}>
-                No data found
-              </h3>
-              <p style={{ margin: 0, fontSize: '0.875rem' }}>
-                {(Object.values(filters).some(f => f.length > 0) || searchTerm || (startDateTime && endDateTime))
-                  ? "Try adjusting your filters or search criteria"
-                  : "No data available to display"
-                }
-              </p>
-            </div>
-          ) : (
-            <DashboardTable
-              data={filteredData}
-              columnData={data?.columnData || {}}
-            />
-          )}
+          <DashboardTable
+            data={filteredData}
+            columnData={data?.columnData || {}}
+          />
         </MainContent>
 
         <FilterModal
