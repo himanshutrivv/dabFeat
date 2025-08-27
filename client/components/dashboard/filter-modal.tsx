@@ -11,7 +11,7 @@ import {
   inputStyles,
   primaryButtonStyles,
   outlineButtonStyles,
-} from "../../styles/styled-components";
+} from "@/styles/styled-components";
 
 interface FilterState {
   [key: string]: string[];
@@ -39,6 +39,7 @@ interface FilterModalProps {
   onFilterChange: (columnKey: string, value: string) => void;
   onClearAllFilters: () => void;
   onToggleFilterSection: (key: string) => void;
+  onApplyFilters: () => Promise<void>;
 }
 
 const MainFilterBackdrop = styled.div`
@@ -317,6 +318,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   onFilterChange,
   onClearAllFilters,
   onToggleFilterSection,
+  onApplyFilters,
 }) => {
   const handleModalClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -355,11 +357,17 @@ const FilterModal: React.FC<FilterModalProps> = ({
   );
 
   const handleApplyFilters = useCallback(
-    (e: React.MouseEvent) => {
+    async (e: React.MouseEvent) => {
       e.stopPropagation();
-      onClose();
+      try {
+        await onApplyFilters();
+        onClose();
+      } catch (error) {
+        console.error("Error applying filters:", error);
+        // Keep modal open if there's an error
+      }
     },
-    [onClose],
+    [onApplyFilters, onClose],
   );
 
   if (!isOpen) return null;
