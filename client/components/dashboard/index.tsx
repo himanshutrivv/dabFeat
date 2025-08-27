@@ -626,20 +626,6 @@ export default function TaskManagementDashboard() {
                   </FilterGroup>
                 </FilterGrid>
 
-                {hasSearchableColumns && (
-                  <SearchBarContainer>
-                    <SearchIcon>
-                      <Search size={20} />
-                    </SearchIcon>
-                    <SearchInput
-                      type="text"
-                      placeholder="Search records..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                  </SearchBarContainer>
-                )}
-
                 {activeFilters.length > 0 && (
                   <ActiveFiltersSection>
                     <ActiveFiltersLabel>Active Filters:</ActiveFiltersLabel>
@@ -662,16 +648,6 @@ export default function TaskManagementDashboard() {
                           </FilterBadgeClose>
                         </FilterBadge>
                       ))}
-                      <ClearAllFiltersButton
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          clearAllFilters();
-                        }}
-                      >
-                        <X size={12} />
-                        Clear All
-                      </ClearAllFiltersButton>
                     </ActiveFiltersContainer>
                   </ActiveFiltersSection>
                 )}
