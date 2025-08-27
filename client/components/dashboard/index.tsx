@@ -338,6 +338,8 @@ export default function TaskManagementDashboard() {
         };
       });
     }
+    // Trigger server-side filtering after filter change
+    setIsUsingServerFiltering(false);
   }, []);
 
   const toggleFilterDropdown = useCallback(
