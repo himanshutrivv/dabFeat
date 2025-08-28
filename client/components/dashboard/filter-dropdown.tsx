@@ -30,6 +30,10 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   onToggle,
   onFilterChange,
 }) => {
+  // Safety checks: ensure selectedValues and options are always arrays
+  const safeSelectedValues = selectedValues || [];
+  const safeOptions = options || [];
+
   return (
     <FilterDropdownFilterGroup>
       <FilterDropdownSelectContainer data-dropdown-container>
@@ -40,9 +44,9 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
           }}
         >
           <FilterDropdownSelectValue>
-            {selectedValues.length === 0
+            {safeSelectedValues.length === 0
               ? `All ${label}`
-              : `${selectedValues.length} selected`}
+              : `${safeSelectedValues.length} selected`}
           </FilterDropdownSelectValue>
           <ChevronDown size={16} />
         </FilterDropdownSelectTrigger>
@@ -55,13 +59,13 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
                   e.stopPropagation();
                   onFilterChange(columnKey, "all");
                 }}
-                selected={selectedValues.length === 0}
+                selected={safeSelectedValues.length === 0}
               >
                 All {label}
               </FilterDropdownSelectItem>
 
-              {options.map((option) => {
-                const isSelected = selectedValues.includes(option);
+              {safeOptions.map((option) => {
+                const isSelected = safeSelectedValues.includes(option);
                 return (
                   <FilterDropdownSelectItem
                     key={option}
