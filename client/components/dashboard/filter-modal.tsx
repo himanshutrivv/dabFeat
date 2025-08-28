@@ -407,6 +407,24 @@ const FilterModal: React.FC<FilterModalProps> = ({
     );
   }, [filterOptions, searchTerm]);
 
+  // Filter individual section options based on section-specific search
+  const getFilteredSectionOptions = useCallback((options: string[], sectionKey: string) => {
+    const sectionSearch = sectionSearchTerms[sectionKey];
+    if (!sectionSearch?.trim()) return options;
+
+    return options.filter(option =>
+      option.toLowerCase().includes(sectionSearch.toLowerCase())
+    );
+  }, [sectionSearchTerms]);
+
+  // Handle section search change
+  const handleSectionSearchChange = useCallback((sectionKey: string, value: string) => {
+    setSectionSearchTerms(prev => ({
+      ...prev,
+      [sectionKey]: value
+    }));
+  }, []);
+
   const handleModalClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
   }, []);
