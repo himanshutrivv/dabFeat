@@ -1268,20 +1268,20 @@ export const FilterModalEmptyState = styled.div<{ theme?: any }>`
   color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
 `;
 
-export const filterModalEmptyIcon = styled.div`
+export const FilterModalEmptyIcon = styled.div`
   font-size: 48px;
   margin-bottom: 12px;
   opacity: 0.5;
 `;
 
-export const filterModalManualContainer = styled.div`
+export const FilterModalManualContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-bottom: 12px;
 `;
 
-export const filterModalManualLabel = styled.label`
+export const FilterModalManualLabel = styled.label`
   font-size: 12px;
   font-weight: 500;
   color: hsl(var(--foreground));
@@ -1290,7 +1290,7 @@ export const filterModalManualLabel = styled.label`
   gap: 6px;
 `;
 
-export const filterModalManualInput = styled.input<{ theme?: any }>`
+export const FilterModalManualInput = styled.input<{ theme?: any }>`
   width: 100%;
   padding: 8px 12px;
   height: 36px;
@@ -1312,7 +1312,7 @@ export const filterModalManualInput = styled.input<{ theme?: any }>`
   }
 `;
 
-export const filterModalTypeIcon = styled.div`
+export const FilterModalTypeIcon = styled.div`
   font-size: 12px;
   color: hsl(var(--primary));
 `;
