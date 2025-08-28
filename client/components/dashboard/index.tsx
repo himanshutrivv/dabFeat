@@ -48,7 +48,7 @@ import FilterDropdown from "./filter-dropdown";
 import FilterModal from "./filter-modal";
 import TimelineFilter from "./timeline-filter";
 import { useBusinessStore } from "@/store/business-store";
-import { srGetDashboardTableData } from "@/sources/dashboard";
+import { srGetDashboardTableData, srGetMonitoringData } from "@/sources/dashboard";
 import Loader from "../common/loader";
 
 interface FilterState {
@@ -185,6 +185,7 @@ export default function TaskManagementDashboard() {
     [key: string]: boolean;
   }>({});
   const [isFilterLoading, setIsFilterLoading] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [manualFilterInputs, setManualFilterInputs] = useState<{
     [key: string]: string;
   }>({});
@@ -585,6 +586,45 @@ export default function TaskManagementDashboard() {
     console.log("Search triggered with term:", searchTerm);
   }, [searchTerm]);
 
+  // Handle refresh button click
+  const handleRefreshClick = useCallback(async () => {
+    try {
+      setIsRefreshing(true);
+      setError(null);
+
+      const bussId = selectedBusiness?.bussId || "default";
+
+      // Set time to current time - 15 minutes
+      const now = new Date();
+      const fifteenMinutesAgo = new Date(now.getTime() - 15 * 60 * 1000);
+
+      const timeRange = {
+        startTime: fifteenMinutesAgo.toISOString(),
+        endTime: now.toISOString(),
+      };
+
+      console.log("Refreshing data with time range:", timeRange);
+
+      const response = await srGetMonitoringData({
+        bussId,
+        timeRange,
+      });
+
+      console.log("Monitoring data refreshed:", response);
+      setData(response);
+      setFilteredData(response.tableData);
+
+      // Show success message
+      toast.success("Data refreshed successfully!");
+    } catch (err) {
+      console.error("Refresh error:", err);
+      setError("Failed to refresh monitoring data.");
+      toast.error("Failed to refresh data. Please try again.");
+    } finally {
+      setIsRefreshing(false);
+    }
+  }, [selectedBusiness]);
+
   const initializeDefaultTimeRange = useCallback(() => {
     const now = new Date();
     const start = new Date(now.getTime() - 5 * 60 * 1000); // 5 minutes ago
@@ -740,6 +780,30 @@ export default function TaskManagementDashboard() {
                       <Search size={18} />
                       Search
                     </SearchButton>
+                    <Button
+                      onClick={handleRefreshClick}
+                      disabled={isRefreshing}
+                      title="Refresh monitoring data (current time - 15 minutes)"
+                      css={{
+                        marginLeft: '8px',
+                        minWidth: 'auto',
+                        padding: '8px 12px',
+                        backgroundColor: isRefreshing ? '#f1f5f9' : '#3b82f6',
+                        color: isRefreshing ? '#64748b' : '#ffffff',
+                        '&:hover': {
+                          backgroundColor: isRefreshing ? '#f1f5f9' : '#2563eb',
+                        },
+                      }}
+                    >
+                      <RefreshCw size={16} css={{
+                        animation: isRefreshing ? 'spin 1s linear infinite' : 'none',
+                        '@keyframes spin': {
+                          '0%': { transform: 'rotate(0deg)' },
+                          '100%': { transform: 'rotate(360deg)' },
+                        },
+                      }} />
+                      {isRefreshing ? 'Refreshing...' : 'Refresh'}
+                    </Button>
                   </SearchBarContainer>
 
                   {activeFilters.length > 0 && (
