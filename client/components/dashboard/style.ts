@@ -1064,46 +1064,13 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  border-radius: 32px 0 0 0;
-  padding: 28px 32px;
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+  border-radius: 16px 0 0 0;
+  padding: 24px 32px;
   border-bottom: 1px solid hsl(var(--border));
   flex-shrink: 0;
   position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 50%,
-      rgba(255, 255, 255, 0.05) 100%
-    );
-    pointer-events: none;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 70%
-    );
-    border-radius: 50%;
-    pointer-events: none;
-  }
 `;
 
 export const FilterModalContent = styled.div<{ theme?: any }>`
