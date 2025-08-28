@@ -704,15 +704,26 @@ export default function TaskManagementDashboard() {
 
                   {hasSearchableColumns && (
                     <SearchBarContainer>
-                      <SearchIcon>
-                        <Search size={20} />
-                      </SearchIcon>
-                      <SearchInput
-                        type="text"
-                        placeholder="Search through all records and data..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                      />
+                      <SearchInputWrapper>
+                        <SearchIcon>
+                          <Search size={20} />
+                        </SearchIcon>
+                        <SearchInput
+                          type="text"
+                          placeholder="Search through all records and data..."
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                              handleSearchClick();
+                            }
+                          }}
+                        />
+                      </SearchInputWrapper>
+                      <SearchButton onClick={handleSearchClick}>
+                        <Search size={18} />
+                        Search
+                      </SearchButton>
                     </SearchBarContainer>
                   )}
 
