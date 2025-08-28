@@ -571,8 +571,22 @@ const FilterModal: React.FC<FilterModalProps> = ({
                       </FilterHeader>
 
                       <FilterOptions>
+                        {/* Section-specific search */}
+                        <SectionSearchContainer>
+                          <SectionSearchIcon>
+                            <Search size={14} />
+                          </SectionSearchIcon>
+                          <SectionSearchInput
+                            type="text"
+                            placeholder={`Search ${label.toLowerCase()}...`}
+                            value={sectionSearchTerms[key] || ""}
+                            onChange={(e) => handleSectionSearchChange(key, e.target.value)}
+                            onClick={(e) => e.stopPropagation()}
+                          />
+                        </SectionSearchContainer>
+
                         <OptionsContainer>
-                          {options.map((option) => {
+                          {getFilteredSectionOptions(options, key).map((option) => {
                             const isSelected =
                               filters[key]?.includes(option) || false;
                             return (
