@@ -1079,12 +1079,6 @@ export const FilterModalFooterContainer = styled.div`
   gap: 12px;
 `;
 
-export const FilterModalHeaderTitle = styled.h2`
-  margin: 0;
-  font-size: 20px;
-  font-weight: 600;
-`;
-
 export const FilterModalSearchIconStyled = styled.div`
   position: absolute;
   left: 12px;
