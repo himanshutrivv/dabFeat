@@ -339,11 +339,7 @@ const StyledCard = styled(Card)`
 `;
 
 const HeaderContainer = styled(CardHeader)`
-  background: linear-gradient(
-    135deg,
-    #3b82f6 0%,
-    #2563eb 100%
-  );
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: #ffffff;
   border-radius: 24px 0 0 0;
   padding: 24px;
