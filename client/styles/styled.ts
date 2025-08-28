@@ -1,5 +1,9 @@
-import { appTheme as theme, AppTheme as Theme } from "./themes";
+
 import styled from '@emotion/styled'
+import {
+  appTheme as theme,
+  AppTheme as Theme,
+} from "../styles/themes/appTheme";
 
 export const media = {
   sm: `@media (min-width: 640px)`,
