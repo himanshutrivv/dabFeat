@@ -914,3 +914,12 @@ function TaskManagementDashboardInternal() {
     </>
   );
 }
+
+// Main wrapper component
+export default function TaskManagementDashboard() {
+  return (
+    <ThemeProvider>
+      <ThemeAwareDashboard />
+    </ThemeProvider>
+  );
+}
