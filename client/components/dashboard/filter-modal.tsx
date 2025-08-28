@@ -285,8 +285,8 @@ const CollapsibleContent = styled.div<{ isOpen?: boolean }>`
 const ModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 99999998;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 50;
   animation: fadeIn 0.3s ease-out;
 
   @keyframes fadeIn {
@@ -305,13 +305,13 @@ const ModalContainer = styled.div`
   right: 0;
   width: 420px;
   height: 100vh;
-  z-index: 99999999;
+  z-index: 51;
   display: flex;
   flex-direction: column;
   animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.25),
-    0 4px 16px rgba(0, 0, 0, 0.1);
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.08);
 
   @keyframes slideIn {
     from {
@@ -339,8 +339,8 @@ const StyledCard = styled(Card)`
 `;
 
 const HeaderContainer = styled(CardHeader)`
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, hsl(215, 25%, 27%) 0%, hsl(215, 25%, 20%) 100%);
+  color: hsl(var(--primary-foreground));
   border-radius: 24px 0 0 0;
   padding: 24px;
   flex-shrink: 0;
@@ -359,12 +359,12 @@ const CloseButton = styled(Button)`
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: hsl(var(--primary-foreground) / 0.1);
+  border: 1px solid hsl(var(--primary-foreground) / 0.2);
   color: hsl(var(--primary-foreground));
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: hsl(var(--primary-foreground) / 0.2);
     transform: scale(1.05);
   }
 `;
@@ -731,7 +731,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
               }}
             >
               <HeaderTitle>
-                <Sparkles size={20} />
+                <Filter size={20} />
                 Advanced Filters
               </HeaderTitle>
               <CloseButton variant="ghost" size="icon" onClick={onClose}>
