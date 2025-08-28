@@ -140,10 +140,7 @@ const TimelineFilterContent = styled(SelectContent)`
   padding: ${({ theme }) => theme.spacing[4]};
   z-index: 20000;
   isolation: isolate;
-  position: fixed;
-  top: auto;
-  left: auto;
-  transform: translateY(4px);
+  position: absolute;
 
   @media (max-width: 768px) {
     width: 300px;
