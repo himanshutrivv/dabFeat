@@ -333,11 +333,7 @@ const StyledCard = styled(Card)`
   height: 100%;
   border-radius: 24px 0 0 24px;
   border-right: none;
-  background: linear-gradient(
-    135deg,
-    hsl(var(--background)) 0%,
-    hsl(var(--background) / 0.98) 100%
-  );
+  background: #ffffff;
   display: flex;
   flex-direction: column;
 `;
