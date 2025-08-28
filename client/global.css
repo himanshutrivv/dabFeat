@@ -102,5 +102,22 @@
 
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Fix blur issues with transforms */
+  [style*="transform"] {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  /* Improve rendering performance */
+  * {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
   }
 }
