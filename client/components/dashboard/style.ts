@@ -1318,13 +1318,9 @@ export const FilterModalCheckbox = styled.div<{
 
 export const FilterModalFooter = styled.div<{ theme?: any }>`
   padding: 28px 32px;
-  border-top: 1px solid hsl(210, 20%, 85%);
+  border-top: 1px solid hsl(var(--border));
   flex-shrink: 0;
-  background: linear-gradient(
-    180deg,
-    hsl(210, 20%, 96%) 0%,
-    hsl(210, 20%, 98%) 100%
-  );
+  background: hsl(var(--card));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 `;
