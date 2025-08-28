@@ -968,16 +968,18 @@ export const FilterModalSearch = styled.div<{ theme?: any }>`
 `;
 
 export const FilterModalListItem = styled.div<{ theme?: any }>`
-  border: 1px solid
-    ${({ theme }) => theme?.colors?.border || "hsl(var(--border))"};
-  border-radius: 12px;
-  background: ${({ theme }) => theme?.colors?.card || "hsl(var(--card))"};
-  transition: all 0.2s ease;
-  margin-bottom: ${({ theme }) => theme?.spacing?.[3] || "12px"};
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 
   &:hover {
-    border-color: hsl(var(--primary) / 0.3);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-color: #d1d5db;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
   }
 
   &:last-child {
