@@ -178,7 +178,7 @@ export const MainContent = styled.div`
 export const Header = styled.div`
   background-color: hsl(var(--card));
   border-bottom: 1px solid hsl(var(--border));
-  padding: 0 32px;
+  padding: 32px;
   position: sticky;
   top: 0;
   z-index: 50;
