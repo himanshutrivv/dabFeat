@@ -175,30 +175,6 @@ export const MainContent = styled.div`
   overflow: hidden;
 `;
 
-export const HorizontalLayout = styled.div`
-  display: flex;
-  flex: 1;
-  gap: 24px;
-  padding: 32px;
-  overflow: hidden;
-`;
-
-export const FilterSidebar = styled.div`
-  flex: 0 0 350px;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  max-height: 100%;
-`;
-
-export const TableSection = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  min-width: 0;
-`;
-
 export const Header = styled.div`
   background-color: hsl(var(--card));
   border-bottom: 1px solid hsl(var(--border));
@@ -207,10 +183,44 @@ export const Header = styled.div`
   top: 0;
   z-index: 50;
   flex-shrink: 0;
+  min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 60px;
+`;
+
+export const HeaderContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const DashboardTitle = styled.h1`
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+`;
+
+export const DashboardSubtitle = styled.p`
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+`;
+
+export const MainContentLayout = styled.div`
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  overflow: hidden;
+`;
+
+export const TableSection = styled.div`
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const FilterCard = styled.div`
@@ -220,11 +230,10 @@ export const FilterCard = styled.div`
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.05),
     0 2px 4px rgba(0, 0, 0, 0.08);
+  margin-top: 24px;
+  margin-bottom: 24px;
   overflow: visible;
   transition: all 0.3s ease;
-  height: fit-content;
-  position: sticky;
-  top: 0;
 
   &:hover {
     box-shadow:
@@ -278,12 +287,20 @@ export const SearchIcon = styled.div`
 `;
 
 export const FilterGrid = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
   margin-bottom: 24px;
   position: relative;
   z-index: 100;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 `;
 
 export const FilterGroup = styled.div``;
@@ -722,6 +739,7 @@ export const SelectItemsContainer = styled.div`
 // Table components
 export const TableContainer = styled.div`
   flex: 1;
+  padding: 32px;
   overflow: hidden;
   min-height: 0;
   display: flex;
