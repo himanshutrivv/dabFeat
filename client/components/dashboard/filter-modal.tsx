@@ -526,7 +526,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
   // Filter individual section options based on section-specific search
   const getFilteredSectionOptions = useCallback(
-    (options: string[], sectionKey: string) => {
+    (options: string[], sectionKey: string, isSearchable: boolean) => {
+      // If not searchable, return all options
+      if (!isSearchable) return options;
+
       const sectionSearch = sectionSearchTerms[sectionKey];
       if (!sectionSearch?.trim()) return options;
 
@@ -711,9 +714,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
                         <OptionsContainer>
                           {(() => {
                             const filteredSectionOptions =
-                              getFilteredSectionOptions(options, key);
+                              getFilteredSectionOptions(options, key, isSearchable);
 
-                            if (filteredSectionOptions.length === 0) {
+                            if (filteredSectionOptions.length === 0 && isSearchable && sectionSearchTerms[key]?.trim()) {
                               return (
                                 <div
                                   style={{
