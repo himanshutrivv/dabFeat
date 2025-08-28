@@ -1133,16 +1133,18 @@ export const FilterDropdownSelectContent = styled.div`
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0;
+  right: auto;
   z-index: 300;
   max-height: 384px;
-  min-width: 200px;
+  min-width: 320px;
+  max-width: calc(100vw - 32px);
   overflow-y: auto;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid hsl(var(--border));
   background-color: white;
   color: hsl(var(--card-foreground));
   opacity: 1;
+  padding: 16px;
   box-shadow:
     0 20px 80px rgba(0, 0, 0, 0.4),
     0 12px 40px rgba(0, 0, 0, 0.3),
