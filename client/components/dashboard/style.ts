@@ -1215,30 +1215,19 @@ export const FilterDropdownSelectContent = styled.div`
   overflow-y: auto;
   border-radius: 8px;
   border: 1px solid hsl(var(--border));
-  background-color: hsl(var(--card));
-  color: hsl(var(--card-foreground));
-  opacity: 1;
+  background-color: white !important;
+  color: hsl(var(--foreground));
+  opacity: 1 !important;
   padding: 16px;
   box-shadow:
     0 10px 80px rgba(0, 0, 0, 0.12),
     0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
-  animation: fadeIn 0.2s ease-out;
+  animation: none;
 
   &.filter-content {
-    background-color: hsl(var(--card)) !important;
+    background-color: white !important;
     opacity: 1 !important;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
   }
 `;
 
