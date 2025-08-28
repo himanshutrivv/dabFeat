@@ -1123,28 +1123,24 @@ export const FilterModalContent = styled.div<{ theme?: any }>`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  background: linear-gradient(
-    180deg,
-    hsl(210, 20%, 96%) 0%,
-    hsl(210, 20%, 98%) 100%
-  );
+  background: hsl(var(--background));
 
   &::-webkit-scrollbar {
     width: 8px;
   }
 
   &::-webkit-scrollbar-track {
-    background: hsl(210, 20%, 90%);
+    background: hsl(var(--muted));
     border-radius: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, hsl(210, 20%, 70%), hsl(210, 20%, 60%));
+    background: hsl(var(--muted-foreground));
     border-radius: 4px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, hsl(210, 20%, 60%), hsl(210, 20%, 50%));
+    background: hsl(var(--muted-foreground) / 0.8);
   }
 `;
 
