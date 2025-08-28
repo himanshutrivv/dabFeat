@@ -230,14 +230,13 @@ export default function TaskManagementDashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bussId = selectedBusiness?.bussId;
-      if (!bussId) return;
+      const bussId = selectedBusiness?.bussId || "demo-business-id";
       try {
         setLoading(true);
         setError(null);
 
         const response = await srGetDashboardTableData({
-          bussId: selectedBusiness?.bussId,
+          bussId: bussId,
           filterData: null,
         });
         setData(response);
