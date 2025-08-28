@@ -1,20 +1,33 @@
 "use client";
 import React, { useCallback, useState, useMemo } from "react";
 import styled from "@emotion/styled";
-import { Search, X, Filter, ChevronDown, ChevronRight, Sparkles } from "lucide-react";
 import {
-  flexBetween,
-  flexCenter,
-  flexColumn,
-} from "../../styles/styled";
+  Search,
+  X,
+  Filter,
+  ChevronDown,
+  ChevronRight,
+  Sparkles,
+} from "lucide-react";
+import { flexBetween, flexCenter, flexColumn } from "../../styles/styled";
 
 // Import modern UI components
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@/components/ui/collapsible";
 
 interface FilterState {
   [key: string]: string[];
@@ -49,7 +62,11 @@ interface FilterModalProps {
 const ModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
   backdrop-filter: blur(8px);
   z-index: 99999998;
   animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -76,7 +93,7 @@ const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
+  box-shadow:
     0 25px 50px -12px rgba(0, 0, 0, 0.25),
     0 0 0 1px rgba(255, 255, 255, 0.1);
 
@@ -100,17 +117,21 @@ const StyledCard = styled(Card)`
   height: 100%;
   border-radius: 24px 0 0 24px;
   border-right: none;
-  background: linear-gradient(135deg, 
-    hsl(var(--background)) 0%, 
-    hsl(var(--background) / 0.98) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--background)) 0%,
+    hsl(var(--background) / 0.98) 100%
+  );
   display: flex;
   flex-direction: column;
 `;
 
 const HeaderContainer = styled(CardHeader)`
-  background: linear-gradient(135deg, 
-    hsl(var(--primary)) 0%, 
-    hsl(var(--primary) / 0.9) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary) / 0.9) 100%
+  );
   color: hsl(var(--primary-foreground));
   border-radius: 24px 0 0 0;
   padding: 24px;
@@ -133,7 +154,7 @@ const CloseButton = styled(Button)`
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: hsl(var(--primary-foreground));
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: scale(1.05);
@@ -168,7 +189,7 @@ const SearchInput = styled(Input)`
   border-radius: 12px;
   border: 2px solid hsl(var(--border));
   background: hsl(var(--background));
-  
+
   &:focus {
     border-color: hsl(var(--primary));
     box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
@@ -186,7 +207,7 @@ const FilterSection = styled(Collapsible)`
   border-radius: 12px;
   background: hsl(var(--card));
   transition: all 0.2s ease;
-  
+
   &:hover {
     border-color: hsl(var(--primary) / 0.3);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -204,11 +225,11 @@ const FilterHeader = styled(CollapsibleTrigger)`
   text-align: left;
   cursor: pointer;
   transition: all 0.2s ease;
-  
+
   &:hover {
     background: hsl(var(--accent) / 0.5);
   }
-  
+
   &[data-state="open"] {
     background: hsl(var(--accent));
     border-bottom: 1px solid hsl(var(--border));
@@ -223,8 +244,9 @@ const FilterHeaderContent = styled.div`
 
 const FilterTitle = styled.h3<{ hasActive: boolean }>`
   font-size: 16px;
-  font-weight: ${props => props.hasActive ? '600' : '500'};
-  color: ${props => props.hasActive ? 'hsl(var(--primary))' : 'hsl(var(--foreground))'};
+  font-weight: ${(props) => (props.hasActive ? "600" : "500")};
+  color: ${(props) =>
+    props.hasActive ? "hsl(var(--primary))" : "hsl(var(--foreground))"};
   margin: 0;
 `;
 
@@ -239,7 +261,7 @@ const FilterCount = styled(Badge)`
 
 const ExpandIcon = styled.div<{ isOpen: boolean }>`
   transition: transform 0.2s ease;
-  transform: ${props => props.isOpen ? 'rotate(90deg)' : 'rotate(0deg)'};
+  transform: ${(props) => (props.isOpen ? "rotate(90deg)" : "rotate(0deg)")};
   color: hsl(var(--muted-foreground));
 `;
 
@@ -253,16 +275,16 @@ const OptionsContainer = styled.div`
   gap: 8px;
   max-height: 200px;
   overflow-y: auto;
-  
+
   &::-webkit-scrollbar {
     width: 6px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: hsl(var(--muted) / 0.3);
     border-radius: 3px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: hsl(var(--muted-foreground) / 0.3);
     border-radius: 3px;
@@ -277,9 +299,12 @@ const OptionItem = styled.div<{ isSelected: boolean }>`
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: ${props => props.isSelected ? 'hsl(var(--primary) / 0.1)' : 'transparent'};
-  border: 1px solid ${props => props.isSelected ? 'hsl(var(--primary) / 0.3)' : 'transparent'};
-  
+  background: ${(props) =>
+    props.isSelected ? "hsl(var(--primary) / 0.1)" : "transparent"};
+  border: 1px solid
+    ${(props) =>
+      props.isSelected ? "hsl(var(--primary) / 0.3)" : "transparent"};
+
   &:hover {
     background: hsl(var(--accent));
     transform: translateX(2px);
@@ -294,14 +319,16 @@ const OptionText = styled.span`
 const CheckBox = styled.div<{ checked: boolean }>`
   width: 18px;
   height: 18px;
-  border: 2px solid ${props => props.checked ? 'hsl(var(--primary))' : 'hsl(var(--border))'};
+  border: 2px solid
+    ${(props) => (props.checked ? "hsl(var(--primary))" : "hsl(var(--border))")};
   border-radius: 4px;
-  background: ${props => props.checked ? 'hsl(var(--primary))' : 'transparent'};
+  background: ${(props) =>
+    props.checked ? "hsl(var(--primary))" : "transparent"};
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  
+
   &:hover {
     border-color: hsl(var(--primary));
   }
@@ -333,7 +360,7 @@ const StyledButton = styled(Button)<{ variant?: any }>`
   border-radius: 12px;
   font-weight: 500;
   transition: all 0.2s ease;
-  
+
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -369,10 +396,13 @@ const FilterModal: React.FC<FilterModalProps> = ({
   // Filter options based on search term (internal search for filtering columns)
   const filteredOptions = useMemo(() => {
     if (!searchTerm.trim()) return filterOptions;
-    
-    return filterOptions.filter(option => 
-      option.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      option.options.some(opt => opt.toLowerCase().includes(searchTerm.toLowerCase()))
+
+    return filterOptions.filter(
+      (option) =>
+        option.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        option.options.some((opt) =>
+          opt.toLowerCase().includes(searchTerm.toLowerCase()),
+        ),
     );
   }, [filterOptions, searchTerm]);
 
@@ -418,7 +448,13 @@ const FilterModal: React.FC<FilterModalProps> = ({
       <ModalContainer>
         <StyledCard>
           <HeaderContainer>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <HeaderTitle>
                 <Sparkles size={20} />
                 Advanced Filters
@@ -455,10 +491,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
               ) : (
                 filteredOptions.map(({ key, label, options }) => {
                   const hasActiveFilters = filters[key]?.length > 0;
-                  const isExpanded = openFilterDropdowns[`modal-${key}`] || false;
+                  const isExpanded =
+                    openFilterDropdowns[`modal-${key}`] || false;
 
                   return (
-                    <FilterSection 
+                    <FilterSection
                       key={key}
                       open={isExpanded}
                       onOpenChange={() => onToggleFilterSection(`modal-${key}`)}
@@ -483,17 +520,23 @@ const FilterModal: React.FC<FilterModalProps> = ({
                       <FilterOptions>
                         <OptionsContainer>
                           {options.map((option) => {
-                            const isSelected = filters[key]?.includes(option) || false;
+                            const isSelected =
+                              filters[key]?.includes(option) || false;
                             return (
                               <OptionItem
                                 key={option}
                                 isSelected={isSelected}
-                                onClick={(e) => handleFilterOptionClick(e, key, option)}
+                                onClick={(e) =>
+                                  handleFilterOptionClick(e, key, option)
+                                }
                               >
                                 <OptionText>{option}</OptionText>
                                 <CheckBox checked={isSelected}>
                                   {isSelected && (
-                                    <CheckIcon viewBox="0 0 20 20" fill="currentColor">
+                                    <CheckIcon
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                    >
                                       <path
                                         fillRule="evenodd"
                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
