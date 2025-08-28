@@ -444,7 +444,9 @@ export const SearchInput = styled.input`
 `;
 
 // Consistent button styling for Search and Refresh actions
-export const ControlButton = styled(Button)<{ variant?: "primary" | "secondary" }>`
+export const ControlButton = styled(Button)<{
+  variant?: "primary" | "secondary";
+}>`
   height: 48px;
   padding: 0 24px;
   border-radius: 8px;
