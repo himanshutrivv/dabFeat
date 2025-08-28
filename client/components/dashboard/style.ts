@@ -278,20 +278,12 @@ export const SearchIcon = styled.div`
 `;
 
 export const FilterGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 16px;
   margin-bottom: 24px;
   position: relative;
   z-index: 100;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
 `;
 
 export const FilterGroup = styled.div``;
