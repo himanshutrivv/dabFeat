@@ -1010,7 +1010,7 @@ export const TimeLineFilterButtonGrid = styled.div<{ theme?: any }>`
 export const FilterModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 1000;
   animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
