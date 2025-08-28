@@ -1113,20 +1113,25 @@ export const FilterModalButton = styled.button<{
     switch (props.variant) {
       case "outline":
         return css`
-          border: 1px solid ${props.theme?.colors?.border || 'hsl(var(--border))'};
-          background-color: ${props.theme?.colors?.background || 'hsl(var(--background))'};
-          color: ${props.theme?.colors?.foreground || 'hsl(var(--foreground))'};
+          border: 2px solid #d1d5db;
+          background-color: #ffffff;
+          color: #374151;
           &:hover {
-            background-color: ${props.theme?.colors?.accent || 'hsl(var(--accent))'};
-            color: ${props.theme?.colors?.accentForeground || 'hsl(var(--accent-foreground))'};
+            background-color: #f9fafb;
+            border-color: #6b7280;
+            color: #1f2937;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
           }
         `;
       default:
         return css`
-          background-color: ${props.theme?.colors?.primary || 'hsl(var(--primary))'};
-          color: ${props.theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
+          background-color: #1f2937;
+          color: #ffffff;
+          border: 2px solid #1f2937;
           &:hover {
-            background-color: ${props.theme?.colors?.primary ? `${props.theme.colors.primary} / 0.9` : 'hsl(var(--primary) / 0.9)'};
+            background-color: #111827;
+            border-color: #111827;
+            box-shadow: 0 6px 20px rgba(31, 41, 55, 0.4);
           }
         `;
     }
