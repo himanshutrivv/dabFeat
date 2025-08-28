@@ -286,7 +286,7 @@ const ModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 50;
+  z-index: 1000;
   animation: fadeIn 0.3s ease-out;
 
   @keyframes fadeIn {
@@ -305,7 +305,7 @@ const ModalContainer = styled.div`
   right: 0;
   width: 420px;
   height: 100vh;
-  z-index: 51;
+  z-index: 1001;
   display: flex;
   flex-direction: column;
   animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
