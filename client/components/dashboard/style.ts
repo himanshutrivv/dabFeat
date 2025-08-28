@@ -1040,17 +1040,13 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   right: 0;
   width: 440px;
   height: 100vh;
-  background: linear-gradient(
-    145deg,
-    hsl(210, 20%, 98%) 0%,
-    hsl(210, 20%, 95%) 100%
-  );
-  border-left: 1px solid hsl(210, 20%, 80%);
+  background: hsl(var(--card));
+  border-left: 1px solid hsl(var(--border));
   border-radius: 32px 0 0 32px;
   box-shadow:
-    0 32px 64px -12px rgba(0, 0, 0, 0.15),
-    0 20px 25px -5px rgba(0, 0, 0, 0.08),
-    0 8px 32px rgba(71, 85, 105, 0.1);
+    0 32px 64px -12px rgba(0, 0, 0, 0.25),
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 32px rgba(139, 92, 246, 0.1);
   z-index: 1001;
   display: flex;
   flex-direction: column;
