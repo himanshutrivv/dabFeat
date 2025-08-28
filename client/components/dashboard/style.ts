@@ -1158,12 +1158,12 @@ export const FilterModalSearch = styled.div<{ theme?: any }>`
 `;
 
 export const FilterModalListItem = styled.div<{ theme?: any }>`
-  border: 1px solid rgba(226, 232, 240, 0.6);
+  border: 1px solid hsl(210, 20%, 80%);
   border-radius: 16px;
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(248, 250, 252, 0.8) 100%
+    hsl(210, 20%, 99%) 0%,
+    hsl(210, 20%, 96%) 100%
   );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -1173,10 +1173,10 @@ export const FilterModalListItem = styled.div<{ theme?: any }>`
   position: relative;
 
   &:hover {
-    border-color: rgba(139, 92, 246, 0.3);
+    border-color: hsl(210, 30%, 70%);
     box-shadow:
-      0 8px 25px rgba(0, 0, 0, 0.1),
-      0 4px 12px rgba(139, 92, 246, 0.15);
+      0 8px 25px rgba(0, 0, 0, 0.08),
+      0 4px 12px hsl(210, 20%, 60%, 0.15);
     transform: translateY(-2px);
   }
 
@@ -1194,7 +1194,7 @@ export const FilterModalListItem = styled.div<{ theme?: any }>`
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(139, 92, 246, 0.3) 50%,
+      hsl(210, 30%, 70%) 50%,
       transparent 100%
     );
     opacity: 0;
