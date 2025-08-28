@@ -493,6 +493,13 @@ const FilterModal: React.FC<FilterModalProps> = ({
     [onApplyFilters, onClose],
   );
 
+  // Clear section search terms when modal closes
+  React.useEffect(() => {
+    if (!isOpen) {
+      setSectionSearchTerms({});
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
