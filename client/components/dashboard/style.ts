@@ -222,6 +222,9 @@ export const FilterCard = styled.div`
     0 2px 4px rgba(0, 0, 0, 0.08);
   overflow: visible;
   transition: all 0.3s ease;
+  height: fit-content;
+  position: sticky;
+  top: 0;
 
   &:hover {
     box-shadow:
