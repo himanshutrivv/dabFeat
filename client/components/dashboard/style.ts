@@ -1655,3 +1655,541 @@ export const TimelineFilterButtonGridNew = styled.div`
   display: flex;
   gap: 8px;
 `;
+
+// FilterModal styled components moved from filter-modal.tsx
+export const MainFilterBackdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
+export const MainFilterModal = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  height: 100vh;
+  background-color: hsl(var(--card));
+  border-left: 1px solid hsl(var(--border));
+  border-radius: 24px 0 0 24px;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  animation: slideInFromRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const MainFilterHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(215, 25%, 20%) 100%);
+  color: hsl(var(--primary-foreground));
+  border-radius: 24px 0 0 0;
+  padding: 24px;
+  border-bottom: 1px solid hsl(var(--border));
+  flex-shrink: 0;
+`;
+
+export const MainFilterContent = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const MainFilterSearch = styled.div`
+  position: relative;
+  margin-bottom: 16px;
+`;
+
+export const MainFilterListItem = styled.div`
+  border: 1px solid hsl(var(--border));
+  border-radius: 12px;
+  background: hsl(var(--card));
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+
+  &:hover {
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+export const MainFilterItemHeader = styled.div<{ isActive?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: none;
+  border: none;
+  text-align: left;
+  color: ${(props) =>
+    props.isActive
+      ? "hsl(var(--primary))"
+      : "hsl(var(--foreground))"};
+
+  &:hover {
+    background: hsl(var(--accent) / 0.5);
+  }
+
+  &[data-state="open"] {
+    background: hsl(var(--accent));
+    border-bottom: 1px solid hsl(var(--border));
+  }
+`;
+
+export const FilterHeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const FilterTitle = styled.h3<{ hasActive: boolean }>`
+  font-size: 16px;
+  font-weight: ${(props) => (props.hasActive ? "600" : "500")};
+  color: ${(props) =>
+    props.hasActive ? "hsl(var(--primary))" : "hsl(var(--foreground))"};
+  margin: 0;
+`;
+
+export const FilterCount = styled.div`
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  font-size: 11px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  font-weight: 600;
+`;
+
+export const ExpandIcon = styled.div<{ isOpen: boolean }>`
+  transition: transform 0.2s ease;
+  transform: ${(props) => (props.isOpen ? "rotate(90deg)" : "rotate(0deg)")};
+  color: hsl(var(--muted-foreground));
+`;
+
+export const MainFilterExpandIcon = styled.div<{ isExpanded: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: ${(props) =>
+    props.isExpanded ? "hsl(var(--primary))" : "hsl(var(--muted))"};
+  color: ${(props) =>
+    props.isExpanded ? "white" : "hsl(var(--muted-foreground))"};
+  transition: all 0.2s ease;
+`;
+
+export const MainFilterOptionsContainer = styled.div`
+  padding: 0 20px 20px 20px;
+`;
+
+export const OptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: hsl(var(--muted) / 0.3);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+`;
+
+export const MainFilterOptions = styled.div`
+  max-height: 256px;
+  overflow-y: auto;
+`;
+
+export const MainFilterCheckbox = styled.div<{ selected: boolean }>`
+  width: 18px;
+  height: 18px;
+  border: 2px solid
+    ${(props) =>
+      props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
+  border-radius: 4px;
+  background-color: ${(props) =>
+    props.selected ? "hsl(var(--primary))" : "transparent"};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: hsl(var(--primary));
+  }
+`;
+
+export const MainFilterFooter = styled.div`
+  padding: 24px;
+  border-top: 1px solid hsl(var(--border));
+  flex-shrink: 0;
+  background: hsl(var(--card));
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+`;
+
+export const FilterModalButton = styled.button<{
+  variant?: "default" | "outline";
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 44px;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-bottom: 8px;
+
+  &:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  ${(props) => {
+    switch (props.variant) {
+      case "outline":
+        return css`
+          border: 1px solid hsl(var(--border));
+          background-color: hsl(var(--background));
+          color: hsl(var(--foreground));
+          &:hover {
+            background-color: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+          }
+        `;
+      default:
+        return css`
+          background-color: hsl(var(--primary));
+          color: hsl(var(--primary-foreground));
+          &:hover {
+            background-color: hsl(var(--primary) / 0.9);
+          }
+        `;
+    }
+  }}
+`;
+
+export const FilterModalHeaderTitle = styled.h2`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  color: hsl(var(--primary-foreground));
+`;
+
+export const FilterModalSearchIcon = styled.div`
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+  z-index: 1;
+`;
+
+export const FilterModalSearchInput = styled.input`
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  height: 44px;
+  border-radius: 12px;
+  border: 2px solid hsl(var(--border));
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-size: 14px;
+
+  &:focus {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+`;
+
+export const FilterModalSectionContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+`;
+
+export const FilterModalItemTitle = styled.span`
+  font-size: 16px;
+  font-weight: 400;
+`;
+
+export const FilterModalItemTitleActive = styled.span`
+  font-size: 16px;
+  font-weight: 600;
+`;
+
+export const FilterModalItemCount = styled.span`
+  margin-left: 8px;
+  font-size: 12px;
+  background-color: hsl(var(--primary));
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+`;
+
+export const SectionSearchContainer = styled.div`
+  position: relative;
+  margin-bottom: 12px;
+`;
+
+export const FilterModalSectionSearchIcon = styled.div`
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+  z-index: 1;
+`;
+
+export const FilterModalSectionSearchInput = styled.input<{ disabled?: boolean }>`
+  width: 100%;
+  padding-left: 36px;
+  padding-right: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background: ${(props) =>
+    props.disabled ? "hsl(var(--muted) / 0.1)" : "hsl(var(--muted) / 0.3)"};
+  color: hsl(var(--foreground));
+  font-size: 13px;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
+  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
+
+  &:focus {
+    border-color: ${({ disabled }) =>
+      disabled ? "hsl(var(--border))" : "hsl(var(--primary))"};
+    background: ${({ disabled }) =>
+      disabled ? "hsl(var(--muted) / 0.1)" : "hsl(var(--background))"};
+    box-shadow: ${({ disabled }) =>
+      disabled ? "none" : "0 0 0 2px hsl(var(--primary) / 0.1)"};
+    outline: none;
+  }
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+    font-size: 12px;
+  }
+`;
+
+export const FilterModalOptionItem = styled.div<{ isSelected?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  background: ${(props) =>
+    props.isSelected ? "hsl(var(--primary) / 0.1)" : "transparent"};
+  border: 1px solid
+    ${(props) =>
+      props.isSelected ? "hsl(var(--primary) / 0.3)" : "transparent"};
+  margin-bottom: 4px;
+
+  &:hover {
+    background: hsl(var(--accent));
+    transform: translateX(2px);
+  }
+`;
+
+export const FilterModalOptionText = styled.span`
+  font-size: 14px;
+  color: hsl(var(--foreground));
+`;
+
+export const FilterModalCheckIcon = styled.svg`
+  width: 10px;
+  height: 10px;
+  color: hsl(var(--primary-foreground));
+`;
+
+export const FilterModalSearchContainer = styled(MainFilterSearch)`
+  margin-bottom: 24px;
+`;
+
+export const FilterModalSearchContainerSmall = styled(MainFilterSearch)`
+  margin-bottom: 12px;
+`;
+
+export const CloseButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: hsl(var(--primary-foreground) / 0.1);
+  border: 1px solid hsl(var(--primary-foreground) / 0.2);
+  cursor: pointer;
+  border-radius: 12px;
+  color: hsl(var(--primary-foreground));
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: hsl(var(--primary-foreground) / 0.2);
+    transform: scale(1.05);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+`;
+
+export const Separator = styled.div`
+  flex-shrink: 0;
+  background: hsl(var(--border));
+  height: 1px;
+  width: 100%;
+`;
+
+export const EmptyState = styled.div`
+  text-align: center;
+  padding: 40px 20px;
+  color: hsl(var(--muted-foreground));
+`;
+
+export const EmptyIcon = styled.div`
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+`;
+
+export const ManualFilterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+`;
+
+export const ManualFilterLabel = styled.label`
+  font-size: 12px;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
+
+export const ManualFilterInput = styled.input`
+  width: 100%;
+  padding: 8px 12px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-size: 13px;
+
+  &:focus {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.1);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+    font-size: 12px;
+  }
+`;
+
+export const FilterTypeIcon = styled.div`
+  font-size: 12px;
+  color: hsl(var(--primary));
+`;
