@@ -592,14 +592,14 @@ export const SelectTrigger = styled.button`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid hsl(var(--input));
   background-color: hsl(var(--background));
   padding: 0 12px;
   font-size: 14px;
   color: hsl(var(--foreground));
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:focus {
     outline: none;
@@ -1122,14 +1122,14 @@ export const FilterDropdownSelectTrigger = styled.button`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid hsl(var(--input));
   background-color: hsl(var(--background));
   padding: 0 12px;
   font-size: 14px;
   color: hsl(var(--foreground));
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:focus {
     outline: none;
@@ -1237,14 +1237,14 @@ export const TimelineFilterSelectTrigger = styled.button`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid hsl(var(--input));
   background-color: hsl(var(--background));
   padding: 0 12px;
   font-size: 14px;
   color: hsl(var(--foreground));
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:focus {
     outline: none;
