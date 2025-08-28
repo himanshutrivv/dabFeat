@@ -202,30 +202,30 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
   return (
     <>
-      <filterModalBackdrop onClick={onClose} />
-      <filterModalContainer
+      <FilterModalBackdrop onClick={onClose} />
+      <FilterModalContainer
         data-modal-container
         onClick={handleModalClick}
         onMouseDown={handleModalClick}
         onMouseUp={handleModalClick}
       >
-        <filterModalHeader>
-          <filterModalHeaderTitle>
+        <FilterModalHeader>
+          <FilterModalHeaderTitle>
             <Sparkles size={20} />
             Advanced Filters
-          </filterModalHeaderTitle>
-          <filterModalCloseButton onClick={onClose}>
+          </FilterModalHeaderTitle>
+          <FilterModalCloseButton onClick={onClose}>
             <X size={18} />
-          </filterModalCloseButton>
-        </filterModalHeader>
+          </FilterModalCloseButton>
+        </FilterModalHeader>
 
-        <filterModalContent>
+        <FilterModalContent>
           {/* Internal search for filtering available filter options/columns */}
-          <filterModalSearch>
-            <filterModalSearchIcon>
+          <FilterModalSearch>
+            <FilterModalSearchIcon>
               <Search size={16} />
-            </filterModalSearchIcon>
-            <filterModalSearchInput
+            </FilterModalSearchIcon>
+            <FilterModalSearchInput
               type="text"
               placeholder="Search filter categories..."
               value={searchTerm}
@@ -233,17 +233,17 @@ const FilterModal: React.FC<FilterModalProps> = ({
               onClick={handleInputInteraction}
               onFocus={handleInputInteraction}
             />
-          </filterModalSearch>
+          </FilterModalSearch>
 
-          <filterModalSeparator />
+          <FilterModalSeparator />
 
-          <filterModalSectionContent>
+          <FilterModalSectionContent>
             {filteredOptions.length === 0 ? (
-              <filterModalEmptyState>
-                <filterModalEmptyIcon>🔍</filterModalEmptyIcon>
+              <FilterModalEmptyState>
+                <FilterModalEmptyIcon>🔍</FilterModalEmptyIcon>
                 <h3>No filters found</h3>
                 <p>Try adjusting your search terms</p>
-              </filterModalEmptyState>
+              </FilterModalEmptyState>
             ) : (
               filteredOptions.map(({ key, label, options, searchable }) => {
                 const hasActiveFilters = filters[key]?.length > 0;
@@ -251,36 +251,36 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 const isSearchable = searchable !== false;
 
                 return (
-                  <filterModalListItem key={key}>
-                    <filterModalItemHeader
+                  <FilterModalListItem key={key}>
+                    <FilterModalItemHeader
                       onClick={(e) => handleSectionToggle(e, key)}
                       onMouseDown={handleModalClick}
                       isActive={hasActiveFilters}
                       data-state={isExpanded ? "open" : "closed"}
                     >
-                      <filterModalHeaderContent>
+                      <FilterModalHeaderContent>
                         <Filter size={16} />
-                        <filterModalTitle hasActive={hasActiveFilters}>
+                        <FilterModalTitle hasActive={hasActiveFilters}>
                           {label}
-                        </filterModalTitle>
+                        </FilterModalTitle>
                         {hasActiveFilters && (
-                          <filterModalCount>{filters[key]?.length}</filterModalCount>
+                          <FilterModalCount>{filters[key]?.length}</FilterModalCount>
                         )}
-                      </filterModalHeaderContent>
-                      <filterModalExpandIcon isOpen={isExpanded}>
+                      </FilterModalHeaderContent>
+                      <FilterModalExpandIcon isOpen={isExpanded}>
                         <ChevronRight size={16} />
-                      </filterModalExpandIcon>
-                    </filterModalItemHeader>
+                      </FilterModalExpandIcon>
+                    </FilterModalItemHeader>
 
                     {isExpanded && (
-                      <filterModalOptionsContainer>
+                      <FilterModalOptionsContainer>
                         {/* Section-specific search or manual input */}
                         {isSearchable ? (
-                          <filterModalSectionSearchContainer>
-                            <filterModalSectionSearchIcon>
+                          <FilterModalSectionSearchContainer>
+                            <FilterModalSectionSearchIcon>
                               <Search size={14} />
-                            </filterModalSectionSearchIcon>
-                            <filterModalSectionSearchInput
+                            </FilterModalSectionSearchIcon>
+                            <FilterModalSectionSearchInput
                               type="text"
                               placeholder={`Search ${label.toLowerCase()}...`}
                               value={sectionSearchTerms[key] || ""}
@@ -290,14 +290,14 @@ const FilterModal: React.FC<FilterModalProps> = ({
                               onClick={handleInputInteraction}
                               onFocus={handleInputInteraction}
                             />
-                          </filterModalSectionSearchContainer>
+                          </FilterModalSectionSearchContainer>
                         ) : (
-                          <filterModalManualContainer>
-                            <filterModalManualLabel>
-                              <filterModalTypeIcon>🔍</filterModalTypeIcon>
+                          <FilterModalManualContainer>
+                            <FilterModalManualLabel>
+                              <FilterModalTypeIcon>🔍</FilterModalTypeIcon>
                               Enter {label.toLowerCase()} value:
-                            </filterModalManualLabel>
-                            <filterModalManualInput
+                            </FilterModalManualLabel>
+                            <FilterModalManualInput
                               type="text"
                               placeholder={`Type ${label.toLowerCase()} value...`}
                               value={manualFilterInputs[key] || ""}
@@ -310,10 +310,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
                               onClick={handleInputInteraction}
                               onFocus={handleInputInteraction}
                             />
-                          </filterModalManualContainer>
+                          </FilterModalManualContainer>
                         )}
 
-                        <filterModalOptionsInner>
+                        <FilterModalOptionsInner>
                           {(() => {
                             const filteredSectionOptions =
                               getFilteredSectionOptions(
@@ -361,19 +361,19 @@ const FilterModal: React.FC<FilterModalProps> = ({
                               const isSelected =
                                 filters[key]?.includes(option) || false;
                               return (
-                                <filterModalOptionItem
+                                <FilterModalOptionItem
                                   key={option}
                                   onClick={(e) =>
                                     handleFilterOptionClick(e, key, option)
                                   }
                                   isSelected={isSelected}
                                 >
-                                  <filterModalOptionText>
+                                  <FilterModalOptionText>
                                     {option}
-                                  </filterModalOptionText>
-                                  <filterModalCheckbox selected={isSelected}>
+                                  </FilterModalOptionText>
+                                  <FilterModalCheckbox selected={isSelected}>
                                     {isSelected && (
-                                      <filterModalCheckIcon
+                                      <FilterModalCheckIcon
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                       >
@@ -382,34 +382,34 @@ const FilterModal: React.FC<FilterModalProps> = ({
                                           d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                           clipRule="evenodd"
                                         />
-                                      </filterModalCheckIcon>
+                                      </FilterModalCheckIcon>
                                     )}
-                                  </filterModalCheckbox>
-                                </filterModalOptionItem>
+                                  </FilterModalCheckbox>
+                                </FilterModalOptionItem>
                               );
                             });
                           })()}
-                        </filterModalOptionsInner>
-                      </filterModalOptionsContainer>
+                        </FilterModalOptionsInner>
+                      </FilterModalOptionsContainer>
                     )}
-                  </filterModalListItem>
+                  </FilterModalListItem>
                 );
               })
             )}
-          </filterModalSectionContent>
-        </filterModalContent>
+          </FilterModalSectionContent>
+        </FilterModalContent>
 
-        <filterModalFooter>
-          <filterModalButtonContainer>
+        <FilterModalFooter>
+          <FilterModalButtonContainer>
             {activeFilters.length > 0 && (
-              <filterModalButton variant="outline" onClick={handleClearAll}>
+              <FilterModalButton variant="outline" onClick={handleClearAll}>
                 Clear All Filters ({activeFilters.length})
-              </filterModalButton>
+              </FilterModalButton>
             )}
-            <filterModalButton onClick={handleApplyFilters}>Apply Filters</filterModalButton>
-          </filterModalButtonContainer>
-        </filterModalFooter>
-      </filterModalContainer>
+            <FilterModalButton onClick={handleApplyFilters}>Apply Filters</FilterModalButton>
+          </FilterModalButtonContainer>
+        </FilterModalFooter>
+      </FilterModalContainer>
     </>
   );
 };
