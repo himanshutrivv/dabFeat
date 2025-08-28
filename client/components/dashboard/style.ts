@@ -1402,46 +1402,22 @@ export const FilterModalButton = styled.button<{
     switch (props.variant) {
       case "outline":
         return css`
-          border: 2px solid hsl(210, 20%, 80%);
-          background: linear-gradient(
-            145deg,
-            hsl(210, 20%, 96%) 0%,
-            hsl(210, 20%, 93%) 100%
-          );
-          color: hsl(210, 20%, 30%);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid hsl(var(--border));
+          background-color: hsl(var(--background));
+          color: hsl(var(--foreground));
 
           &:hover {
-            border-color: hsl(210, 30%, 60%);
-            background: linear-gradient(
-              145deg,
-              hsl(210, 20%, 93%) 0%,
-              hsl(210, 20%, 88%) 100%
-            );
-            color: hsl(210, 20%, 20%);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            background-color: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
           }
         `;
       default:
         return css`
-          background: linear-gradient(
-            135deg,
-            hsl(210, 40%, 30%) 0%,
-            hsl(210, 30%, 40%) 50%,
-            hsl(210, 20%, 50%) 100%
-          );
-          color: white;
-          box-shadow: 0 4px 15px hsl(210, 30%, 40%, 0.3);
+          background-color: hsl(var(--primary));
+          color: hsl(var(--primary-foreground));
 
           &:hover {
-            background: linear-gradient(
-              135deg,
-              hsl(210, 40%, 25%) 0%,
-              hsl(210, 30%, 35%) 50%,
-              hsl(210, 20%, 45%) 100%
-            );
-            box-shadow: 0 8px 25px hsl(210, 30%, 40%, 0.4);
+            background-color: hsl(var(--primary) / 0.9);
           }
         `;
     }
