@@ -520,26 +520,28 @@ export const FilterDropdownSelectTrigger = styled.button`
   height: 40px;
   width: 100%;
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border: 2px solid #d1d5db;
   background-color: #ffffff;
   padding: 0 12px;
   font-size: 14px;
   color: #374151;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #2563eb;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    border-color: #3b82f6;
     outline-offset: 2px;
   }
 
   &:hover {
-    background-color: #f3f4f6;
+    background-color: #f8fafc;
     color: #1f2937;
-    border-color: #d1d5db;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    transform: translateY(-1px);
   }
 
   &:disabled {
@@ -634,18 +636,20 @@ export const TimeLineSelectTrigger = styled.button<{ theme?: any }>`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: ${({ theme }) => theme?.borderRadius?.lg || '8px'};
-  border: 1px solid ${({ theme }) => theme?.colors?.input || 'hsl(var(--input))'};
-  background-color: ${({ theme }) => theme?.colors?.background || 'hsl(var(--background))'};
-  padding: 0 ${({ theme }) => theme?.spacing?.[3] || '12px'};
-  font-size: ${({ theme }) => theme?.fontSizes?.sm || '14px'};
-  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+  border-radius: 8px;
+  border: 2px solid #d1d5db;
+  background-color: #ffffff;
+  padding: 0 12px;
+  font-size: 14px;
+  color: #374151;
   cursor: pointer;
-  transition: ${({ theme }) => theme?.transitions?.all || 'all 0.2s ease'};
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px ${({ theme }) => theme?.colors?.ring || 'hsl(var(--ring))'};
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    border-color: #3b82f6;
     outline-offset: 2px;
   }
 
@@ -655,8 +659,11 @@ export const TimeLineSelectTrigger = styled.button<{ theme?: any }>`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme?.colors?.accent || 'hsl(var(--accent))'};
-    color: ${({ theme }) => theme?.colors?.accentForeground || 'hsl(var(--accent-foreground))'};
+    background-color: #f8fafc;
+    color: #1f2937;
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    transform: translateY(-1px);
   }
 `;
 
@@ -698,16 +705,16 @@ export const TimeLineSelectContent = styled.div<{ theme?: any }>`
 export const TimeLineInput = styled.input<{ theme?: any }>`
   width: 100%;
   padding: 8px 12px;
-  background-color: ${({ theme }) => theme?.colors?.background || 'hsl(var(--background))'};
-  border: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  background-color: #ffffff;
+  border: 2px solid #d1d5db;
   border-radius: 6px;
-  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+  color: #374151;
   font-size: 14px;
-  font-family: ${({ theme }) => theme?.fonts?.mono || 'monospace'};
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 
   &:focus {
-    box-shadow: 0 0 0 2px ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
-    border-color: ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    border-color: #3b82f6;
     outline: none;
   }
 
