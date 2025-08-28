@@ -1247,12 +1247,10 @@ export const FilterModalCheckbox = styled.div<{
 `;
 
 export const FilterModalFooter = styled.div<{ theme?: any }>`
-  padding: 28px 32px;
+  padding: 20px 32px;
   border-top: 1px solid hsl(var(--border));
   flex-shrink: 0;
   background: hsl(var(--card));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
 `;
 
 export const FilterModalButtonContainer = styled.div`
