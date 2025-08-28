@@ -156,7 +156,7 @@ const MainFilterCheckbox = styled.div<{ selected: boolean }>`
   height: 20px;
   border: 2px solid
     ${(props) =>
-    props.selected ? props.theme.colors.primary : props.theme.colors.border};
+      props.selected ? props.theme.colors.primary : props.theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   background-color: ${(props) =>
     props.selected ? props.theme.colors.primary : "transparent"};

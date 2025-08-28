@@ -214,7 +214,7 @@ export default function TaskManagementDashboard() {
 
       // Don't close if clicking inside modal or dropdown containers
       if (
-        target.closest("[data-dropdown-container=\"true\"]") ||
+        target.closest('[data-dropdown-container="true"]') ||
         target.closest("[data-dropdown-container]") ||
         target.closest("[data-modal-container]") ||
         target.closest(".filter-content") ||
@@ -608,11 +608,13 @@ export default function TaskManagementDashboard() {
                         ))}
 
                     <FilterGroup>
-                      <AllFiltersButton onClick={() => {
-                        setShowMainFilter(true);
-                        setOpenFilterDropdowns({});
-                        setShowTimelineFilter(false);
-                      }}>
+                      <AllFiltersButton
+                        onClick={() => {
+                          setShowMainFilter(true);
+                          setOpenFilterDropdowns({});
+                          setShowTimelineFilter(false);
+                        }}
+                      >
                         <Filter size={16} />
                         <span>All Filters</span>
                       </AllFiltersButton>
