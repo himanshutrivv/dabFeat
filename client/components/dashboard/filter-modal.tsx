@@ -392,6 +392,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   onApplyFilters,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [sectionSearchTerms, setSectionSearchTerms] = useState<{[key: string]: string}>({});
 
   // Filter options based on search term (internal search for filtering columns)
   const filteredOptions = useMemo(() => {
