@@ -639,7 +639,9 @@ export const SelectContent = styled.div`
   background-color: hsl(var(--card));
   color: hsl(var(--card-foreground));
   opacity: 1;
-  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
@@ -866,7 +868,9 @@ export const FilterModalContainer = styled.div`
   border-left: 1px solid hsl(var(--border));
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
-  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -1174,7 +1178,9 @@ export const FilterDropdownSelectContent = styled.div`
   color: hsl(var(--card-foreground));
   opacity: 1;
   padding: 16px;
-  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
