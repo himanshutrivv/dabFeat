@@ -1079,14 +1079,6 @@ export const FilterModalFooterContainer = styled.div`
   gap: 12px;
 `;
 
-export const FilterModalSearchIconStyled = styled.div`
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: hsl(var(--muted-foreground));
-`;
-
 export const FilterModalSearchInputStyled = styled.input`
   width: 100%;
   padding-left: 40px;
