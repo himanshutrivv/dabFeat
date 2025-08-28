@@ -621,7 +621,8 @@ export const SelectTrigger = styled.button`
 `;
 
 export const SelectValue = styled.span`
-  color: hsl(var(--foreground));
+  color: #374151;
+  font-weight: 500;
 `;
 
 export const SelectContent = styled.div`
@@ -1153,7 +1154,7 @@ export const FilterDropdownSelectTrigger = styled.button`
 `;
 
 export const FilterDropdownSelectValue = styled.span`
-  color: hsl(var(--foreground));
+  color: #374151;
   font-weight: 500;
 `;
 
@@ -1270,7 +1271,7 @@ export const TimelineFilterSelectTrigger = styled.button`
 `;
 
 export const TimelineFilterSelectValue = styled.span`
-  color: hsl(var(--foreground));
+  color: #374151;
   font-weight: 500;
 `;
 
