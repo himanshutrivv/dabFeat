@@ -692,7 +692,7 @@ export const SelectItem = styled.div<{ selected?: boolean }>`
 `;
 
 export const SelectItemsContainer = styled.div`
-  padding: 4px;
+  padding: 8px 4px;
 `;
 
 // Table components
