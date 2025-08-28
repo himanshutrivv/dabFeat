@@ -785,7 +785,7 @@ export const TimeLineButton = styled.button<{
           "hsl(var(--primary-foreground))"};
           &:hover {
             background-color: ${props.theme?.colors?.default?.primary
-              ? `${props.theme.colors.primary} / 0.9`
+              ? `${props.theme.colors.default.primary} / 0.9`
               : "hsl(var(--primary) / 0.9)"};
           }
         `;
@@ -1161,7 +1161,7 @@ export const FilterModalButton = styled.button<{
           "hsl(var(--primary-foreground))"};
           &:hover {
             background-color: ${props.theme?.colors?.default?.primary
-              ? `${props.theme.colors.primary} / 0.9`
+              ? `${props.theme.colors.default.primary} / 0.9`
               : "hsl(var(--primary) / 0.9)"};
           }
         `;
