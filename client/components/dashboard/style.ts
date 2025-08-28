@@ -1062,7 +1062,7 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
   justify-content: space-between;
   background: hsl(var(--card));
   color: hsl(var(--foreground));
-  border-radius: 16px 0 0 0;
+  border-radius: 0;
   padding: 24px 32px;
   border-bottom: 1px solid hsl(var(--border));
   flex-shrink: 0;
