@@ -1010,26 +1010,16 @@ export const TimeLineFilterButtonGrid = styled.div<{ theme?: any }>`
 export const FilterModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.4) 100%
-  );
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 1000;
   animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      backdrop-filter: blur(0px);
-      -webkit-backdrop-filter: blur(0px);
     }
     to {
       opacity: 1;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
     }
   }
 `;
@@ -1040,37 +1030,29 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   right: 0;
   width: 440px;
   height: 100vh;
-  background: linear-gradient(
-    145deg,
-    ${({ theme }) => theme?.colors?.card || "hsl(var(--card))"} 0%,
-    rgba(255, 255, 255, 0.95) 100%
-  );
-  border-left: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 32px 0 0 32px;
-  box-shadow:
-    0 32px 64px -12px rgba(0, 0, 0, 0.25),
-    0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 8px 32px rgba(139, 92, 246, 0.1);
+  background: hsl(var(--card));
+  border-left: 1px solid hsl(var(--border));
+  border-radius: 0;
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  animation: slideInFromRight 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: slideInFromRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 
   @keyframes slideInFromRight {
     from {
-      transform: translateX(100%) scale(0.95);
+      transform: translateX(100%);
       opacity: 0;
     }
     to {
-      transform: translateX(0) scale(1);
+      transform: translateX(0);
       opacity: 1;
     }
   }
 
   @media (max-width: 768px) {
     width: 100%;
-    border-radius: 24px 0 0 24px;
+    border-radius: 0;
   }
 `;
 
@@ -1078,77 +1060,40 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%);
-  color: white;
-  border-radius: 32px 0 0 0;
-  padding: 28px 32px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+  border-radius: 0;
+  padding: 24px 32px;
+  border-bottom: 1px solid hsl(var(--border));
   flex-shrink: 0;
   position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 50%,
-      rgba(255, 255, 255, 0.05) 100%
-    );
-    pointer-events: none;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 70%
-    );
-    border-radius: 50%;
-    pointer-events: none;
-  }
 `;
 
 export const FilterModalContent = styled.div<{ theme?: any }>`
   flex: 1;
   overflow-y: auto;
-  padding: 28px 32px;
+  padding: 24px 32px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  background: linear-gradient(
-    180deg,
-    rgba(248, 250, 252, 0.5) 0%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
+  gap: 16px;
+  background: hsl(var(--card));
 
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    background: rgba(241, 245, 249, 0.5);
-    border-radius: 4px;
+    background: hsl(var(--muted) / 0.3);
+    border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #cbd5e1, #94a3b8);
-    border-radius: 4px;
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, #94a3b8, #64748b);
+    background: hsl(var(--muted-foreground) / 0.5);
   }
 `;
 
@@ -1158,51 +1103,19 @@ export const FilterModalSearch = styled.div<{ theme?: any }>`
 `;
 
 export const FilterModalListItem = styled.div<{ theme?: any }>`
-  border: 1px solid rgba(226, 232, 240, 0.6);
-  border-radius: 16px;
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(248, 250, 252, 0.8) 100%
-  );
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-bottom: 16px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
+  background: hsl(var(--background));
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
   overflow: hidden;
-  position: relative;
 
   &:hover {
-    border-color: rgba(139, 92, 246, 0.3);
-    box-shadow:
-      0 8px 25px rgba(0, 0, 0, 0.1),
-      0 4px 12px rgba(139, 92, 246, 0.15);
-    transform: translateY(-2px);
+    border-color: hsl(var(--primary) / 0.3);
   }
 
   &:last-child {
     margin-bottom: 0;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(139, 92, 246, 0.3) 50%,
-      transparent 100%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover::before {
-    opacity: 1;
   }
 `;
 
@@ -1329,16 +1242,10 @@ export const FilterModalCheckbox = styled.div<{
 `;
 
 export const FilterModalFooter = styled.div<{ theme?: any }>`
-  padding: 28px 32px;
-  border-top: 1px solid rgba(226, 232, 240, 0.5);
+  padding: 20px 32px;
+  border-top: 1px solid hsl(var(--border));
   flex-shrink: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(248, 250, 252, 0.8) 0%,
-    rgba(255, 255, 255, 0.95) 100%
-  );
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: hsl(var(--card));
 `;
 
 export const FilterModalButtonContainer = styled.div`
@@ -1355,48 +1262,21 @@ export const FilterModalButton = styled.button<{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   white-space: nowrap;
-  border-radius: 14px;
+  border-radius: 8px;
   font-size: 14px;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  transition: all 0.2s ease;
   cursor: pointer;
   border: none;
   outline: none;
   width: 100%;
-  height: 48px;
-  margin-bottom: 12px;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.2) 50%,
-      transparent 100%
-    );
-    transition: left 0.5s ease;
-  }
-
-  &:hover::before {
-    left: 100%;
-  }
+  height: 40px;
+  margin-bottom: 8px;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  }
-
-  &:active {
-    transform: translateY(0);
+    opacity: 0.9;
   }
 
   &:last-child {
@@ -1404,60 +1284,35 @@ export const FilterModalButton = styled.button<{
   }
 
   &:focus-visible {
-    outline: 2px solid rgba(139, 92, 246, 0.5);
+    outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
   }
 
   &:disabled {
     pointer-events: none;
     opacity: 0.5;
-    transform: none;
   }
 
   ${(props) => {
     switch (props.variant) {
       case "outline":
         return css`
-          border: 2px solid rgba(226, 232, 240, 0.8);
-          background: linear-gradient(
-            145deg,
-            rgba(248, 250, 252, 0.8) 0%,
-            rgba(241, 245, 249, 0.6) 100%
-          );
-          color: #475569;
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid hsl(var(--border));
+          background-color: hsl(var(--background));
+          color: hsl(var(--foreground));
 
           &:hover {
-            border-color: rgba(139, 92, 246, 0.4);
-            background: linear-gradient(
-              145deg,
-              rgba(241, 245, 249, 0.9) 0%,
-              rgba(226, 232, 240, 0.7) 100%
-            );
-            color: #334155;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            background-color: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
           }
         `;
       default:
         return css`
-          background: linear-gradient(
-            135deg,
-            #667eea 0%,
-            #764ba2 50%,
-            #8b5cf6 100%
-          );
-          color: white;
-          box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+          background-color: hsl(var(--primary));
+          color: hsl(var(--primary-foreground));
 
           &:hover {
-            background: linear-gradient(
-              135deg,
-              #5a67d8 0%,
-              #6b46c1 50%,
-              #7c3aed 100%
-            );
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+            background-color: hsl(var(--primary) / 0.9);
           }
         `;
     }
