@@ -955,10 +955,11 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
 export const FilterModalContent = styled.div<{ theme?: any }>`
   flex: 1;
   overflow-y: auto;
-  padding: ${({ theme }) => theme?.spacing?.[6] || "24px"};
+  padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme?.spacing?.[5] || "20px"};
+  gap: 24px;
+  background: #fafafa;
 `;
 
 export const FilterModalSearch = styled.div<{ theme?: any }>`
