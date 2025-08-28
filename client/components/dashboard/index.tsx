@@ -707,7 +707,18 @@ export default function TaskManagementDashboard() {
                                 if (filter.key === "search") {
                                   setSearchTerm("");
                                 } else {
-                                  clearIndividualFilter(filter.key);
+                                  // Check if it's a manual filter input or dropdown filter
+                                  if (manualFilterInputs[filter.key] === filter.value) {
+                                    // Clear manual filter input
+                                    setManualFilterInputs((prev) => {
+                                      const newInputs = { ...prev };
+                                      delete newInputs[filter.key];
+                                      return newInputs;
+                                    });
+                                  } else {
+                                    // Clear dropdown filter
+                                    clearIndividualFilter(filter.key);
+                                  }
                                 }
                               }}
                             >
