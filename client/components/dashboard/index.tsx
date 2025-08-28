@@ -214,16 +214,21 @@ export default function TaskManagementDashboard() {
 
       // Don't close if clicking inside modal or dropdown containers
       if (
+        target.closest("[data-dropdown-container=\"true\"]") ||
         target.closest("[data-dropdown-container]") ||
         target.closest("[data-modal-container]") ||
+        target.closest(".filter-content") ||
         target.closest("input") ||
         target.closest("button")
       ) {
         return;
       }
 
-      setOpenFilterDropdowns({});
-      setShowTimelineFilter(false);
+      // Only close if we're not interacting with filter elements
+      if (!target.closest(".css-la24vj") && !target.closest(".css-bb8i8d")) {
+        setOpenFilterDropdowns({});
+        setShowTimelineFilter(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
