@@ -4,8 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import { ThemeControllerProvider } from "@/styles/theme-controller";
-import { globalStyles } from "@/styles/global-styles";
+import { ThemeControllerProvider } from "@/styles/ThemeControllerProvider";
+import { globalStyles } from "@/styles/global";
 import { appTheme } from "@/styles/themes";
 import {
   DashboardContainer,
@@ -214,16 +214,21 @@ export default function TaskManagementDashboard() {
 
       // Don't close if clicking inside modal or dropdown containers
       if (
+        target.closest('[data-dropdown-container="true"]') ||
         target.closest("[data-dropdown-container]") ||
         target.closest("[data-modal-container]") ||
+        target.closest(".filter-content") ||
         target.closest("input") ||
         target.closest("button")
       ) {
         return;
       }
 
-      setOpenFilterDropdowns({});
-      setShowTimelineFilter(false);
+      // Only close if we're not interacting with filter elements
+      if (!target.closest(".css-la24vj") && !target.closest(".css-bb8i8d")) {
+        setOpenFilterDropdowns({});
+        setShowTimelineFilter(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -603,7 +608,13 @@ export default function TaskManagementDashboard() {
                         ))}
 
                     <FilterGroup>
-                      <AllFiltersButton onClick={() => setShowMainFilter(true)}>
+                      <AllFiltersButton
+                        onClick={() => {
+                          setShowMainFilter(true);
+                          setOpenFilterDropdowns({});
+                          setShowTimelineFilter(false);
+                        }}
+                      >
                         <Filter size={16} />
                         <span>All Filters</span>
                       </AllFiltersButton>
@@ -617,7 +628,7 @@ export default function TaskManagementDashboard() {
                       </SearchIcon>
                       <SearchInput
                         type="text"
-                        placeholder="Search records..."
+                        placeholder="Search through all records and data..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                       />

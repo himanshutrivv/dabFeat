@@ -11,14 +11,14 @@ type ThemeControllerContextType = {
 };
 
 const ThemeControllerContext = createContext<ThemeControllerContextType | null>(
-  null
+  null,
 );
 
 export const useThemeController = () => {
   const ctx = useContext(ThemeControllerContext);
   if (!ctx)
     throw new Error(
-      "useThemeController must be inside ThemeControllerProvider"
+      "useThemeController must be inside ThemeControllerProvider",
     );
   return ctx;
 };
