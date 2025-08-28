@@ -123,3 +123,26 @@ export const srGetDashboardTableData = async ({
   // Default data for initial load - use your static data
   return getDashboardData;
 };
+
+export const srGetMonitoringData = async ({
+  bussId,
+  timeRange,
+}: {
+  bussId: string;
+  timeRange?: {
+    startTime: string;
+    endTime: string;
+  };
+}): Promise<DashboardResponse> => {
+  // Log the request for debugging
+  console.log("🚀 srGetMonitoringData called with:", {
+    bussId,
+    timeRange: timeRange ? JSON.stringify(timeRange, null, 2) : null,
+  });
+
+  // Simulate API call delay
+  await new Promise((resolve) => setTimeout(resolve, 300));
+
+  // Return fresh monitoring data (same structure for now)
+  return getDashboardData;
+};
