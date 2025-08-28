@@ -1100,7 +1100,7 @@ export const FilterDropdownSelectTrigger = styled.button`
   width: 100%;
   border-radius: 12px;
   border: 1px solid hsl(var(--input));
-  background-color: hsl(var(--background));
+  background-color: hsl(var(--muted));
   padding: 0 12px;
   font-size: 14px;
   color: hsl(var(--foreground));
