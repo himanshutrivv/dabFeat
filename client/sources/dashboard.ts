@@ -34,7 +34,7 @@ export const srGetDashboardTableData = async ({
   // If filters are applied, return filtered data based on the new format
   if (filterData && filterData.length > 0) {
     console.log("Returning filtered data based on:", filterData);
-    
+
     // Mock filtered data response
     return {
       status: true,
@@ -44,76 +44,77 @@ export const srGetDashboardTableData = async ({
         {
           STATUS: "Delivered",
           ORDER_REF_NUM: "ORD1001",
-          PAYMENT_MODE: "Credit Card"
+          PAYMENT_MODE: "Credit Card",
         },
         {
           STATUS: "Pending",
           ORDER_REF_NUM: "ORD1002",
-          PAYMENT_MODE: "UPI"
+          PAYMENT_MODE: "UPI",
         },
         {
           STATUS: "Cancelled",
           ORDER_REF_NUM: "ORD1003",
-          PAYMENT_MODE: "Net Banking"
+          PAYMENT_MODE: "Net Banking",
         },
         {
           STATUS: "Shipped",
           ORDER_REF_NUM: "ORD1004",
-          PAYMENT_MODE: "Cash on Delivery"
+          PAYMENT_MODE: "Cash on Delivery",
         },
         {
           STATUS: "Delivered",
           ORDER_REF_NUM: "ORD1005",
-          PAYMENT_MODE: "Credit Card"
+          PAYMENT_MODE: "Credit Card",
         },
         {
           STATUS: "Returned",
           ORDER_REF_NUM: "ORD1006",
-          PAYMENT_MODE: "UPI"
+          PAYMENT_MODE: "UPI",
         },
         {
           STATUS: "Pending",
           ORDER_REF_NUM: "ORD1007",
-          PAYMENT_MODE: "Debit Card"
+          PAYMENT_MODE: "Debit Card",
         },
         {
           STATUS: "Shipped",
           ORDER_REF_NUM: "ORD1008",
-          PAYMENT_MODE: "Net Banking"
+          PAYMENT_MODE: "Net Banking",
         },
         {
           STATUS: "Delivered",
           ORDER_REF_NUM: "ORD1009",
-          PAYMENT_MODE: "Cash on Delivery"
+          PAYMENT_MODE: "Cash on Delivery",
         },
         {
           STATUS: "Cancelled",
           ORDER_REF_NUM: "ORD1010",
-          PAYMENT_MODE: "Credit Card"
-        }
+          PAYMENT_MODE: "Credit Card",
+        },
       ],
       columnData: {
         ORDER_REF_NUM: {
           label: "order ref num",
           filterable: true,
           searchable: false,
-          hidden: false
+          hidden: false,
         },
         PAYMENT_MODE: {
           label: "Payment Mode",
           filterable: true,
           searchable: false,
           hidden: false,
-          filerValues: "UPI,Credit Card,Debit Card,Net Banking,Cash on Delivery"
+          filerValues:
+            "UPI,Credit Card,Debit Card,Net Banking,Cash on Delivery",
         },
         STATUS: {
           label: "Status",
           filterable: true,
           searchable: false,
           hidden: false,
-          filerValues: "Delivered,Pending,Cancelled,Shipped,Returned"
-        }
-      }
+          filerValues: "Delivered,Pending,Cancelled,Shipped,Returned",
+        },
+      },
     };
   }
 

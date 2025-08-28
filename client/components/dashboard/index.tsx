@@ -222,7 +222,14 @@ export default function TaskManagementDashboard() {
     } finally {
       setIsFilterLoading(false);
     }
-  }, [filters, manualFilterInputs, searchTerm, startDateTime, endDateTime, selectedBusiness]);
+  }, [
+    filters,
+    manualFilterInputs,
+    searchTerm,
+    startDateTime,
+    endDateTime,
+    selectedBusiness,
+  ]);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -439,8 +446,12 @@ export default function TaskManagementDashboard() {
   }, [data, getFilterOptions]);
 
   const getActiveFilters = useCallback(() => {
-    const activeFilters: Array<{ key: string; value: string; label: string; type?: string }> =
-      [];
+    const activeFilters: Array<{
+      key: string;
+      value: string;
+      label: string;
+      type?: string;
+    }> = [];
 
     // Add dropdown filter selections
     Object.entries(filters).forEach(([key, values]) => {
@@ -713,7 +724,10 @@ export default function TaskManagementDashboard() {
                                   setSearchTerm("");
                                 } else {
                                   // Check if it's a manual filter input or dropdown filter
-                                  if (manualFilterInputs[filter.key] === filter.value) {
+                                  if (
+                                    manualFilterInputs[filter.key] ===
+                                    filter.value
+                                  ) {
                                     // Clear manual filter input
                                     setManualFilterInputs((prev) => {
                                       const newInputs = { ...prev };
