@@ -192,8 +192,6 @@ export const FilterCard = styled.div`
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.05),
     0 2px 4px rgba(0, 0, 0, 0.08);
-  margin-top: 24px;
-  margin-bottom: 24px;
   overflow: visible;
   transition: all 0.3s ease;
 
