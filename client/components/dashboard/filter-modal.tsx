@@ -341,10 +341,10 @@ const StyledCard = styled(Card)`
 const HeaderContainer = styled(CardHeader)`
   background: linear-gradient(
     135deg,
-    hsl(var(--primary)) 0%,
-    hsl(var(--primary) / 0.9) 100%
+    #3b82f6 0%,
+    #2563eb 100%
   );
-  color: hsl(var(--primary-foreground));
+  color: #ffffff;
   border-radius: 24px 0 0 0;
   padding: 24px;
   flex-shrink: 0;
