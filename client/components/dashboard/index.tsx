@@ -101,13 +101,14 @@ const parseDateTimeToISO = (dateTimeString: string): string | null => {
 // Transform filters state to API format
 const transformFiltersToAPIFormat = (
   filters: FilterState,
+  manualFilterInputs: { [key: string]: string },
   searchTerm: string,
   startDateTime: string,
   endDateTime: string,
 ): FilterDataItem[] => {
   const filterData: FilterDataItem[] = [];
 
-  // Add regular filters
+  // Add regular filters (from dropdown selections)
   Object.entries(filters).forEach(([key, values]) => {
     if (values && values.length > 0) {
       if (values.length === 1) {
@@ -125,6 +126,18 @@ const transformFiltersToAPIFormat = (
           value: values,
         });
       }
+    }
+  });
+
+  // Add manual filter inputs (from text inputs for non-searchable columns)
+  Object.entries(manualFilterInputs).forEach(([key, value]) => {
+    if (value && value.trim()) {
+      // Use LIKE operator for manual text inputs
+      filterData.push({
+        key,
+        operator: "LIKE",
+        value: value.trim(),
+      });
     }
   });
 
@@ -170,6 +183,9 @@ export default function TaskManagementDashboard() {
     [key: string]: boolean;
   }>({});
   const [isFilterLoading, setIsFilterLoading] = useState(false);
+  const [manualFilterInputs, setManualFilterInputs] = useState<{
+    [key: string]: string;
+  }>({});
   const { selectedBusiness } = useBusinessStore();
 
   // Function to apply filters and fetch data from API
@@ -181,6 +197,7 @@ export default function TaskManagementDashboard() {
       const bussId = selectedBusiness?.bussId || "TESTORG2";
       const filterData = transformFiltersToAPIFormat(
         filters,
+        manualFilterInputs,
         searchTerm,
         startDateTime,
         endDateTime,
@@ -205,7 +222,14 @@ export default function TaskManagementDashboard() {
     } finally {
       setIsFilterLoading(false);
     }
-  }, [filters, searchTerm, startDateTime, endDateTime, selectedBusiness]);
+  }, [
+    filters,
+    manualFilterInputs,
+    searchTerm,
+    startDateTime,
+    endDateTime,
+    selectedBusiness,
+  ]);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -326,6 +350,9 @@ export default function TaskManagementDashboard() {
 
   const toggleFilterDropdown = useCallback(
     (columnKey: string) => {
+      // Don't allow opening dropdowns if modal is open
+      if (showMainFilter) return;
+
       // Close timeline filter if it's open
       setShowTimelineFilter(false);
 
@@ -345,14 +372,17 @@ export default function TaskManagementDashboard() {
         return newState;
       });
     },
-    [data],
+    [data, showMainFilter],
   );
 
   const toggleTimelineDropdown = useCallback(() => {
+    // Don't allow opening timeline filter if modal is open
+    if (showMainFilter) return;
+
     // Close all other filter dropdowns
     setOpenFilterDropdowns({});
     setShowTimelineFilter(!showTimelineFilter);
-  }, [showTimelineFilter]);
+  }, [showTimelineFilter, showMainFilter]);
 
   const clearAllFilters = useCallback(() => {
     const clearedFilters: FilterState = {};
@@ -360,6 +390,7 @@ export default function TaskManagementDashboard() {
       clearedFilters[key] = [];
     });
     setFilters(clearedFilters);
+    setManualFilterInputs({});
     setSearchTerm("");
     setOpenFilterDropdowns({});
   }, [filters]);
@@ -368,6 +399,19 @@ export default function TaskManagementDashboard() {
     setFilters((prev) => ({
       ...prev,
       [filterKey]: [],
+    }));
+    // Also clear manual input for this filter
+    setManualFilterInputs((prev) => {
+      const newInputs = { ...prev };
+      delete newInputs[filterKey];
+      return newInputs;
+    });
+  }, []);
+
+  const handleManualFilterChange = useCallback((key: string, value: string) => {
+    setManualFilterInputs((prev) => ({
+      ...prev,
+      [key]: value,
     }));
   }, []);
 
@@ -397,13 +441,19 @@ export default function TaskManagementDashboard() {
         key,
         label: columnInfo.label,
         options: getFilterOptions(key),
+        searchable: columnInfo.searchable,
       }));
   }, [data, getFilterOptions]);
 
   const getActiveFilters = useCallback(() => {
-    const activeFilters: Array<{ key: string; value: string; label: string }> =
-      [];
+    const activeFilters: Array<{
+      key: string;
+      value: string;
+      label: string;
+      type?: string;
+    }> = [];
 
+    // Add dropdown filter selections
     Object.entries(filters).forEach(([key, values]) => {
       if (values && values.length > 0 && data?.columnData[key]) {
         values.forEach((value) => {
@@ -411,7 +461,20 @@ export default function TaskManagementDashboard() {
             key,
             value,
             label: data.columnData[key].label,
+            type: "dropdown",
           });
+        });
+      }
+    });
+
+    // Add manual filter inputs
+    Object.entries(manualFilterInputs).forEach(([key, value]) => {
+      if (value && value.trim() && data?.columnData[key]) {
+        activeFilters.push({
+          key,
+          value: value.trim(),
+          label: data.columnData[key].label,
+          type: "manual",
         });
       }
     });
@@ -421,11 +484,12 @@ export default function TaskManagementDashboard() {
         key: "search",
         value: searchTerm,
         label: "Search",
+        type: "search",
       });
     }
 
     return activeFilters;
-  }, [filters, searchTerm, data]);
+  }, [filters, manualFilterInputs, searchTerm, data]);
 
   // Timeline Filter helpers
   const formatDateTimeForInput = useCallback((date: Date) => {
@@ -525,6 +589,14 @@ export default function TaskManagementDashboard() {
       initializeDefaultTimeRange();
     }
   }, [startDateTime, endDateTime, initializeDefaultTimeRange]);
+
+  // Close all dropdowns when modal opens
+  useEffect(() => {
+    if (showMainFilter) {
+      setOpenFilterDropdowns({});
+      setShowTimelineFilter(false);
+    }
+  }, [showMainFilter]);
 
   if (error) {
     return (
@@ -641,6 +713,8 @@ export default function TaskManagementDashboard() {
                       <ActiveFiltersContainer>
                         {activeFilters.map((filter) => (
                           <FilterBadge key={`${filter.key}-${filter.value}`}>
+                            {filter.type === "manual" && "🔍 "}
+                            {filter.type === "search" && "🔎 "}
                             {filter.label}: {filter.value}
                             <FilterBadgeClose
                               onClick={(e) => {
@@ -649,7 +723,21 @@ export default function TaskManagementDashboard() {
                                 if (filter.key === "search") {
                                   setSearchTerm("");
                                 } else {
-                                  clearIndividualFilter(filter.key);
+                                  // Check if it's a manual filter input or dropdown filter
+                                  if (
+                                    manualFilterInputs[filter.key] ===
+                                    filter.value
+                                  ) {
+                                    // Clear manual filter input
+                                    setManualFilterInputs((prev) => {
+                                      const newInputs = { ...prev };
+                                      delete newInputs[filter.key];
+                                      return newInputs;
+                                    });
+                                  } else {
+                                    // Clear dropdown filter
+                                    clearIndividualFilter(filter.key);
+                                  }
                                 }
                               }}
                             >
@@ -692,10 +780,12 @@ export default function TaskManagementDashboard() {
           isOpen={showMainFilter}
           filterOptions={getMainFilterOptions()}
           filters={filters}
+          manualFilterInputs={manualFilterInputs}
           activeFilters={activeFilters}
           openFilterDropdowns={openFilterDropdowns}
           onClose={() => setShowMainFilter(false)}
           onFilterChange={handleFilterChange}
+          onManualFilterChange={handleManualFilterChange}
           onClearAllFilters={clearAllFilters}
           onToggleFilterSection={(key: string) => {
             setOpenFilterDropdowns((prev) => ({
