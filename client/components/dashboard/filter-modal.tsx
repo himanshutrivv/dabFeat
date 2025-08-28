@@ -70,7 +70,7 @@ const MainFilterModal = styled.div`
   background-color: ${({ theme }) => theme.colors.card};
   border-left: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 24px 0 0 24px;
-  box-shadow: 
+  box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 4px 16px rgba(0, 0, 0, 0.08);
   z-index: 1001;
@@ -97,7 +97,8 @@ const MainFilterModal = styled.div`
 // Beautiful gradient header
 const MainFilterHeader = styled.div`
   ${flexBetween}
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary} 0%, hsl(215, 25%, 20%) 100%);
+  background: linear-gradient(135deg, ${({ theme }) =>
+    theme.colors.primary} 0%, hsl(215, 25%, 20%) 100%);
   color: ${({ theme }) => theme.colors.primaryForeground};
   border-radius: 24px 0 0 0;
   padding: ${({ theme }) => theme.spacing[6]};
@@ -242,7 +243,7 @@ const MainFilterCheckbox = styled.div<{ selected: boolean }>`
   height: 18px;
   border: 2px solid
     ${(props) =>
-    props.selected ? props.theme.colors.primary : props.theme.colors.border};
+      props.selected ? props.theme.colors.primary : props.theme.colors.border};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected ? props.theme.colors.primary : "transparent"};
@@ -650,9 +651,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                           {label}
                         </FilterTitle>
                         {hasActiveFilters && (
-                          <FilterCount>
-                            {filters[key]?.length}
-                          </FilterCount>
+                          <FilterCount>{filters[key]?.length}</FilterCount>
                         )}
                       </FilterHeaderContent>
                       <ExpandIcon isOpen={isExpanded}>
