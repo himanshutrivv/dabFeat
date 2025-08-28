@@ -400,12 +400,12 @@ export const FilterResults = styled.div`
 // Button components
 export const Button = styled.button<{
   variant?:
-  | "default"
-  | "destructive"
-  | "outline"
-  | "secondary"
-  | "ghost"
-  | "link";
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
   size?: "default" | "sm" | "lg" | "icon";
 }>`
   display: inline-flex;
@@ -684,7 +684,9 @@ export const SelectContent = styled.div`
   background-color: hsl(var(--card));
   color: hsl(var(--card-foreground));
   opacity: 1;
-  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
   isolation: isolate;
@@ -1010,7 +1012,7 @@ export const FilterModalCheckboxContainer = styled.div<{ selected: boolean }>`
   height: 20px;
   border: 2px solid
     ${(props) =>
-    props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
+      props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected ? "hsl(var(--primary))" : "transparent"};
@@ -1229,7 +1231,9 @@ export const FilterDropdownSelectContent = styled.div`
   color: hsl(var(--card-foreground));
   opacity: 1;
   padding: 16px;
-  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
   isolation: isolate;

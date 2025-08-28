@@ -53,7 +53,6 @@ interface FilterState {
   [key: string]: string[];
 }
 
-
 export interface ColumnData {
   [key: string]: ColumnMetadata;
 }
@@ -423,7 +422,6 @@ export default function TaskManagementDashboard() {
     return activeFilters;
   }, [filters, searchTerm, data]);
 
-
   // Timeline Filter helpers
   const formatDateTimeForInput = useCallback((date: Date) => {
     const year = date.getFullYear();
@@ -565,7 +563,8 @@ export default function TaskManagementDashboard() {
                     Filter & Search
                   </FilterCardTitle>
                   <FilterCardSubtitle>
-                    Filter your data by categories, search through records, or set time ranges to find exactly what you need
+                    Filter your data by categories, search through records, or
+                    set time ranges to find exactly what you need
                   </FilterCardSubtitle>
                 </FilterCardHeader>
 
@@ -582,21 +581,26 @@ export default function TaskManagementDashboard() {
                       onApply={() => setShowTimelineFilter(false)}
                     />
 
-                    {data && data.columnData && Object.entries(data.columnData)
-                      .filter(([, columnInfo]) => columnInfo && columnInfo.filterable === true)
-                      .slice(0, 3)
-                      .map(([columnKey, columnInfo]) => (
-                        <FilterDropdown
-                          key={columnKey}
-                          label={columnInfo.label}
-                          columnKey={columnKey}
-                          options={getFilterOptions(columnKey)}
-                          selectedValues={filters[columnKey] || []}
-                          isOpen={openFilterDropdowns[columnKey] || false}
-                          onToggle={toggleFilterDropdown}
-                          onFilterChange={handleFilterChange}
-                        />
-                      ))}
+                    {data &&
+                      data.columnData &&
+                      Object.entries(data.columnData)
+                        .filter(
+                          ([, columnInfo]) =>
+                            columnInfo && columnInfo.filterable === true,
+                        )
+                        .slice(0, 3)
+                        .map(([columnKey, columnInfo]) => (
+                          <FilterDropdown
+                            key={columnKey}
+                            label={columnInfo.label}
+                            columnKey={columnKey}
+                            options={getFilterOptions(columnKey)}
+                            selectedValues={filters[columnKey] || []}
+                            isOpen={openFilterDropdowns[columnKey] || false}
+                            onToggle={toggleFilterDropdown}
+                            onFilterChange={handleFilterChange}
+                          />
+                        ))}
 
                     <FilterGroup>
                       <AllFiltersButton onClick={() => setShowMainFilter(true)}>
