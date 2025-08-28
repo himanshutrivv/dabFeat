@@ -293,7 +293,7 @@ export const FilterGrid = styled.div`
   gap: 16px;
   margin-bottom: 24px;
   position: relative;
-  z-index: 100;
+  z-index: 9999;
   isolation: isolate;
 
   @media (min-width: 768px) {
@@ -395,12 +395,12 @@ export const FilterResults = styled.div`
 // Button components
 export const Button = styled.button<{
   variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link";
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link";
   size?: "default" | "sm" | "lg" | "icon";
 }>`
   display: inline-flex;
@@ -623,7 +623,7 @@ export const ErrorText = styled.div`
 // Select components with fixed hover effects
 export const SelectContainer = styled.div`
   position: relative;
-  z-index: 99999;
+  z-index: 200;
 `;
 
 export const SelectTrigger = styled.button`
@@ -670,28 +670,35 @@ export const SelectContent = styled.div`
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 999999;
-  min-height: 600px;
-  height: calc(100vh - 200px);
-  max-height: none;
+  z-index: 300;
+  max-height: 384px;
   min-width: 200px;
   overflow-y: auto;
   border-radius: 8px;
   border: 1px solid hsl(var(--border));
-  background-color: white !important;
-  color: hsl(var(--foreground));
-  opacity: 1 !important;
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  opacity: 1;
   box-shadow:
-    0 20px 100px rgba(0, 0, 0, 0.2),
-    0 8px 32px rgba(0, 0, 0, 0.15);
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
-  animation: none;
-  pointer-events: auto;
-  padding: 16px;
+  animation: fadeIn 0.2s ease-out;
 
   &.filter-content {
-    background-color: white !important;
+    background-color: hsl(var(--card)) !important;
     opacity: 1 !important;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 `;
 
@@ -992,7 +999,7 @@ export const FilterModalCheckboxContainer = styled.div<{ selected: boolean }>`
   height: 20px;
   border: 2px solid
     ${(props) =>
-      props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
+    props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected ? "hsl(var(--primary))" : "transparent"};
@@ -1152,7 +1159,7 @@ export const FilterDropdownFilterGroup = styled.div``;
 
 export const FilterDropdownSelectContainer = styled.div`
   position: relative;
-  z-index: 99999;
+  z-index: 50;
   isolation: isolate;
 `;
 
@@ -1200,13 +1207,11 @@ export const FilterDropdownSelectContent = styled.div`
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0;
-  z-index: 999999;
-  min-height: 600px;
-  height: calc(100vh - 200px);
-  max-height: none;
+  right: auto;
+  z-index: 999;
+  max-height: 384px;
   min-width: 320px;
-  max-width: none;
+  max-width: calc(100vw - 32px);
   overflow-y: auto;
   border-radius: 8px;
   border: 1px solid hsl(var(--border));
@@ -1215,8 +1220,8 @@ export const FilterDropdownSelectContent = styled.div`
   opacity: 1 !important;
   padding: 16px;
   box-shadow:
-    0 20px 100px rgba(0, 0, 0, 0.2),
-    0 8px 32px rgba(0, 0, 0, 0.15);
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: none;
   pointer-events: auto;
@@ -1265,7 +1270,7 @@ export const TimelineFilterGroup = styled.div``;
 
 export const TimelineFilterSelectContainer = styled.div`
   position: relative;
-  z-index: 99999;
+  z-index: 200;
 `;
 
 export const TimelineFilterSelectTrigger = styled.button`
