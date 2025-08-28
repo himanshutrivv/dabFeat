@@ -2,14 +2,16 @@
 
 import { useState, createContext, useContext, ReactNode } from "react";
 import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
-import { themeVariants, ThemeVariant, AppTheme } from "../styles/themes";
+import { AppTheme } from "../styles/themes/appTheme";
+import { ThemeVariantKey, themeVariants } from "./themes/themeVariants";
+import { FontVariant, fontVariants } from "./themes/fontVariants";
 
 interface ThemeContextType {
-  currentTheme: ThemeVariant;
+  currentTheme: ThemeVariantKey;
+  currentFont: FontVariant;
   theme: AppTheme;
-  setTheme: (variant: ThemeVariant) => void;
-  setBackground: (variant: ThemeVariant) => void;
-  setFont: (variant: ThemeVariant) => void;
+  setTheme: (variant: ThemeVariantKey) => void;
+  setFont: (variant: FontVariant) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -23,21 +25,27 @@ export const useThemeController = (): ThemeContextType => {
 };
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [currentTheme, setCurrentTheme] = useState<ThemeVariant>("default");
+  const [currentTheme, setCurrentTheme] = useState<ThemeVariantKey>("default");
+  const [currentFont, setCurrentFont] = useState<FontVariant>("arial");
 
-  const theme = themeVariants[currentTheme] as AppTheme;
+  const baseTheme = themeVariants[currentTheme].theme;
+  const fontStack = fontVariants[currentFont].stack;
 
-  const setTheme = (variant: ThemeVariant) => setCurrentTheme(variant);
-  const setBackground = setTheme;
-  const setFont = setTheme;
+  const theme: AppTheme = {
+    ...baseTheme,
+    fonts: fontStack,
+  };
+
+  const setTheme = (variant: ThemeVariantKey) => setCurrentTheme(variant);
+  const setFont = (variant: FontVariant) => setCurrentFont(variant);
 
   return (
     <ThemeContext.Provider
       value={{
         currentTheme,
+        currentFont,
         theme,
         setTheme,
-        setBackground,
         setFont,
       }}
     >
