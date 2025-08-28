@@ -742,7 +742,7 @@ export const TimeLineButton = styled.button<{
   outline: none;
 
   &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme?.colors?.ring || 'hsl(var(--ring))'};
+    outline: 2px solid #3b82f6;
     outline-offset: 2px;
   }
 
@@ -755,20 +755,25 @@ export const TimeLineButton = styled.button<{
     switch (props.variant) {
       case "outline":
         return css`
-          border: 1px solid ${props.theme?.colors?.border || 'hsl(var(--border))'};
-          background-color: ${props.theme?.colors?.background || 'hsl(var(--background))'};
-          color: ${props.theme?.colors?.foreground || 'hsl(var(--foreground))'};
+          border: 2px solid #d1d5db;
+          background-color: #ffffff;
+          color: #374151;
           &:hover {
-            background-color: ${props.theme?.colors?.accent || 'hsl(var(--accent))'};
-            color: ${props.theme?.colors?.accentForeground || 'hsl(var(--accent-foreground))'};
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            color: #1f2937;
           }
         `;
       default:
         return css`
-          background-color: ${props.theme?.colors?.primary || 'hsl(var(--primary))'};
-          color: ${props.theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
+          background-color: #3b82f6;
+          color: #ffffff;
+          border: 2px solid #3b82f6;
           &:hover {
-            background-color: ${props.theme?.colors?.primary ? `${props.theme.colors.primary} / 0.9` : 'hsl(var(--primary) / 0.9)'};
+            background-color: #2563eb;
+            border-color: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
           }
         `;
     }
