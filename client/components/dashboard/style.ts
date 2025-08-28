@@ -1267,48 +1267,21 @@ export const FilterModalButton = styled.button<{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   white-space: nowrap;
-  border-radius: 14px;
+  border-radius: 8px;
   font-size: 14px;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  transition: all 0.2s ease;
   cursor: pointer;
   border: none;
   outline: none;
   width: 100%;
-  height: 48px;
-  margin-bottom: 12px;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.2) 50%,
-      transparent 100%
-    );
-    transition: left 0.5s ease;
-  }
-
-  &:hover::before {
-    left: 100%;
-  }
+  height: 40px;
+  margin-bottom: 8px;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  }
-
-  &:active {
-    transform: translateY(0);
+    opacity: 0.9;
   }
 
   &:last-child {
@@ -1316,14 +1289,13 @@ export const FilterModalButton = styled.button<{
   }
 
   &:focus-visible {
-    outline: 2px solid rgba(139, 92, 246, 0.5);
+    outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
   }
 
   &:disabled {
     pointer-events: none;
     opacity: 0.5;
-    transform: none;
   }
 
   ${(props) => {
