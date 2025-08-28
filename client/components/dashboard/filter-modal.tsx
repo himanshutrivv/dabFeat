@@ -586,35 +586,55 @@ const FilterModal: React.FC<FilterModalProps> = ({
                         </SectionSearchContainer>
 
                         <OptionsContainer>
-                          {getFilteredSectionOptions(options, key).map((option) => {
-                            const isSelected =
-                              filters[key]?.includes(option) || false;
-                            return (
-                              <OptionItem
-                                key={option}
-                                isSelected={isSelected}
-                                onClick={(e) =>
-                                  handleFilterOptionClick(e, key, option)
-                                }
-                              >
-                                <OptionText>{option}</OptionText>
-                                <CheckBox checked={isSelected}>
-                                  {isSelected && (
-                                    <CheckIcon
-                                      viewBox="0 0 20 20"
-                                      fill="currentColor"
-                                    >
-                                      <path
-                                        fillRule="evenodd"
-                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                        clipRule="evenodd"
-                                      />
-                                    </CheckIcon>
-                                  )}
-                                </CheckBox>
-                              </OptionItem>
-                            );
-                          })}
+                          {(() => {
+                            const filteredSectionOptions = getFilteredSectionOptions(options, key);
+
+                            if (filteredSectionOptions.length === 0) {
+                              return (
+                                <div style={{
+                                  textAlign: 'center',
+                                  padding: '20px',
+                                  color: 'hsl(var(--muted-foreground))',
+                                  fontSize: '13px'
+                                }}>
+                                  <div style={{ fontSize: '20px', marginBottom: '8px' }}>🔍</div>
+                                  No {label.toLowerCase()} found
+                                  <div style={{ fontSize: '11px', marginTop: '4px' }}>
+                                    Try different search terms
+                                  </div>
+                                </div>
+                              );
+                            }
+
+                            return filteredSectionOptions.map((option) => {
+                              const isSelected = filters[key]?.includes(option) || false;
+                              return (
+                                <OptionItem
+                                  key={option}
+                                  isSelected={isSelected}
+                                  onClick={(e) =>
+                                    handleFilterOptionClick(e, key, option)
+                                  }
+                                >
+                                  <OptionText>{option}</OptionText>
+                                  <CheckBox checked={isSelected}>
+                                    {isSelected && (
+                                      <CheckIcon
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                      >
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clipRule="evenodd"
+                                        />
+                                      </CheckIcon>
+                                    )}
+                                  </CheckBox>
+                                </OptionItem>
+                              );
+                            });
+                          })()}
                         </OptionsContainer>
                       </FilterOptions>
                     </FilterSection>
