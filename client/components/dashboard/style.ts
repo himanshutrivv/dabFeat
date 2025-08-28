@@ -446,9 +446,9 @@ export const SearchInput = styled.input`
 export const SearchButton = styled(Button)`
   height: 48px;
   padding: 0 24px;
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  border: 1px solid hsl(var(--border));
+  background-color: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
   font-weight: 500;
   font-size: 14px;
@@ -460,9 +460,9 @@ export const SearchButton = styled(Button)`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:hover:not(:disabled) {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-    border-color: hsl(var(--border));
+    background-color: #f1f5f9;
+    color: #475569;
+    border-color: #cbd5e1;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
@@ -473,8 +473,8 @@ export const SearchButton = styled(Button)`
   }
 
   &:active:not(:disabled) {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    background-color: #e2e8f0;
+    color: #334155;
   }
 
   &:disabled {
@@ -483,6 +483,51 @@ export const SearchButton = styled(Button)`
     cursor: not-allowed;
     opacity: 0.6;
     border-color: hsl(var(--border));
+    box-shadow: none;
+  }
+`;
+
+export const RefreshButton = styled(Button)`
+  height: 48px;
+  padding: 0 24px;
+  background-color: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-left: 8px;
+
+  &:hover:not(:disabled) {
+    background-color: #f1f5f9;
+    color: #475569;
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus:not(:disabled) {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  &:active:not(:disabled) {
+    background-color: #e2e8f0;
+    color: #334155;
+  }
+
+  &:disabled {
+    background-color: #f1f5f9;
+    color: #94a3b8;
+    cursor: not-allowed;
+    opacity: 0.8;
+    border-color: #e2e8f0;
     box-shadow: none;
   }
 `;
