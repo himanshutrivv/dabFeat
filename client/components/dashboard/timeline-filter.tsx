@@ -119,10 +119,10 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     value={
                       startDateTime
                         ? startDateTime
-                          .split(" ")[0]
-                          .split("/")
-                          .reverse()
-                          .join("-")
+                            .split(" ")[0]
+                            .split("/")
+                            .reverse()
+                            .join("-")
                         : ""
                     }
                     onClick={handleInputInteraction}
@@ -149,10 +149,10 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     value={
                       endDateTime
                         ? endDateTime
-                          .split(" ")[0]
-                          .split("/")
-                          .reverse()
-                          .join("-")
+                            .split(" ")[0]
+                            .split("/")
+                            .reverse()
+                            .join("-")
                         : ""
                     }
                     onClick={handleInputInteraction}
