@@ -9,7 +9,7 @@ import {
   inputStyles,
   primaryButtonStyles,
   outlineButtonStyles,
-} from "../../styles/styled-components";
+} from "../../styles/styled";
 
 interface TimelineFilterProps {
   startDateTime: string;
@@ -33,21 +33,19 @@ const SelectTrigger = styled.button`
   ${flexBetween}
   height: 40px;
   width: 100%;
-  border-radius: 25px;
-  border: 2px solid #e5e7eb;
-  background-color: #ffffff;
-  padding: 0 16px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #374151;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  border: 1px solid ${({ theme }) => theme.colors.input};
+  background-color: ${({ theme }) => theme.colors.background};
+  padding: 0 ${({ theme }) => theme.spacing[3]};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.foreground};
   cursor: pointer;
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: ${({ theme }) => theme.transitions.all};
 
   &:focus {
     outline: none;
-    border-color: #d1d5db;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.ring};
+    outline-offset: 2px;
   }
 
   &:disabled {
@@ -56,14 +54,14 @@ const SelectTrigger = styled.button`
   }
 
   &:hover {
-    border-color: #d1d5db;
-    background-color: #f9fafb;
+    background-color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.accentForeground};
   }
 `;
 
 const SelectValue = styled.span`
-  color: #374151;
-  font-weight: 500;
+  color: ${({ theme }) => theme.colors.foreground};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
 `;
 
 const SelectContent = styled.div`
@@ -262,10 +260,10 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     value={
                       startDateTime
                         ? startDateTime
-                            .split(" ")[0]
-                            .split("/")
-                            .reverse()
-                            .join("-")
+                          .split(" ")[0]
+                          .split("/")
+                          .reverse()
+                          .join("-")
                         : ""
                     }
                     onClick={handleInputInteraction}
@@ -292,10 +290,10 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     value={
                       endDateTime
                         ? endDateTime
-                            .split(" ")[0]
-                            .split("/")
-                            .reverse()
-                            .join("-")
+                          .split(" ")[0]
+                          .split("/")
+                          .reverse()
+                          .join("-")
                         : ""
                     }
                     onClick={handleInputInteraction}
