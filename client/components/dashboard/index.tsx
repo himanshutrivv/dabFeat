@@ -11,6 +11,9 @@ import {
   DashboardContainer,
   MainContent,
   Header,
+  HorizontalLayout,
+  FilterSidebar,
+  TableSection,
   FilterCard,
   FilterCardHeader,
   FilterCardTitle,
@@ -47,7 +50,6 @@ import Loader from "../common/loader";
 interface FilterState {
   [key: string]: string[];
 }
-
 
 export interface ColumnData {
   [key: string]: ColumnMetadata;
@@ -230,14 +232,13 @@ export default function TaskManagementDashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bussId = selectedBusiness?.bussId;
-      if (!bussId) return;
+      const bussId = selectedBusiness?.bussId || "demo-business-id";
       try {
         setLoading(true);
         setError(null);
 
         const response = await srGetDashboardTableData({
-          bussId: selectedBusiness?.bussId,
+          bussId: bussId,
           filterData: null,
         });
         setData(response);
@@ -419,7 +420,6 @@ export default function TaskManagementDashboard() {
     return activeFilters;
   }, [filters, searchTerm, data]);
 
-
   // Timeline Filter helpers
   const formatDateTimeForInput = useCallback((date: Date) => {
     const year = date.getFullYear();
@@ -553,118 +553,137 @@ export default function TaskManagementDashboard() {
       <DashboardContainer>
         <MainContent>
           <Header>
-            {(hasSearchableColumns || hasFilterableColumns) && (
-              <FilterCard>
-                <FilterCardHeader>
-                  <FilterCardTitle>
-                    <Filter size={20} />
-                    Filter & Search
-                  </FilterCardTitle>
-                  <FilterCardSubtitle>
-                    Filter your data by categories, search through records, or set time ranges to find exactly what you need
-                  </FilterCardSubtitle>
-                </FilterCardHeader>
-
-                <FilterContainer show={true}>
-                  <FilterGrid>
-                    <TimelineFilter
-                      startDateTime={startDateTime}
-                      endDateTime={endDateTime}
-                      isOpen={showTimelineFilter}
-                      onToggle={toggleTimelineDropdown}
-                      onStartDateTimeChange={handleStartDateTimeChange}
-                      onEndDateTimeChange={handleEndDateTimeChange}
-                      onReset={initializeDefaultTimeRange}
-                      onApply={() => setShowTimelineFilter(false)}
-                    />
-
-                    {Object.entries(data?.columnData || [])
-                      .filter(([, columnInfo]) => columnInfo.filterable === true)
-                      .slice(0, 3)
-                      .map(([columnKey, columnInfo]) => (
-                        <FilterDropdown
-                          key={columnKey}
-                          label={columnInfo.label}
-                          columnKey={columnKey}
-                          options={getFilterOptions(columnKey)}
-                          selectedValues={filters[columnKey] || []}
-                          isOpen={openFilterDropdowns[columnKey] || false}
-                          onToggle={toggleFilterDropdown}
-                          onFilterChange={handleFilterChange}
-                        />
-                      ))}
-
-                    <FilterGroup>
-                      <AllFiltersButton onClick={() => setShowMainFilter(true)}>
-                        <Filter size={16} />
-                        <span>All Filters</span>
-                      </AllFiltersButton>
-                    </FilterGroup>
-                  </FilterGrid>
-
-                  {hasSearchableColumns && (
-                    <SearchBarContainer>
-                      <SearchIcon>
-                        <Search size={20} />
-                      </SearchIcon>
-                      <SearchInput
-                        type="text"
-                        placeholder="Search records..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                      />
-                    </SearchBarContainer>
-                  )}
-
-                  {activeFilters.length > 0 && (
-                    <ActiveFiltersSection>
-                      <ActiveFiltersLabel>Active Filters:</ActiveFiltersLabel>
-                      <ActiveFiltersContainer>
-                        {activeFilters.map((filter) => (
-                          <FilterBadge key={`${filter.key}-${filter.value}`}>
-                            {filter.label}: {filter.value}
-                            <FilterBadgeClose
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                if (filter.key === "search") {
-                                  setSearchTerm("");
-                                } else {
-                                  clearIndividualFilter(filter.key);
-                                }
-                              }}
-                            >
-                              <X size={12} />
-                            </FilterBadgeClose>
-                          </FilterBadge>
-                        ))}
-                        <ClearAllFiltersButton
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            clearAllFilters();
-                          }}
-                        >
-                          <X size={12} />
-                          Clear All
-                        </ClearAllFiltersButton>
-                      </ActiveFiltersContainer>
-                    </ActiveFiltersSection>
-                  )}
-
-                  <FilterResults>
-                    Showing {filteredData.length} of {data?.tableData?.length}{" "}
-                    results
-                  </FilterResults>
-                </FilterContainer>
-              </FilterCard>
-            )}
+            <div>
+              <h1 style={{ margin: 0, fontSize: "24px", fontWeight: "600" }}>
+                Dashboard
+              </h1>
+              <p style={{ margin: 0, color: "#6b7280", fontSize: "14px" }}>
+                Filter and view your data
+              </p>
+            </div>
           </Header>
 
-          <DashboardTable
-            data={filteredData}
-            columnData={data?.columnData || {}}
-          />
+          <HorizontalLayout>
+            {(hasSearchableColumns || hasFilterableColumns) && (
+              <FilterSidebar>
+                <FilterCard>
+                  <FilterCardHeader>
+                    <FilterCardTitle>
+                      <Filter size={20} />
+                      Filter & Search
+                    </FilterCardTitle>
+                    <FilterCardSubtitle>
+                      Filter your data by categories, search through records, or
+                      set time ranges to find exactly what you need
+                    </FilterCardSubtitle>
+                  </FilterCardHeader>
+
+                  <FilterContainer show={true}>
+                    <FilterGrid>
+                      <TimelineFilter
+                        startDateTime={startDateTime}
+                        endDateTime={endDateTime}
+                        isOpen={showTimelineFilter}
+                        onToggle={toggleTimelineDropdown}
+                        onStartDateTimeChange={handleStartDateTimeChange}
+                        onEndDateTimeChange={handleEndDateTimeChange}
+                        onReset={initializeDefaultTimeRange}
+                        onApply={() => setShowTimelineFilter(false)}
+                      />
+
+                      {Object.entries(data?.columnData || [])
+                        .filter(
+                          ([, columnInfo]) => columnInfo.filterable === true,
+                        )
+                        .map(([columnKey, columnInfo]) => (
+                          <FilterDropdown
+                            key={columnKey}
+                            label={columnInfo.label}
+                            columnKey={columnKey}
+                            options={getFilterOptions(columnKey)}
+                            selectedValues={filters[columnKey] || []}
+                            isOpen={openFilterDropdowns[columnKey] || false}
+                            onToggle={toggleFilterDropdown}
+                            onFilterChange={handleFilterChange}
+                          />
+                        ))}
+
+                      <FilterGroup>
+                        <AllFiltersButton
+                          onClick={() => setShowMainFilter(true)}
+                        >
+                          <Filter size={16} />
+                          <span>All Filters</span>
+                        </AllFiltersButton>
+                      </FilterGroup>
+                    </FilterGrid>
+
+                    {hasSearchableColumns && (
+                      <SearchBarContainer>
+                        <SearchIcon>
+                          <Search size={20} />
+                        </SearchIcon>
+                        <SearchInput
+                          type="text"
+                          placeholder="Search records..."
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                      </SearchBarContainer>
+                    )}
+
+                    {activeFilters.length > 0 && (
+                      <ActiveFiltersSection>
+                        <ActiveFiltersLabel>Active Filters:</ActiveFiltersLabel>
+                        <ActiveFiltersContainer>
+                          {activeFilters.map((filter) => (
+                            <FilterBadge key={`${filter.key}-${filter.value}`}>
+                              {filter.label}: {filter.value}
+                              <FilterBadgeClose
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  e.preventDefault();
+                                  if (filter.key === "search") {
+                                    setSearchTerm("");
+                                  } else {
+                                    clearIndividualFilter(filter.key);
+                                  }
+                                }}
+                              >
+                                <X size={12} />
+                              </FilterBadgeClose>
+                            </FilterBadge>
+                          ))}
+                          <ClearAllFiltersButton
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              clearAllFilters();
+                            }}
+                          >
+                            <X size={12} />
+                            Clear All
+                          </ClearAllFiltersButton>
+                        </ActiveFiltersContainer>
+                      </ActiveFiltersSection>
+                    )}
+
+                    <FilterResults>
+                      Showing {filteredData.length} of {data?.tableData?.length}{" "}
+                      results
+                    </FilterResults>
+                  </FilterContainer>
+                </FilterCard>
+              </FilterSidebar>
+            )}
+
+            <TableSection>
+              <DashboardTable
+                data={filteredData}
+                columnData={data?.columnData || {}}
+              />
+            </TableSection>
+          </HorizontalLayout>
         </MainContent>
 
         <FilterModal

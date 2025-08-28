@@ -175,14 +175,42 @@ export const MainContent = styled.div`
   overflow: hidden;
 `;
 
+export const HorizontalLayout = styled.div`
+  display: flex;
+  flex: 1;
+  gap: 24px;
+  padding: 32px;
+  overflow: hidden;
+`;
+
+export const FilterSidebar = styled.div`
+  flex: 0 0 350px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 100%;
+`;
+
+export const TableSection = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+`;
+
 export const Header = styled.div`
   background-color: hsl(var(--card));
   border-bottom: 1px solid hsl(var(--border));
-  padding: 0 32px;
+  padding: 16px 32px;
   position: sticky;
   top: 0;
   z-index: 50;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
 `;
 
 export const FilterCard = styled.div`
@@ -192,10 +220,11 @@ export const FilterCard = styled.div`
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.05),
     0 2px 4px rgba(0, 0, 0, 0.08);
-  margin-top: 24px;
-  margin-bottom: 24px;
   overflow: visible;
   transition: all 0.3s ease;
+  height: fit-content;
+  position: sticky;
+  top: 0;
 
   &:hover {
     box-shadow:
@@ -249,20 +278,12 @@ export const SearchIcon = styled.div`
 `;
 
 export const FilterGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 16px;
   margin-bottom: 24px;
   position: relative;
   z-index: 100;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
 `;
 
 export const FilterGroup = styled.div``;
@@ -592,23 +613,26 @@ export const SelectTrigger = styled.button`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  border-radius: 8px;
-  border: 1px solid hsl(var(--input));
-  background-color: hsl(var(--background));
-  padding: 0 12px;
+  border-radius: 25px;
+  border: 2px solid #e5e7eb;
+  background-color: #ffffff;
+  padding: 0 16px;
   font-size: 14px;
-  color: hsl(var(--foreground));
+  font-weight: 500;
+  color: #374151;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
-    outline-offset: 2px;
+    border-color: #d1d5db;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
   &:hover {
-    background-color: hsl(var(--muted) / 0.5);
+    border-color: #d1d5db;
+    background-color: #f9fafb;
   }
 
   &:disabled {
@@ -618,7 +642,8 @@ export const SelectTrigger = styled.button`
 `;
 
 export const SelectValue = styled.span`
-  color: hsl(var(--foreground));
+  color: #374151;
+  font-weight: 500;
 `;
 
 export const SelectContent = styled.div`
@@ -632,29 +657,28 @@ export const SelectContent = styled.div`
   overflow-y: auto;
   border-radius: 8px;
   border: 1px solid hsl(var(--border));
-  background-color: white;
+  background-color: hsl(var(--card));
   color: hsl(var(--card-foreground));
   opacity: 1;
   box-shadow:
-    0 20px 80px rgba(0, 0, 0, 0.4),
-    0 12px 40px rgba(0, 0, 0, 0.3),
-    0 4px 16px rgba(0, 0, 0, 0.2);
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
   &.filter-content {
-    background-color: white !important;
+    background-color: hsl(var(--card)) !important;
     opacity: 1 !important;
   }
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(-8px) scale(0.95);
+      transform: scale(0.95);
     }
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: scale(1);
     }
   }
 `;
@@ -666,7 +690,7 @@ export const SelectItem = styled.div<{ selected?: boolean }>`
   cursor: pointer;
   user-select: none;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 8px 12px;
   font-size: 14px;
   outline: none;
@@ -698,7 +722,6 @@ export const SelectItemsContainer = styled.div`
 // Table components
 export const TableContainer = styled.div`
   flex: 1;
-  padding: 32px;
   overflow: hidden;
   min-height: 0;
   display: flex;
@@ -861,11 +884,13 @@ export const FilterModalContainer = styled.div`
   right: 0;
   width: 33.333333%;
   height: 100vh;
-  background-color: white;
+  background-color: hsl(var(--card));
   border-left: 1px solid hsl(var(--border));
-  border-top-left-radius: 24px;
-  border-bottom-left-radius: 24px;
-  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  box-shadow:
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -996,11 +1021,21 @@ export const FilterModalSearchInputStyled = styled.input`
   padding-right: 12px;
   padding-top: 12px;
   padding-bottom: 12px;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid hsl(var(--input));
   border-radius: 8px;
   font-size: 14px;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+
+  &:focus {
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+    border-color: hsl(var(--ring));
+    outline: none;
+  }
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
 `;
 
 export const FilterModalSectionContentStyled = styled.div`
@@ -1042,11 +1077,21 @@ export const FilterModalSectionSearchInputStyled = styled.input`
   padding-right: 12px;
   padding-top: 8px;
   padding-bottom: 8px;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid hsl(var(--input));
   border-radius: 6px;
   font-size: 13px;
-  background-color: hsl(var(--muted));
+  background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+
+  &:focus {
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+    border-color: hsl(var(--ring));
+    outline: none;
+  }
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
 `;
 
 export const FilterModalOptionItemStyled = styled.div<{ isSelected?: boolean }>`
@@ -1055,14 +1100,20 @@ export const FilterModalOptionItemStyled = styled.div<{ isSelected?: boolean }>`
   justify-content: space-between;
   padding: 8px 12px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 6px;
   background-color: ${(props) =>
     props.isSelected ? "hsl(var(--accent))" : "transparent"};
   margin-bottom: 2px;
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: hsl(var(--accent) / 0.7);
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  &:focus {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
   }
 `;
 
@@ -1098,24 +1149,26 @@ export const FilterDropdownSelectTrigger = styled.button`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: 12px;
-  border: 1px solid hsl(var(--input));
-  background-color: hsl(var(--muted));
-  padding: 0 12px;
+  border-radius: 25px;
+  border: 2px solid #e5e7eb;
+  background-color: #ffffff;
+  padding: 0 16px;
   font-size: 14px;
-  color: hsl(var(--foreground));
+  font-weight: 500;
+  color: #374151;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
-    outline-offset: 2px;
+    border-color: #d1d5db;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
   &:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    border-color: #d1d5db;
+    background-color: #f9fafb;
   }
 
   &:disabled {
@@ -1125,7 +1178,7 @@ export const FilterDropdownSelectTrigger = styled.button`
 `;
 
 export const FilterDropdownSelectValue = styled.span`
-  color: hsl(var(--foreground));
+  color: #374151;
   font-weight: 500;
 `;
 
@@ -1139,32 +1192,31 @@ export const FilterDropdownSelectContent = styled.div`
   min-width: 320px;
   max-width: calc(100vw - 32px);
   overflow-y: auto;
-  border-radius: 16px;
+  border-radius: 8px;
   border: 1px solid hsl(var(--border));
-  background-color: white;
+  background-color: hsl(var(--card));
   color: hsl(var(--card-foreground));
   opacity: 1;
   padding: 16px;
   box-shadow:
-    0 20px 80px rgba(0, 0, 0, 0.35),
-    0 12px 40px rgba(0, 0, 0, 0.25),
-    0 4px 16px rgba(0, 0, 0, 0.15);
-  margin-top: 8px;
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+  margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
   &.filter-content {
-    background-color: white !important;
+    background-color: hsl(var(--card)) !important;
     opacity: 1 !important;
   }
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(-8px) scale(0.95);
+      transform: scale(0.95);
     }
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: scale(1);
     }
   }
 `;
@@ -1176,7 +1228,7 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
   cursor: pointer;
   user-select: none;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 8px 12px;
   font-size: 14px;
   outline: none;
@@ -1185,7 +1237,7 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
   font-weight: ${(props) => (props.selected ? "600" : "400")};
 
   &:hover {
-    background-color: hsl(var(--accent) / 0.7);
+    background-color: hsl(var(--accent));
     color: hsl(var(--accent-foreground));
   }
 
@@ -1216,23 +1268,26 @@ export const TimelineFilterSelectTrigger = styled.button`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: 8px;
-  border: 1px solid hsl(var(--input));
-  background-color: hsl(var(--background));
-  padding: 0 12px;
+  border-radius: 25px;
+  border: 2px solid #e5e7eb;
+  background-color: #ffffff;
+  padding: 0 16px;
   font-size: 14px;
-  color: hsl(var(--foreground));
+  font-weight: 500;
+  color: #374151;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
-    outline-offset: 2px;
+    border-color: #d1d5db;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
   &:hover {
-    background-color: hsl(var(--muted) / 0.5);
+    border-color: #d1d5db;
+    background-color: #f9fafb;
   }
 
   &:disabled {
@@ -1242,7 +1297,7 @@ export const TimelineFilterSelectTrigger = styled.button`
 `;
 
 export const TimelineFilterSelectValue = styled.span`
-  color: hsl(var(--foreground));
+  color: #374151;
   font-weight: 500;
 `;
 
