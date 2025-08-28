@@ -175,6 +175,30 @@ export const MainContent = styled.div`
   overflow: hidden;
 `;
 
+export const HorizontalLayout = styled.div`
+  display: flex;
+  flex: 1;
+  gap: 24px;
+  padding: 32px;
+  overflow: hidden;
+`;
+
+export const FilterSidebar = styled.div`
+  flex: 0 0 350px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 100%;
+`;
+
+export const TableSection = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+`;
+
 export const Header = styled.div`
   background-color: hsl(var(--card));
   border-bottom: 1px solid hsl(var(--border));
