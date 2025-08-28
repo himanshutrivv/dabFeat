@@ -202,11 +202,15 @@ export const TableSection = styled.div`
 export const Header = styled.div`
   background-color: hsl(var(--card));
   border-bottom: 1px solid hsl(var(--border));
-  padding: 32px;
+  padding: 16px 32px;
   position: sticky;
   top: 0;
   z-index: 50;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
 `;
 
 export const FilterCard = styled.div`
