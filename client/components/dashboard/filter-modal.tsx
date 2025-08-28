@@ -1,90 +1,257 @@
 "use client";
-import React from "react";
-import { ChevronDown } from "lucide-react";
+import React, { useState } from "react";
+import { X, Search, Check } from "lucide-react";
 import {
-  FilterDropdownFilterGroup,
-  FilterDropdownSelectContainer,
-  FilterDropdownSelectTrigger,
-  FilterDropdownSelectValue,
-  FilterDropdownSelectContent,
-  SelectItemsContainer,
-  FilterDropdownSelectItem,
+  FilterModalBackdrop,
+  FilterModalContainer,
+  FilterModalHeaderContainer,
+  FilterModalHeaderTitle,
+  FilterModalContentContainer,
+  FilterModalListItem,
+  FilterModalItemHeaderContainer,
+  FilterModalExpandIcon,
+  FilterModalOptionsContainer,
+  FilterModalOptions,
+  FilterModalCheckboxContainer,
+  FilterModalFooterContainer,
+  FilterModalButton,
+  FilterModalSearchContainerWithMargin,
+  FilterModalSearchIconStyled,
+  FilterModalSearchInputStyled,
+  FilterModalSectionContentStyled,
+  FilterModalItemTitleStyled,
+  FilterModalItemTitleActiveStyled,
+  FilterModalItemCountStyled,
+  FilterModalSearchContainerSmallMargin,
+  FilterModalSectionSearchIconStyled,
+  FilterModalSectionSearchInputStyled,
+  FilterModalOptionItemStyled,
+  FilterModalOptionTextStyled,
+  FilterModalCheckIconStyled,
 } from "./style";
 
-interface FilterDropdownProps {
+interface FilterOption {
+  key: string;
   label: string;
-  columnKey: string;
   options: string[];
-  selectedValues: string[];
-  isOpen: boolean;
-  onToggle: (columnKey: string) => void;
-  onFilterChange: (columnKey: string, value: string) => void;
 }
 
-const FilterDropdown: React.FC<FilterDropdownProps> = ({
-  label,
-  columnKey,
-  options,
-  selectedValues,
+interface FilterState {
+  [key: string]: string[];
+}
+
+interface ActiveFilter {
+  key: string;
+  value: string;
+  label: string;
+}
+
+interface FilterModalProps {
+  isOpen: boolean;
+  filterOptions: FilterOption[];
+  filters: FilterState;
+  activeFilters: ActiveFilter[];
+  openFilterDropdowns: { [key: string]: boolean };
+  onClose: () => void;
+  onFilterChange: (columnKey: string, value: string) => void;
+  onClearAllFilters: () => void;
+  onToggleFilterSection: (key: string) => void;
+  onApplyFilters: () => Promise<void>;
+}
+
+const FilterModal: React.FC<FilterModalProps> = ({
   isOpen,
-  onToggle,
+  filterOptions,
+  filters,
+  activeFilters,
+  openFilterDropdowns,
+  onClose,
   onFilterChange,
+  onClearAllFilters,
+  onToggleFilterSection,
+  onApplyFilters,
 }) => {
-  // Safety checks: ensure selectedValues and options are always arrays
-  const safeSelectedValues = selectedValues || [];
-  const safeOptions = options || [];
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sectionSearchTerms, setSectionSearchTerms] = useState<{ [key: string]: string }>({});
+
+  if (!isOpen) return null;
+
+  const handleApplyFilters = async () => {
+    await onApplyFilters();
+    onClose();
+  };
+
+  const filteredOptions = filterOptions.filter(option =>
+    option.label.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <FilterDropdownFilterGroup>
-      <FilterDropdownSelectContainer data-dropdown-container>
-        <FilterDropdownSelectTrigger
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggle(columnKey);
-          }}
-        >
-          <FilterDropdownSelectValue>
-            {safeSelectedValues.length === 0
-              ? `All ${label}`
-              : `${safeSelectedValues.length} selected`}
-          </FilterDropdownSelectValue>
-          <ChevronDown size={16} />
-        </FilterDropdownSelectTrigger>
+    <>
+      <FilterModalBackdrop onClick={onClose} />
+      <FilterModalContainer data-modal-container>
+        <FilterModalHeaderContainer>
+          <FilterModalHeaderTitle>All Filters</FilterModalHeaderTitle>
+          <FilterModalButton
+            variant="ghost"
+            size="sm"
+            onClick={onClose}
+          >
+            <X size={20} />
+          </FilterModalButton>
+        </FilterModalHeaderContainer>
 
-        {isOpen && (
-          <FilterDropdownSelectContent className="filter-content">
-            <SelectItemsContainer>
-              <FilterDropdownSelectItem
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onFilterChange(columnKey, "all");
-                }}
-                selected={safeSelectedValues.length === 0}
-              >
-                All {label}
-              </FilterDropdownSelectItem>
+        <FilterModalContentContainer>
+          <FilterModalSearchContainerWithMargin>
+            <FilterModalSearchIconStyled>
+              <Search size={16} />
+            </FilterModalSearchIconStyled>
+            <FilterModalSearchInputStyled
+              type="text"
+              placeholder="Search filters..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </FilterModalSearchContainerWithMargin>
 
-              {safeOptions.map((option) => {
-                const isSelected = safeSelectedValues.includes(option);
-                return (
-                  <FilterDropdownSelectItem
-                    key={option}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onFilterChange(columnKey, option);
-                    }}
-                    selected={isSelected}
-                  >
-                    {option}
-                  </FilterDropdownSelectItem>
-                );
-              })}
-            </SelectItemsContainer>
-          </FilterDropdownSelectContent>
-        )}
-      </FilterDropdownSelectContainer>
-    </FilterDropdownFilterGroup>
+          {filteredOptions.map((filterOption) => {
+            const isExpanded = openFilterDropdowns[filterOption.key] || false;
+            const selectedValues = filters[filterOption.key] || [];
+            const sectionSearchTerm = sectionSearchTerms[filterOption.key] || "";
+            
+            const filteredSectionOptions = filterOption.options.filter(option =>
+              option.toLowerCase().includes(sectionSearchTerm.toLowerCase())
+            );
+
+            return (
+              <FilterModalListItem key={filterOption.key}>
+                <FilterModalItemHeaderContainer
+                  isActive={selectedValues.length > 0}
+                  onClick={() => onToggleFilterSection(filterOption.key)}
+                >
+                  <FilterModalSectionContentStyled>
+                    {selectedValues.length > 0 ? (
+                      <FilterModalItemTitleActiveStyled>
+                        {filterOption.label}
+                        <FilterModalItemCountStyled>
+                          {selectedValues.length}
+                        </FilterModalItemCountStyled>
+                      </FilterModalItemTitleActiveStyled>
+                    ) : (
+                      <FilterModalItemTitleStyled>
+                        {filterOption.label}
+                      </FilterModalItemTitleStyled>
+                    )}
+                  </FilterModalSectionContentStyled>
+                  <FilterModalExpandIcon isExpanded={isExpanded}>
+                    {isExpanded ? <X size={12} /> : "+"}
+                  </FilterModalExpandIcon>
+                </FilterModalItemHeaderContainer>
+
+                {isExpanded && (
+                  <FilterModalOptionsContainer>
+                    <FilterModalSearchContainerSmallMargin>
+                      <FilterModalSectionSearchIconStyled>
+                        <Search size={14} />
+                      </FilterModalSectionSearchIconStyled>
+                      <FilterModalSectionSearchInputStyled
+                        type="text"
+                        placeholder={`Search ${filterOption.label.toLowerCase()}...`}
+                        value={sectionSearchTerm}
+                        onChange={(e) => {
+                          setSectionSearchTerms(prev => ({
+                            ...prev,
+                            [filterOption.key]: e.target.value
+                          }));
+                        }}
+                      />
+                    </FilterModalSearchContainerSmallMargin>
+
+                    <FilterModalOptions>
+                      <FilterModalOptionItemStyled
+                        isSelected={selectedValues.length === 0}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onFilterChange(filterOption.key, "all");
+                        }}
+                      >
+                        <FilterModalOptionTextStyled>
+                          All {filterOption.label}
+                        </FilterModalOptionTextStyled>
+                        <FilterModalCheckboxContainer selected={selectedValues.length === 0}>
+                          {selectedValues.length === 0 && (
+                            <FilterModalCheckIconStyled
+                              width="12"
+                              height="12"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <Check size={12} />
+                            </FilterModalCheckIconStyled>
+                          )}
+                        </FilterModalCheckboxContainer>
+                      </FilterModalOptionItemStyled>
+
+                      {filteredSectionOptions.map((option) => {
+                        const isSelected = selectedValues.includes(option);
+                        return (
+                          <FilterModalOptionItemStyled
+                            key={option}
+                            isSelected={isSelected}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onFilterChange(filterOption.key, option);
+                            }}
+                          >
+                            <FilterModalOptionTextStyled>
+                              {option}
+                            </FilterModalOptionTextStyled>
+                            <FilterModalCheckboxContainer selected={isSelected}>
+                              {isSelected && (
+                                <FilterModalCheckIconStyled
+                                  width="12"
+                                  height="12"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <Check size={12} />
+                                </FilterModalCheckIconStyled>
+                              )}
+                            </FilterModalCheckboxContainer>
+                          </FilterModalOptionItemStyled>
+                        );
+                      })}
+                    </FilterModalOptions>
+                  </FilterModalOptionsContainer>
+                )}
+              </FilterModalListItem>
+            );
+          })}
+        </FilterModalContentContainer>
+
+        <FilterModalFooterContainer>
+          <FilterModalButton
+            variant="outline"
+            onClick={onClearAllFilters}
+          >
+            Clear All
+          </FilterModalButton>
+          <FilterModalButton
+            onClick={handleApplyFilters}
+          >
+            Apply Filters ({activeFilters.length})
+          </FilterModalButton>
+        </FilterModalFooterContainer>
+      </FilterModalContainer>
+    </>
   );
 };
 
-export default FilterDropdown;
+export default FilterModal;
