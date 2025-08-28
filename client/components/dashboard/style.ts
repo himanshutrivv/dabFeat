@@ -605,8 +605,8 @@ export const SearchInput = styled.input`
 export const SearchButton = styled(Button)`
   height: 48px;
   padding: 0 24px;
-  background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
+  background-color: #2563eb;
+  color: #ffffff;
   border: none;
   border-radius: 16px;
   font-weight: 500;
@@ -618,7 +618,7 @@ export const SearchButton = styled(Button)`
   transition: all 0.2s ease;
 
   &:hover:not(:disabled) {
-    background-color: hsl(var(--primary) / 0.9);
+    background-color: #1d4ed8;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
@@ -628,8 +628,8 @@ export const SearchButton = styled(Button)`
   }
 
   &:disabled {
-    background-color: hsl(var(--muted));
-    color: hsl(var(--muted-foreground));
+    background-color: #e5e7eb;
+    color: #9ca3af;
     cursor: not-allowed;
     opacity: 0.6;
     transform: none;
