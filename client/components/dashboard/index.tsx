@@ -196,7 +196,7 @@ export default function TaskManagementDashboard() {
       setIsFilterLoading(true);
       setError(null);
 
-      const bussId = selectedBusiness?.bussId || "TESTORG2";
+      const bussId = selectedBusiness?.bussId || "default"; // TODO: Handle missing business selection properly
       const filterData = transformFiltersToAPIFormat(
         filters,
         manualFilterInputs,
