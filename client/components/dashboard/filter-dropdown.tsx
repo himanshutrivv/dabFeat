@@ -30,8 +30,9 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   onToggle,
   onFilterChange,
 }) => {
-  // Safety check: ensure selectedValues is always an array
+  // Safety checks: ensure selectedValues and options are always arrays
   const safeSelectedValues = selectedValues || [];
+  const safeOptions = options || [];
 
   return (
     <FilterDropdownFilterGroup>
@@ -63,7 +64,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
                 All {label}
               </FilterDropdownSelectItem>
 
-              {options.map((option) => {
+              {safeOptions.map((option) => {
                 const isSelected = safeSelectedValues.includes(option);
                 return (
                   <FilterDropdownSelectItem
