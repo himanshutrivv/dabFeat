@@ -1172,10 +1172,15 @@ export const FilterModalCheckbox = styled.div<{ selected: boolean; theme?: any }
 `;
 
 export const FilterModalFooter = styled.div<{ theme?: any }>`
-  padding: ${({ theme }) => theme?.spacing?.[6] || '24px'};
-  border-top: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  padding: 28px 32px;
+  border-top: 1px solid rgba(226, 232, 240, 0.5);
   flex-shrink: 0;
-  background: ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'};
+  background: linear-gradient(180deg,
+    rgba(248, 250, 252, 0.8) 0%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 `;
 
 export const FilterModalButtonContainer = styled.div`
@@ -1192,22 +1197,47 @@ export const FilterModalButton = styled.button<{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   white-space: nowrap;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: none;
   outline: none;
   width: 100%;
-  height: 44px;
-  margin-bottom: ${({ theme }) => theme?.spacing?.[2] || '8px'};
+  height: 48px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
+    transition: left 0.5s ease;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
 
   &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   &:last-child {
@@ -1215,33 +1245,56 @@ export const FilterModalButton = styled.button<{
   }
 
   &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme?.colors?.ring || 'hsl(var(--ring))'};
+    outline: 2px solid rgba(139, 92, 246, 0.5);
     outline-offset: 2px;
   }
 
   &:disabled {
     pointer-events: none;
     opacity: 0.5;
+    transform: none;
   }
 
   ${(props) => {
     switch (props.variant) {
       case "outline":
         return css`
-          border: 1px solid ${props.theme?.colors?.border || 'hsl(var(--border))'};
-          background-color: ${props.theme?.colors?.background || 'hsl(var(--background))'};
-          color: ${props.theme?.colors?.foreground || 'hsl(var(--foreground))'};
+          border: 2px solid rgba(226, 232, 240, 0.8);
+          background: linear-gradient(145deg,
+            rgba(248, 250, 252, 0.8) 0%,
+            rgba(241, 245, 249, 0.6) 100%
+          );
+          color: #475569;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+
           &:hover {
-            background-color: ${props.theme?.colors?.accent || 'hsl(var(--accent))'};
-            color: ${props.theme?.colors?.accentForeground || 'hsl(var(--accent-foreground))'};
+            border-color: rgba(139, 92, 246, 0.4);
+            background: linear-gradient(145deg,
+              rgba(241, 245, 249, 0.9) 0%,
+              rgba(226, 232, 240, 0.7) 100%
+            );
+            color: #334155;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
           }
         `;
       default:
         return css`
-          background-color: ${props.theme?.colors?.primary || 'hsl(var(--primary))'};
-          color: ${props.theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
+          background: linear-gradient(135deg,
+            #667eea 0%,
+            #764ba2 50%,
+            #8b5cf6 100%
+          );
+          color: white;
+          box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+
           &:hover {
-            background-color: ${props.theme?.colors?.primary ? `${props.theme.colors.primary} / 0.9` : 'hsl(var(--primary) / 0.9)'};
+            background: linear-gradient(135deg,
+              #5a67d8 0%,
+              #6b46c1 50%,
+              #7c3aed 100%
+            );
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
           }
         `;
     }
