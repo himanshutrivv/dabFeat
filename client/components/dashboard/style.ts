@@ -1079,8 +1079,6 @@ export const FilterModalFooterContainer = styled.div`
   gap: 12px;
 `;
 
-export const FilterModalButton = styled(Button)``;
-
 export const FilterModalHeaderTitle = styled.h2`
   margin: 0;
   font-size: 20px;
