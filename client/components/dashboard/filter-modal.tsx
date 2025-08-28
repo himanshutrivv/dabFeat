@@ -1,17 +1,43 @@
 "use client";
 import React, { useCallback, useState, useMemo } from "react";
-import styled from "@emotion/styled";
 import { Search, X, Filter, ChevronRight, Sparkles } from "lucide-react";
 import {
-  flexBetween,
-  flexCenter,
-  flexColumn,
-  cardStyles,
-  buttonBaseStyles,
-  inputStyles,
-  primaryButtonStyles,
-  outlineButtonStyles,
-} from "@/styles/styled";
+  filterModalBackdrop,
+  filterModalContainer,
+  filterModalHeader,
+  filterModalHeaderTitle,
+  filterModalCloseButton,
+  filterModalContent,
+  filterModalSearch,
+  filterModalSearchIcon,
+  filterModalSearchInput,
+  filterModalSeparator,
+  filterModalSectionContent,
+  filterModalListItem,
+  filterModalItemHeader,
+  filterModalHeaderContent,
+  filterModalTitle,
+  filterModalCount,
+  filterModalExpandIcon,
+  filterModalOptionsContainer,
+  filterModalOptionsInner,
+  filterModalSectionSearchContainer,
+  filterModalSectionSearchIcon,
+  filterModalSectionSearchInput,
+  filterModalOptionItem,
+  filterModalOptionText,
+  filterModalCheckbox,
+  filterModalCheckIcon,
+  filterModalEmptyState,
+  filterModalEmptyIcon,
+  filterModalManualContainer,
+  filterModalManualLabel,
+  filterModalManualInput,
+  filterModalTypeIcon,
+  filterModalFooter,
+  filterModalButtonContainer,
+  filterModalButton,
+} from "./style";
 
 interface FilterState {
   [key: string]: string[];
