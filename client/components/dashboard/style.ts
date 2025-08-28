@@ -292,7 +292,7 @@ export const FilterGrid = styled.div`
   gap: 16px;
   margin-bottom: 24px;
   position: relative;
-  z-index: 100;
+  z-index: 1;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -621,7 +621,7 @@ export const ErrorText = styled.div`
 // Select components with fixed hover effects
 export const SelectContainer = styled.div`
   position: relative;
-  z-index: 200;
+  z-index: 600;
 `;
 
 export const SelectTrigger = styled.button`
