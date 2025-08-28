@@ -4,8 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import { ThemeControllerProvider } from "@/styles/theme-controller";
-import { globalStyles } from "@/styles/global-styles";
+import { ThemeControllerProvider } from "@/styles/ThemeControllerProvider";
+import { globalStyles } from "@/styles/global";
 import { appTheme } from "@/styles/themes";
 import {
   DashboardContainer,
@@ -556,17 +556,6 @@ export default function TaskManagementDashboard() {
       <Toaster />
       <DashboardContainer>
         <MainContent>
-          <Header>
-            <HeaderContent>
-              <DashboardTitle>
-                Dashboard
-              </DashboardTitle>
-              <DashboardSubtitle>
-                Manage and view your data
-              </DashboardSubtitle>
-            </HeaderContent>
-          </Header>
-
           <MainContentLayout>
             {(hasSearchableColumns || hasFilterableColumns) && (
               <FilterCard>
