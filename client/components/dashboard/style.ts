@@ -1197,7 +1197,7 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
   cursor: pointer;
   user-select: none;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 8px 12px;
   font-size: 14px;
   outline: none;
@@ -1206,7 +1206,7 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
   font-weight: ${(props) => (props.selected ? "600" : "400")};
 
   &:hover {
-    background-color: hsl(var(--accent) / 0.7);
+    background-color: hsl(var(--accent));
     color: hsl(var(--accent-foreground));
   }
 
