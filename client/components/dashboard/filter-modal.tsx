@@ -410,11 +410,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
         <MainFilterFooter>
           <ButtonContainer>
             {activeFilters.length > 0 && (
-              <Button variant="outline" onClick={handleClearAll}>
+              <FilterModalButton variant="outline" onClick={handleClearAll}>
                 Clear All Filters ({activeFilters.length})
-              </Button>
+              </FilterModalButton>
             )}
-            <Button onClick={handleApplyFilters}>Apply Filters</Button>
+            <FilterModalButton onClick={handleApplyFilters}>Apply Filters</FilterModalButton>
           </ButtonContainer>
         </MainFilterFooter>
       </MainFilterModal>
