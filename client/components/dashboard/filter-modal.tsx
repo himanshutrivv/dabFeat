@@ -34,10 +34,12 @@ interface FilterModalProps {
   isOpen: boolean;
   filterOptions: FilterOption[];
   filters: FilterState;
+  manualFilterInputs: { [key: string]: string };
   activeFilters: ActiveFilter[];
   openFilterDropdowns: { [key: string]: boolean };
   onClose: () => void;
   onFilterChange: (columnKey: string, value: string) => void;
+  onManualFilterChange: (key: string, value: string) => void;
   onClearAllFilters: () => void;
   onToggleFilterSection: (key: string) => void;
   onApplyFilters: () => Promise<void>;
@@ -520,10 +522,12 @@ const FilterModal: React.FC<FilterModalProps> = ({
   isOpen,
   filterOptions,
   filters,
+  manualFilterInputs,
   activeFilters,
   openFilterDropdowns,
   onClose,
   onFilterChange,
+  onManualFilterChange,
   onClearAllFilters,
   onToggleFilterSection,
   onApplyFilters,
@@ -532,9 +536,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   const [sectionSearchTerms, setSectionSearchTerms] = useState<{
     [key: string]: string;
   }>({});
-  const [manualFilterInputs, setManualFilterInputs] = useState<{
-    [key: string]: string;
-  }>({});
+  // Remove local state as it's now managed by parent
 
   // Filter options based on search term (internal search for filtering columns)
   const filteredOptions = useMemo(() => {
@@ -579,12 +581,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
   // Handle manual filter input change
   const handleManualFilterInputChange = useCallback(
     (sectionKey: string, value: string) => {
-      setManualFilterInputs((prev) => ({
-        ...prev,
-        [sectionKey]: value,
-      }));
+      onManualFilterChange(sectionKey, value);
     },
-    [],
+    [onManualFilterChange],
   );
 
   const handleModalClick = useCallback((e: React.MouseEvent) => {
@@ -642,7 +641,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
     if (!isOpen) {
       setSectionSearchTerms({});
       setSearchTerm("");
-      setManualFilterInputs({});
     }
   }, [isOpen]);
 
