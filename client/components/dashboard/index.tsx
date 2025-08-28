@@ -4,9 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import { ThemeControllerProvider } from "@/styles/ThemeControllerProvider";
 import { globalStyles } from "@/styles/global";
-import { appTheme } from "@/styles/themes";
+import { appTheme } from "@/styles/themes/appTheme";
 import {
   DashboardContainer,
   MainContent,
@@ -48,10 +47,7 @@ import FilterDropdown from "./filter-dropdown";
 import FilterModal from "./filter-modal";
 import TimelineFilter from "./timeline-filter";
 import { useBusinessStore } from "@/store/business-store";
-import {
-  srGetDashboardTableData,
-  srGetMonitoringData,
-} from "@/sources/dashboard";
+import { srGetDashboardTableData } from "@/sources/dashboard";
 import Loader from "../common/loader";
 
 interface FilterState {
@@ -595,7 +591,7 @@ export default function TaskManagementDashboard() {
       setIsRefreshing(true);
       setError(null);
 
-      const bussId = selectedBusiness?.bussId || "default";
+      const bussId = selectedBusiness?.bussId || null;
 
       // Set time to current time - 15 minutes
       const now = new Date();
@@ -608,7 +604,7 @@ export default function TaskManagementDashboard() {
 
       console.log("Refreshing data with time range:", timeRange);
 
-      const response = await srGetMonitoringData({
+      const response = await srGetDashboardTableData({
         bussId,
         timeRange,
       });
@@ -652,7 +648,7 @@ export default function TaskManagementDashboard() {
 
   if (error) {
     return (
-      <ThemeControllerProvider>
+      <>
         <Global styles={globalStyles(appTheme)} />
         <ErrorContainer>
           <ErrorText>Error: {error}</ErrorText>
@@ -661,7 +657,7 @@ export default function TaskManagementDashboard() {
             Retry
           </RetryButton>
         </ErrorContainer>
-      </ThemeControllerProvider>
+      </>
     );
   }
 
@@ -678,7 +674,7 @@ export default function TaskManagementDashboard() {
   );
 
   return (
-    <ThemeControllerProvider>
+    <>
       <Global styles={globalStyles(appTheme)} />
       <Toaster />
       <DashboardContainer>
@@ -788,29 +784,24 @@ export default function TaskManagementDashboard() {
                       disabled={isRefreshing}
                       title="Refresh monitoring data (current time - 15 minutes)"
                       css={{
-                        marginLeft: "8px",
-                        minWidth: "auto",
-                        padding: "8px 12px",
-                        backgroundColor: isRefreshing ? "#f1f5f9" : "#3b82f6",
-                        color: isRefreshing ? "#64748b" : "#ffffff",
-                        "&:hover": {
-                          backgroundColor: isRefreshing ? "#f1f5f9" : "#2563eb",
+                        marginLeft: '8px',
+                        minWidth: 'auto',
+                        padding: '8px 12px',
+                        backgroundColor: isRefreshing ? '#f1f5f9' : '#3b82f6',
+                        color: isRefreshing ? '#64748b' : '#ffffff',
+                        '&:hover': {
+                          backgroundColor: isRefreshing ? '#f1f5f9' : '#2563eb',
                         },
                       }}
                     >
-                      <RefreshCw
-                        size={16}
-                        css={{
-                          animation: isRefreshing
-                            ? "spin 1s linear infinite"
-                            : "none",
-                          "@keyframes spin": {
-                            "0%": { transform: "rotate(0deg)" },
-                            "100%": { transform: "rotate(360deg)" },
-                          },
-                        }}
-                      />
-                      {isRefreshing ? "Refreshing..." : "Refresh"}
+                      <RefreshCw size={16} css={{
+                        animation: isRefreshing ? 'spin 1s linear infinite' : 'none',
+                        '@keyframes spin': {
+                          '0%': { transform: 'rotate(0deg)' },
+                          '100%': { transform: 'rotate(360deg)' },
+                        },
+                      }} />
+                      {isRefreshing ? 'Refreshing...' : 'Refresh'}
                     </Button>
                   </SearchBarContainer>
 
@@ -820,8 +811,8 @@ export default function TaskManagementDashboard() {
                       <ActiveFiltersContainer>
                         {activeFilters.map((filter) => (
                           <FilterBadge key={`${filter.key}-${filter.value}`}>
-                            {filter.type === "manual" && "🔍 "}
-                            {filter.type === "search" && "🔎 "}
+                            {filter.type === "manual" && "?? "}
+                            {filter.type === "search" && "?? "}
                             {filter.label}: {filter.value}
                             <FilterBadgeClose
                               onClick={(e) => {
@@ -903,6 +894,6 @@ export default function TaskManagementDashboard() {
           onApplyFilters={applyFiltersAndFetchData}
         />
       </DashboardContainer>
-    </ThemeControllerProvider>
+    </>
   );
 }

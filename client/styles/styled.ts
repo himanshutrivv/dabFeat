@@ -1,5 +1,9 @@
-import styled from "@emotion/styled";
-import { appTheme as theme, AppTheme as Theme } from "./themes";
+
+import styled from '@emotion/styled'
+import {
+  appTheme as theme,
+  AppTheme as Theme,
+} from "../styles/themes/appTheme";
 
 export const media = {
   sm: `@media (min-width: 640px)`,
@@ -26,47 +30,24 @@ export const flexColumn = `
   flex-direction: column;
 `;
 
-export const HeaderSection = styled.div`
-  // display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing?.[2]};
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  padding: ${({ theme }) => theme.spacing?.[6]};
-  margin: 0 auto;
-  backdrop-filter: blur(8px);
+export const cardStyles = (theme: Theme) => `
+  background-color: ${theme.colors.default.card};
+  color: ${theme.colors.default.cardForeground};
+  border: 1px solid ${theme.colors.default.border};
+  border-radius: ${theme.borderRadius.lg};
+  box-shadow: ${theme.shadows.sm};
 `;
 
-export const Title = styled.h1`
-  font-size: ${({ theme }) => theme.fontSizes?.["3xl"]};
-  font-weight: ${({ theme }) => theme.fontWeights?.bold};
-  margin: 0;
-`;
-
-export const Subtitle = styled.p`
-  color: ${({ theme }) => theme.colors?.mutedForeground};
-  margin: 0;
-`;
-
-export const cardStyles = () => `
-  background-color: ${theme.colors?.card};
-  color: ${theme.colors?.cardForeground};
-  border: 1px solid ${theme.colors?.border};
-  border-radius: ${theme.borderRadius?.lg};
-  box-shadow: ${theme.shadows?.sm};
-`;
-
-export const buttonBaseStyles = () => `
+export const buttonBaseStyles = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: ${theme.spacing?.[2]};
-  padding: ${theme.spacing?.[2]} ${theme.spacing?.[4]};
-  border-radius: ${theme.borderRadius?.lg};
-  font-size: ${theme.fontSizes?.sm};
-  font-weight: ${theme.fontWeights?.medium};
-  transition: ${theme.transitions?.colors};
+  gap: ${theme.spacing[2]};
+  padding: ${theme.spacing[2]} ${theme.spacing[4]};
+  border-radius: ${theme.borderRadius.lg};
+  font-size: ${theme.fontSizes.sm};
+  font-weight: ${theme.fontWeights.medium};
+  transition: ${theme.transitions.colors};
   cursor: pointer;
   border: none;
   text-decoration: none;
@@ -79,7 +60,7 @@ export const buttonBaseStyles = () => `
 
 const buttonVariant = (bg: string, fg: string) => (theme: Theme) =>
   `
-  ${buttonBaseStyles()}
+  ${buttonBaseStyles}
   background-color: ${bg};
   color: ${fg};
 
@@ -89,71 +70,72 @@ const buttonVariant = (bg: string, fg: string) => (theme: Theme) =>
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px ${theme.colors?.ring};
+    box-shadow: 0 0 0 2px ${theme.colors.default.ring};
   }
 `;
 
 export const primaryButtonStyles = buttonVariant(
-  theme.colors?.primary!,
-  theme.colors?.primaryForeground!
+  theme.colors.default.primary,
+  theme.colors.default.primaryForeground
 );
 
 export const secondaryButtonStyles = buttonVariant(
-  theme.colors?.secondary!,
-  theme.colors?.secondaryForeground!
+  theme.colors.default.secondary,
+  theme.colors.default.secondaryForeground
 );
 
 export const outlineButtonStyles = (theme: Theme) => `
-  ${buttonBaseStyles()}
-  border: 1px solid ${theme.colors?.border};
-  background-color: ${theme.colors?.background};
-  color: ${theme.colors?.foreground};
+  ${buttonBaseStyles}
+  border: 1px solid ${theme.colors.default.border};
+  background-color: ${theme.colors.default.background};
+  color: ${theme.colors.default.foreground};
 
   &:hover:not(:disabled) {
-    background-color: ${theme.colors?.accent};
-    color: ${theme.colors?.accentForeground};
+    background-color: ${theme.colors.default.accent};
+    color: ${theme.colors.default.accentForeground};
   }
 `;
 
-export const ghostButtonStyles = () => `
-  ${buttonBaseStyles()}
+export const ghostButtonStyles = `
+  ${buttonBaseStyles}
   background-color: transparent;
-  color: ${theme.colors?.foreground};
+  color: ${theme.colors.default.foreground};
 
   &:hover:not(:disabled) {
-    background-color: ${theme.colors?.accent};
-    color: ${theme.colors?.accentForeground};
+    background-color: ${theme.colors.default.accent};
+    color: ${theme.colors.default.accentForeground};
   }
 `;
 
-export const destructiveButtonStyles = buttonVariant(
-  theme.colors?.destructive!,
-  theme.colors?.destructiveForeground!
-);
-
-export const inputStyles = () => `
+export const inputStyles = `
   display: flex;
   width: 100%;
-  border-radius: ${theme.borderRadius?.md};
-  border: 1px solid ${theme.colors?.border};
-  background-color: ${theme.colors?.background};
-  padding: ${theme.spacing?.[2]} ${theme.spacing?.[3]};
-  font-size: ${theme.fontSizes?.sm};
-  color: ${theme.colors?.foreground};
-  transition: ${theme.transitions?.colors};
+  border-radius: ${theme.borderRadius.md};
+  border: 1px solid ${theme.colors.default.border};
+  background-color: ${theme.colors.default.background};
+  padding: ${theme.spacing[2]} ${theme.spacing[3]};
+  font-size: ${theme.fontSizes.sm};
+  color: ${theme.colors.default.foreground};
+  transition: ${theme.transitions.colors};
 
   &::placeholder {
-    color: ${theme.colors?.mutedForeground};
+    color: ${theme.colors.default.mutedForeground};
   }
 
   &:focus {
     outline: none;
-    border-color: ${theme.colors?.ring};
-    box-shadow: 0 0 0 2px ${theme.colors?.ring};
+    border-color: ${theme.colors.default.ring};
+    box-shadow: 0 0 0 2px ${theme.colors.default.ring};
   }
 
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
+`;
+
+export const ErrorMessage = styled.p`
+  font-size: ${theme.fontSizes?.sm};
+  color: ${theme.colors.default.destructive};
+  margin: 0;
 `;

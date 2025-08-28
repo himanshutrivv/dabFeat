@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { AppTheme } from "./themes";
+import { AppTheme } from "./themes/appTheme";
 
 export const globalStyles = (theme: AppTheme) => css`
   *,
@@ -8,30 +8,33 @@ export const globalStyles = (theme: AppTheme) => css`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: ${theme.fonts.sans};
+    font-family: ${(theme as any).fonts};
   }
 
   html {
-    font-family: ${theme.fonts.sans};
-    line-height: ${theme.lineHeights.normal};
+    font-family: ${(theme as any).fonts};
+    line-height: ${(theme as any).lineHeights.normal};
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    overflow: hidden !important;
-    background-color: ${theme.colors.background};
-    color: ${theme.colors.foreground};
-    font-size: ${theme.fontSizes.base};
-    line-height: ${theme.lineHeights.normal};
+    background-color: ${(theme as any).colors.background};
+    color: ${(theme as any).colors.foreground};
+    font-size: ${(theme as any).fontSizes.base};
+    line-height: ${(theme as any).lineHeights.normal};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: ${(theme as any).transitions.colors};
   }
 
   input,
   textarea,
   select,
   div,
-  span {
+  span,
+  button,
+  option,
+  text {
     font: inherit;
   }
 
@@ -61,7 +64,8 @@ export const globalStyles = (theme: AppTheme) => css`
 
   /* Focus styles */
   :focus-visible {
-    outline: 2px solid ${theme.colors.ring};
+    outline: 2px solid
+      ${(theme as any).colors.ring || (theme as any).colors.primary};
     outline-offset: 2px;
   }
 
@@ -72,15 +76,18 @@ export const globalStyles = (theme: AppTheme) => css`
   }
 
   ::-webkit-scrollbar-track {
-    background: ${theme.colors.muted};
+    background: ${(theme as any).colors.muted ||
+  (theme as any).colors.secondary ||
+  (theme as any).colors.card};
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${theme.colors.border};
-    border-radius: ${theme.borderRadius.md};
+    background: ${(theme as any).colors.border};
+    border-radius: ${(theme as any).borderRadius.md};
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: ${theme.colors.mutedForeground};
+    background: ${(theme as any).colors.mutedForeground ||
+  (theme as any).colors.foreground};
   }
 `;
