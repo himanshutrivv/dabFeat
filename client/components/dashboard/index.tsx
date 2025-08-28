@@ -173,7 +173,19 @@ const transformFiltersToAPIFormat = (
   return filterData;
 };
 
-export default function TaskManagementDashboard() {
+// Helper component to handle theme within the context
+const ThemeAwareDashboard: React.FC = () => {
+  const { theme } = useThemeController();
+
+  return (
+    <>
+      <Global styles={globalStyles(theme)} />
+      <TaskManagementDashboardInternal />
+    </>
+  );
+};
+
+function TaskManagementDashboardInternal() {
   const [data, setData] = useState<DashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
