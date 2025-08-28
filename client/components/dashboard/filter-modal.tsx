@@ -85,12 +85,12 @@ const Button = styled.button<{
   cursor: pointer;
   border: none;
   outline: none;
-  
+
   &:focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
   }
-  
+
   &:disabled {
     pointer-events: none;
     opacity: 0.5;
@@ -176,17 +176,17 @@ const Input = styled.input`
   font-size: 14px;
   color: hsl(var(--foreground));
   transition: all 0.2s ease;
-  
+
   &::placeholder {
     color: hsl(var(--muted-foreground));
   }
-  
+
   &:focus {
     outline: none;
     border-color: hsl(var(--ring));
     box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
   }
-  
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
@@ -205,7 +205,7 @@ const Badge = styled.div<{
   font-size: 11px;
   font-weight: 600;
   transition: all 0.2s ease;
-  
+
   ${(props) => {
     switch (props.variant) {
       case "secondary":
@@ -252,12 +252,11 @@ const Separator = styled.div<{
 }>`
   flex-shrink: 0;
   background: hsl(var(--border));
-  
-  ${(props) => 
-    props.orientation === "vertical" 
-      ? "height: 100%; width: 1px;" 
-      : "height: 1px; width: 100%;"
-  }
+
+  ${(props) =>
+    props.orientation === "vertical"
+      ? "height: 100%; width: 1px;"
+      : "height: 1px; width: 100%;"}
 `;
 
 // Collapsible Components
@@ -275,19 +274,22 @@ const CollapsibleTrigger = styled.button`
 const CollapsibleContent = styled.div<{ isOpen?: boolean }>`
   overflow: hidden;
   transition: all 0.2s ease;
-  
-  ${(props) => 
-    props.isOpen 
-      ? "opacity: 1; max-height: 1000px;" 
-      : "opacity: 0; max-height: 0;"
-  }
+
+  ${(props) =>
+    props.isOpen
+      ? "opacity: 1; max-height: 1000px;"
+      : "opacity: 0; max-height: 0;"}
 `;
 
 // Styled components with modern design
 const ModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
   backdrop-filter: blur(8px);
   z-index: 99999998;
   animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -314,7 +316,7 @@ const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
+  box-shadow:
     0 25px 50px -12px rgba(0, 0, 0, 0.25),
     0 0 0 1px rgba(255, 255, 255, 0.1);
 
@@ -338,17 +340,21 @@ const StyledCard = styled(Card)`
   height: 100%;
   border-radius: 24px 0 0 24px;
   border-right: none;
-  background: linear-gradient(135deg, 
-    hsl(var(--background)) 0%, 
-    hsl(var(--background) / 0.98) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--background)) 0%,
+    hsl(var(--background) / 0.98) 100%
+  );
   display: flex;
   flex-direction: column;
 `;
 
 const HeaderContainer = styled(CardHeader)`
-  background: linear-gradient(135deg, 
-    hsl(var(--primary)) 0%, 
-    hsl(var(--primary) / 0.9) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary) / 0.9) 100%
+  );
   color: hsl(var(--primary-foreground));
   border-radius: 24px 0 0 0;
   padding: 24px;
@@ -371,7 +377,7 @@ const CloseButton = styled(Button)`
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: hsl(var(--primary-foreground));
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: scale(1.05);
@@ -406,7 +412,7 @@ const SearchInput = styled(Input)`
   border-radius: 12px;
   border: 2px solid hsl(var(--border));
   background: hsl(var(--background));
-  
+
   &:focus {
     border-color: hsl(var(--primary));
     box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
@@ -424,7 +430,7 @@ const FilterSection = styled(Collapsible)`
   border-radius: 12px;
   background: hsl(var(--card));
   transition: all 0.2s ease;
-  
+
   &:hover {
     border-color: hsl(var(--primary) / 0.3);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -442,11 +448,11 @@ const FilterHeader = styled(CollapsibleTrigger)`
   text-align: left;
   cursor: pointer;
   transition: all 0.2s ease;
-  
+
   &:hover {
     background: hsl(var(--accent) / 0.5);
   }
-  
+
   &[data-state="open"] {
     background: hsl(var(--accent));
     border-bottom: 1px solid hsl(var(--border));
@@ -461,8 +467,9 @@ const FilterHeaderContent = styled.div`
 
 const FilterTitle = styled.h3<{ hasActive: boolean }>`
   font-size: 16px;
-  font-weight: ${props => props.hasActive ? '600' : '500'};
-  color: ${props => props.hasActive ? 'hsl(var(--primary))' : 'hsl(var(--foreground))'};
+  font-weight: ${(props) => (props.hasActive ? "600" : "500")};
+  color: ${(props) =>
+    props.hasActive ? "hsl(var(--primary))" : "hsl(var(--foreground))"};
   margin: 0;
 `;
 
@@ -477,7 +484,7 @@ const FilterCount = styled(Badge)`
 
 const ExpandIcon = styled.div<{ isOpen: boolean }>`
   transition: transform 0.2s ease;
-  transform: ${props => props.isOpen ? 'rotate(90deg)' : 'rotate(0deg)'};
+  transform: ${(props) => (props.isOpen ? "rotate(90deg)" : "rotate(0deg)")};
   color: hsl(var(--muted-foreground));
 `;
 
@@ -491,16 +498,16 @@ const OptionsContainer = styled.div`
   gap: 8px;
   max-height: 200px;
   overflow-y: auto;
-  
+
   &::-webkit-scrollbar {
     width: 6px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: hsl(var(--muted) / 0.3);
     border-radius: 3px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: hsl(var(--muted-foreground) / 0.3);
     border-radius: 3px;
@@ -515,9 +522,12 @@ const OptionItem = styled.div<{ isSelected: boolean }>`
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: ${props => props.isSelected ? 'hsl(var(--primary) / 0.1)' : 'transparent'};
-  border: 1px solid ${props => props.isSelected ? 'hsl(var(--primary) / 0.3)' : 'transparent'};
-  
+  background: ${(props) =>
+    props.isSelected ? "hsl(var(--primary) / 0.1)" : "transparent"};
+  border: 1px solid
+    ${(props) =>
+      props.isSelected ? "hsl(var(--primary) / 0.3)" : "transparent"};
+
   &:hover {
     background: hsl(var(--accent));
     transform: translateX(2px);
@@ -532,14 +542,16 @@ const OptionText = styled.span`
 const CheckBox = styled.div<{ checked: boolean }>`
   width: 18px;
   height: 18px;
-  border: 2px solid ${props => props.checked ? 'hsl(var(--primary))' : 'hsl(var(--border))'};
+  border: 2px solid
+    ${(props) => (props.checked ? "hsl(var(--primary))" : "hsl(var(--border))")};
   border-radius: 4px;
-  background: ${props => props.checked ? 'hsl(var(--primary))' : 'transparent'};
+  background: ${(props) =>
+    props.checked ? "hsl(var(--primary))" : "transparent"};
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  
+
   &:hover {
     border-color: hsl(var(--primary));
   }
@@ -563,13 +575,13 @@ const SectionSearchInput = styled(Input)`
   border: 1px solid hsl(var(--border));
   background: hsl(var(--muted) / 0.3);
   font-size: 13px;
-  
+
   &:focus {
     border-color: hsl(var(--primary));
     background: hsl(var(--background));
     box-shadow: 0 0 0 2px hsl(var(--primary) / 0.1);
   }
-  
+
   &::placeholder {
     color: hsl(var(--muted-foreground));
     font-size: 12px;
@@ -605,7 +617,7 @@ const StyledButton = styled(Button)<{ variant?: any }>`
   border-radius: 12px;
   font-weight: 500;
   transition: all 0.2s ease;
-  
+
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -637,12 +649,14 @@ const FilterModal: React.FC<FilterModalProps> = ({
   onApplyFilters,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [sectionSearchTerms, setSectionSearchTerms] = useState<{[key: string]: string}>({});
+  const [sectionSearchTerms, setSectionSearchTerms] = useState<{
+    [key: string]: string;
+  }>({});
 
   // Filter options based on search term (internal search for filtering columns)
   const filteredOptions = useMemo(() => {
     if (!searchTerm.trim()) return filterOptions;
-    
+
     return filterOptions.filter(
       (option) =>
         option.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -653,22 +667,28 @@ const FilterModal: React.FC<FilterModalProps> = ({
   }, [filterOptions, searchTerm]);
 
   // Filter individual section options based on section-specific search
-  const getFilteredSectionOptions = useCallback((options: string[], sectionKey: string) => {
-    const sectionSearch = sectionSearchTerms[sectionKey];
-    if (!sectionSearch?.trim()) return options;
-    
-    return options.filter(option => 
-      option.toLowerCase().includes(sectionSearch.toLowerCase())
-    );
-  }, [sectionSearchTerms]);
+  const getFilteredSectionOptions = useCallback(
+    (options: string[], sectionKey: string) => {
+      const sectionSearch = sectionSearchTerms[sectionKey];
+      if (!sectionSearch?.trim()) return options;
+
+      return options.filter((option) =>
+        option.toLowerCase().includes(sectionSearch.toLowerCase()),
+      );
+    },
+    [sectionSearchTerms],
+  );
 
   // Handle section search change
-  const handleSectionSearchChange = useCallback((sectionKey: string, value: string) => {
-    setSectionSearchTerms(prev => ({
-      ...prev,
-      [sectionKey]: value
-    }));
-  }, []);
+  const handleSectionSearchChange = useCallback(
+    (sectionKey: string, value: string) => {
+      setSectionSearchTerms((prev) => ({
+        ...prev,
+        [sectionKey]: value,
+      }));
+    },
+    [],
+  );
 
   const handleModalClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -719,7 +739,13 @@ const FilterModal: React.FC<FilterModalProps> = ({
       <ModalContainer>
         <StyledCard>
           <HeaderContainer>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <HeaderTitle>
                 <Sparkles size={20} />
                 Advanced Filters
@@ -756,7 +782,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
               ) : (
                 filteredOptions.map(({ key, label, options }) => {
                   const hasActiveFilters = filters[key]?.length > 0;
-                  const isExpanded = openFilterDropdowns[`modal-${key}`] || false;
+                  const isExpanded =
+                    openFilterDropdowns[`modal-${key}`] || false;
 
                   return (
                     <FilterSection key={key}>
@@ -790,34 +817,52 @@ const FilterModal: React.FC<FilterModalProps> = ({
                             type="text"
                             placeholder={`Search ${label.toLowerCase()}...`}
                             value={sectionSearchTerms[key] || ""}
-                            onChange={(e) => handleSectionSearchChange(key, e.target.value)}
+                            onChange={(e) =>
+                              handleSectionSearchChange(key, e.target.value)
+                            }
                             onClick={(e) => e.stopPropagation()}
                           />
                         </SectionSearchContainer>
-                        
+
                         <OptionsContainer>
                           {(() => {
-                            const filteredSectionOptions = getFilteredSectionOptions(options, key);
-                            
+                            const filteredSectionOptions =
+                              getFilteredSectionOptions(options, key);
+
                             if (filteredSectionOptions.length === 0) {
                               return (
-                                <div style={{ 
-                                  textAlign: 'center', 
-                                  padding: '20px', 
-                                  color: 'hsl(var(--muted-foreground))',
-                                  fontSize: '13px'
-                                }}>
-                                  <div style={{ fontSize: '20px', marginBottom: '8px' }}>🔍</div>
+                                <div
+                                  style={{
+                                    textAlign: "center",
+                                    padding: "20px",
+                                    color: "hsl(var(--muted-foreground))",
+                                    fontSize: "13px",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      fontSize: "20px",
+                                      marginBottom: "8px",
+                                    }}
+                                  >
+                                    🔍
+                                  </div>
                                   No {label.toLowerCase()} found
-                                  <div style={{ fontSize: '11px', marginTop: '4px' }}>
+                                  <div
+                                    style={{
+                                      fontSize: "11px",
+                                      marginTop: "4px",
+                                    }}
+                                  >
                                     Try different search terms
                                   </div>
                                 </div>
                               );
                             }
-                            
+
                             return filteredSectionOptions.map((option) => {
-                              const isSelected = filters[key]?.includes(option) || false;
+                              const isSelected =
+                                filters[key]?.includes(option) || false;
                               return (
                                 <OptionItem
                                   key={option}
