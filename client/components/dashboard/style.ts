@@ -269,7 +269,7 @@ export const FilterContainer = styled.div<{ show: boolean }>`
   background: transparent;
   display: ${(props) => (props.show ? "block" : "none")};
   position: relative;
-  z-index: 10;
+  z-index: 999999;
   isolation: isolate;
 `;
 
@@ -293,7 +293,7 @@ export const FilterGrid = styled.div`
   gap: 16px;
   margin-bottom: 24px;
   position: relative;
-  z-index: 9999;
+  z-index: 999999;
   isolation: isolate;
 
   @media (min-width: 768px) {
@@ -623,7 +623,7 @@ export const ErrorText = styled.div`
 // Select components with fixed hover effects
 export const SelectContainer = styled.div`
   position: relative;
-  z-index: 200;
+  z-index: 999999;
 `;
 
 export const SelectTrigger = styled.button`
@@ -670,7 +670,7 @@ export const SelectContent = styled.div`
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 300;
+  z-index: 9999999;
   max-height: 384px;
   min-width: 200px;
   overflow-y: auto;
@@ -883,7 +883,7 @@ export const FilterModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 9998;
+  z-index: 99999998;
   animation: fadeIn 0.3s ease-out;
   opacity: 1;
 
@@ -910,7 +910,7 @@ export const FilterModalContainer = styled.div`
   box-shadow:
     0 10px 80px rgba(0, 0, 0, 0.12),
     0 4px 16px rgba(0, 0, 0, 0.08);
-  z-index: 9999;
+  z-index: 99999999;
   display: flex;
   flex-direction: column;
   animation: slideInFromRight 0.3s ease-out;
@@ -1159,7 +1159,7 @@ export const FilterDropdownFilterGroup = styled.div``;
 
 export const FilterDropdownSelectContainer = styled.div`
   position: relative;
-  z-index: 50;
+  z-index: 999999;
   isolation: isolate;
 `;
 
@@ -1208,7 +1208,7 @@ export const FilterDropdownSelectContent = styled.div`
   top: 100%;
   left: 0;
   right: auto;
-  z-index: 999;
+  z-index: 9999999;
   max-height: 384px;
   min-width: 320px;
   max-width: calc(100vw - 32px);
@@ -1270,7 +1270,7 @@ export const TimelineFilterGroup = styled.div``;
 
 export const TimelineFilterSelectContainer = styled.div`
   position: relative;
-  z-index: 200;
+  z-index: 999999;
 `;
 
 export const TimelineFilterSelectTrigger = styled.button`
