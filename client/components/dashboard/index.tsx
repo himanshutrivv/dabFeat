@@ -557,17 +557,17 @@ export default function TaskManagementDashboard() {
       <DashboardContainer>
         <MainContent>
           <Header>
-            <div>
-              <h1 style={{ margin: 0, fontSize: "24px", fontWeight: "600" }}>
+            <HeaderContent>
+              <DashboardTitle>
                 Dashboard
-              </h1>
-              <p style={{ margin: 0, color: "#6b7280", fontSize: "14px" }}>
+              </DashboardTitle>
+              <DashboardSubtitle>
                 Manage and view your data
-              </p>
-            </div>
+              </DashboardSubtitle>
+            </HeaderContent>
           </Header>
 
-          <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "24px", flex: 1, overflow: "hidden" }}>
+          <MainContentLayout>
             {(hasSearchableColumns || hasFilterableColumns) && (
               <FilterCard>
                 <FilterCardHeader>
@@ -675,13 +675,13 @@ export default function TaskManagementDashboard() {
               </FilterCard>
             )}
 
-            <div style={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+            <TableContainer>
               <DashboardTable
                 data={filteredData}
                 columnData={data?.columnData || {}}
               />
-            </div>
-          </div>
+            </TableContainer>
+          </MainContentLayout>
         </MainContent>
 
         <FilterModal
