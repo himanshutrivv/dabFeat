@@ -265,7 +265,7 @@ export default function TaskManagementDashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bussId = selectedBusiness?.bussId || "demo-business-id";
+      const bussId = selectedBusiness?.bussId || "default"; // TODO: Handle missing business selection properly
       try {
         setLoading(true);
         setError(null);
