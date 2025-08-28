@@ -196,6 +196,40 @@ const SearchInput = styled(Input)`
   }
 `;
 
+const SectionSearchContainer = styled.div`
+  position: relative;
+  margin-bottom: 12px;
+`;
+
+const SectionSearchInput = styled(Input)`
+  padding-left: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--muted) / 0.3);
+  font-size: 13px;
+
+  &:focus {
+    border-color: hsl(var(--primary));
+    background: hsl(var(--background));
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.1);
+  }
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+    font-size: 12px;
+  }
+`;
+
+const SectionSearchIcon = styled.div`
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+  z-index: 1;
+`;
+
 const FiltersGrid = styled.div`
   display: flex;
   flex-direction: column;
