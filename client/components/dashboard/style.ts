@@ -818,11 +818,12 @@ export const TimeLineFilterSection = styled.div<{ theme?: any }>`
 `;
 
 export const TimeLineFilterLabel = styled.label<{ theme?: any }>`
-  font-size: ${({ theme }) => theme?.fontSizes?.sm || '14px'};
-  font-weight: ${({ theme }) => theme?.fontWeights?.medium || '500'};
-  margin-bottom: ${({ theme }) => theme?.spacing?.[2] || '8px'};
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
   display: block;
-  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+  color: #374151;
+  letter-spacing: -0.025em;
 `;
 
 export const TimeLineFilterInputGrid = styled.div<{ theme?: any }>`
