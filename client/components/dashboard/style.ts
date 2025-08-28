@@ -666,25 +666,31 @@ export const SelectValue = styled.span`
 `;
 
 export const SelectContent = styled.div`
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 100%;
   left: 0;
   right: 0;
-  bottom: 0;
   z-index: 999999;
+  min-height: 600px;
+  height: calc(100vh - 200px);
+  max-height: none;
+  min-width: 200px;
   overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background-color: white !important;
   color: hsl(var(--foreground));
   opacity: 1 !important;
+  box-shadow:
+    0 20px 100px rgba(0, 0, 0, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.15);
+  margin-top: 4px;
   animation: none;
   pointer-events: auto;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 100px;
+  padding: 16px;
 
   &.filter-content {
-    background-color: rgba(0, 0, 0, 0.5) !important;
+    background-color: white !important;
     opacity: 1 !important;
   }
 `;
@@ -1191,25 +1197,32 @@ export const FilterDropdownSelectValue = styled.span`
 `;
 
 export const FilterDropdownSelectContent = styled.div`
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 100%;
   left: 0;
   right: 0;
-  bottom: 0;
   z-index: 999999;
+  min-height: 600px;
+  height: calc(100vh - 200px);
+  max-height: none;
+  min-width: 320px;
+  max-width: none;
   overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background-color: white !important;
   color: hsl(var(--foreground));
   opacity: 1 !important;
+  padding: 16px;
+  box-shadow:
+    0 20px 100px rgba(0, 0, 0, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.15);
+  margin-top: 4px;
   animation: none;
   pointer-events: auto;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 100px;
 
   &.filter-content {
-    background-color: rgba(0, 0, 0, 0.5) !important;
+    background-color: white !important;
     opacity: 1 !important;
   }
 `;
