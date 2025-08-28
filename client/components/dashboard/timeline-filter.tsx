@@ -99,23 +99,23 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
   );
 
   return (
-    <FilterGroup>
-      <SelectContainer data-dropdown-container>
-        <SelectTrigger onClick={onToggle}>
-          <SelectValue>
+    <TimelineFilterFilterGroup>
+      <TimelineFilterSelectContainer data-dropdown-container>
+        <TimelineFilterSelectTriggerNew onClick={onToggle}>
+          <TimelineFilterSelectValueNew>
             {startDateTime && endDateTime
               ? "Custom Range"
               : "Select Time Range"}
-          </SelectValue>
+          </TimelineFilterSelectValueNew>
           <ChevronDown size={16} />
-        </SelectTrigger>
+        </TimelineFilterSelectTriggerNew>
         {isOpen && (
-          <TimelineFilterContent>
-            <TimelineFilterSection>
+          <TimelineFilterContentNew>
+            <TimelineFilterSectionNew>
               <div>
-                <TimelineFilterLabel>Start Date & Time</TimelineFilterLabel>
-                <TimelineFilterInputGrid>
-                  <TimelineInput
+                <TimelineFilterLabelNew>Start Date & Time</TimelineFilterLabelNew>
+                <TimelineFilterInputGridNew>
+                  <TimelineFilterInputNew
                     type="date"
                     value={
                       startDateTime
@@ -129,7 +129,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleDateChange(e, true)}
                   />
-                  <TimelineInput
+                  <TimelineFilterInputNew
                     type="time"
                     step="1"
                     value={
@@ -140,12 +140,12 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleTimeChange(e, true)}
                   />
-                </TimelineFilterInputGrid>
+                </TimelineFilterInputGridNew>
               </div>
               <div>
-                <TimelineFilterLabel>End Date & Time</TimelineFilterLabel>
-                <TimelineFilterInputGrid>
-                  <TimelineInput
+                <TimelineFilterLabelNew>End Date & Time</TimelineFilterLabelNew>
+                <TimelineFilterInputGridNew>
+                  <TimelineFilterInputNew
                     type="date"
                     value={
                       endDateTime
@@ -159,7 +159,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleDateChange(e, false)}
                   />
-                  <TimelineInput
+                  <TimelineFilterInputNew
                     type="time"
                     step="1"
                     value={
@@ -168,31 +168,31 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleTimeChange(e, false)}
                   />
-                </TimelineFilterInputGrid>
+                </TimelineFilterInputGridNew>
               </div>
-              <TimelineFilterNote>
+              <TimelineFilterNoteNew>
                 Maximum time range: 5 minutes
-              </TimelineFilterNote>
-              <TimelineFilterButtonGrid>
-                <Button
+              </TimelineFilterNoteNew>
+              <TimelineFilterButtonGridNew>
+                <TimelineFilterButtonNew
                   size="sm"
                   variant="outline"
                   onClick={(e) => handleButtonClick(e, "reset")}
                 >
                   Reset
-                </Button>
-                <Button
+                </TimelineFilterButtonNew>
+                <TimelineFilterButtonNew
                   size="sm"
                   onClick={(e) => handleButtonClick(e, "apply")}
                 >
                   Apply
-                </Button>
-              </TimelineFilterButtonGrid>
-            </TimelineFilterSection>
-          </TimelineFilterContent>
+                </TimelineFilterButtonNew>
+              </TimelineFilterButtonGridNew>
+            </TimelineFilterSectionNew>
+          </TimelineFilterContentNew>
         )}
-      </SelectContainer>
-    </FilterGroup>
+      </TimelineFilterSelectContainer>
+    </TimelineFilterFilterGroup>
   );
 };
 
