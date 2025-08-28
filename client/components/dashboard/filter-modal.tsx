@@ -1,17 +1,20 @@
 "use client";
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useMemo } from "react";
 import styled from "@emotion/styled";
-import { Search, X } from "lucide-react";
+import { Search, X, Filter, ChevronDown, ChevronRight, Sparkles } from "lucide-react";
 import {
   flexBetween,
   flexCenter,
   flexColumn,
-  cardStyles,
-  buttonBaseStyles,
-  inputStyles,
-  primaryButtonStyles,
-  outlineButtonStyles,
 } from "../../styles/styled";
+
+// Import modern UI components
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
 
 interface FilterState {
   [key: string]: string[];
@@ -42,270 +45,311 @@ interface FilterModalProps {
   onApplyFilters: () => Promise<void>;
 }
 
-const MainFilterBackdrop = styled.div`
+// Styled components with modern design
+const ModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%);
+  backdrop-filter: blur(8px);
   z-index: 99999998;
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   @keyframes fadeIn {
     from {
       opacity: 0;
+      backdrop-filter: blur(0px);
     }
     to {
       opacity: 1;
+      backdrop-filter: blur(8px);
     }
   }
 `;
 
-const MainFilterModal = styled.div`
+const ModalContainer = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  width: 33.333333%;
+  width: 420px;
   height: 100vh;
-  background-color: ${({ theme }) => theme.colors.background};
-  border-left: 1px solid ${({ theme }) => theme.colors.border};
-  border-top-left-radius: ${({ theme }) => theme.borderRadius["3xl"]};
-  border-bottom-left-radius: ${({ theme }) => theme.borderRadius["3xl"]};
-  box-shadow: ${({ theme }) => theme.shadows.xl};
   z-index: 99999999;
   display: flex;
   flex-direction: column;
-  animation: slideInFromRight 0.3s ease-out;
+  animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
 
-  @keyframes slideInFromRight {
+  @keyframes slideIn {
     from {
       transform: translateX(100%);
+      opacity: 0;
     }
     to {
       transform: translateX(0);
+      opacity: 1;
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
-const MainFilterHeader = styled.div`
-  ${flexBetween}
-  padding: ${({ theme }) => theme.spacing[6]};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+const StyledCard = styled(Card)`
+  height: 100%;
+  border-radius: 24px 0 0 24px;
+  border-right: none;
+  background: linear-gradient(135deg, 
+    hsl(var(--background)) 0%, 
+    hsl(var(--background) / 0.98) 100%);
+  display: flex;
+  flex-direction: column;
+`;
+
+const HeaderContainer = styled(CardHeader)`
+  background: linear-gradient(135deg, 
+    hsl(var(--primary)) 0%, 
+    hsl(var(--primary) / 0.9) 100%);
+  color: hsl(var(--primary-foreground));
+  border-radius: 24px 0 0 0;
+  padding: 24px;
   flex-shrink: 0;
 `;
 
-const MainFilterContent = styled.div`
+const HeaderTitle = styled(CardTitle)`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+`;
+
+const CloseButton = styled(Button)`
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: hsl(var(--primary-foreground));
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+  }
+`;
+
+const ContentArea = styled(CardContent)`
   flex: 1;
   overflow-y: auto;
-  padding: ${({ theme }) => theme.spacing[6]};
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
-const MainFilterSearch = styled.div`
+const SearchContainer = styled.div`
   position: relative;
-  margin-bottom: ${({ theme }) => theme.spacing[4]};
 `;
 
-const MainFilterListItem = styled.div`
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+const SearchIcon = styled.div`
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+  z-index: 1;
+`;
 
-  &:last-child {
-    border-bottom: none;
+const SearchInput = styled(Input)`
+  padding-left: 40px;
+  height: 44px;
+  border-radius: 12px;
+  border: 2px solid hsl(var(--border));
+  background: hsl(var(--background));
+  
+  &:focus {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
   }
 `;
 
-const MainFilterItemHeader = styled.div<{ isActive?: boolean }>`
-  ${flexBetween}
-  padding: ${({ theme }) => theme.spacing[4]} 0;
-  cursor: pointer;
-  transition: ${({ theme }) => theme.transitions.all};
-  color: ${(props) =>
-    props.isActive
-      ? props.theme.colors.primary
-      : props.theme.colors.foreground};
+const FiltersGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
 
+const FilterSection = styled(Collapsible)`
+  border: 1px solid hsl(var(--border));
+  border-radius: 12px;
+  background: hsl(var(--card));
+  transition: all 0.2s ease;
+  
   &:hover {
-    background-color: ${({ theme }) => theme.colors.muted};
-    margin: 0 -${({ theme }) => theme.spacing[6]};
-    padding-left: ${({ theme }) => theme.spacing[6]};
-    padding-right: ${({ theme }) => theme.spacing[6]};
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   }
 `;
 
-const MainFilterExpandIcon = styled.div<{ isExpanded: boolean }>`
-  ${flexCenter}
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: ${(props) =>
-    props.isExpanded ? props.theme.colors.primary : props.theme.colors.muted};
-  color: ${(props) =>
-    props.isExpanded ? "white" : props.theme.colors.mutedForeground};
-  transition: ${({ theme }) => theme.transitions.all};
+const FilterHeader = styled(CollapsibleTrigger)`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: hsl(var(--accent) / 0.5);
+  }
+  
+  &[data-state="open"] {
+    background: hsl(var(--accent));
+    border-bottom: 1px solid hsl(var(--border));
+  }
 `;
 
-const MainFilterOptionsContainer = styled.div`
-  padding: 0 0 ${({ theme }) => theme.spacing[4]} 0;
-  margin-top: -${({ theme }) => theme.spacing[2]};
+const FilterHeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
 `;
 
-const MainFilterOptions = styled.div`
-  max-height: 256px;
-  overflow-y: auto;
+const FilterTitle = styled.h3<{ hasActive: boolean }>`
+  font-size: 16px;
+  font-weight: ${props => props.hasActive ? '600' : '500'};
+  color: ${props => props.hasActive ? 'hsl(var(--primary))' : 'hsl(var(--foreground))'};
+  margin: 0;
 `;
 
-const MainFilterCheckbox = styled.div<{ selected: boolean }>`
-  width: 20px;
+const FilterCount = styled(Badge)`
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  font-size: 11px;
+  min-width: 20px;
   height: 20px;
-  border: 2px solid
-    ${(props) =>
-      props.selected ? props.theme.colors.primary : props.theme.colors.border};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  background-color: ${(props) =>
-    props.selected ? props.theme.colors.primary : "transparent"};
+  border-radius: 10px;
+`;
+
+const ExpandIcon = styled.div<{ isOpen: boolean }>`
+  transition: transform 0.2s ease;
+  transform: ${props => props.isOpen ? 'rotate(90deg)' : 'rotate(0deg)'};
+  color: hsl(var(--muted-foreground));
+`;
+
+const FilterOptions = styled(CollapsibleContent)`
+  padding: 0 20px 20px 20px;
+`;
+
+const OptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: hsl(var(--muted) / 0.3);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+`;
+
+const OptionItem = styled.div<{ isSelected: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: ${props => props.isSelected ? 'hsl(var(--primary) / 0.1)' : 'transparent'};
+  border: 1px solid ${props => props.isSelected ? 'hsl(var(--primary) / 0.3)' : 'transparent'};
+  
+  &:hover {
+    background: hsl(var(--accent));
+    transform: translateX(2px);
+  }
+`;
+
+const OptionText = styled.span`
+  font-size: 14px;
+  color: hsl(var(--foreground));
+`;
+
+const CheckBox = styled.div<{ checked: boolean }>`
+  width: 18px;
+  height: 18px;
+  border: 2px solid ${props => props.checked ? 'hsl(var(--primary))' : 'hsl(var(--border))'};
+  border-radius: 4px;
+  background: ${props => props.checked ? 'hsl(var(--primary))' : 'transparent'};
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: ${({ theme }) => theme.transitions.all};
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: hsl(var(--primary));
+  }
 `;
 
-const MainFilterFooter = styled.div`
-  padding: ${({ theme }) => theme.spacing[6]};
-  border-top: 1px solid ${({ theme }) => theme.colors.border};
+const CheckIcon = styled.svg`
+  width: 10px;
+  height: 10px;
+  color: hsl(var(--primary-foreground));
+`;
+
+const FooterContainer = styled(CardFooter)`
+  padding: 24px;
+  border-top: 1px solid hsl(var(--border));
   flex-shrink: 0;
+  background: hsl(var(--background) / 0.8);
+  backdrop-filter: blur(8px);
 `;
 
-const Button = styled.button<{
-  variant?: "default" | "outline";
-}>`
-  ${buttonBaseStyles()}
-
-  ${(props) => {
-    switch (props.variant) {
-      case "outline":
-        return outlineButtonStyles(props.theme);
-      default:
-        return primaryButtonStyles(props.theme);
-    }
-  }}
-
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
-  margin-bottom: ${({ theme }) => theme.spacing[2]};
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 `;
 
-const FilterModalHeaderTitle = styled.h2`
-  margin: 0;
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.fontWeights.semibold};
-  color: ${({ theme }) => theme.colors.foreground};
-`;
-
-const FilterModalSearchIcon = styled.div`
-  position: absolute;
-  left: ${({ theme }) => theme.spacing[3]};
-  top: 50%;
-  transform: translateY(-50%);
-  color: ${({ theme }) => theme.colors.mutedForeground};
-`;
-
-const FilterModalSearchInput = styled.input`
-  ${inputStyles()}
-  padding-left: ${({ theme }) => theme.spacing[10]};
-`;
-
-const FilterModalSectionContent = styled.div`
-  ${flexColumn}
-  gap: 0;
-`;
-
-const FilterModalItemTitle = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.base};
-  font-weight: ${({ theme }) => theme.fontWeights.normal};
-`;
-
-const FilterModalItemTitleActive = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.base};
-  font-weight: ${({ theme }) => theme.fontWeights.semibold};
-`;
-
-const FilterModalItemCount = styled.span`
-  margin-left: ${({ theme }) => theme.spacing[2]};
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: white;
-  padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[2]};
-  border-radius: ${({ theme }) => theme.borderRadius.full};
-`;
-
-const FilterModalSectionSearchIcon = styled.div`
-  position: absolute;
-  left: ${({ theme }) => theme.spacing[3]};
-  top: 50%;
-  transform: translateY(-50%);
-  color: ${({ theme }) => theme.colors.mutedForeground};
-`;
-
-const FilterModalSectionSearchInput = styled.input`
-  ${inputStyles()}
-  padding-left: ${({ theme }) => theme.spacing[10]};
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  background-color: ${({ theme }) => theme.colors.muted};
-`;
-
-const FilterModalOptionItem = styled.div<{ isSelected?: boolean }>`
-  ${flexBetween}
-  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) =>
-    theme.spacing[3]};
-  cursor: pointer;
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  background-color: ${(props) =>
-    props.isSelected ? props.theme.colors.accent : "transparent"};
-  margin-bottom: ${({ theme }) => theme.spacing[1]};
-  transition: ${({ theme }) => theme.transitions.all};
-
+const StyledButton = styled(Button)<{ variant?: any }>`
+  height: 44px;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  
   &:hover {
-    background-color: ${({ theme }) => theme.colors.accent};
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 `;
 
-const FilterModalOptionText = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.foreground};
+const EmptyState = styled.div`
+  text-align: center;
+  padding: 40px 20px;
+  color: hsl(var(--muted-foreground));
 `;
 
-const FilterModalCheckIcon = styled.svg`
-  color: white;
-`;
-
-const FilterModalSearchContainer = styled(MainFilterSearch)`
-  margin-bottom: ${({ theme }) => theme.spacing[6]};
-`;
-
-const FilterModalSearchContainerSmall = styled(MainFilterSearch)`
-  margin-bottom: ${({ theme }) => theme.spacing[3]};
-`;
-
-const CloseButton = styled.button`
-  ${flexCenter}
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  color: ${({ theme }) => theme.colors.mutedForeground};
-  transition: ${({ theme }) => theme.transitions.all};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.muted};
-    color: ${({ theme }) => theme.colors.foreground};
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.ring};
-  }
+const EmptyIcon = styled.div`
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
 `;
 
 const FilterModal: React.FC<FilterModalProps> = ({
@@ -320,16 +364,21 @@ const FilterModal: React.FC<FilterModalProps> = ({
   onToggleFilterSection,
   onApplyFilters,
 }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Filter options based on search term (internal search for filtering columns)
+  const filteredOptions = useMemo(() => {
+    if (!searchTerm.trim()) return filterOptions;
+    
+    return filterOptions.filter(option => 
+      option.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      option.options.some(opt => opt.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+  }, [filterOptions, searchTerm]);
+
   const handleModalClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
   }, []);
-
-  const handleInputInteraction = useCallback(
-    (e: React.MouseEvent | React.FocusEvent) => {
-      e.stopPropagation();
-    },
-    [],
-  );
 
   const handleFilterOptionClick = useCallback(
     (e: React.MouseEvent, key: string, option: string) => {
@@ -338,14 +387,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
       onFilterChange(key, option);
     },
     [onFilterChange],
-  );
-
-  const handleSectionToggle = useCallback(
-    (e: React.MouseEvent, key: string) => {
-      e.stopPropagation();
-      onToggleFilterSection(`modal-${key}`);
-    },
-    [onToggleFilterSection],
   );
 
   const handleClearAll = useCallback(
@@ -364,7 +405,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
         onClose();
       } catch (error) {
         console.error("Error applying filters:", error);
-        // Keep modal open if there's an error
       }
     },
     [onApplyFilters, onClose],
@@ -374,142 +414,120 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
   return (
     <>
-      <MainFilterBackdrop onClick={onClose} />
-      <MainFilterModal
-        data-modal-container
-        onClick={handleModalClick}
-        onMouseDown={handleModalClick}
-        onMouseUp={handleModalClick}
-      >
-        <MainFilterHeader>
-          <FilterModalHeaderTitle>Filters</FilterModalHeaderTitle>
-          <CloseButton onClick={onClose}>
-            <X size={20} />
-          </CloseButton>
-        </MainFilterHeader>
+      <ModalBackdrop onClick={onClose} />
+      <ModalContainer>
+        <StyledCard>
+          <HeaderContainer>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <HeaderTitle>
+                <Sparkles size={20} />
+                Advanced Filters
+              </HeaderTitle>
+              <CloseButton variant="ghost" size="icon" onClick={onClose}>
+                <X size={18} />
+              </CloseButton>
+            </div>
+          </HeaderContainer>
 
-        <MainFilterContent>
-          <FilterModalSearchContainer>
-            <FilterModalSearchIcon>
-              <Search size={16} />
-            </FilterModalSearchIcon>
-            <FilterModalSearchInput
-              type="text"
-              placeholder="Search all filters..."
-              onClick={handleInputInteraction}
-              onFocus={handleInputInteraction}
-              onChange={(e) => e.stopPropagation()}
-            />
-          </FilterModalSearchContainer>
+          <ContentArea>
+            {/* Internal search for filtering available filter options/columns */}
+            <SearchContainer>
+              <SearchIcon>
+                <Search size={16} />
+              </SearchIcon>
+              <SearchInput
+                type="text"
+                placeholder="Search filter categories..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </SearchContainer>
 
-          <FilterModalSectionContent>
-            {filterOptions.map(({ key, label, options }) => {
-              const hasActiveFilters = filters[key]?.length > 0;
-              const isExpanded = openFilterDropdowns[`modal-${key}`] || false;
+            <Separator />
 
-              return (
-                <MainFilterListItem key={key}>
-                  <MainFilterItemHeader
-                    onClick={(e) => handleSectionToggle(e, key)}
-                    onMouseDown={handleModalClick}
-                    isActive={hasActiveFilters}
-                  >
-                    {hasActiveFilters ? (
-                      <FilterModalItemTitleActive>
-                        {label}
-                        <FilterModalItemCount>
-                          {filters[key]?.length}
-                        </FilterModalItemCount>
-                      </FilterModalItemTitleActive>
-                    ) : (
-                      <FilterModalItemTitle>{label}</FilterModalItemTitle>
-                    )}
-                    <MainFilterExpandIcon isExpanded={isExpanded}>
-                      {isExpanded ? (
-                        <X size={18} />
-                      ) : (
-                        <svg
-                          width={18}
-                          height={18}
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <line x1={12} y1={5} x2={12} y2={19}></line>
-                          <line x1={5} y1={12} x2={19} y2={12}></line>
-                        </svg>
-                      )}
-                    </MainFilterExpandIcon>
-                  </MainFilterItemHeader>
+            <FiltersGrid>
+              {filteredOptions.length === 0 ? (
+                <EmptyState>
+                  <EmptyIcon>🔍</EmptyIcon>
+                  <h3>No filters found</h3>
+                  <p>Try adjusting your search terms</p>
+                </EmptyState>
+              ) : (
+                filteredOptions.map(({ key, label, options }) => {
+                  const hasActiveFilters = filters[key]?.length > 0;
+                  const isExpanded = openFilterDropdowns[`modal-${key}`] || false;
 
-                  {isExpanded && (
-                    <MainFilterOptionsContainer>
-                      <FilterModalSearchContainerSmall>
-                        <FilterModalSectionSearchIcon>
-                          <Search size={14} />
-                        </FilterModalSectionSearchIcon>
-                        <FilterModalSectionSearchInput
-                          type="text"
-                          placeholder={`Search ${label.toLowerCase()}...`}
-                          onClick={handleInputInteraction}
-                          onFocus={handleInputInteraction}
-                          onChange={(e) => e.stopPropagation()}
-                        />
-                      </FilterModalSearchContainerSmall>
+                  return (
+                    <FilterSection 
+                      key={key}
+                      open={isExpanded}
+                      onOpenChange={() => onToggleFilterSection(`modal-${key}`)}
+                    >
+                      <FilterHeader>
+                        <FilterHeaderContent>
+                          <Filter size={16} />
+                          <FilterTitle hasActive={hasActiveFilters}>
+                            {label}
+                          </FilterTitle>
+                          {hasActiveFilters && (
+                            <FilterCount variant="default">
+                              {filters[key]?.length}
+                            </FilterCount>
+                          )}
+                        </FilterHeaderContent>
+                        <ExpandIcon isOpen={isExpanded}>
+                          <ChevronRight size={16} />
+                        </ExpandIcon>
+                      </FilterHeader>
 
-                      <MainFilterOptions>
-                        {options.map((option) => {
-                          const isSelected =
-                            filters[key]?.includes(option) || false;
-                          return (
-                            <FilterModalOptionItem
-                              key={option}
-                              onClick={(e) =>
-                                handleFilterOptionClick(e, key, option)
-                              }
-                              isSelected={isSelected}
-                            >
-                              <FilterModalOptionText>
-                                {option}
-                              </FilterModalOptionText>
-                              <MainFilterCheckbox selected={isSelected}>
-                                {isSelected && (
-                                  <FilterModalCheckIcon
-                                    width={12}
-                                    height={12}
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </FilterModalCheckIcon>
-                                )}
-                              </MainFilterCheckbox>
-                            </FilterModalOptionItem>
-                          );
-                        })}
-                      </MainFilterOptions>
-                    </MainFilterOptionsContainer>
-                  )}
-                </MainFilterListItem>
-              );
-            })}
-          </FilterModalSectionContent>
-        </MainFilterContent>
+                      <FilterOptions>
+                        <OptionsContainer>
+                          {options.map((option) => {
+                            const isSelected = filters[key]?.includes(option) || false;
+                            return (
+                              <OptionItem
+                                key={option}
+                                isSelected={isSelected}
+                                onClick={(e) => handleFilterOptionClick(e, key, option)}
+                              >
+                                <OptionText>{option}</OptionText>
+                                <CheckBox checked={isSelected}>
+                                  {isSelected && (
+                                    <CheckIcon viewBox="0 0 20 20" fill="currentColor">
+                                      <path
+                                        fillRule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clipRule="evenodd"
+                                      />
+                                    </CheckIcon>
+                                  )}
+                                </CheckBox>
+                              </OptionItem>
+                            );
+                          })}
+                        </OptionsContainer>
+                      </FilterOptions>
+                    </FilterSection>
+                  );
+                })
+              )}
+            </FiltersGrid>
+          </ContentArea>
 
-        <MainFilterFooter>
-          {activeFilters.length > 0 && (
-            <Button variant="outline" onClick={handleClearAll}>
-              Clear all ({activeFilters.length})
-            </Button>
-          )}
-          <Button onClick={handleApplyFilters}>Apply Filters</Button>
-        </MainFilterFooter>
-      </MainFilterModal>
+          <FooterContainer>
+            <ButtonContainer>
+              {activeFilters.length > 0 && (
+                <StyledButton variant="outline" onClick={handleClearAll}>
+                  Clear All Filters ({activeFilters.length})
+                </StyledButton>
+              )}
+              <StyledButton onClick={handleApplyFilters}>
+                Apply Filters
+              </StyledButton>
+            </ButtonContainer>
+          </FooterContainer>
+        </StyledCard>
+      </ModalContainer>
     </>
   );
 };
