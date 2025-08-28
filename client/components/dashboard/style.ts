@@ -213,7 +213,7 @@ export const MainContentLayout = styled.div`
   flex-direction: column;
   gap: 24px;
   flex: 1;
-  overflow: hidden;
+  overflow: visible;
 `;
 
 export const TableSection = styled.div`
@@ -269,7 +269,8 @@ export const FilterContainer = styled.div<{ show: boolean }>`
   background: transparent;
   display: ${(props) => (props.show ? "block" : "none")};
   position: relative;
-  z-index: 100;
+  z-index: 9999;
+  isolation: isolate;
 `;
 
 export const SearchBarContainer = styled.div`
@@ -292,7 +293,8 @@ export const FilterGrid = styled.div`
   gap: 16px;
   margin-bottom: 24px;
   position: relative;
-  z-index: 100;
+  z-index: 9999;
+  isolation: isolate;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -802,7 +804,6 @@ export const TableHeader = styled.th`
   min-width: 150px;
   position: sticky;
   top: 0;
-  backdrop-filter: blur(12px);
   z-index: 5;
   border: 1px solid #1d4ed8;
   border-bottom: 2px solid #1e40af;
@@ -1158,7 +1159,8 @@ export const FilterDropdownFilterGroup = styled.div``;
 
 export const FilterDropdownSelectContainer = styled.div`
   position: relative;
-  z-index: 200;
+  z-index: 10000;
+  isolation: isolate;
 `;
 
 export const FilterDropdownSelectTrigger = styled.button`
@@ -1205,7 +1207,7 @@ export const FilterDropdownSelectContent = styled.div`
   top: 100%;
   left: 0;
   right: auto;
-  z-index: 300;
+  z-index: 10001;
   max-height: 384px;
   min-width: 320px;
   max-width: calc(100vw - 32px);
