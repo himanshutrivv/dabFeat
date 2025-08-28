@@ -591,6 +591,32 @@ export const SearchInput = styled.input`
   }
 `;
 
+export const SearchButton = styled(Button)`
+  height: 48px;
+  padding: 0 24px;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  border-radius: 16px;
+  font-weight: 500;
+  font-size: 16px;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: hsl(var(--primary) / 0.9);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
 export const TimelineInput = styled.input`
   width: 100%;
   padding: 8px 12px;
