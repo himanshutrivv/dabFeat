@@ -142,7 +142,7 @@ export const FilterGrid = styled.div`
   gap: 16px;
   margin-bottom: 24px;
   position: relative;
-  z-index: 10;
+  z-index: 30;
   isolation: isolate;
 
   @media (min-width: 768px) {
