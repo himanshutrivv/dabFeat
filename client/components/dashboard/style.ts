@@ -979,17 +979,17 @@ export const FilterModalCount = styled.div<{ theme?: any }>`
   font-weight: 600;
 `;
 
-export const filterModalExpandIcon = styled.div<{ isOpen: boolean; theme?: any }>`
+export const FilterModalExpandIcon = styled.div<{ isOpen: boolean; theme?: any }>`
   transition: transform 0.2s ease;
   transform: ${(props) => (props.isOpen ? "rotate(90deg)" : "rotate(0deg)")};
   color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
 `;
 
-export const filterModalOptionsContainer = styled.div`
+export const FilterModalOptionsContainer = styled.div`
   padding: 0 20px 20px 20px;
 `;
 
-export const filterModalOptionsInner = styled.div`
+export const FilterModalOptionsInner = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -1011,7 +1011,7 @@ export const filterModalOptionsInner = styled.div`
   }
 `;
 
-export const filterModalCheckbox = styled.div<{ selected: boolean; theme?: any }>`
+export const FilterModalCheckbox = styled.div<{ selected: boolean; theme?: any }>`
   width: 18px;
   height: 18px;
   border: 2px solid
@@ -1030,21 +1030,21 @@ export const filterModalCheckbox = styled.div<{ selected: boolean; theme?: any }
   }
 `;
 
-export const filterModalFooter = styled.div<{ theme?: any }>`
+export const FilterModalFooter = styled.div<{ theme?: any }>`
   padding: ${({ theme }) => theme?.spacing?.[6] || '24px'};
   border-top: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
   flex-shrink: 0;
   background: ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'};
 `;
 
-export const filterModalButtonContainer = styled.div`
+export const FilterModalButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 100%;
 `;
 
-export const filterModalButton = styled.button<{
+export const FilterModalButton = styled.button<{
   variant?: "default" | "outline";
   theme?: any;
 }>`
@@ -1107,7 +1107,7 @@ export const filterModalButton = styled.button<{
   }}
 `;
 
-export const filterModalHeaderTitle = styled.h2<{ theme?: any }>`
+export const FilterModalHeaderTitle = styled.h2<{ theme?: any }>`
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1117,7 +1117,7 @@ export const filterModalHeaderTitle = styled.h2<{ theme?: any }>`
   color: ${({ theme }) => theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
 `;
 
-export const filterModalSearchIcon = styled.div<{ theme?: any }>`
+export const FilterModalSearchIcon = styled.div<{ theme?: any }>`
   position: absolute;
   left: 12px;
   top: 50%;
@@ -1126,7 +1126,7 @@ export const filterModalSearchIcon = styled.div<{ theme?: any }>`
   z-index: 1;
 `;
 
-export const filterModalSearchInput = styled.input<{ theme?: any }>`
+export const FilterModalSearchInput = styled.input<{ theme?: any }>`
   width: 100%;
   padding: 8px 12px;
   padding-left: 40px;
