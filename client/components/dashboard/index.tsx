@@ -577,8 +577,8 @@ export default function TaskManagementDashboard() {
                       onApply={() => setShowTimelineFilter(false)}
                     />
 
-                    {Object.entries(data?.columnData || [])
-                      .filter(([, columnInfo]) => columnInfo.filterable === true)
+                    {data && data.columnData && Object.entries(data.columnData)
+                      .filter(([, columnInfo]) => columnInfo && columnInfo.filterable === true)
                       .slice(0, 3)
                       .map(([columnKey, columnInfo]) => (
                         <FilterDropdown
