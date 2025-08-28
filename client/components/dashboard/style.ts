@@ -1253,7 +1253,8 @@ export const TimelineFilterSelectTrigger = styled.button`
   }
 
   &:hover {
-    background-color: hsl(var(--muted) / 0.5);
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
   }
 
   &:disabled {
