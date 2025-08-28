@@ -96,13 +96,13 @@ export const srGetDashboardTableData = async ({
         ORDER_REF_NUM: {
           label: "order ref num",
           filterable: true,
-          searchable: false,
+          searchable: true,
           hidden: false,
         },
         PAYMENT_MODE: {
           label: "Payment Mode",
           filterable: true,
-          searchable: false,
+          searchable: true,
           hidden: false,
           filerValues:
             "UPI,Credit Card,Debit Card,Net Banking,Cash on Delivery",
@@ -110,7 +110,7 @@ export const srGetDashboardTableData = async ({
         STATUS: {
           label: "Status",
           filterable: true,
-          searchable: false,
+          searchable: true,
           hidden: false,
           filerValues: "Delivered,Pending,Cancelled,Shipped,Returned",
         },
