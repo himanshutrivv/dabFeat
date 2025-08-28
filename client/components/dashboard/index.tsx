@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import { ThemeControllerProvider } from "@/styles/ThemeControllerProvider";
+import { ThemeProvider, useThemeController } from "@/styles/ThemeControllerProvider";
 import { globalStyles } from "@/styles/global";
 import { appTheme } from "@/styles/themes";
 import {
