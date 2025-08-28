@@ -702,30 +702,41 @@ export default function TaskManagementDashboard() {
                     </FilterGroup>
                   </FilterGrid>
 
-                  {hasSearchableColumns && (
-                    <SearchBarContainer>
-                      <SearchInputWrapper>
-                        <SearchIcon>
-                          <Search size={20} />
-                        </SearchIcon>
-                        <SearchInput
-                          type="text"
-                          placeholder="Search through all records and data..."
-                          value={searchTerm}
-                          onChange={(e) => setSearchTerm(e.target.value)}
-                          onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                              handleSearchClick();
-                            }
-                          }}
-                        />
-                      </SearchInputWrapper>
-                      <SearchButton onClick={handleSearchClick}>
-                        <Search size={18} />
-                        Search
-                      </SearchButton>
-                    </SearchBarContainer>
-                  )}
+                  <SearchBarContainer>
+                    <SearchInputWrapper>
+                      <SearchIcon>
+                        <Search size={20} />
+                      </SearchIcon>
+                      <SearchInput
+                        type="text"
+                        placeholder={
+                          hasSearchableColumns
+                            ? "Search through all records and data..."
+                            : "Search is disabled - no searchable columns available"
+                        }
+                        value={searchTerm}
+                        onChange={(e) => hasSearchableColumns && setSearchTerm(e.target.value)}
+                        onKeyPress={(e) => {
+                          if (e.key === 'Enter' && hasSearchableColumns) {
+                            handleSearchClick();
+                          }
+                        }}
+                        disabled={!hasSearchableColumns}
+                      />
+                    </SearchInputWrapper>
+                    <SearchButton
+                      onClick={hasSearchableColumns ? handleSearchClick : undefined}
+                      disabled={!hasSearchableColumns}
+                      title={
+                        hasSearchableColumns
+                          ? "Search through records"
+                          : "Search is disabled - no searchable columns available"
+                      }
+                    >
+                      <Search size={18} />
+                      Search
+                    </SearchButton>
+                  </SearchBarContainer>
 
                   {activeFilters.length > 0 && (
                     <ActiveFiltersSection>
