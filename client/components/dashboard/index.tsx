@@ -628,7 +628,7 @@ export default function TaskManagementDashboard() {
                       </SearchIcon>
                       <SearchInput
                         type="text"
-                        placeholder="Search records..."
+                        placeholder="Search through all records and data..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                       />
