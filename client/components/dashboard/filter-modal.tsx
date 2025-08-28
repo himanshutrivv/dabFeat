@@ -30,6 +30,9 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   onToggle,
   onFilterChange,
 }) => {
+  // Safety check: ensure selectedValues is always an array
+  const safeSelectedValues = selectedValues || [];
+
   return (
     <FilterDropdownFilterGroup>
       <FilterDropdownSelectContainer data-dropdown-container>
@@ -40,9 +43,9 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
           }}
         >
           <FilterDropdownSelectValue>
-            {selectedValues.length === 0
+            {safeSelectedValues.length === 0
               ? `All ${label}`
-              : `${selectedValues.length} selected`}
+              : `${safeSelectedValues.length} selected`}
           </FilterDropdownSelectValue>
           <ChevronDown size={16} />
         </FilterDropdownSelectTrigger>
