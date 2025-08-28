@@ -49,7 +49,7 @@ export const StyledTable = styled.table`
 export const TableHeader = styled.thead`
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1;
   background: ${theme.colors.primary};
   color: ${theme.colors.primaryForeground};
   font-weight: ${theme.fontWeights.semibold};
@@ -85,7 +85,7 @@ export const TableRow = styled.tr<{ isEven: boolean }>`
   &:hover {
     transform: translateY(-2px);
     box-shadow: ${theme.shadows.md};
-    z-index: 1;
+    z-index: 0;
     position: relative;
   }
 `;
@@ -111,7 +111,7 @@ export const CopyToast = styled.div<{ show: boolean }>`
   box-shadow: ${theme.shadows.lg};
   font-size: ${theme.fontSizes.sm};
   font-weight: ${theme.fontWeights.medium};
-  z-index: 1000;
+  z-index: 100;
   transform: translateY(${(props) => (props.show ? "0" : "-100px")});
   opacity: ${(props) => (props.show ? "1" : "0")};
   transition: all 0.3s ease;
