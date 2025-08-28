@@ -1032,31 +1032,31 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   height: 100vh;
   background: hsl(var(--card));
   border-left: 1px solid hsl(var(--border));
-  border-radius: 32px 0 0 32px;
+  border-radius: 16px 0 0 16px;
   box-shadow:
-    0 32px 64px -12px rgba(0, 0, 0, 0.25),
-    0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 8px 32px rgba(139, 92, 246, 0.1);
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 15px 30px -5px rgba(0, 0, 0, 0.15),
+    0 5px 15px rgba(0, 0, 0, 0.1);
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  animation: slideInFromRight 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: slideInFromRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 
   @keyframes slideInFromRight {
     from {
-      transform: translateX(100%) scale(0.95);
+      transform: translateX(100%);
       opacity: 0;
     }
     to {
-      transform: translateX(0) scale(1);
+      transform: translateX(0);
       opacity: 1;
     }
   }
 
   @media (max-width: 768px) {
     width: 100%;
-    border-radius: 24px 0 0 24px;
+    border-radius: 16px 0 0 16px;
   }
 `;
 
