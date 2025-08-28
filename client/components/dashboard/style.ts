@@ -605,34 +605,43 @@ export const SearchInput = styled.input`
 export const SearchButton = styled(Button)`
   height: 48px;
   padding: 0 24px;
-  background-color: #2563eb;
-  color: #ffffff;
-  border: none;
-  border-radius: 16px;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   min-width: 120px;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:hover:not(:disabled) {
-    background-color: #1d4ed8;
-    transform: translateY(-1px);
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    border-color: hsl(var(--border));
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
+  &:focus:not(:disabled) {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
   &:active:not(:disabled) {
-    transform: translateY(0);
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
   }
 
   &:disabled {
-    background-color: #e5e7eb;
-    color: #9ca3af;
+    background-color: hsl(var(--muted));
+    color: hsl(var(--muted-foreground));
     cursor: not-allowed;
     opacity: 0.6;
-    transform: none;
+    border-color: hsl(var(--border));
     box-shadow: none;
   }
 `;
