@@ -8,6 +8,8 @@ export const TableContainer = styled.div`
   box-shadow: ${theme.shadows.md};
   overflow: hidden;
   border: 1px solid ${theme.colors.border};
+  position: relative;
+  z-index: 1;
 `;
 
 export const ScrollableContainer = styled.div<{ minHeight: string }>`
@@ -49,7 +51,7 @@ export const StyledTable = styled.table`
 export const TableHeader = styled.thead`
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1;
   background: ${theme.colors.primary};
   color: ${theme.colors.primaryForeground};
   font-weight: ${theme.fontWeights.semibold};
@@ -85,7 +87,7 @@ export const TableRow = styled.tr<{ isEven: boolean }>`
   &:hover {
     transform: translateY(-2px);
     box-shadow: ${theme.shadows.md};
-    z-index: 1;
+    z-index: 0;
     position: relative;
   }
 `;
