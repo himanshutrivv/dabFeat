@@ -269,7 +269,7 @@ export const FilterContainer = styled.div<{ show: boolean }>`
   background: transparent;
   display: ${(props) => (props.show ? "block" : "none")};
   position: relative;
-  z-index: 9999;
+  z-index: 10;
   isolation: isolate;
 `;
 
@@ -395,12 +395,12 @@ export const FilterResults = styled.div`
 // Button components
 export const Button = styled.button<{
   variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link";
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link";
   size?: "default" | "sm" | "lg" | "icon";
 }>`
   display: inline-flex;
@@ -999,7 +999,7 @@ export const FilterModalCheckboxContainer = styled.div<{ selected: boolean }>`
   height: 20px;
   border: 2px solid
     ${(props) =>
-      props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
+    props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected ? "hsl(var(--primary))" : "transparent"};
@@ -1159,7 +1159,7 @@ export const FilterDropdownFilterGroup = styled.div``;
 
 export const FilterDropdownSelectContainer = styled.div`
   position: relative;
-  z-index: 10000;
+  z-index: 50;
   isolation: isolate;
 `;
 
@@ -1169,26 +1169,27 @@ export const FilterDropdownSelectTrigger = styled.button`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: 25px;
-  border: 2px solid #e5e7eb;
-  background-color: #ffffff;
-  padding: 0 16px;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--background));
+  padding: 0 12px;
   font-size: 14px;
-  font-weight: 500;
-  color: #374151;
+  color: hsl(var(--foreground));
   cursor: pointer;
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    border-color: #d1d5db;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+    outline-offset: 2px;
   }
 
   &:hover {
-    border-color: #d1d5db;
-    background-color: #f9fafb;
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    border-color: hsl(var(--border));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   &:disabled {
@@ -1198,7 +1199,7 @@ export const FilterDropdownSelectTrigger = styled.button`
 `;
 
 export const FilterDropdownSelectValue = styled.span`
-  color: #374151;
+  color: hsl(var(--foreground));
   font-weight: 500;
 `;
 
@@ -1207,37 +1208,27 @@ export const FilterDropdownSelectContent = styled.div`
   top: 100%;
   left: 0;
   right: auto;
-  z-index: 10001;
+  z-index: 999;
   max-height: 384px;
   min-width: 320px;
   max-width: calc(100vw - 32px);
   overflow-y: auto;
   border-radius: 8px;
   border: 1px solid hsl(var(--border));
-  background-color: hsl(var(--card));
-  color: hsl(var(--card-foreground));
-  opacity: 1;
+  background-color: white !important;
+  color: hsl(var(--foreground));
+  opacity: 1 !important;
   padding: 16px;
   box-shadow:
     0 10px 80px rgba(0, 0, 0, 0.12),
     0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
-  animation: fadeIn 0.2s ease-out;
+  animation: none;
+  pointer-events: auto;
 
   &.filter-content {
-    background-color: hsl(var(--card)) !important;
+    background-color: white !important;
     opacity: 1 !important;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
   }
 `;
 
