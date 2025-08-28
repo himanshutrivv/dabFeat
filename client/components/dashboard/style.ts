@@ -831,7 +831,7 @@ export const TimeLineFilterButtonGrid = styled.div<{ theme?: any }>`
 `;
 
 // Filter Modal Components
-export const filterModalBackdrop = styled.div`
+export const FilterModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
@@ -848,7 +848,7 @@ export const filterModalBackdrop = styled.div`
   }
 `;
 
-export const filterModalContainer = styled.div<{ theme?: any }>`
+export const FilterModalContainer = styled.div<{ theme?: any }>`
   position: fixed;
   top: 0;
   right: 0;
@@ -881,7 +881,7 @@ export const filterModalContainer = styled.div<{ theme?: any }>`
   }
 `;
 
-export const filterModalHeader = styled.div<{ theme?: any }>`
+export const FilterModalHeader = styled.div<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -894,7 +894,7 @@ export const filterModalHeader = styled.div<{ theme?: any }>`
   flex-shrink: 0;
 `;
 
-export const filterModalContent = styled.div<{ theme?: any }>`
+export const FilterModalContent = styled.div<{ theme?: any }>`
   flex: 1;
   overflow-y: auto;
   padding: ${({ theme }) => theme?.spacing?.[6] || '24px'};
@@ -903,12 +903,12 @@ export const filterModalContent = styled.div<{ theme?: any }>`
   gap: ${({ theme }) => theme?.spacing?.[5] || '20px'};
 `;
 
-export const filterModalSearch = styled.div<{ theme?: any }>`
+export const FilterModalSearch = styled.div<{ theme?: any }>`
   position: relative;
   margin-bottom: ${({ theme }) => theme?.spacing?.[4] || '16px'};
 `;
 
-export const filterModalListItem = styled.div<{ theme?: any }>`
+export const FilterModalListItem = styled.div<{ theme?: any }>`
   border: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
   border-radius: 12px;
   background: ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'};
@@ -925,7 +925,7 @@ export const filterModalListItem = styled.div<{ theme?: any }>`
   }
 `;
 
-export const filterModalItemHeader = styled.div<{ isActive?: boolean; theme?: any }>`
+export const FilterModalItemHeader = styled.div<{ isActive?: boolean; theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -951,13 +951,13 @@ export const filterModalItemHeader = styled.div<{ isActive?: boolean; theme?: an
   }
 `;
 
-export const filterModalHeaderContent = styled.div`
+export const FilterModalHeaderContent = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
 `;
 
-export const filterModalTitle = styled.h3<{ hasActive: boolean }>`
+export const FilterModalTitle = styled.h3<{ hasActive: boolean }>`
   font-size: 16px;
   font-weight: ${(props) => (props.hasActive ? "600" : "500")};
   color: ${(props) =>
@@ -965,7 +965,7 @@ export const filterModalTitle = styled.h3<{ hasActive: boolean }>`
   margin: 0;
 `;
 
-export const filterModalCount = styled.div<{ theme?: any }>`
+export const FilterModalCount = styled.div<{ theme?: any }>`
   background: ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
   color: ${({ theme }) => theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
   font-size: 11px;
