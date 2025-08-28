@@ -793,7 +793,7 @@ export const TableHeaderRow = styled.tr`
   border: none;
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 0;
 `;
 
 export const TableHeader = styled.th`
