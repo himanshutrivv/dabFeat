@@ -277,6 +277,14 @@ export const SearchBarContainer = styled.div`
   margin-bottom: 24px;
   margin-top: 24px;
   position: relative;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+`;
+
+export const SearchInputWrapper = styled.div`
+  position: relative;
+  flex: 1;
 `;
 
 export const SearchIcon = styled.div`
@@ -580,6 +588,61 @@ export const SearchInput = styled.input`
 
   &::placeholder {
     color: hsl(var(--muted-foreground));
+  }
+
+  &:disabled {
+    background-color: hsl(var(--muted) / 0.5);
+    color: hsl(var(--muted-foreground));
+    cursor: not-allowed;
+    border-color: hsl(var(--border) / 0.5);
+
+    &::placeholder {
+      color: hsl(var(--muted-foreground) / 0.7);
+    }
+  }
+`;
+
+export const SearchButton = styled(Button)`
+  height: 48px;
+  padding: 0 24px;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  &:hover:not(:disabled) {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    border-color: hsl(var(--border));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus:not(:disabled) {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  &:active:not(:disabled) {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  &:disabled {
+    background-color: hsl(var(--muted));
+    color: hsl(var(--muted-foreground));
+    cursor: not-allowed;
+    opacity: 0.6;
+    border-color: hsl(var(--border));
+    box-shadow: none;
   }
 `;
 
@@ -1170,25 +1233,25 @@ export const FilterDropdownSelectTrigger = styled.button`
   height: 40px;
   width: 100%;
   border-radius: 8px;
-  border: 1px solid hsl(var(--border));
-  background-color: hsl(var(--background));
+  border: 1px solid #e5e7eb;
+  background-color: #ffffff;
   padding: 0 12px;
   font-size: 14px;
-  color: hsl(var(--foreground));
+  color: #374151;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
+    box-shadow: 0 0 0 2px #2563eb;
     outline-offset: 2px;
   }
 
   &:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-    border-color: hsl(var(--border));
+    background-color: #f3f4f6;
+    color: #1f2937;
+    border-color: #d1d5db;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
@@ -1199,7 +1262,7 @@ export const FilterDropdownSelectTrigger = styled.button`
 `;
 
 export const FilterDropdownSelectValue = styled.span`
-  color: hsl(var(--foreground));
+  color: #374151;
   font-weight: 500;
 `;
 

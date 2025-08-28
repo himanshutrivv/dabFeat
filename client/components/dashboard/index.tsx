@@ -25,8 +25,10 @@ import {
   FilterGroup,
   Button,
   SearchBarContainer,
+  SearchInputWrapper,
   SearchIcon,
   SearchInput,
+  SearchButton,
   ActiveFiltersSection,
   ActiveFiltersLabel,
   ActiveFiltersContainer,
@@ -576,6 +578,13 @@ export default function TaskManagementDashboard() {
     [startDateTime, validateAndAdjustTimeRange],
   );
 
+  // Handle search button click
+  const handleSearchClick = useCallback(() => {
+    // Trigger search - the effect will handle the actual filtering
+    // Since searchTerm is already being watched by useEffect, we just need to ensure it's applied
+    console.log("Search triggered with term:", searchTerm);
+  }, [searchTerm]);
+
   const initializeDefaultTimeRange = useCallback(() => {
     const now = new Date();
     const start = new Date(now.getTime() - 5 * 60 * 1000); // 5 minutes ago
@@ -693,19 +702,45 @@ export default function TaskManagementDashboard() {
                     </FilterGroup>
                   </FilterGrid>
 
-                  {hasSearchableColumns && (
-                    <SearchBarContainer>
+                  <SearchBarContainer>
+                    <SearchInputWrapper>
                       <SearchIcon>
                         <Search size={20} />
                       </SearchIcon>
                       <SearchInput
                         type="text"
-                        placeholder="Search through all records and data..."
+                        placeholder={
+                          hasSearchableColumns
+                            ? "Search through all records and data..."
+                            : "Search is disabled - no searchable columns available"
+                        }
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e) =>
+                          hasSearchableColumns && setSearchTerm(e.target.value)
+                        }
+                        onKeyPress={(e) => {
+                          if (e.key === "Enter" && hasSearchableColumns) {
+                            handleSearchClick();
+                          }
+                        }}
+                        disabled={!hasSearchableColumns}
                       />
-                    </SearchBarContainer>
-                  )}
+                    </SearchInputWrapper>
+                    <SearchButton
+                      onClick={
+                        hasSearchableColumns ? handleSearchClick : undefined
+                      }
+                      disabled={!hasSearchableColumns}
+                      title={
+                        hasSearchableColumns
+                          ? "Search through records"
+                          : "Search is disabled - no searchable columns available"
+                      }
+                    >
+                      <Search size={18} />
+                      Search
+                    </SearchButton>
+                  </SearchBarContainer>
 
                   {activeFilters.length > 0 && (
                     <ActiveFiltersSection>
