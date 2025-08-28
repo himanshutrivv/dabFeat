@@ -784,24 +784,29 @@ export default function TaskManagementDashboard() {
                       disabled={isRefreshing}
                       title="Refresh monitoring data (current time - 15 minutes)"
                       css={{
-                        marginLeft: '8px',
-                        minWidth: 'auto',
-                        padding: '8px 12px',
-                        backgroundColor: isRefreshing ? '#f1f5f9' : '#3b82f6',
-                        color: isRefreshing ? '#64748b' : '#ffffff',
-                        '&:hover': {
-                          backgroundColor: isRefreshing ? '#f1f5f9' : '#2563eb',
+                        marginLeft: "8px",
+                        minWidth: "auto",
+                        padding: "8px 12px",
+                        backgroundColor: isRefreshing ? "#f1f5f9" : "#3b82f6",
+                        color: isRefreshing ? "#64748b" : "#ffffff",
+                        "&:hover": {
+                          backgroundColor: isRefreshing ? "#f1f5f9" : "#2563eb",
                         },
                       }}
                     >
-                      <RefreshCw size={16} css={{
-                        animation: isRefreshing ? 'spin 1s linear infinite' : 'none',
-                        '@keyframes spin': {
-                          '0%': { transform: 'rotate(0deg)' },
-                          '100%': { transform: 'rotate(360deg)' },
-                        },
-                      }} />
-                      {isRefreshing ? 'Refreshing...' : 'Refresh'}
+                      <RefreshCw
+                        size={16}
+                        css={{
+                          animation: isRefreshing
+                            ? "spin 1s linear infinite"
+                            : "none",
+                          "@keyframes spin": {
+                            "0%": { transform: "rotate(0deg)" },
+                            "100%": { transform: "rotate(360deg)" },
+                          },
+                        }}
+                      />
+                      {isRefreshing ? "Refreshing..." : "Refresh"}
                     </Button>
                   </SearchBarContainer>
 

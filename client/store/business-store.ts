@@ -1,10 +1,10 @@
 import { Business } from "@/types/common";
 import { SecureStorage } from "@/utils/encryption";
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 interface BusinessStore {
-  userName: string | null
+  userName: string | null;
   selectedBusiness: Business | null;
   businesses: Business[];
   setSelectedBusiness: (business: Business | null) => void;
@@ -24,7 +24,7 @@ const encryptedStorage = {
       const parsedValue = JSON.parse(value);
       SecureStorage.setItem(name, parsedValue);
     } catch (error) {
-      console.error('Failed to parse and encrypt data:', error);
+      console.error("Failed to parse and encrypt data:", error);
     }
   },
   removeItem: (name: string): void => {
@@ -52,7 +52,7 @@ export const useBusinessStore = create<BusinessStore>()(
       },
     }),
     {
-      name: 'business-storage',
+      name: "business-storage",
       storage: createJSONStorage(() => encryptedStorage),
 
       partialize: (state) => ({
@@ -63,9 +63,13 @@ export const useBusinessStore = create<BusinessStore>()(
 
       onRehydrateStorage: () => (state) => {
         if (state?.selectedBusiness) {
-          console.log('Rehydrated encrypted business data:', state.selectedBusiness.bussName, state.userName);
+          console.log(
+            "Rehydrated encrypted business data:",
+            state.selectedBusiness.bussName,
+            state.userName,
+          );
         }
       },
-    }
-  )
+    },
+  ),
 );
