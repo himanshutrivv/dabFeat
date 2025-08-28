@@ -214,7 +214,7 @@ export default function TaskManagementDashboard() {
 
       // Don't close if clicking inside modal or dropdown containers
       if (
-        target.closest("[data-dropdown-container=\"true\"]") ||
+        target.closest('[data-dropdown-container="true"]') ||
         target.closest("[data-dropdown-container]") ||
         target.closest("[data-modal-container]") ||
         target.closest(".filter-content") ||
