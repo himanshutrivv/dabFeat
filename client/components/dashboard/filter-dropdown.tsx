@@ -30,59 +30,49 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   onToggle,
   onFilterChange,
 }) => {
-  const handleContainerClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
-
-  const handleTriggerClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onToggle(columnKey);
-  };
-
-  const handleItemClick = (e: React.MouseEvent, value: string) => {
-    e.stopPropagation();
-    onFilterChange(columnKey, value);
-  };
-
-  const handleContentMouseDown = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
+  // Safety checks: ensure selectedValues and options are always arrays
+  const safeSelectedValues = selectedValues || [];
+  const safeOptions = options || [];
 
   return (
     <FilterDropdownFilterGroup>
-      <FilterDropdownSelectContainer
-        data-dropdown-container="true"
-        onClick={handleContainerClick}
-      >
-        <FilterDropdownSelectTrigger onClick={handleTriggerClick}>
+      <FilterDropdownSelectContainer data-dropdown-container>
+        <FilterDropdownSelectTrigger
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggle(columnKey);
+          }}
+        >
           <FilterDropdownSelectValue>
-            {selectedValues.length === 0
+            {safeSelectedValues.length === 0
               ? `All ${label}`
-              : `${selectedValues.length} selected`}
+              : `${safeSelectedValues.length} selected`}
           </FilterDropdownSelectValue>
           <ChevronDown size={16} />
         </FilterDropdownSelectTrigger>
 
         {isOpen && (
-          <FilterDropdownSelectContent
-            className="filter-content"
-            onMouseDown={handleContentMouseDown}
-            onClick={handleContainerClick}
-          >
+          <FilterDropdownSelectContent className="filter-content">
             <SelectItemsContainer>
               <FilterDropdownSelectItem
-                onClick={(e) => handleItemClick(e, "all")}
-                selected={selectedValues.length === 0}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onFilterChange(columnKey, "all");
+                }}
+                selected={safeSelectedValues.length === 0}
               >
                 All {label}
               </FilterDropdownSelectItem>
 
-              {options.map((option) => {
-                const isSelected = selectedValues.includes(option);
+              {safeOptions.map((option) => {
+                const isSelected = safeSelectedValues.includes(option);
                 return (
                   <FilterDropdownSelectItem
                     key={option}
-                    onClick={(e) => handleItemClick(e, option)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onFilterChange(columnKey, option);
+                    }}
                     selected={isSelected}
                   >
                     {option}
