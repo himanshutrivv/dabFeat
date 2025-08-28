@@ -4,9 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import { ThemeProvider, useThemeController } from "@/styles/ThemeControllerProvider";
 import { globalStyles } from "@/styles/global";
-import { appTheme } from "@/styles/themes";
+import { appTheme } from "@/styles/themes/appTheme";
 import {
   DashboardContainer,
   MainContent,
@@ -48,10 +47,7 @@ import FilterDropdown from "./filter-dropdown";
 import FilterModal from "./filter-modal";
 import TimelineFilter from "./timeline-filter";
 import { useBusinessStore } from "@/store/business-store";
-import {
-  srGetDashboardTableData,
-  srGetMonitoringData,
-} from "@/sources/dashboard";
+import { srGetDashboardTableData } from "@/sources/dashboard";
 import Loader from "../common/loader";
 
 interface FilterState {
@@ -173,19 +169,7 @@ const transformFiltersToAPIFormat = (
   return filterData;
 };
 
-// Helper component to handle theme within the context
-const ThemeAwareDashboard: React.FC = () => {
-  const { theme } = useThemeController();
-
-  return (
-    <>
-      <Global styles={globalStyles(theme)} />
-      <TaskManagementDashboardInternal />
-    </>
-  );
-};
-
-function TaskManagementDashboardInternal() {
+export default function TaskManagementDashboard() {
   const [data, setData] = useState<DashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -607,7 +591,7 @@ function TaskManagementDashboardInternal() {
       setIsRefreshing(true);
       setError(null);
 
-      const bussId = selectedBusiness?.bussId || "default";
+      const bussId = selectedBusiness?.bussId || null;
 
       // Set time to current time - 15 minutes
       const now = new Date();
@@ -620,7 +604,7 @@ function TaskManagementDashboardInternal() {
 
       console.log("Refreshing data with time range:", timeRange);
 
-      const response = await srGetMonitoringData({
+      const response = await srGetDashboardTableData({
         bussId,
         timeRange,
       });
@@ -664,13 +648,16 @@ function TaskManagementDashboardInternal() {
 
   if (error) {
     return (
-      <ErrorContainer>
-        <ErrorText>Error: {error}</ErrorText>
-        <RetryButton onClick={() => window.location.reload()}>
-          <RefreshCw size={16} />
-          Retry
-        </RetryButton>
-      </ErrorContainer>
+      <>
+        <Global styles={globalStyles(appTheme)} />
+        <ErrorContainer>
+          <ErrorText>Error: {error}</ErrorText>
+          <RetryButton onClick={() => window.location.reload()}>
+            <RefreshCw size={16} />
+            Retry
+          </RetryButton>
+        </ErrorContainer>
+      </>
     );
   }
 
@@ -688,6 +675,7 @@ function TaskManagementDashboardInternal() {
 
   return (
     <>
+      <Global styles={globalStyles(appTheme)} />
       <Toaster />
       <DashboardContainer>
         <MainContent>
@@ -795,19 +783,25 @@ function TaskManagementDashboardInternal() {
                       onClick={handleRefreshClick}
                       disabled={isRefreshing}
                       title="Refresh monitoring data (current time - 15 minutes)"
-                      style={{
-                        marginLeft: "8px",
-                        minWidth: "auto",
-                        padding: "8px 12px",
-                        backgroundColor: isRefreshing ? "#f1f5f9" : "#3b82f6",
-                        color: isRefreshing ? "#64748b" : "#ffffff",
+                      css={{
+                        marginLeft: '8px',
+                        minWidth: 'auto',
+                        padding: '8px 12px',
+                        backgroundColor: isRefreshing ? '#f1f5f9' : '#3b82f6',
+                        color: isRefreshing ? '#64748b' : '#ffffff',
+                        '&:hover': {
+                          backgroundColor: isRefreshing ? '#f1f5f9' : '#2563eb',
+                        },
                       }}
                     >
-                      <RefreshCw
-                        size={16}
-                        className={isRefreshing ? "animate-spin" : ""}
-                      />
-                      {isRefreshing ? "Refreshing..." : "Refresh"}
+                      <RefreshCw size={16} css={{
+                        animation: isRefreshing ? 'spin 1s linear infinite' : 'none',
+                        '@keyframes spin': {
+                          '0%': { transform: 'rotate(0deg)' },
+                          '100%': { transform: 'rotate(360deg)' },
+                        },
+                      }} />
+                      {isRefreshing ? 'Refreshing...' : 'Refresh'}
                     </Button>
                   </SearchBarContainer>
 
@@ -817,8 +811,8 @@ function TaskManagementDashboardInternal() {
                       <ActiveFiltersContainer>
                         {activeFilters.map((filter) => (
                           <FilterBadge key={`${filter.key}-${filter.value}`}>
-                            {filter.type === "manual" && "🔍 "}
-                            {filter.type === "search" && "🔎 "}
+                            {filter.type === "manual" && "?? "}
+                            {filter.type === "search" && "?? "}
                             {filter.label}: {filter.value}
                             <FilterBadgeClose
                               onClick={(e) => {
@@ -901,14 +895,5 @@ function TaskManagementDashboardInternal() {
         />
       </DashboardContainer>
     </>
-  );
-}
-
-// Main wrapper component
-export default function TaskManagementDashboard() {
-  return (
-    <ThemeProvider>
-      <ThemeAwareDashboard />
-    </ThemeProvider>
   );
 }
