@@ -26,7 +26,8 @@ const FilterGroup = styled.div``;
 
 const SelectContainer = styled.div`
   position: relative;
-  z-index: 1000;
+  z-index: 10000;
+  isolation: isolate;
 `;
 
 const SelectTrigger = styled.button`
@@ -137,8 +138,17 @@ const Button = styled.button<{
 const TimelineFilterContent = styled(SelectContent)`
   width: 380px;
   padding: ${({ theme }) => theme.spacing[4]};
-  z-index: 10001;
+  z-index: 20000;
   isolation: isolate;
+  position: fixed;
+  top: auto;
+  left: auto;
+  transform: translateY(4px);
+
+  @media (max-width: 768px) {
+    width: 300px;
+    min-width: 280px;
+  }
 `;
 
 const TimelineFilterSection = styled.div`
