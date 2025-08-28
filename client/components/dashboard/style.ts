@@ -175,30 +175,6 @@ export const MainContent = styled.div`
   overflow: hidden;
 `;
 
-export const HorizontalLayout = styled.div`
-  display: flex;
-  flex: 1;
-  gap: 24px;
-  padding: 32px;
-  overflow: hidden;
-`;
-
-export const FilterSidebar = styled.div`
-  flex: 0 0 350px;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  max-height: 100%;
-`;
-
-export const TableSection = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  min-width: 0;
-`;
-
 export const Header = styled.div`
   background-color: hsl(var(--card));
   border-bottom: 1px solid hsl(var(--border));
@@ -207,10 +183,44 @@ export const Header = styled.div`
   top: 0;
   z-index: 50;
   flex-shrink: 0;
+  min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 60px;
+`;
+
+export const HeaderContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const DashboardTitle = styled.h1`
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+`;
+
+export const DashboardSubtitle = styled.p`
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+`;
+
+export const MainContentLayout = styled.div`
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  overflow: hidden;
+`;
+
+export const TableSection = styled.div`
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const FilterCard = styled.div`
@@ -220,11 +230,10 @@ export const FilterCard = styled.div`
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.05),
     0 2px 4px rgba(0, 0, 0, 0.08);
+  margin-top: 24px;
+  margin-bottom: 24px;
   overflow: visible;
   transition: all 0.3s ease;
-  height: fit-content;
-  position: sticky;
-  top: 0;
 
   &:hover {
     box-shadow:
@@ -278,12 +287,20 @@ export const SearchIcon = styled.div`
 `;
 
 export const FilterGrid = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
   margin-bottom: 24px;
   position: relative;
   z-index: 100;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 `;
 
 export const FilterGroup = styled.div``;
@@ -376,12 +393,12 @@ export const FilterResults = styled.div`
 // Button components
 export const Button = styled.button<{
   variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link";
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link";
   size?: "default" | "sm" | "lg" | "icon";
 }>`
   display: inline-flex;
@@ -660,9 +677,7 @@ export const SelectContent = styled.div`
   background-color: hsl(var(--card));
   color: hsl(var(--card-foreground));
   opacity: 1;
-  box-shadow:
-    0 10px 80px rgba(0, 0, 0, 0.12),
-    0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
@@ -722,6 +737,7 @@ export const SelectItemsContainer = styled.div`
 // Table components
 export const TableContainer = styled.div`
   flex: 1;
+  padding: 32px;
   overflow: hidden;
   min-height: 0;
   display: flex;
@@ -888,9 +904,7 @@ export const FilterModalContainer = styled.div`
   border-left: 1px solid hsl(var(--border));
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
-  box-shadow:
-    0 10px 80px rgba(0, 0, 0, 0.12),
-    0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -980,7 +994,7 @@ export const FilterModalCheckboxContainer = styled.div<{ selected: boolean }>`
   height: 20px;
   border: 2px solid
     ${(props) =>
-      props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
+    props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected ? "hsl(var(--primary))" : "transparent"};
@@ -1198,9 +1212,7 @@ export const FilterDropdownSelectContent = styled.div`
   color: hsl(var(--card-foreground));
   opacity: 1;
   padding: 16px;
-  box-shadow:
-    0 10px 80px rgba(0, 0, 0, 0.12),
-    0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
