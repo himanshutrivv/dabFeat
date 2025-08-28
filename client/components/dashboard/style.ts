@@ -1262,7 +1262,7 @@ export const FilterDropdownSelectTrigger = styled.button`
 `;
 
 export const FilterDropdownSelectValue = styled.span`
-  color: hsl(var(--foreground));
+  color: #374151;
   font-weight: 500;
 `;
 
