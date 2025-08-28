@@ -21,6 +21,7 @@ interface FilterOption {
   key: string;
   label: string;
   options: string[];
+  searchable?: boolean;
 }
 
 interface ActiveFilter {
@@ -70,7 +71,7 @@ const MainFilterModal = styled.div`
   background-color: ${({ theme }) => theme.colors.card};
   border-left: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 24px 0 0 24px;
-  box-shadow:
+  box-shadow: 
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 4px 16px rgba(0, 0, 0, 0.08);
   z-index: 1001;
@@ -97,8 +98,7 @@ const MainFilterModal = styled.div`
 // Beautiful gradient header
 const MainFilterHeader = styled.div`
   ${flexBetween}
-  background: linear-gradient(135deg, ${({ theme }) =>
-    theme.colors.primary} 0%, hsl(215, 25%, 20%) 100%);
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary} 0%, hsl(215, 25%, 20%) 100%);
   color: ${({ theme }) => theme.colors.primaryForeground};
   border-radius: 24px 0 0 0;
   padding: ${({ theme }) => theme.spacing[6]};
@@ -243,7 +243,7 @@ const MainFilterCheckbox = styled.div<{ selected: boolean }>`
   height: 18px;
   border: 2px solid
     ${(props) =>
-      props.selected ? props.theme.colors.primary : props.theme.colors.border};
+    props.selected ? props.theme.colors.primary : props.theme.colors.border};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected ? props.theme.colors.primary : "transparent"};
@@ -373,19 +373,21 @@ const FilterModalSectionSearchIcon = styled.div`
   z-index: 1;
 `;
 
-const FilterModalSectionSearchInput = styled.input`
+const FilterModalSectionSearchInput = styled.input<{ disabled?: boolean }>`
   ${inputStyles()}
   padding-left: 36px;
   height: 36px;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.border};
-  background: hsl(var(--muted) / 0.3);
+  background: ${(props) => props.disabled ? 'hsl(var(--muted) / 0.1)' : 'hsl(var(--muted) / 0.3)'};
   font-size: 13px;
+  cursor: ${(props) => props.disabled ? 'not-allowed' : 'text'};
+  opacity: ${(props) => props.disabled ? '0.6' : '1'};
 
   &:focus {
-    border-color: ${({ theme }) => theme.colors.primary};
-    background: ${({ theme }) => theme.colors.background};
-    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.1);
+    border-color: ${({ theme, disabled }) => disabled ? theme.colors.border : theme.colors.primary};
+    background: ${({ theme, disabled }) => disabled ? 'hsl(var(--muted) / 0.1)' : theme.colors.background};
+    box-shadow: ${({ disabled }) => disabled ? 'none' : '0 0 0 2px hsl(var(--primary) / 0.1)'};
   }
 
   &::placeholder {
@@ -472,6 +474,24 @@ const EmptyIcon = styled.div`
   font-size: 48px;
   margin-bottom: 12px;
   opacity: 0.5;
+`;
+
+const SearchDisabledMessage = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: hsl(var(--muted) / 0.3);
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
+  font-size: 12px;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 12px;
+`;
+
+const InfoIcon = styled.div`
+  font-size: 14px;
+  color: hsl(var(--muted-foreground));
 `;
 
 const FilterModal: React.FC<FilterModalProps> = ({
@@ -633,9 +653,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 <p>Try adjusting your search terms</p>
               </EmptyState>
             ) : (
-              filteredOptions.map(({ key, label, options }) => {
+              filteredOptions.map(({ key, label, options, searchable }) => {
                 const hasActiveFilters = filters[key]?.length > 0;
                 const isExpanded = openFilterDropdowns[`modal-${key}`] || false;
+                const isSearchable = searchable !== false;
 
                 return (
                   <MainFilterListItem key={key}>
@@ -651,7 +672,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
                           {label}
                         </FilterTitle>
                         {hasActiveFilters && (
-                          <FilterCount>{filters[key]?.length}</FilterCount>
+                          <FilterCount>
+                            {filters[key]?.length}
+                          </FilterCount>
                         )}
                       </FilterHeaderContent>
                       <ExpandIcon isOpen={isExpanded}>
@@ -661,22 +684,29 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
                     {isExpanded && (
                       <MainFilterOptionsContainer>
-                        {/* Section-specific search */}
-                        <SectionSearchContainer>
-                          <FilterModalSectionSearchIcon>
-                            <Search size={14} />
-                          </FilterModalSectionSearchIcon>
-                          <FilterModalSectionSearchInput
-                            type="text"
-                            placeholder={`Search ${label.toLowerCase()}...`}
-                            value={sectionSearchTerms[key] || ""}
-                            onChange={(e) =>
-                              handleSectionSearchChange(key, e.target.value)
-                            }
-                            onClick={handleInputInteraction}
-                            onFocus={handleInputInteraction}
-                          />
-                        </SectionSearchContainer>
+                        {/* Section-specific search or disabled message */}
+                        {isSearchable ? (
+                          <SectionSearchContainer>
+                            <FilterModalSectionSearchIcon>
+                              <Search size={14} />
+                            </FilterModalSectionSearchIcon>
+                            <FilterModalSectionSearchInput
+                              type="text"
+                              placeholder={`Search ${label.toLowerCase()}...`}
+                              value={sectionSearchTerms[key] || ""}
+                              onChange={(e) =>
+                                handleSectionSearchChange(key, e.target.value)
+                              }
+                              onClick={handleInputInteraction}
+                              onFocus={handleInputInteraction}
+                            />
+                          </SectionSearchContainer>
+                        ) : (
+                          <SearchDisabledMessage>
+                            <InfoIcon>ℹ️</InfoIcon>
+                            <span>This column is not opted for searchable functionality</span>
+                          </SearchDisabledMessage>
+                        )}
 
                         <OptionsContainer>
                           {(() => {
