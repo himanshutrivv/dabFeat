@@ -1148,18 +1148,18 @@ export const FilterModalSearchInput = styled.input<{ theme?: any }>`
   }
 `;
 
-export const filterModalSectionContent = styled.div`
+export const FilterModalSectionContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0;
 `;
 
-export const filterModalSectionSearchContainer = styled.div`
+export const FilterModalSectionSearchContainer = styled.div`
   position: relative;
   margin-bottom: 12px;
 `;
 
-export const filterModalSectionSearchIcon = styled.div<{ theme?: any }>`
+export const FilterModalSectionSearchIcon = styled.div<{ theme?: any }>`
   position: absolute;
   left: 10px;
   top: 50%;
@@ -1168,7 +1168,7 @@ export const filterModalSectionSearchIcon = styled.div<{ theme?: any }>`
   z-index: 1;
 `;
 
-export const filterModalSectionSearchInput = styled.input<{ disabled?: boolean; theme?: any }>`
+export const FilterModalSectionSearchInput = styled.input<{ disabled?: boolean; theme?: any }>`
   width: 100%;
   padding: 8px 12px;
   padding-left: 36px;
@@ -1198,7 +1198,7 @@ export const filterModalSectionSearchInput = styled.input<{ disabled?: boolean; 
   }
 `;
 
-export const filterModalOptionItem = styled.div<{ isSelected?: boolean; theme?: any }>`
+export const FilterModalOptionItem = styled.div<{ isSelected?: boolean; theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1219,18 +1219,18 @@ export const filterModalOptionItem = styled.div<{ isSelected?: boolean; theme?: 
   }
 `;
 
-export const filterModalOptionText = styled.span<{ theme?: any }>`
+export const FilterModalOptionText = styled.span<{ theme?: any }>`
   font-size: 14px;
   color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
 `;
 
-export const filterModalCheckIcon = styled.svg<{ theme?: any }>`
+export const FilterModalCheckIcon = styled.svg<{ theme?: any }>`
   width: 10px;
   height: 10px;
   color: ${({ theme }) => theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
 `;
 
-export const filterModalCloseButton = styled.button<{ theme?: any }>`
+export const FilterModalCloseButton = styled.button<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1255,14 +1255,14 @@ export const filterModalCloseButton = styled.button<{ theme?: any }>`
   }
 `;
 
-export const filterModalSeparator = styled.div<{ theme?: any }>`
+export const FilterModalSeparator = styled.div<{ theme?: any }>`
   flex-shrink: 0;
   background: ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
   height: 1px;
   width: 100%;
 `;
 
-export const filterModalEmptyState = styled.div<{ theme?: any }>`
+export const FilterModalEmptyState = styled.div<{ theme?: any }>`
   text-align: center;
   padding: 40px 20px;
   color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
