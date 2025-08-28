@@ -4,8 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import { ThemeControllerProvider } from "@/styles/theme-controller";
-import { globalStyles } from "@/styles/global-styles";
+import { ThemeControllerProvider } from "@/styles/ThemeControllerProvider";
+import { globalStyles } from "@/styles/global";
 import { appTheme } from "@/styles/themes";
 import {
   DashboardContainer,
@@ -214,7 +214,7 @@ export default function TaskManagementDashboard() {
 
       // Don't close if clicking inside modal or dropdown containers
       if (
-        target.closest('[data-dropdown-container="true"]') ||
+        target.closest("[data-dropdown-container=\"true\"]") ||
         target.closest("[data-dropdown-container]") ||
         target.closest("[data-modal-container]") ||
         target.closest(".filter-content") ||
