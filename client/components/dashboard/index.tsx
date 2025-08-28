@@ -554,8 +554,12 @@ export default function TaskManagementDashboard() {
         <MainContent>
           <Header>
             <div>
-              <h1 style={{ margin: 0, fontSize: '24px', fontWeight: '600' }}>Dashboard</h1>
-              <p style={{ margin: 0, color: '#6b7280', fontSize: '14px' }}>Filter and view your data</p>
+              <h1 style={{ margin: 0, fontSize: "24px", fontWeight: "600" }}>
+                Dashboard
+              </h1>
+              <p style={{ margin: 0, color: "#6b7280", fontSize: "14px" }}>
+                Filter and view your data
+              </p>
             </div>
           </Header>
 
@@ -605,7 +609,9 @@ export default function TaskManagementDashboard() {
                         ))}
 
                       <FilterGroup>
-                        <AllFiltersButton onClick={() => setShowMainFilter(true)}>
+                        <AllFiltersButton
+                          onClick={() => setShowMainFilter(true)}
+                        >
                           <Filter size={16} />
                           <span>All Filters</span>
                         </AllFiltersButton>
