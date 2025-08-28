@@ -664,16 +664,13 @@ function TaskManagementDashboardInternal() {
 
   if (error) {
     return (
-      <ThemeControllerProvider>
-        <Global styles={globalStyles(appTheme)} />
-        <ErrorContainer>
-          <ErrorText>Error: {error}</ErrorText>
-          <RetryButton onClick={() => window.location.reload()}>
-            <RefreshCw size={16} />
-            Retry
-          </RetryButton>
-        </ErrorContainer>
-      </ThemeControllerProvider>
+      <ErrorContainer>
+        <ErrorText>Error: {error}</ErrorText>
+        <RetryButton onClick={() => window.location.reload()}>
+          <RefreshCw size={16} />
+          Retry
+        </RetryButton>
+      </ErrorContainer>
     );
   }
 
