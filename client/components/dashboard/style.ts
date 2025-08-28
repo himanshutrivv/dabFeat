@@ -1104,7 +1104,7 @@ export const FilterModalSearch = styled.div<{ theme?: any }>`
 
 export const FilterModalListItem = styled.div<{ theme?: any }>`
   border: 1px solid hsl(var(--border));
-  border-radius: 12px;
+  border-radius: 8px;
   background: hsl(var(--background));
   transition: all 0.2s ease;
   margin-bottom: 12px;
@@ -1112,7 +1112,6 @@ export const FilterModalListItem = styled.div<{ theme?: any }>`
 
   &:hover {
     border-color: hsl(var(--primary) / 0.3);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
   &:last-child {
