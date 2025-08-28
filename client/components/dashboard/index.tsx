@@ -819,3 +819,5 @@ export default function TaskManagementDashboard() {
     </ThemeControllerProvider>
   );
 }
+
+export default TaskManagementDashboard;
