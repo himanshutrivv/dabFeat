@@ -552,19 +552,31 @@ export default function TaskManagementDashboard() {
       <DashboardContainer>
         <MainContent>
           <Header>
-            {(hasSearchableColumns || hasFilterableColumns) && (
-              <FilterCard>
-                <FilterCardHeader>
-                  <FilterCardTitle>
-                    <Filter size={20} />
-                    Filter & Search
-                  </FilterCardTitle>
-                  <FilterCardSubtitle>
-                    Filter your data by categories, search through records, or set time ranges to find exactly what you need
-                  </FilterCardSubtitle>
-                </FilterCardHeader>
+            <div>
+              <h1 style={{ margin: 0, fontSize: "24px", fontWeight: "600" }}>
+                Dashboard
+              </h1>
+              <p style={{ margin: 0, color: "#6b7280", fontSize: "14px" }}>
+                Manage and view your data
+              </p>
+            </div>
+          </Header>
 
-                <FilterContainer show={true}>
+          <HorizontalLayout>
+            {(hasSearchableColumns || hasFilterableColumns) && (
+              <FilterSidebar>
+                <FilterCard>
+                  <FilterCardHeader>
+                    <FilterCardTitle>
+                      <Filter size={20} />
+                      Filter & Search
+                    </FilterCardTitle>
+                    <FilterCardSubtitle>
+                      Filter your data by categories, search through records, or set time ranges to find exactly what you need
+                    </FilterCardSubtitle>
+                  </FilterCardHeader>
+
+                  <FilterContainer show={true}>
                   <FilterGrid>
                     <TimelineFilter
                       startDateTime={startDateTime}
@@ -651,19 +663,22 @@ export default function TaskManagementDashboard() {
                     </ActiveFiltersSection>
                   )}
 
-                  <FilterResults>
-                    Showing {filteredData.length} of {data?.tableData?.length}{" "}
-                    results
-                  </FilterResults>
-                </FilterContainer>
-              </FilterCard>
+                    <FilterResults>
+                      Showing {filteredData.length} of {data?.tableData?.length}{" "}
+                      results
+                    </FilterResults>
+                  </FilterContainer>
+                </FilterCard>
+              </FilterSidebar>
             )}
-          </Header>
 
-          <DashboardTable
-            data={filteredData}
-            columnData={data?.columnData || {}}
-          />
+            <TableSection>
+              <DashboardTable
+                data={filteredData}
+                columnData={data?.columnData || {}}
+              />
+            </TableSection>
+          </HorizontalLayout>
         </MainContent>
 
         <FilterModal
