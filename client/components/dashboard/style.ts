@@ -277,6 +277,14 @@ export const SearchBarContainer = styled.div`
   margin-bottom: 24px;
   margin-top: 24px;
   position: relative;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+`;
+
+export const SearchInputWrapper = styled.div`
+  position: relative;
+  flex: 1;
 `;
 
 export const SearchIcon = styled.div`
