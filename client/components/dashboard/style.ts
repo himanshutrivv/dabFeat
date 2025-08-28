@@ -603,6 +603,7 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchButton = styled.button`
+  /* Updated styling to match filter dropdowns */
   display: flex;
   align-items: center;
   justify-content: center;
