@@ -62,8 +62,8 @@ const SelectTrigger = styled.button`
 `;
 
 const SelectValue = styled.span`
-  color: ${({ theme }) => theme.colors.foreground};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  color: #374151;
+  font-weight: 500;
 `;
 
 const SelectContent = styled.div`
