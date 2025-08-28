@@ -269,7 +269,7 @@ export const FilterContainer = styled.div<{ show: boolean }>`
   background: transparent;
   display: ${(props) => (props.show ? "block" : "none")};
   position: relative;
-  z-index: 9999;
+  z-index: 10;
   isolation: isolate;
 `;
 
@@ -1159,7 +1159,7 @@ export const FilterDropdownFilterGroup = styled.div``;
 
 export const FilterDropdownSelectContainer = styled.div`
   position: relative;
-  z-index: 10000;
+  z-index: 50;
   isolation: isolate;
 `;
 
@@ -1208,7 +1208,7 @@ export const FilterDropdownSelectContent = styled.div`
   top: 100%;
   left: 0;
   right: auto;
-  z-index: 10001;
+  z-index: 999;
   max-height: 384px;
   min-width: 320px;
   max-width: calc(100vw - 32px);
@@ -1224,6 +1224,7 @@ export const FilterDropdownSelectContent = styled.div`
     0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: none;
+  pointer-events: auto;
 
   &.filter-content {
     background-color: white !important;
