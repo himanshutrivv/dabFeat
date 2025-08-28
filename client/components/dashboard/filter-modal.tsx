@@ -72,7 +72,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
   onApplyFilters,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [sectionSearchTerms, setSectionSearchTerms] = useState<{ [key: string]: string }>({});
+  const [sectionSearchTerms, setSectionSearchTerms] = useState<{
+    [key: string]: string;
+  }>({});
 
   if (!isOpen) return null;
 
@@ -81,8 +83,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
     onClose();
   };
 
-  const filteredOptions = filterOptions.filter(option =>
-    option.label.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredOptions = filterOptions.filter((option) =>
+    option.label.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -91,11 +93,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
       <FilterModalContainer data-modal-container>
         <FilterModalHeaderContainer>
           <FilterModalHeaderTitle>All Filters</FilterModalHeaderTitle>
-          <FilterModalButton
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-          >
+          <FilterModalButton variant="ghost" size="sm" onClick={onClose}>
             <X size={20} />
           </FilterModalButton>
         </FilterModalHeaderContainer>
@@ -116,10 +114,12 @@ const FilterModal: React.FC<FilterModalProps> = ({
           {filteredOptions.map((filterOption) => {
             const isExpanded = openFilterDropdowns[filterOption.key] || false;
             const selectedValues = filters[filterOption.key] || [];
-            const sectionSearchTerm = sectionSearchTerms[filterOption.key] || "";
-            
-            const filteredSectionOptions = filterOption.options.filter(option =>
-              option.toLowerCase().includes(sectionSearchTerm.toLowerCase())
+            const sectionSearchTerm =
+              sectionSearchTerms[filterOption.key] || "";
+
+            const filteredSectionOptions = filterOption.options.filter(
+              (option) =>
+                option.toLowerCase().includes(sectionSearchTerm.toLowerCase()),
             );
 
             return (
@@ -158,9 +158,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
                         placeholder={`Search ${filterOption.label.toLowerCase()}...`}
                         value={sectionSearchTerm}
                         onChange={(e) => {
-                          setSectionSearchTerms(prev => ({
+                          setSectionSearchTerms((prev) => ({
                             ...prev,
-                            [filterOption.key]: e.target.value
+                            [filterOption.key]: e.target.value,
                           }));
                         }}
                       />
@@ -177,7 +177,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
                         <FilterModalOptionTextStyled>
                           All {filterOption.label}
                         </FilterModalOptionTextStyled>
-                        <FilterModalCheckboxContainer selected={selectedValues.length === 0}>
+                        <FilterModalCheckboxContainer
+                          selected={selectedValues.length === 0}
+                        >
                           {selectedValues.length === 0 && (
                             <FilterModalCheckIconStyled
                               width="12"
@@ -237,15 +239,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
         </FilterModalContentContainer>
 
         <FilterModalFooterContainer>
-          <FilterModalButton
-            variant="outline"
-            onClick={onClearAllFilters}
-          >
+          <FilterModalButton variant="outline" onClick={onClearAllFilters}>
             Clear All
           </FilterModalButton>
-          <FilterModalButton
-            onClick={handleApplyFilters}
-          >
+          <FilterModalButton onClick={handleApplyFilters}>
             Apply Filters ({activeFilters.length})
           </FilterModalButton>
         </FilterModalFooterContainer>
