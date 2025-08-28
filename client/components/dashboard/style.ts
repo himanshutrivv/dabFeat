@@ -1260,7 +1260,7 @@ export const TimelineFilterGroup = styled.div``;
 
 export const TimelineFilterSelectContainer = styled.div`
   position: relative;
-  z-index: 200;
+  z-index: 99999;
 `;
 
 export const TimelineFilterSelectTrigger = styled.button`
