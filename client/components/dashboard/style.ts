@@ -165,6 +165,8 @@ export const DashboardContainer = styled.div`
   min-height: 100vh;
   background-color: hsl(var(--background));
   display: flex;
+  overflow: visible;
+  position: relative;
 `;
 
 export const MainContent = styled.div`
