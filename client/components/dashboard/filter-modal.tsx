@@ -426,7 +426,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
   onApplyFilters,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [sectionSearchTerms, setSectionSearchTerms] = useState<{[key: string]: string}>({});
+  const [sectionSearchTerms, setSectionSearchTerms] = useState<{
+    [key: string]: string;
+  }>({});
 
   // Filter options based on search term (internal search for filtering columns)
   const filteredOptions = useMemo(() => {
@@ -442,22 +444,28 @@ const FilterModal: React.FC<FilterModalProps> = ({
   }, [filterOptions, searchTerm]);
 
   // Filter individual section options based on section-specific search
-  const getFilteredSectionOptions = useCallback((options: string[], sectionKey: string) => {
-    const sectionSearch = sectionSearchTerms[sectionKey];
-    if (!sectionSearch?.trim()) return options;
+  const getFilteredSectionOptions = useCallback(
+    (options: string[], sectionKey: string) => {
+      const sectionSearch = sectionSearchTerms[sectionKey];
+      if (!sectionSearch?.trim()) return options;
 
-    return options.filter(option =>
-      option.toLowerCase().includes(sectionSearch.toLowerCase())
-    );
-  }, [sectionSearchTerms]);
+      return options.filter((option) =>
+        option.toLowerCase().includes(sectionSearch.toLowerCase()),
+      );
+    },
+    [sectionSearchTerms],
+  );
 
   // Handle section search change
-  const handleSectionSearchChange = useCallback((sectionKey: string, value: string) => {
-    setSectionSearchTerms(prev => ({
-      ...prev,
-      [sectionKey]: value
-    }));
-  }, []);
+  const handleSectionSearchChange = useCallback(
+    (sectionKey: string, value: string) => {
+      setSectionSearchTerms((prev) => ({
+        ...prev,
+        [sectionKey]: value,
+      }));
+    },
+    [],
+  );
 
   const handleModalClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -587,26 +595,43 @@ const FilterModal: React.FC<FilterModalProps> = ({
                             type="text"
                             placeholder={`Search ${label.toLowerCase()}...`}
                             value={sectionSearchTerms[key] || ""}
-                            onChange={(e) => handleSectionSearchChange(key, e.target.value)}
+                            onChange={(e) =>
+                              handleSectionSearchChange(key, e.target.value)
+                            }
                             onClick={(e) => e.stopPropagation()}
                           />
                         </SectionSearchContainer>
 
                         <OptionsContainer>
                           {(() => {
-                            const filteredSectionOptions = getFilteredSectionOptions(options, key);
+                            const filteredSectionOptions =
+                              getFilteredSectionOptions(options, key);
 
                             if (filteredSectionOptions.length === 0) {
                               return (
-                                <div style={{
-                                  textAlign: 'center',
-                                  padding: '20px',
-                                  color: 'hsl(var(--muted-foreground))',
-                                  fontSize: '13px'
-                                }}>
-                                  <div style={{ fontSize: '20px', marginBottom: '8px' }}>🔍</div>
+                                <div
+                                  style={{
+                                    textAlign: "center",
+                                    padding: "20px",
+                                    color: "hsl(var(--muted-foreground))",
+                                    fontSize: "13px",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      fontSize: "20px",
+                                      marginBottom: "8px",
+                                    }}
+                                  >
+                                    🔍
+                                  </div>
                                   No {label.toLowerCase()} found
-                                  <div style={{ fontSize: '11px', marginTop: '4px' }}>
+                                  <div
+                                    style={{
+                                      fontSize: "11px",
+                                      marginTop: "4px",
+                                    }}
+                                  >
                                     Try different search terms
                                   </div>
                                 </div>
@@ -614,7 +639,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
                             }
 
                             return filteredSectionOptions.map((option) => {
-                              const isSelected = filters[key]?.includes(option) || false;
+                              const isSelected =
+                                filters[key]?.includes(option) || false;
                               return (
                                 <OptionItem
                                   key={option}
