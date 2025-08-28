@@ -1150,13 +1150,9 @@ export const FilterModalSearch = styled.div<{ theme?: any }>`
 `;
 
 export const FilterModalListItem = styled.div<{ theme?: any }>`
-  border: 1px solid hsl(210, 20%, 80%);
+  border: 1px solid hsl(var(--border));
   border-radius: 16px;
-  background: linear-gradient(
-    145deg,
-    hsl(210, 20%, 99%) 0%,
-    hsl(210, 20%, 96%) 100%
-  );
+  background: hsl(var(--card));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1165,10 +1161,10 @@ export const FilterModalListItem = styled.div<{ theme?: any }>`
   position: relative;
 
   &:hover {
-    border-color: hsl(210, 30%, 70%);
+    border-color: hsl(var(--primary));
     box-shadow:
-      0 8px 25px rgba(0, 0, 0, 0.08),
-      0 4px 12px hsl(210, 20%, 60%, 0.15);
+      0 8px 25px rgba(0, 0, 0, 0.1),
+      0 4px 12px hsl(var(--primary) / 0.15);
     transform: translateY(-2px);
   }
 
@@ -1186,7 +1182,7 @@ export const FilterModalListItem = styled.div<{ theme?: any }>`
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(210, 30%, 70%) 50%,
+      hsl(var(--primary) / 0.3) 50%,
       transparent 100%
     );
     opacity: 0;
