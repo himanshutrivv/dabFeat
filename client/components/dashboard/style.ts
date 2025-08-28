@@ -1423,3 +1423,86 @@ export const FilterModalTypeIcon = styled.div`
   font-size: 12px;
   color: hsl(var(--primary));
 `;
+
+export const FilterModalFooter = styled.div<{ theme?: any }>`
+  padding: 24px 32px;
+  border-top: 2px solid #e5e7eb;
+  flex-shrink: 0;
+  background: #ffffff;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
+`;
+
+export const FilterModalButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+`;
+
+export const FilterModalButton = styled.button<{
+  variant?: "default" | "outline";
+  theme?: any;
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 44px;
+  margin-bottom: 8px;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  ${(props) => {
+    switch (props.variant) {
+      case "outline":
+        return css`
+          border: 2px solid #d1d5db;
+          background-color: #ffffff;
+          color: #374151;
+          &:hover {
+            background-color: #f9fafb;
+            border-color: #6b7280;
+            color: #1f2937;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+          }
+        `;
+      default:
+        return css`
+          background-color: #1f2937;
+          color: #ffffff;
+          border: 2px solid #1f2937;
+          &:hover {
+            background-color: #111827;
+            border-color: #111827;
+            box-shadow: 0 6px 20px rgba(31, 41, 55, 0.4);
+          }
+        `;
+    }
+  }}
+`;
