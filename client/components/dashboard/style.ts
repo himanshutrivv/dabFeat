@@ -1129,8 +1129,8 @@ export const FilterModalContent = styled.div<{ theme?: any }>`
   gap: 24px;
   background: linear-gradient(
     180deg,
-    rgba(248, 250, 252, 0.5) 0%,
-    rgba(255, 255, 255, 0.8) 100%
+    hsl(210, 20%, 96%) 0%,
+    hsl(210, 20%, 98%) 100%
   );
 
   &::-webkit-scrollbar {
@@ -1138,17 +1138,17 @@ export const FilterModalContent = styled.div<{ theme?: any }>`
   }
 
   &::-webkit-scrollbar-track {
-    background: rgba(241, 245, 249, 0.5);
+    background: hsl(210, 20%, 90%);
     border-radius: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #cbd5e1, #94a3b8);
+    background: linear-gradient(to bottom, hsl(210, 20%, 70%), hsl(210, 20%, 60%));
     border-radius: 4px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, #94a3b8, #64748b);
+    background: linear-gradient(to bottom, hsl(210, 20%, 60%), hsl(210, 20%, 50%));
   }
 `;
 
