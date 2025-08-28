@@ -1098,9 +1098,9 @@ export const FilterDropdownSelectTrigger = styled.button`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid hsl(var(--input));
-  background-color: hsl(var(--muted));
+  background-color: hsl(var(--background));
   padding: 0 12px;
   font-size: 14px;
   color: hsl(var(--foreground));
