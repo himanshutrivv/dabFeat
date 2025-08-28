@@ -439,7 +439,7 @@ export default function TaskManagementDashboard() {
   }, [data, getFilterOptions]);
 
   const getActiveFilters = useCallback(() => {
-    const activeFilters: Array<{ key: string; value: string; label: string }> =
+    const activeFilters: Array<{ key: string; value: string; label: string; type?: string }> =
       [];
 
     // Add dropdown filter selections
@@ -450,6 +450,7 @@ export default function TaskManagementDashboard() {
             key,
             value,
             label: data.columnData[key].label,
+            type: "dropdown",
           });
         });
       }
@@ -462,6 +463,7 @@ export default function TaskManagementDashboard() {
           key,
           value: value.trim(),
           label: data.columnData[key].label,
+          type: "manual",
         });
       }
     });
@@ -471,6 +473,7 @@ export default function TaskManagementDashboard() {
         key: "search",
         value: searchTerm,
         label: "Search",
+        type: "search",
       });
     }
 
@@ -699,6 +702,8 @@ export default function TaskManagementDashboard() {
                       <ActiveFiltersContainer>
                         {activeFilters.map((filter) => (
                           <FilterBadge key={`${filter.key}-${filter.value}`}>
+                            {filter.type === "manual" && "🔍 "}
+                            {filter.type === "search" && "🔎 "}
                             {filter.label}: {filter.value}
                             <FilterBadgeClose
                               onClick={(e) => {
