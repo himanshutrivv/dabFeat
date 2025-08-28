@@ -172,7 +172,7 @@ export const MainContent = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: hidden;
+  overflow: visible;
 `;
 
 export const Header = styled.div`
@@ -213,12 +213,12 @@ export const MainContentLayout = styled.div`
   flex-direction: column;
   gap: 24px;
   flex: 1;
-  overflow: hidden;
+  overflow: visible;
 `;
 
 export const TableSection = styled.div`
   flex: 1;
-  overflow: hidden;
+  overflow: auto;
   display: flex;
   flex-direction: column;
 `;
@@ -234,6 +234,8 @@ export const FilterCard = styled.div`
   margin-bottom: 24px;
   overflow: visible;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 
   &:hover {
     box-shadow:
@@ -269,7 +271,8 @@ export const FilterContainer = styled.div<{ show: boolean }>`
   background: transparent;
   display: ${(props) => (props.show ? "block" : "none")};
   position: relative;
-  z-index: 100;
+  z-index: 1;
+  overflow: visible;
 `;
 
 export const SearchBarContainer = styled.div`
