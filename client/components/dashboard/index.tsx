@@ -393,6 +393,19 @@ export default function TaskManagementDashboard() {
       ...prev,
       [filterKey]: [],
     }));
+    // Also clear manual input for this filter
+    setManualFilterInputs((prev) => {
+      const newInputs = { ...prev };
+      delete newInputs[filterKey];
+      return newInputs;
+    });
+  }, []);
+
+  const handleManualFilterChange = useCallback((key: string, value: string) => {
+    setManualFilterInputs((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
   }, []);
 
   const getFilterOptions = useCallback(
@@ -429,6 +442,7 @@ export default function TaskManagementDashboard() {
     const activeFilters: Array<{ key: string; value: string; label: string }> =
       [];
 
+    // Add dropdown filter selections
     Object.entries(filters).forEach(([key, values]) => {
       if (values && values.length > 0 && data?.columnData[key]) {
         values.forEach((value) => {
@@ -437,6 +451,17 @@ export default function TaskManagementDashboard() {
             value,
             label: data.columnData[key].label,
           });
+        });
+      }
+    });
+
+    // Add manual filter inputs
+    Object.entries(manualFilterInputs).forEach(([key, value]) => {
+      if (value && value.trim() && data?.columnData[key]) {
+        activeFilters.push({
+          key,
+          value: value.trim(),
+          label: data.columnData[key].label,
         });
       }
     });
@@ -450,7 +475,7 @@ export default function TaskManagementDashboard() {
     }
 
     return activeFilters;
-  }, [filters, searchTerm, data]);
+  }, [filters, manualFilterInputs, searchTerm, data]);
 
   // Timeline Filter helpers
   const formatDateTimeForInput = useCallback((date: Date) => {
@@ -725,10 +750,12 @@ export default function TaskManagementDashboard() {
           isOpen={showMainFilter}
           filterOptions={getMainFilterOptions()}
           filters={filters}
+          manualFilterInputs={manualFilterInputs}
           activeFilters={activeFilters}
           openFilterDropdowns={openFilterDropdowns}
           onClose={() => setShowMainFilter(false)}
           onFilterChange={handleFilterChange}
+          onManualFilterChange={handleManualFilterChange}
           onClearAllFilters={clearAllFilters}
           onToggleFilterSection={(key: string) => {
             setOpenFilterDropdowns((prev) => ({
