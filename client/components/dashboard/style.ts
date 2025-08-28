@@ -223,6 +223,8 @@ export const TableSection = styled.div`
   overflow: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 0;
 `;
 
 export const FilterCard = styled.div`
@@ -807,7 +809,7 @@ export const TableHeader = styled.th`
   position: sticky;
   top: 0;
   backdrop-filter: blur(12px);
-  z-index: 5;
+  z-index: 0;
   border: 1px solid #1d4ed8;
   border-bottom: 2px solid #1e40af;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
