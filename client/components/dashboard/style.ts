@@ -1075,14 +1075,20 @@ export const FilterModalOptionItemStyled = styled.div<{ isSelected?: boolean }>`
   justify-content: space-between;
   padding: 8px 12px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 6px;
   background-color: ${(props) =>
     props.isSelected ? "hsl(var(--accent))" : "transparent"};
   margin-bottom: 2px;
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: hsl(var(--accent) / 0.7);
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  &:focus {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
   }
 `;
 
