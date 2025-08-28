@@ -887,9 +887,7 @@ export const TableEmptyStateDescription = styled.div`
 export const FilterModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.75);
   z-index: 9998;
   animation: fadeIn 0.3s ease-out;
   opacity: 1;
@@ -897,11 +895,9 @@ export const FilterModalBackdrop = styled.div`
   @keyframes fadeIn {
     from {
       opacity: 0;
-      backdrop-filter: blur(0px);
     }
     to {
       opacity: 1;
-      backdrop-filter: blur(12px);
     }
   }
 `;
@@ -912,7 +908,7 @@ export const FilterModalContainer = styled.div`
   right: 0;
   width: 33.333333%;
   height: 100vh;
-  background-color: hsl(var(--card));
+  background-color: white;
   border-left: 1px solid hsl(var(--border));
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
@@ -923,34 +919,19 @@ export const FilterModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   animation: slideInFromRight 0.3s ease-out;
-  opacity: 1;
-  isolation: isolate;
-  transform: translateZ(0);
-  will-change: transform;
-  filter: none !important;
-  -webkit-filter: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
 
   @keyframes slideInFromRight {
     from {
-      transform: translateX(100%) translateZ(0);
+      transform: translateX(100%);
     }
     to {
-      transform: translateX(0) translateZ(0);
+      transform: translateX(0);
     }
   }
 
   @media (max-width: 768px) {
     width: 90%;
     right: 5%;
-  }
-
-  * {
-    filter: none !important;
-    -webkit-filter: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
   }
 `;
 
@@ -961,12 +942,14 @@ export const FilterModalHeaderContainer = styled.div`
   padding: 24px;
   border-bottom: 1px solid hsl(var(--border));
   flex-shrink: 0;
+  background-color: white;
 `;
 
 export const FilterModalContentContainer = styled.div`
   flex: 1;
   overflow-y: auto;
   padding: 24px;
+  background-color: white;
 `;
 
 export const FilterModalListItem = styled.div`
@@ -1044,6 +1027,7 @@ export const FilterModalFooterContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  background-color: white;
 `;
 
 export const FilterModalButton = styled(Button)``;
