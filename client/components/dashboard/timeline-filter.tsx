@@ -26,7 +26,7 @@ const FilterGroup = styled.div``;
 
 const SelectContainer = styled.div`
   position: relative;
-  z-index: 20;
+  z-index: 1000;
 `;
 
 const SelectTrigger = styled.button`
@@ -69,7 +69,7 @@ const SelectContent = styled.div`
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 30;
+  z-index: 10000;
   max-height: 384px;
   min-width: 200px;
   overflow-y: auto;
@@ -80,6 +80,7 @@ const SelectContent = styled.div`
   box-shadow: ${({ theme }) => theme.shadows.xl};
   margin-top: ${({ theme }) => theme.spacing[1]};
   animation: fadeIn 0.2s ease-out;
+  isolation: isolate;
 
   @keyframes fadeIn {
     from {
@@ -136,6 +137,8 @@ const Button = styled.button<{
 const TimelineFilterContent = styled(SelectContent)`
   width: 380px;
   padding: ${({ theme }) => theme.spacing[4]};
+  z-index: 10001;
+  isolation: isolate;
 `;
 
 const TimelineFilterSection = styled.div`
