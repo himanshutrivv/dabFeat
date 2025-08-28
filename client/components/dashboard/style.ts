@@ -814,7 +814,7 @@ export const TimeLineFilterContent = styled(TimeLineSelectContent)`
 export const TimeLineFilterSection = styled.div<{ theme?: any }>`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme?.spacing?.[4] || '16px'};
+  gap: 20px;
 `;
 
 export const TimeLineFilterLabel = styled.label<{ theme?: any }>`
