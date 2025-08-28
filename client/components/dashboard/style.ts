@@ -779,14 +779,17 @@ export const TimeLineButton = styled.button<{
       case "sm":
         return css`
           height: 36px;
-          border-radius: ${props.theme?.borderRadius?.md || '6px'};
-          padding: 0 ${props.theme?.spacing?.[3] || '12px'};
-          font-size: ${props.theme?.fontSizes?.xs || '12px'};
+          border-radius: 6px;
+          padding: 0 16px;
+          font-size: 13px;
+          font-weight: 600;
         `;
       default:
         return css`
           height: 40px;
-          padding: 0 ${props.theme?.spacing?.[4] || '16px'};
+          padding: 0 20px;
+          font-size: 14px;
+          font-weight: 600;
         `;
     }
   }}
