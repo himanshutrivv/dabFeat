@@ -715,9 +715,11 @@ export default function TaskManagementDashboard() {
                             : "Search is disabled - no searchable columns available"
                         }
                         value={searchTerm}
-                        onChange={(e) => hasSearchableColumns && setSearchTerm(e.target.value)}
+                        onChange={(e) =>
+                          hasSearchableColumns && setSearchTerm(e.target.value)
+                        }
                         onKeyPress={(e) => {
-                          if (e.key === 'Enter' && hasSearchableColumns) {
+                          if (e.key === "Enter" && hasSearchableColumns) {
                             handleSearchClick();
                           }
                         }}
@@ -725,7 +727,9 @@ export default function TaskManagementDashboard() {
                       />
                     </SearchInputWrapper>
                     <SearchButton
-                      onClick={hasSearchableColumns ? handleSearchClick : undefined}
+                      onClick={
+                        hasSearchableColumns ? handleSearchClick : undefined
+                      }
                       disabled={!hasSearchableColumns}
                       title={
                         hasSearchableColumns
