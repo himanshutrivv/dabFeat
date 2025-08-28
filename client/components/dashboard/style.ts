@@ -829,18 +829,22 @@ export const TimeLineFilterLabel = styled.label<{ theme?: any }>`
 export const TimeLineFilterInputGrid = styled.div<{ theme?: any }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: ${({ theme }) => theme?.spacing?.[2] || '8px'};
+  gap: 12px;
 `;
 
 export const TimeLineFilterNote = styled.div<{ theme?: any }>`
-  font-size: ${({ theme }) => theme?.fontSizes?.xs || '12px'};
-  color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+  font-size: 12px;
+  color: #6b7280;
   text-align: center;
+  background-color: #f3f4f6;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
 `;
 
 export const TimeLineFilterButtonGrid = styled.div<{ theme?: any }>`
   display: flex;
-  gap: ${({ theme }) => theme?.spacing?.[2] || '8px'};
+  gap: 12px;
 `;
 
 // Filter Modal Components
