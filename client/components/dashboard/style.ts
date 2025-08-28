@@ -446,9 +446,9 @@ export const SearchInput = styled.input`
 export const SearchButton = styled(Button)`
   height: 48px;
   padding: 0 24px;
-  background-color: #f8fafc;
-  color: #64748b;
-  border: 1px solid #e2e8f0;
+  background: hsl(215, 25%, 27%);
+  color: white;
+  border: none;
   border-radius: 8px;
   font-weight: 500;
   font-size: 14px;
@@ -456,14 +456,13 @@ export const SearchButton = styled(Button)`
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
 
   &:hover:not(:disabled) {
-    background-color: #f1f5f9;
-    color: #475569;
-    border-color: #cbd5e1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: hsl(215, 25%, 35%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
   }
 
   &:focus:not(:disabled) {
@@ -473,26 +472,26 @@ export const SearchButton = styled(Button)`
   }
 
   &:active:not(:disabled) {
-    background-color: #e2e8f0;
-    color: #334155;
+    background: hsl(215, 25%, 30%);
+    transform: translateY(0);
   }
 
   &:disabled {
-    background-color: hsl(var(--muted));
-    color: hsl(var(--muted-foreground));
+    background: hsl(215, 25%, 20%);
+    color: rgba(255, 255, 255, 0.5);
     cursor: not-allowed;
     opacity: 0.6;
-    border-color: hsl(var(--border));
     box-shadow: none;
+    transform: none;
   }
 `;
 
 export const RefreshButton = styled(Button)`
   height: 48px;
   padding: 0 24px;
-  background-color: #f8fafc;
-  color: #64748b;
-  border: 1px solid #e2e8f0;
+  background: hsl(215, 25%, 27%);
+  color: white;
+  border: none;
   border-radius: 8px;
   font-weight: 500;
   font-size: 14px;
@@ -500,15 +499,14 @@ export const RefreshButton = styled(Button)`
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
   margin-left: 8px;
 
   &:hover:not(:disabled) {
-    background-color: #f1f5f9;
-    color: #475569;
-    border-color: #cbd5e1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: hsl(215, 25%, 35%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
   }
 
   &:focus:not(:disabled) {
@@ -518,17 +516,17 @@ export const RefreshButton = styled(Button)`
   }
 
   &:active:not(:disabled) {
-    background-color: #e2e8f0;
-    color: #334155;
+    background: hsl(215, 25%, 30%);
+    transform: translateY(0);
   }
 
   &:disabled {
-    background-color: #f1f5f9;
-    color: #94a3b8;
+    background: hsl(215, 25%, 20%);
+    color: rgba(255, 255, 255, 0.5);
     cursor: not-allowed;
     opacity: 0.8;
-    border-color: #e2e8f0;
     box-shadow: none;
+    transform: none;
   }
 `;
 
