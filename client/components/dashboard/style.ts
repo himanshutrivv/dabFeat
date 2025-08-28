@@ -216,7 +216,7 @@ export const MainContentLayout = styled.div`
   overflow: hidden;
 `;
 
-export const TableContainer = styled.div`
+export const TableSection = styled.div`
   flex: 1;
   overflow: hidden;
   display: flex;
