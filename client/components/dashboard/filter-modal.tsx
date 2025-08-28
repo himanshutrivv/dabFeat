@@ -46,7 +46,7 @@ const MainFilterBackdrop = styled.div`
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 9998;
+  z-index: 99999998;
   animation: fadeIn 0.3s ease-out;
 
   @keyframes fadeIn {
@@ -70,7 +70,7 @@ const MainFilterModal = styled.div`
   border-top-left-radius: ${({ theme }) => theme.borderRadius["3xl"]};
   border-bottom-left-radius: ${({ theme }) => theme.borderRadius["3xl"]};
   box-shadow: ${({ theme }) => theme.shadows.xl};
-  z-index: 9999;
+  z-index: 99999999;
   display: flex;
   flex-direction: column;
   animation: slideInFromRight 0.3s ease-out;
