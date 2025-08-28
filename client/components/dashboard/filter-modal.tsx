@@ -58,13 +58,13 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
                   e.stopPropagation();
                   onFilterChange(columnKey, "all");
                 }}
-                selected={selectedValues.length === 0}
+                selected={safeSelectedValues.length === 0}
               >
                 All {label}
               </FilterDropdownSelectItem>
 
               {options.map((option) => {
-                const isSelected = selectedValues.includes(option);
+                const isSelected = safeSelectedValues.includes(option);
                 return (
                   <FilterDropdownSelectItem
                     key={option}
