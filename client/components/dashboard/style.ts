@@ -617,3 +617,702 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
       color: hsl(var(--accent-foreground));
     `}
 `;
+
+// Timeline Filter Components
+export const timeLineFilterGroup = styled.div``;
+
+export const timeLineSelectContainer = styled.div`
+  position: relative;
+  z-index: 10000;
+  isolation: isolate;
+`;
+
+export const timeLineSelectTrigger = styled.button<{ theme?: any }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  width: 100%;
+  border-radius: ${({ theme }) => theme?.borderRadius?.lg || '8px'};
+  border: 1px solid ${({ theme }) => theme?.colors?.input || 'hsl(var(--input))'};
+  background-color: ${({ theme }) => theme?.colors?.background || 'hsl(var(--background))'};
+  padding: 0 ${({ theme }) => theme?.spacing?.[3] || '12px'};
+  font-size: ${({ theme }) => theme?.fontSizes?.sm || '14px'};
+  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+  cursor: pointer;
+  transition: ${({ theme }) => theme?.transitions?.all || 'all 0.2s ease'};
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme?.colors?.ring || 'hsl(var(--ring))'};
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme?.colors?.accent || 'hsl(var(--accent))'};
+    color: ${({ theme }) => theme?.colors?.accentForeground || 'hsl(var(--accent-foreground))'};
+  }
+`;
+
+export const timeLineSelectValue = styled.span<{ theme?: any }>`
+  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+  font-weight: ${({ theme }) => theme?.fontWeights?.medium || '500'};
+`;
+
+export const timeLineSelectContent = styled.div<{ theme?: any }>`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  max-height: 384px;
+  min-width: 200px;
+  overflow-y: auto;
+  border-radius: ${({ theme }) => theme?.borderRadius?.lg || '8px'};
+  border: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  background-color: ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'};
+  color: ${({ theme }) => theme?.colors?.cardForeground || 'hsl(var(--card-foreground))'};
+  box-shadow: ${({ theme }) => theme?.shadows?.xl || '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'};
+  margin-top: ${({ theme }) => theme?.spacing?.[1] || '4px'};
+  animation: fadeIn 0.2s ease-out;
+  isolation: isolate;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+`;
+
+export const timeLineInput = styled.input<{ theme?: any }>`
+  width: 100%;
+  padding: 8px 12px;
+  background-color: ${({ theme }) => theme?.colors?.background || 'hsl(var(--background))'};
+  border: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  border-radius: 6px;
+  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+  font-size: 14px;
+  font-family: ${({ theme }) => theme?.fonts?.mono || 'monospace'};
+
+  &:focus {
+    box-shadow: 0 0 0 2px ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
+    border-color: ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
+    outline: none;
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+  }
+`;
+
+export const timeLineButton = styled.button<{
+  variant?: "default" | "outline";
+  size?: "default" | "sm";
+  theme?: any;
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme?.colors?.ring || 'hsl(var(--ring))'};
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  ${(props) => {
+    switch (props.variant) {
+      case "outline":
+        return css`
+          border: 1px solid ${props.theme?.colors?.border || 'hsl(var(--border))'};
+          background-color: ${props.theme?.colors?.background || 'hsl(var(--background))'};
+          color: ${props.theme?.colors?.foreground || 'hsl(var(--foreground))'};
+          &:hover {
+            background-color: ${props.theme?.colors?.accent || 'hsl(var(--accent))'};
+            color: ${props.theme?.colors?.accentForeground || 'hsl(var(--accent-foreground))'};
+          }
+        `;
+      default:
+        return css`
+          background-color: ${props.theme?.colors?.primary || 'hsl(var(--primary))'};
+          color: ${props.theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
+          &:hover {
+            background-color: ${props.theme?.colors?.primary ? `${props.theme.colors.primary} / 0.9` : 'hsl(var(--primary) / 0.9)'};
+          }
+        `;
+    }
+  }}
+
+  ${(props) => {
+    switch (props.size) {
+      case "sm":
+        return css`
+          height: 36px;
+          border-radius: ${props.theme?.borderRadius?.md || '6px'};
+          padding: 0 ${props.theme?.spacing?.[3] || '12px'};
+          font-size: ${props.theme?.fontSizes?.xs || '12px'};
+        `;
+      default:
+        return css`
+          height: 40px;
+          padding: 0 ${props.theme?.spacing?.[4] || '16px'};
+        `;
+    }
+  }}
+
+  flex: 1;
+`;
+
+export const timeLineFilterContent = styled(timeLineSelectContent)`
+  width: 380px;
+  padding: ${({ theme }) => theme?.spacing?.[4] || '16px'};
+  z-index: 20000;
+  isolation: isolate;
+  position: absolute;
+
+  @media (max-width: 768px) {
+    width: 300px;
+    min-width: 280px;
+  }
+`;
+
+export const timeLineFilterSection = styled.div<{ theme?: any }>`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme?.spacing?.[4] || '16px'};
+`;
+
+export const timeLineFilterLabel = styled.label<{ theme?: any }>`
+  font-size: ${({ theme }) => theme?.fontSizes?.sm || '14px'};
+  font-weight: ${({ theme }) => theme?.fontWeights?.medium || '500'};
+  margin-bottom: ${({ theme }) => theme?.spacing?.[2] || '8px'};
+  display: block;
+  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+`;
+
+export const timeLineFilterInputGrid = styled.div<{ theme?: any }>`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${({ theme }) => theme?.spacing?.[2] || '8px'};
+`;
+
+export const timeLineFilterNote = styled.div<{ theme?: any }>`
+  font-size: ${({ theme }) => theme?.fontSizes?.xs || '12px'};
+  color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+  text-align: center;
+`;
+
+export const timeLineFilterButtonGrid = styled.div<{ theme?: any }>`
+  display: flex;
+  gap: ${({ theme }) => theme?.spacing?.[2] || '8px'};
+`;
+
+// Filter Modal Components
+export const filterModalBackdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
+export const filterModalContainer = styled.div<{ theme?: any }>`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  height: 100vh;
+  background-color: ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'};
+  border-left: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  border-radius: 24px 0 0 24px;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  animation: slideInFromRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const filterModalHeader = styled.div<{ theme?: any }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, ${({ theme }) =>
+    theme?.colors?.primary || 'hsl(var(--primary))'} 0%, hsl(215, 25%, 20%) 100%);
+  color: ${({ theme }) => theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
+  border-radius: 24px 0 0 0;
+  padding: ${({ theme }) => theme?.spacing?.[6] || '24px'};
+  border-bottom: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  flex-shrink: 0;
+`;
+
+export const filterModalContent = styled.div<{ theme?: any }>`
+  flex: 1;
+  overflow-y: auto;
+  padding: ${({ theme }) => theme?.spacing?.[6] || '24px'};
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme?.spacing?.[5] || '20px'};
+`;
+
+export const filterModalSearch = styled.div<{ theme?: any }>`
+  position: relative;
+  margin-bottom: ${({ theme }) => theme?.spacing?.[4] || '16px'};
+`;
+
+export const filterModalListItem = styled.div<{ theme?: any }>`
+  border: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  border-radius: 12px;
+  background: ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'};
+  transition: all 0.2s ease;
+  margin-bottom: ${({ theme }) => theme?.spacing?.[3] || '12px'};
+
+  &:hover {
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+export const filterModalItemHeader = styled.div<{ isActive?: boolean; theme?: any }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: ${({ theme }) => theme?.transitions?.all || 'all 0.2s ease'};
+  background: none;
+  border: none;
+  text-align: left;
+  color: ${(props) =>
+    props.isActive
+      ? props.theme?.colors?.primary || 'hsl(var(--primary))'
+      : props.theme?.colors?.foreground || 'hsl(var(--foreground))'};
+
+  &:hover {
+    background: hsl(var(--accent) / 0.5);
+  }
+
+  &[data-state="open"] {
+    background: hsl(var(--accent));
+    border-bottom: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  }
+`;
+
+export const filterModalHeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const filterModalTitle = styled.h3<{ hasActive: boolean }>`
+  font-size: 16px;
+  font-weight: ${(props) => (props.hasActive ? "600" : "500")};
+  color: ${(props) =>
+    props.hasActive ? "hsl(var(--primary))" : "hsl(var(--foreground))"};
+  margin: 0;
+`;
+
+export const filterModalCount = styled.div<{ theme?: any }>`
+  background: ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
+  color: ${({ theme }) => theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
+  font-size: 11px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  font-weight: 600;
+`;
+
+export const filterModalExpandIcon = styled.div<{ isOpen: boolean; theme?: any }>`
+  transition: transform 0.2s ease;
+  transform: ${(props) => (props.isOpen ? "rotate(90deg)" : "rotate(0deg)")};
+  color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+`;
+
+export const filterModalOptionsContainer = styled.div`
+  padding: 0 20px 20px 20px;
+`;
+
+export const filterModalOptionsInner = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: hsl(var(--muted) / 0.3);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+`;
+
+export const filterModalCheckbox = styled.div<{ selected: boolean; theme?: any }>`
+  width: 18px;
+  height: 18px;
+  border: 2px solid
+    ${(props) =>
+      props.selected ? props.theme?.colors?.primary || 'hsl(var(--primary))' : props.theme?.colors?.border || 'hsl(var(--border))'};
+  border-radius: 4px;
+  background-color: ${(props) =>
+    props.selected ? props.theme?.colors?.primary || 'hsl(var(--primary))' : "transparent"};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: ${({ theme }) => theme?.transitions?.all || 'all 0.2s ease'};
+
+  &:hover {
+    border-color: ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
+  }
+`;
+
+export const filterModalFooter = styled.div<{ theme?: any }>`
+  padding: ${({ theme }) => theme?.spacing?.[6] || '24px'};
+  border-top: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  flex-shrink: 0;
+  background: ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'};
+`;
+
+export const filterModalButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+`;
+
+export const filterModalButton = styled.button<{
+  variant?: "default" | "outline";
+  theme?: any;
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 44px;
+  margin-bottom: ${({ theme }) => theme?.spacing?.[2] || '8px'};
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme?.colors?.ring || 'hsl(var(--ring))'};
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  ${(props) => {
+    switch (props.variant) {
+      case "outline":
+        return css`
+          border: 1px solid ${props.theme?.colors?.border || 'hsl(var(--border))'};
+          background-color: ${props.theme?.colors?.background || 'hsl(var(--background))'};
+          color: ${props.theme?.colors?.foreground || 'hsl(var(--foreground))'};
+          &:hover {
+            background-color: ${props.theme?.colors?.accent || 'hsl(var(--accent))'};
+            color: ${props.theme?.colors?.accentForeground || 'hsl(var(--accent-foreground))'};
+          }
+        `;
+      default:
+        return css`
+          background-color: ${props.theme?.colors?.primary || 'hsl(var(--primary))'};
+          color: ${props.theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
+          &:hover {
+            background-color: ${props.theme?.colors?.primary ? `${props.theme.colors.primary} / 0.9` : 'hsl(var(--primary) / 0.9)'};
+          }
+        `;
+    }
+  }}
+`;
+
+export const filterModalHeaderTitle = styled.h2<{ theme?: any }>`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  color: ${({ theme }) => theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
+`;
+
+export const filterModalSearchIcon = styled.div<{ theme?: any }>`
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+  z-index: 1;
+`;
+
+export const filterModalSearchInput = styled.input<{ theme?: any }>`
+  width: 100%;
+  padding: 8px 12px;
+  padding-left: 40px;
+  height: 44px;
+  border-radius: 12px;
+  border: 2px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  background: ${({ theme }) => theme?.colors?.background || 'hsl(var(--background))'};
+  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+  font-size: 14px;
+
+  &:focus {
+    border-color: ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+  }
+`;
+
+export const filterModalSectionContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+`;
+
+export const filterModalSectionSearchContainer = styled.div`
+  position: relative;
+  margin-bottom: 12px;
+`;
+
+export const filterModalSectionSearchIcon = styled.div<{ theme?: any }>`
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+  z-index: 1;
+`;
+
+export const filterModalSectionSearchInput = styled.input<{ disabled?: boolean; theme?: any }>`
+  width: 100%;
+  padding: 8px 12px;
+  padding-left: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  background: ${(props) =>
+    props.disabled ? "hsl(var(--muted) / 0.1)" : "hsl(var(--muted) / 0.3)"};
+  font-size: 13px;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
+  opacity: ${(props) => (props.disabled ? "0.6" : "1")};
+  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+
+  &:focus {
+    border-color: ${({ theme, disabled }) =>
+      disabled ? theme?.colors?.border || 'hsl(var(--border))' : theme?.colors?.primary || 'hsl(var(--primary))'};
+    background: ${({ theme, disabled }) =>
+      disabled ? "hsl(var(--muted) / 0.1)" : theme?.colors?.background || 'hsl(var(--background))'};
+    box-shadow: ${({ disabled }) =>
+      disabled ? "none" : "0 0 0 2px hsl(var(--primary) / 0.1)"};
+    outline: none;
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+    font-size: 12px;
+  }
+`;
+
+export const filterModalOptionItem = styled.div<{ isSelected?: boolean; theme?: any }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  background: ${(props) =>
+    props.isSelected ? "hsl(var(--primary) / 0.1)" : "transparent"};
+  border: 1px solid
+    ${(props) =>
+      props.isSelected ? "hsl(var(--primary) / 0.3)" : "transparent"};
+  margin-bottom: ${({ theme }) => theme?.spacing?.[1] || '4px'};
+
+  &:hover {
+    background: hsl(var(--accent));
+    transform: translateX(2px);
+  }
+`;
+
+export const filterModalOptionText = styled.span<{ theme?: any }>`
+  font-size: 14px;
+  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+`;
+
+export const filterModalCheckIcon = styled.svg<{ theme?: any }>`
+  width: 10px;
+  height: 10px;
+  color: ${({ theme }) => theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
+`;
+
+export const filterModalCloseButton = styled.button<{ theme?: any }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: hsl(var(--primary-foreground) / 0.1);
+  border: 1px solid hsl(var(--primary-foreground) / 0.2);
+  cursor: pointer;
+  border-radius: 12px;
+  color: ${({ theme }) => theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
+  transition: ${({ theme }) => theme?.transitions?.all || 'all 0.2s ease'};
+
+  &:hover {
+    background: hsl(var(--primary-foreground) / 0.2);
+    transform: scale(1.05);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme?.colors?.ring || 'hsl(var(--ring))'};
+  }
+`;
+
+export const filterModalSeparator = styled.div<{ theme?: any }>`
+  flex-shrink: 0;
+  background: ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  height: 1px;
+  width: 100%;
+`;
+
+export const filterModalEmptyState = styled.div<{ theme?: any }>`
+  text-align: center;
+  padding: 40px 20px;
+  color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+`;
+
+export const filterModalEmptyIcon = styled.div`
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+`;
+
+export const filterModalManualContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+`;
+
+export const filterModalManualLabel = styled.label`
+  font-size: 12px;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
+
+export const filterModalManualInput = styled.input<{ theme?: any }>`
+  width: 100%;
+  padding: 8px 12px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  background: ${({ theme }) => theme?.colors?.background || 'hsl(var(--background))'};
+  font-size: 13px;
+  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+
+  &:focus {
+    border-color: ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.1);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+    font-size: 12px;
+  }
+`;
+
+export const filterModalTypeIcon = styled.div`
+  font-size: 12px;
+  color: hsl(var(--primary));
+`;
