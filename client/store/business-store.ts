@@ -36,7 +36,7 @@ export const useBusinessStore = create<BusinessStore>()(
   persist(
     (set) => ({
       userName: null,
-      selectedBusiness: null,
+      selectedBusiness: { bussId: "default", bussName: "Default Business" },
       businesses: [],
       setSelectedBusiness: (business) => {
         set({ selectedBusiness: business });
