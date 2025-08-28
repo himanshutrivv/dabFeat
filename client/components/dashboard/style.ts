@@ -666,7 +666,7 @@ export const TimeLineFilterGroup = styled.div``;
 
 export const TimeLineSelectContainer = styled.div`
   position: relative;
-  z-index: 10000;
+  z-index: 50;
   isolation: isolate;
 `;
 
@@ -711,17 +711,17 @@ export const TimeLineSelectContent = styled.div<{ theme?: any }>`
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0;
-  z-index: 10000;
+  right: auto;
+  z-index: 50;
   max-height: 384px;
   min-width: 200px;
   overflow-y: auto;
-  border-radius: ${({ theme }) => theme?.borderRadius?.lg || '8px'};
-  border: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
-  background-color: ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'};
-  color: ${({ theme }) => theme?.colors?.cardForeground || 'hsl(var(--card-foreground))'};
-  box-shadow: ${({ theme }) => theme?.shadows?.xl || '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'};
-  margin-top: ${({ theme }) => theme?.spacing?.[1] || '4px'};
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background-color: white;
+  color: hsl(var(--foreground));
+  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
   isolation: isolate;
 
@@ -740,21 +740,21 @@ export const TimeLineSelectContent = styled.div<{ theme?: any }>`
 export const TimeLineInput = styled.input<{ theme?: any }>`
   width: 100%;
   padding: 8px 12px;
-  background-color: ${({ theme }) => theme?.colors?.background || 'hsl(var(--background))'};
-  border: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
   border-radius: 6px;
-  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+  color: hsl(var(--foreground));
   font-size: 14px;
-  font-family: ${({ theme }) => theme?.fonts?.mono || 'monospace'};
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 
   &:focus {
-    box-shadow: 0 0 0 2px ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
-    border-color: ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
+    box-shadow: 0 0 0 2px hsl(var(--primary));
+    border-color: hsl(var(--primary));
     outline: none;
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+    color: hsl(var(--muted-foreground));
   }
 `;
 
@@ -831,10 +831,22 @@ export const TimeLineButton = styled.button<{
 
 export const TimeLineFilterContent = styled(TimeLineSelectContent)`
   width: 380px;
-  padding: ${({ theme }) => theme?.spacing?.[4] || '16px'};
-  z-index: 20000;
+  padding: 16px;
+  z-index: 100;
   isolation: isolate;
   position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: auto;
+  min-width: 320px;
+  max-width: calc(100vw - 32px);
+  box-shadow:
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+  background-color: white;
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
+  margin-top: 4px;
 
   @media (max-width: 768px) {
     width: 300px;
@@ -849,28 +861,34 @@ export const TimeLineFilterSection = styled.div<{ theme?: any }>`
 `;
 
 export const TimeLineFilterLabel = styled.label<{ theme?: any }>`
-  font-size: ${({ theme }) => theme?.fontSizes?.sm || '14px'};
-  font-weight: ${({ theme }) => theme?.fontWeights?.medium || '500'};
-  margin-bottom: ${({ theme }) => theme?.spacing?.[2] || '8px'};
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
   display: block;
-  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+  color: hsl(var(--foreground));
 `;
 
 export const TimeLineFilterInputGrid = styled.div<{ theme?: any }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: ${({ theme }) => theme?.spacing?.[2] || '8px'};
+  gap: 8px;
+  margin-bottom: 16px;
 `;
 
 export const TimeLineFilterNote = styled.div<{ theme?: any }>`
-  font-size: ${({ theme }) => theme?.fontSizes?.xs || '12px'};
-  color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+  font-size: 12px;
+  color: hsl(var(--muted-foreground));
   text-align: center;
+  margin: 12px 0;
+  padding: 8px;
+  background: hsl(var(--muted) / 0.3);
+  border-radius: 6px;
 `;
 
 export const TimeLineFilterButtonGrid = styled.div<{ theme?: any }>`
   display: flex;
-  gap: ${({ theme }) => theme?.spacing?.[2] || '8px'};
+  gap: 8px;
+  margin-top: 16px;
 `;
 
 // Filter Modal Components
