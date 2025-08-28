@@ -1108,46 +1108,19 @@ export const FilterModalSearch = styled.div<{ theme?: any }>`
 
 export const FilterModalListItem = styled.div<{ theme?: any }>`
   border: 1px solid hsl(var(--border));
-  border-radius: 16px;
-  background: hsl(var(--card));
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-bottom: 16px;
+  border-radius: 12px;
+  background: hsl(var(--background));
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
   overflow: hidden;
-  position: relative;
 
   &:hover {
-    border-color: hsl(var(--primary));
-    box-shadow:
-      0 8px 25px rgba(0, 0, 0, 0.1),
-      0 4px 12px hsl(var(--primary) / 0.15);
-    transform: translateY(-2px);
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
   &:last-child {
     margin-bottom: 0;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      hsl(var(--primary) / 0.3) 50%,
-      transparent 100%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover::before {
-    opacity: 1;
   }
 `;
 
