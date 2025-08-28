@@ -606,7 +606,7 @@ export default function TaskManagementDashboard() {
 
       const response = await srGetDashboardTableData({
         bussId,
-        timeRange,
+        filterData: null,
       });
 
       console.log("Monitoring data refreshed:", response);
