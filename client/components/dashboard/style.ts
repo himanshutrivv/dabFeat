@@ -416,7 +416,7 @@ export const SearchInput = styled.input`
   height: 48px;
   width: 100%;
   background-color: hsl(var(--background));
-  border: 1px solid hsl(var(--border));
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
   color: hsl(var(--foreground));
   font-size: 18px;
