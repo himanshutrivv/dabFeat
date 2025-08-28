@@ -98,23 +98,23 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
   );
 
   return (
-    <FilterGroup>
-      <SelectContainer data-dropdown-container>
-        <SelectTrigger onClick={onToggle}>
-          <SelectValue>
+    <timeLineFilterGroup>
+      <timeLineSelectContainer data-dropdown-container>
+        <timeLineSelectTrigger onClick={onToggle}>
+          <timeLineSelectValue>
             {startDateTime && endDateTime
               ? "Custom Range"
               : "Select Time Range"}
-          </SelectValue>
+          </timeLineSelectValue>
           <ChevronDown size={16} />
-        </SelectTrigger>
+        </timeLineSelectTrigger>
         {isOpen && (
-          <TimelineFilterContent>
-            <TimelineFilterSection>
+          <timeLineFilterContent>
+            <timeLineFilterSection>
               <div>
-                <TimelineFilterLabel>Start Date & Time</TimelineFilterLabel>
-                <TimelineFilterInputGrid>
-                  <TimelineInput
+                <timeLineFilterLabel>Start Date & Time</timeLineFilterLabel>
+                <timeLineFilterInputGrid>
+                  <timeLineInput
                     type="date"
                     value={
                       startDateTime
@@ -128,7 +128,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleDateChange(e, true)}
                   />
-                  <TimelineInput
+                  <timeLineInput
                     type="time"
                     step="1"
                     value={
@@ -139,12 +139,12 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleTimeChange(e, true)}
                   />
-                </TimelineFilterInputGrid>
+                </timeLineFilterInputGrid>
               </div>
               <div>
-                <TimelineFilterLabel>End Date & Time</TimelineFilterLabel>
-                <TimelineFilterInputGrid>
-                  <TimelineInput
+                <timeLineFilterLabel>End Date & Time</timeLineFilterLabel>
+                <timeLineFilterInputGrid>
+                  <timeLineInput
                     type="date"
                     value={
                       endDateTime
@@ -158,7 +158,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleDateChange(e, false)}
                   />
-                  <TimelineInput
+                  <timeLineInput
                     type="time"
                     step="1"
                     value={
@@ -167,31 +167,31 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleTimeChange(e, false)}
                   />
-                </TimelineFilterInputGrid>
+                </timeLineFilterInputGrid>
               </div>
-              <TimelineFilterNote>
+              <timeLineFilterNote>
                 Maximum time range: 5 minutes
-              </TimelineFilterNote>
-              <TimelineFilterButtonGrid>
-                <Button
+              </timeLineFilterNote>
+              <timeLineFilterButtonGrid>
+                <timeLineButton
                   size="sm"
                   variant="outline"
                   onClick={(e) => handleButtonClick(e, "reset")}
                 >
                   Reset
-                </Button>
-                <Button
+                </timeLineButton>
+                <timeLineButton
                   size="sm"
                   onClick={(e) => handleButtonClick(e, "apply")}
                 >
                   Apply
-                </Button>
-              </TimelineFilterButtonGrid>
-            </TimelineFilterSection>
-          </TimelineFilterContent>
+                </timeLineButton>
+              </timeLineFilterButtonGrid>
+            </timeLineFilterSection>
+          </timeLineFilterContent>
         )}
-      </SelectContainer>
-    </FilterGroup>
+      </timeLineSelectContainer>
+    </timeLineFilterGroup>
   );
 };
 
