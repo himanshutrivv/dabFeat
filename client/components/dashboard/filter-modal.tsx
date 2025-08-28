@@ -285,7 +285,7 @@ const CollapsibleContent = styled.div<{ isOpen?: boolean }>`
 const ModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   z-index: 99999998;
   animation: fadeIn 0.3s ease-out;
 
@@ -311,7 +311,7 @@ const ModalContainer = styled.div`
   animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow:
     0 25px 50px -12px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+    0 4px 16px rgba(0, 0, 0, 0.1);
 
   @keyframes slideIn {
     from {
@@ -333,7 +333,7 @@ const StyledCard = styled(Card)`
   height: 100%;
   border-radius: 24px 0 0 24px;
   border-right: none;
-  background: #ffffff;
+  background: hsl(var(--card));
   display: flex;
   flex-direction: column;
 `;
@@ -586,8 +586,7 @@ const FooterContainer = styled(CardFooter)`
   padding: 24px;
   border-top: 1px solid hsl(var(--border));
   flex-shrink: 0;
-  background: hsl(var(--background) / 0.8);
-  backdrop-filter: blur(8px);
+  background: hsl(var(--card));
 `;
 
 const ButtonContainer = styled.div`
