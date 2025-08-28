@@ -194,7 +194,7 @@ export const FilterCard = styled.div`
     0 2px 4px rgba(0, 0, 0, 0.08);
   margin-top: 24px;
   margin-bottom: 24px;
-  overflow: hidden;
+  overflow: visible;
   transition: all 0.3s ease;
 
   &:hover {
@@ -355,12 +355,12 @@ export const FilterResults = styled.div`
 // Button components
 export const Button = styled.button<{
   variant?:
-  | "default"
-  | "destructive"
-  | "outline"
-  | "secondary"
-  | "ghost"
-  | "link";
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
   size?: "default" | "sm" | "lg" | "icon";
 }>`
   display: inline-flex;
@@ -692,7 +692,7 @@ export const SelectItem = styled.div<{ selected?: boolean }>`
 `;
 
 export const SelectItemsContainer = styled.div`
-  padding: 4px;
+  padding: 8px 4px;
 `;
 
 // Table components
@@ -804,7 +804,7 @@ export const TableCell = styled.td`
 
 export const TableCellClickableStyled = styled(TableCell)`
   cursor: pointer;
-  
+
   &:hover {
     background-color: hsl(var(--accent) / 0.5);
   }
@@ -906,7 +906,9 @@ export const FilterModalListItem = styled.div`
   }
 `;
 
-export const FilterModalItemHeaderContainer = styled.div<{ isActive?: boolean }>`
+export const FilterModalItemHeaderContainer = styled.div<{
+  isActive?: boolean;
+}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -953,7 +955,7 @@ export const FilterModalCheckboxContainer = styled.div<{ selected: boolean }>`
   height: 20px;
   border: 2px solid
     ${(props) =>
-    props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
+      props.selected ? "hsl(var(--primary))" : "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected ? "hsl(var(--primary))" : "transparent"};
@@ -1096,9 +1098,9 @@ export const FilterDropdownSelectTrigger = styled.button`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid hsl(var(--input));
-  background-color: hsl(var(--background));
+  background-color: hsl(var(--muted));
   padding: 0 12px;
   font-size: 14px;
   color: hsl(var(--foreground));
@@ -1112,7 +1114,8 @@ export const FilterDropdownSelectTrigger = styled.button`
   }
 
   &:hover {
-    background-color: hsl(var(--muted) / 0.5);
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
   }
 
   &:disabled {
@@ -1130,21 +1133,23 @@ export const FilterDropdownSelectContent = styled.div`
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0;
+  right: auto;
   z-index: 300;
   max-height: 384px;
-  min-width: 200px;
+  min-width: 320px;
+  max-width: calc(100vw - 32px);
   overflow-y: auto;
-  border-radius: 8px;
+  border-radius: 16px;
   border: 1px solid hsl(var(--border));
   background-color: white;
   color: hsl(var(--card-foreground));
   opacity: 1;
+  padding: 16px;
   box-shadow:
-    0 20px 80px rgba(0, 0, 0, 0.4),
-    0 12px 40px rgba(0, 0, 0, 0.3),
-    0 4px 16px rgba(0, 0, 0, 0.2);
-  margin-top: 4px;
+    0 20px 80px rgba(0, 0, 0, 0.35),
+    0 12px 40px rgba(0, 0, 0, 0.25),
+    0 4px 16px rgba(0, 0, 0, 0.15);
+  margin-top: 8px;
   animation: fadeIn 0.2s ease-out;
 
   &.filter-content {
