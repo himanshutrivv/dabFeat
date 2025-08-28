@@ -178,11 +178,49 @@ export const MainContent = styled.div`
 export const Header = styled.div`
   background-color: hsl(var(--card));
   border-bottom: 1px solid hsl(var(--border));
-  padding: 0 32px;
+  padding: 16px 32px;
   position: sticky;
   top: 0;
   z-index: 50;
   flex-shrink: 0;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const HeaderContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const DashboardTitle = styled.h1`
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+`;
+
+export const DashboardSubtitle = styled.p`
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+`;
+
+export const MainContentLayout = styled.div`
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  overflow: hidden;
+`;
+
+export const TableContainer = styled.div`
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const FilterCard = styled.div`
