@@ -943,18 +943,13 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(
-    135deg,
-    ${({ theme }) => theme?.colors?.primary || "hsl(var(--primary))"} 0%,
-    hsl(215, 25%, 20%) 100%
-  );
-  color: ${({ theme }) =>
-    theme?.colors?.primaryForeground || "hsl(var(--primary-foreground))"};
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  color: #ffffff;
   border-radius: 24px 0 0 0;
-  padding: ${({ theme }) => theme?.spacing?.[6] || "24px"};
-  border-bottom: 1px solid
-    ${({ theme }) => theme?.colors?.border || "hsl(var(--border))"};
+  padding: 24px 32px;
+  border-bottom: 1px solid #e5e7eb;
   flex-shrink: 0;
+  min-height: 80px;
 `;
 
 export const FilterModalContent = styled.div<{ theme?: any }>`
