@@ -578,6 +578,13 @@ export default function TaskManagementDashboard() {
     [startDateTime, validateAndAdjustTimeRange],
   );
 
+  // Handle search button click
+  const handleSearchClick = useCallback(() => {
+    // Trigger search - the effect will handle the actual filtering
+    // Since searchTerm is already being watched by useEffect, we just need to ensure it's applied
+    console.log("Search triggered with term:", searchTerm);
+  }, [searchTerm]);
+
   const initializeDefaultTimeRange = useCallback(() => {
     const now = new Date();
     const start = new Date(now.getTime() - 5 * 60 * 1000); // 5 minutes ago
