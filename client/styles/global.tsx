@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { AppTheme } from "./themes";
+import { appTheme, AppTheme } from "./themes";
 
 export const globalStyles = (theme: AppTheme) => css`
   *,
@@ -8,30 +8,33 @@ export const globalStyles = (theme: AppTheme) => css`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: ${theme.fonts.sans};
+    font-family: ${theme.fonts.default};
   }
 
   html {
-    font-family: ${theme.fonts.sans};
+    font-family: ${theme.fonts.default};
     line-height: ${theme.lineHeights.normal};
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    overflow: hidden !important;
-    background-color: ${theme.colors.background};
-    color: ${theme.colors.foreground};
+    background-color: ${theme.colors.default.background};
+    color: ${theme.colors.default.foreground};
     font-size: ${theme.fontSizes.base};
     line-height: ${theme.lineHeights.normal};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: ${theme.transitions.colors};
   }
 
   input,
   textarea,
   select,
   div,
-  span {
+  span,
+  button,
+  option,
+  text {
     font: inherit;
   }
 
@@ -61,7 +64,8 @@ export const globalStyles = (theme: AppTheme) => css`
 
   /* Focus styles */
   :focus-visible {
-    outline: 2px solid ${theme.colors.ring};
+    outline: 2px solid
+      ${(theme.colors.default as any).ring || theme.colors.default.primary};
     outline-offset: 2px;
   }
 
@@ -72,15 +76,18 @@ export const globalStyles = (theme: AppTheme) => css`
   }
 
   ::-webkit-scrollbar-track {
-    background: ${theme.colors.muted};
+    background: ${(theme.colors.default as any).muted ||
+  (theme.colors.default as any).secondary ||
+  theme.colors.default.card};
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${theme.colors.border};
+    background: ${theme.colors.default.border};
     border-radius: ${theme.borderRadius.md};
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: ${theme.colors.mutedForeground};
+    background: ${(theme.colors.default as any).mutedForeground ||
+  theme.colors.default.foreground};
   }
 `;
