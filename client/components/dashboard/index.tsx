@@ -767,6 +767,7 @@ export default function TaskManagementDashboard() {
                       />
                     </SearchInputWrapper>
                     <SearchButton
+                      variant="primary"
                       onClick={
                         hasSearchableColumns ? handleSearchClick : undefined
                       }
@@ -780,19 +781,13 @@ export default function TaskManagementDashboard() {
                       <Search size={18} />
                       Search
                     </SearchButton>
-                    <Button
+                    <RefreshButton
+                      variant="secondary"
                       onClick={handleRefreshClick}
                       disabled={isRefreshing}
                       title="Refresh monitoring data (current time - 15 minutes)"
                       css={{
                         marginLeft: "8px",
-                        minWidth: "auto",
-                        padding: "8px 12px",
-                        backgroundColor: isRefreshing ? "#f1f5f9" : "#3b82f6",
-                        color: isRefreshing ? "#64748b" : "#ffffff",
-                        "&:hover": {
-                          backgroundColor: isRefreshing ? "#f1f5f9" : "#2563eb",
-                        },
                       }}
                     >
                       <RefreshCw
@@ -808,7 +803,7 @@ export default function TaskManagementDashboard() {
                         }}
                       />
                       {isRefreshing ? "Refreshing..." : "Refresh"}
-                    </Button>
+                    </RefreshButton>
                   </SearchBarContainer>
 
                   {activeFilters.length > 0 && (
