@@ -101,13 +101,14 @@ const parseDateTimeToISO = (dateTimeString: string): string | null => {
 // Transform filters state to API format
 const transformFiltersToAPIFormat = (
   filters: FilterState,
+  manualFilterInputs: { [key: string]: string },
   searchTerm: string,
   startDateTime: string,
   endDateTime: string,
 ): FilterDataItem[] => {
   const filterData: FilterDataItem[] = [];
 
-  // Add regular filters
+  // Add regular filters (from dropdown selections)
   Object.entries(filters).forEach(([key, values]) => {
     if (values && values.length > 0) {
       if (values.length === 1) {
@@ -125,6 +126,18 @@ const transformFiltersToAPIFormat = (
           value: values,
         });
       }
+    }
+  });
+
+  // Add manual filter inputs (from text inputs for non-searchable columns)
+  Object.entries(manualFilterInputs).forEach(([key, value]) => {
+    if (value && value.trim()) {
+      // Use LIKE operator for manual text inputs
+      filterData.push({
+        key,
+        operator: "LIKE",
+        value: value.trim(),
+      });
     }
   });
 
@@ -170,6 +183,9 @@ export default function TaskManagementDashboard() {
     [key: string]: boolean;
   }>({});
   const [isFilterLoading, setIsFilterLoading] = useState(false);
+  const [manualFilterInputs, setManualFilterInputs] = useState<{
+    [key: string]: string;
+  }>({});
   const { selectedBusiness } = useBusinessStore();
 
   // Function to apply filters and fetch data from API
@@ -181,6 +197,7 @@ export default function TaskManagementDashboard() {
       const bussId = selectedBusiness?.bussId || "TESTORG2";
       const filterData = transformFiltersToAPIFormat(
         filters,
+        manualFilterInputs,
         searchTerm,
         startDateTime,
         endDateTime,
@@ -205,7 +222,7 @@ export default function TaskManagementDashboard() {
     } finally {
       setIsFilterLoading(false);
     }
-  }, [filters, searchTerm, startDateTime, endDateTime, selectedBusiness]);
+  }, [filters, manualFilterInputs, searchTerm, startDateTime, endDateTime, selectedBusiness]);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -366,6 +383,7 @@ export default function TaskManagementDashboard() {
       clearedFilters[key] = [];
     });
     setFilters(clearedFilters);
+    setManualFilterInputs({});
     setSearchTerm("");
     setOpenFilterDropdowns({});
   }, [filters]);
