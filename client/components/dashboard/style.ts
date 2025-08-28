@@ -447,7 +447,11 @@ export const SearchInput = styled.input`
 export const SearchButton = styled(Button)`
   height: 48px;
   padding: 0 24px;
-  background: linear-gradient(135deg, hsl(215, 25%, 27%) 0%, hsl(215, 25%, 20%) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(215, 25%, 27%) 0%,
+    hsl(215, 25%, 20%) 100%
+  );
   color: white;
   border: 1px solid hsl(215, 25%, 35%);
   border-radius: 12px;
@@ -465,13 +469,14 @@ export const SearchButton = styled(Button)`
   overflow: hidden;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg,
+    background: linear-gradient(
+      90deg,
       transparent 0%,
       rgba(255, 255, 255, 0.2) 50%,
       transparent 100%
@@ -484,7 +489,11 @@ export const SearchButton = styled(Button)`
   }
 
   &:hover:not(:disabled) {
-    background: linear-gradient(135deg, hsl(215, 25%, 35%) 0%, hsl(215, 25%, 27%) 100%);
+    background: linear-gradient(
+      135deg,
+      hsl(215, 25%, 35%) 0%,
+      hsl(215, 25%, 27%) 100%
+    );
     transform: translateY(-2px);
     box-shadow:
       0 8px 20px rgba(71, 85, 105, 0.3),
@@ -501,13 +510,21 @@ export const SearchButton = styled(Button)`
   }
 
   &:active:not(:disabled) {
-    background: linear-gradient(135deg, hsl(215, 25%, 20%) 0%, hsl(215, 25%, 15%) 100%);
+    background: linear-gradient(
+      135deg,
+      hsl(215, 25%, 20%) 0%,
+      hsl(215, 25%, 15%) 100%
+    );
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(71, 85, 105, 0.2);
   }
 
   &:disabled {
-    background: linear-gradient(135deg, hsl(215, 25%, 15%) 0%, hsl(215, 25%, 10%) 100%);
+    background: linear-gradient(
+      135deg,
+      hsl(215, 25%, 15%) 0%,
+      hsl(215, 25%, 10%) 100%
+    );
     color: rgba(255, 255, 255, 0.4);
     cursor: not-allowed;
     opacity: 0.6;
@@ -520,7 +537,11 @@ export const SearchButton = styled(Button)`
 export const RefreshButton = styled(Button)`
   height: 48px;
   padding: 0 24px;
-  background: linear-gradient(135deg, hsl(215, 25%, 27%) 0%, hsl(215, 25%, 20%) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(215, 25%, 27%) 0%,
+    hsl(215, 25%, 20%) 100%
+  );
   color: white;
   border: 1px solid hsl(215, 25%, 35%);
   border-radius: 12px;
@@ -539,13 +560,14 @@ export const RefreshButton = styled(Button)`
   overflow: hidden;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg,
+    background: linear-gradient(
+      90deg,
       transparent 0%,
       rgba(255, 255, 255, 0.2) 50%,
       transparent 100%
@@ -558,7 +580,11 @@ export const RefreshButton = styled(Button)`
   }
 
   &:hover:not(:disabled) {
-    background: linear-gradient(135deg, hsl(215, 25%, 35%) 0%, hsl(215, 25%, 27%) 100%);
+    background: linear-gradient(
+      135deg,
+      hsl(215, 25%, 35%) 0%,
+      hsl(215, 25%, 27%) 100%
+    );
     transform: translateY(-2px);
     box-shadow:
       0 8px 20px rgba(71, 85, 105, 0.3),
@@ -575,13 +601,21 @@ export const RefreshButton = styled(Button)`
   }
 
   &:active:not(:disabled) {
-    background: linear-gradient(135deg, hsl(215, 25%, 20%) 0%, hsl(215, 25%, 15%) 100%);
+    background: linear-gradient(
+      135deg,
+      hsl(215, 25%, 20%) 0%,
+      hsl(215, 25%, 15%) 100%
+    );
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(71, 85, 105, 0.2);
   }
 
   &:disabled {
-    background: linear-gradient(135deg, hsl(215, 25%, 15%) 0%, hsl(215, 25%, 10%) 100%);
+    background: linear-gradient(
+      135deg,
+      hsl(215, 25%, 15%) 0%,
+      hsl(215, 25%, 10%) 100%
+    );
     color: rgba(255, 255, 255, 0.4);
     cursor: not-allowed;
     opacity: 0.8;
