@@ -779,12 +779,12 @@ export const TimeLineButton = styled.button<{
         `;
       default:
         return css`
-          background-color: ${props.theme?.colors?.primary ||
+          background-color: ${props.theme?.colors?.default?.primary ||
           "hsl(var(--primary))"};
-          color: ${props.theme?.colors?.primaryForeground ||
+          color: ${props.theme?.colors?.default?.primaryForeground ||
           "hsl(var(--primary-foreground))"};
           &:hover {
-            background-color: ${props.theme?.colors?.primary
+            background-color: ${props.theme?.colors?.default?.primary
               ? `${props.theme.colors.primary} / 0.9`
               : "hsl(var(--primary) / 0.9)"};
           }
@@ -976,7 +976,7 @@ export const FilterModalItemHeader = styled.div<{
   text-align: left;
   color: ${(props) =>
     props.isActive
-      ? props.theme?.colors?.primary || "hsl(var(--primary))"
+      ? props.theme?.colors?.default?.primary || "hsl(var(--primary))"
       : props.theme?.colors?.foreground || "hsl(var(--foreground))"};
 
   &:hover {
@@ -1064,12 +1064,12 @@ export const FilterModalCheckbox = styled.div<{
   border: 2px solid
     ${(props) =>
       props.selected
-        ? props.theme?.colors?.primary || "hsl(var(--primary))"
+        ? props.theme?.colors?.default?.primary || "hsl(var(--primary))"
         : props.theme?.colors?.border || "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected
-      ? props.theme?.colors?.primary || "hsl(var(--primary))"
+      ? props.theme?.colors?.default?.primary || "hsl(var(--primary))"
       : "transparent"};
   display: flex;
   align-items: center;
@@ -1155,12 +1155,12 @@ export const FilterModalButton = styled.button<{
         `;
       default:
         return css`
-          background-color: ${props.theme?.colors?.primary ||
+          background-color: ${props.theme?.colors?.default?.primary ||
           "hsl(var(--primary))"};
-          color: ${props.theme?.colors?.primaryForeground ||
+          color: ${props.theme?.colors?.default?.primaryForeground ||
           "hsl(var(--primary-foreground))"};
           &:hover {
-            background-color: ${props.theme?.colors?.primary
+            background-color: ${props.theme?.colors?.default?.primary
               ? `${props.theme.colors.primary} / 0.9`
               : "hsl(var(--primary) / 0.9)"};
           }
