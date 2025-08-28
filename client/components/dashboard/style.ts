@@ -592,24 +592,26 @@ export const SelectTrigger = styled.button`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  border-radius: 12px;
-  border: 1px solid hsl(var(--input));
-  background-color: hsl(var(--background));
-  padding: 0 12px;
+  border-radius: 25px;
+  border: 2px solid #e5e7eb;
+  background-color: #ffffff;
+  padding: 0 16px;
   font-size: 14px;
-  color: hsl(var(--foreground));
+  font-weight: 500;
+  color: #374151;
   cursor: pointer;
   transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
-    outline-offset: 2px;
+    border-color: #d1d5db;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
   &:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    border-color: #d1d5db;
+    background-color: #f9fafb;
   }
 
   &:disabled {
@@ -1122,24 +1124,26 @@ export const FilterDropdownSelectTrigger = styled.button`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: 12px;
-  border: 1px solid hsl(var(--input));
-  background-color: hsl(var(--background));
-  padding: 0 12px;
+  border-radius: 25px;
+  border: 2px solid #e5e7eb;
+  background-color: #ffffff;
+  padding: 0 16px;
   font-size: 14px;
-  color: hsl(var(--foreground));
+  font-weight: 500;
+  color: #374151;
   cursor: pointer;
   transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
-    outline-offset: 2px;
+    border-color: #d1d5db;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
   &:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    border-color: #d1d5db;
+    background-color: #f9fafb;
   }
 
   &:disabled {
@@ -1237,24 +1241,26 @@ export const TimelineFilterSelectTrigger = styled.button`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: 12px;
-  border: 1px solid hsl(var(--input));
-  background-color: hsl(var(--background));
-  padding: 0 12px;
+  border-radius: 25px;
+  border: 2px solid #e5e7eb;
+  background-color: #ffffff;
+  padding: 0 16px;
   font-size: 14px;
-  color: hsl(var(--foreground));
+  font-weight: 500;
+  color: #374151;
   cursor: pointer;
   transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
-    outline-offset: 2px;
+    border-color: #d1d5db;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
   &:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    border-color: #d1d5db;
+    background-color: #f9fafb;
   }
 
   &:disabled {
