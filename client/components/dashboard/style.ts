@@ -1446,3 +1446,212 @@ export const TimelineFilterButtonGridStyled = styled.div`
   display: flex;
   gap: 8px;
 `;
+
+// Additional TimelineFilter components moved from timeline-filter.tsx
+export const TimelineFilterFilterGroup = styled.div``;
+
+export const TimelineFilterSelectContainer = styled.div`
+  position: relative;
+  z-index: 10000;
+  isolation: isolate;
+`;
+
+export const TimelineFilterSelectTriggerNew = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  padding: 0 12px;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:hover {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+`;
+
+export const TimelineFilterSelectValueNew = styled.span`
+  color: hsl(var(--foreground));
+  font-weight: 500;
+`;
+
+export const TimelineFilterSelectContentNew = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  max-height: 384px;
+  min-width: 200px;
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin-top: 4px;
+  animation: fadeIn 0.2s ease-out;
+  isolation: isolate;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+`;
+
+export const TimelineFilterInputNew = styled.input`
+  width: 100%;
+  padding: 8px 12px;
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+  color: hsl(var(--foreground));
+  font-size: 14px;
+  font-family: monospace;
+
+  &:focus {
+    box-shadow: 0 0 0 2px hsl(var(--primary));
+    border-color: hsl(var(--primary));
+    outline: none;
+  }
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+`;
+
+export const TimelineFilterButtonNew = styled.button<{
+  variant?: "default" | "outline";
+  size?: "default" | "sm";
+}>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  flex: 1;
+
+  &:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  ${(props) => {
+    switch (props.variant) {
+      case "outline":
+        return css`
+          border: 1px solid hsl(var(--border));
+          background-color: hsl(var(--background));
+          color: hsl(var(--foreground));
+          &:hover {
+            background-color: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+          }
+        `;
+      default:
+        return css`
+          background-color: hsl(var(--primary));
+          color: hsl(var(--primary-foreground));
+          &:hover {
+            background-color: hsl(var(--primary) / 0.9);
+          }
+        `;
+    }
+  }}
+
+  ${(props) => {
+    switch (props.size) {
+      case "sm":
+        return css`
+          height: 36px;
+          border-radius: 6px;
+          padding: 0 12px;
+        `;
+      default:
+        return css`
+          height: 40px;
+          padding: 0 16px;
+        `;
+    }
+  }}
+`;
+
+export const TimelineFilterContentNew = styled(TimelineFilterSelectContentNew)`
+  width: 380px;
+  padding: 16px;
+  z-index: 20000;
+  isolation: isolate;
+  position: absolute;
+
+  @media (max-width: 768px) {
+    width: 300px;
+    min-width: 280px;
+  }
+`;
+
+export const TimelineFilterSectionNew = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+export const TimelineFilterLabelNew = styled.label`
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+  color: hsl(var(--foreground));
+`;
+
+export const TimelineFilterInputGridNew = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+`;
+
+export const TimelineFilterNoteNew = styled.div`
+  font-size: 12px;
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+`;
+
+export const TimelineFilterButtonGridNew = styled.div`
+  display: flex;
+  gap: 8px;
+`;
