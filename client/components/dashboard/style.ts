@@ -603,19 +603,19 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchButton = styled.button`
-  /* Updated styling to match filter dropdowns */
+  /* Exact match with FilterDropdownSelectTrigger styling */
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  height: 48px;
-  padding: 0 24px;
+  height: 40px;
+  width: auto;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
   background-color: #ffffff;
-  color: #374151;
+  padding: 0 12px;
   font-size: 14px;
-  font-weight: 500;
+  color: #374151;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -627,23 +627,18 @@ export const SearchButton = styled.button`
     outline-offset: 2px;
   }
 
-  &:hover:not(:disabled) {
+  &:hover {
     background-color: #f3f4f6;
     color: #1f2937;
     border-color: #d1d5db;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
-  &:active:not(:disabled) {
-    background-color: #e5e7eb;
-    transform: translateY(1px);
-  }
-
   &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
     background-color: #f9fafb;
     color: #9ca3af;
-    cursor: not-allowed;
-    opacity: 0.6;
     border-color: #e5e7eb;
     box-shadow: none;
   }
