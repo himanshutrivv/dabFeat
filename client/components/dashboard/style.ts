@@ -795,15 +795,19 @@ export const TimeLineButton = styled.button<{
 `;
 
 export const TimeLineFilterContent = styled(TimeLineSelectContent)`
-  width: 380px;
-  padding: ${({ theme }) => theme?.spacing?.[4] || '16px'};
+  width: 420px;
+  padding: 20px;
   z-index: 20000;
   isolation: isolate;
   position: absolute;
+  background-color: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
   @media (max-width: 768px) {
-    width: 300px;
-    min-width: 280px;
+    width: 320px;
+    min-width: 300px;
   }
 `;
 
