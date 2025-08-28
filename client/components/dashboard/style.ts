@@ -623,7 +623,7 @@ export const ErrorText = styled.div`
 // Select components with fixed hover effects
 export const SelectContainer = styled.div`
   position: relative;
-  z-index: 1000;
+  z-index: 99999;
 `;
 
 export const SelectTrigger = styled.button`
@@ -670,7 +670,7 @@ export const SelectContent = styled.div`
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 999999;
   max-height: 384px;
   min-width: 200px;
   overflow-y: auto;
@@ -680,8 +680,8 @@ export const SelectContent = styled.div`
   color: hsl(var(--foreground));
   opacity: 1 !important;
   box-shadow:
-    0 10px 80px rgba(0, 0, 0, 0.12),
-    0 4px 16px rgba(0, 0, 0, 0.08);
+    0 20px 100px rgba(0, 0, 0, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.15);
   margin-top: 4px;
   animation: none;
   pointer-events: auto;
@@ -1149,7 +1149,7 @@ export const FilterDropdownFilterGroup = styled.div``;
 
 export const FilterDropdownSelectContainer = styled.div`
   position: relative;
-  z-index: 1000;
+  z-index: 99999;
   isolation: isolate;
 `;
 
@@ -1198,7 +1198,7 @@ export const FilterDropdownSelectContent = styled.div`
   top: 100%;
   left: 0;
   right: auto;
-  z-index: 9999;
+  z-index: 999999;
   max-height: 384px;
   min-width: 320px;
   max-width: calc(100vw - 32px);
@@ -1210,8 +1210,8 @@ export const FilterDropdownSelectContent = styled.div`
   opacity: 1 !important;
   padding: 16px;
   box-shadow:
-    0 10px 80px rgba(0, 0, 0, 0.12),
-    0 4px 16px rgba(0, 0, 0, 0.08);
+    0 20px 100px rgba(0, 0, 0, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.15);
   margin-top: 4px;
   animation: none;
   pointer-events: auto;
