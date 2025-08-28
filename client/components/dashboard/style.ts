@@ -415,20 +415,20 @@ export const SearchInput = styled.input`
   padding-left: 48px;
   height: 48px;
   width: 100%;
-  background-color: hsl(var(--background));
-  border: 1px solid hsl(var(--border));
+  background-color: #ffffff;
+  border: 2px solid #e2e8f0;
   border-radius: 16px;
-  color: hsl(var(--foreground));
+  color: #1a1a1a;
   font-size: 18px;
 
   &:focus {
-    box-shadow: 0 0 0 2px hsl(var(--primary));
-    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
     outline: none;
   }
 
   &::placeholder {
-    color: hsl(var(--muted-foreground));
+    color: #6b7280;
   }
 
   &:disabled {
@@ -446,24 +446,25 @@ export const SearchInput = styled.input`
 export const SearchButton = styled(Button)`
   height: 48px;
   padding: 0 24px;
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  border: 1px solid hsl(var(--border));
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: 2px solid #3b82f6;
   border-radius: 8px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   min-width: 120px;
   display: flex;
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 
   &:hover:not(:disabled) {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-    border-color: hsl(var(--border));
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+    transform: translateY(-1px);
   }
 
   &:focus:not(:disabled) {
@@ -834,8 +835,9 @@ export const TimeLineFilterButtonGrid = styled.div<{ theme?: any }>`
 export const FilterModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
   animation: fadeIn 0.3s ease-out;
 
   @keyframes fadeIn {
@@ -854,13 +856,13 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   right: 0;
   width: 420px;
   height: 100vh;
-  background-color: ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'};
-  border-left: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  background-color: #ffffff;
+  border-left: 2px solid #e5e7eb;
   border-radius: 24px 0 0 24px;
   box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 4px 16px rgba(0, 0, 0, 0.08);
-  z-index: 1001;
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 8px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
   display: flex;
   flex-direction: column;
   animation: slideInFromRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
