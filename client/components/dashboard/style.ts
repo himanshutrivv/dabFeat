@@ -293,7 +293,7 @@ export const FilterGrid = styled.div`
   gap: 16px;
   margin-bottom: 24px;
   position: relative;
-  z-index: 9999;
+  z-index: 100;
   isolation: isolate;
 
   @media (min-width: 768px) {
@@ -623,7 +623,7 @@ export const ErrorText = styled.div`
 // Select components with fixed hover effects
 export const SelectContainer = styled.div`
   position: relative;
-  z-index: 200;
+  z-index: 1000;
 `;
 
 export const SelectTrigger = styled.button`
@@ -670,35 +670,25 @@ export const SelectContent = styled.div`
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 300;
+  z-index: 9999;
   max-height: 384px;
   min-width: 200px;
   overflow-y: auto;
   border-radius: 8px;
   border: 1px solid hsl(var(--border));
-  background-color: hsl(var(--card));
-  color: hsl(var(--card-foreground));
-  opacity: 1;
+  background-color: white !important;
+  color: hsl(var(--foreground));
+  opacity: 1 !important;
   box-shadow:
     0 10px 80px rgba(0, 0, 0, 0.12),
     0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
-  animation: fadeIn 0.2s ease-out;
+  animation: none;
+  pointer-events: auto;
 
   &.filter-content {
-    background-color: hsl(var(--card)) !important;
+    background-color: white !important;
     opacity: 1 !important;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
   }
 `;
 
@@ -1159,7 +1149,7 @@ export const FilterDropdownFilterGroup = styled.div``;
 
 export const FilterDropdownSelectContainer = styled.div`
   position: relative;
-  z-index: 50;
+  z-index: 1000;
   isolation: isolate;
 `;
 
@@ -1208,7 +1198,7 @@ export const FilterDropdownSelectContent = styled.div`
   top: 100%;
   left: 0;
   right: auto;
-  z-index: 999;
+  z-index: 9999;
   max-height: 384px;
   min-width: 320px;
   max-width: calc(100vw - 32px);
