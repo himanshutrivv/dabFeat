@@ -447,87 +447,147 @@ export const SearchInput = styled.input`
 export const SearchButton = styled(Button)`
   height: 48px;
   padding: 0 24px;
-  background: hsl(215, 25%, 27%);
+  background: linear-gradient(135deg, hsl(215, 25%, 27%) 0%, hsl(215, 25%, 20%) 100%);
   color: white;
   border: 1px solid hsl(215, 25%, 35%);
-  border-radius: 8px;
-  font-weight: 500;
+  border-radius: 12px;
+  font-weight: 600;
   font-size: 14px;
   min-width: 120px;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 4px 12px rgba(71, 85, 105, 0.25),
+    0 2px 4px rgba(71, 85, 105, 0.1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
+    transition: left 0.5s ease;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
 
   &:hover:not(:disabled) {
-    background: hsl(215, 25%, 35%);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
+    background: linear-gradient(135deg, hsl(215, 25%, 35%) 0%, hsl(215, 25%, 27%) 100%);
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 20px rgba(71, 85, 105, 0.3),
+      0 4px 8px rgba(71, 85, 105, 0.15);
+    border-color: hsl(215, 25%, 40%);
   }
 
   &:focus:not(:disabled) {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
+    box-shadow:
+      0 0 0 3px rgba(71, 85, 105, 0.3),
+      0 8px 20px rgba(71, 85, 105, 0.25);
     outline-offset: 2px;
   }
 
   &:active:not(:disabled) {
-    background: hsl(215, 25%, 30%);
+    background: linear-gradient(135deg, hsl(215, 25%, 20%) 0%, hsl(215, 25%, 15%) 100%);
     transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(71, 85, 105, 0.2);
   }
 
   &:disabled {
-    background: hsl(215, 25%, 20%);
-    color: rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, hsl(215, 25%, 15%) 0%, hsl(215, 25%, 10%) 100%);
+    color: rgba(255, 255, 255, 0.4);
     cursor: not-allowed;
     opacity: 0.6;
     box-shadow: none;
     transform: none;
+    border-color: hsl(215, 25%, 20%);
   }
 `;
 
 export const RefreshButton = styled(Button)`
   height: 48px;
   padding: 0 24px;
-  background: hsl(215, 25%, 27%);
+  background: linear-gradient(135deg, hsl(215, 25%, 27%) 0%, hsl(215, 25%, 20%) 100%);
   color: white;
   border: 1px solid hsl(215, 25%, 35%);
-  border-radius: 8px;
-  font-weight: 500;
+  border-radius: 12px;
+  font-weight: 600;
   font-size: 14px;
   min-width: 120px;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 4px 12px rgba(71, 85, 105, 0.25),
+    0 2px 4px rgba(71, 85, 105, 0.1);
   margin-left: 8px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
+    transition: left 0.5s ease;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
 
   &:hover:not(:disabled) {
-    background: hsl(215, 25%, 35%);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
+    background: linear-gradient(135deg, hsl(215, 25%, 35%) 0%, hsl(215, 25%, 27%) 100%);
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 20px rgba(71, 85, 105, 0.3),
+      0 4px 8px rgba(71, 85, 105, 0.15);
+    border-color: hsl(215, 25%, 40%);
   }
 
   &:focus:not(:disabled) {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
+    box-shadow:
+      0 0 0 3px rgba(71, 85, 105, 0.3),
+      0 8px 20px rgba(71, 85, 105, 0.25);
     outline-offset: 2px;
   }
 
   &:active:not(:disabled) {
-    background: hsl(215, 25%, 30%);
+    background: linear-gradient(135deg, hsl(215, 25%, 20%) 0%, hsl(215, 25%, 15%) 100%);
     transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(71, 85, 105, 0.2);
   }
 
   &:disabled {
-    background: hsl(215, 25%, 20%);
-    color: rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, hsl(215, 25%, 15%) 0%, hsl(215, 25%, 10%) 100%);
+    color: rgba(255, 255, 255, 0.4);
     cursor: not-allowed;
     opacity: 0.8;
     box-shadow: none;
     transform: none;
+    border-color: hsl(215, 25%, 20%);
   }
 `;
 
