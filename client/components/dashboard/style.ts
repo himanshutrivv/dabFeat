@@ -1369,7 +1369,9 @@ export const TimelineFilterSelectContentNew = styled.div`
   border: 1px solid hsl(var(--border));
   background-color: hsl(var(--card));
   color: hsl(var(--card-foreground));
-  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 10px 80px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
   isolation: isolate;
@@ -1574,7 +1576,11 @@ export const MainFilterHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(215, 25%, 20%) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)) 0%,
+    hsl(215, 25%, 20%) 100%
+  );
   color: hsl(var(--primary-foreground));
   border-radius: 24px 0 0 0;
   padding: 24px;
@@ -1625,9 +1631,7 @@ export const MainFilterItemHeader = styled.div<{ isActive?: boolean }>`
   border: none;
   text-align: left;
   color: ${(props) =>
-    props.isActive
-      ? "hsl(var(--primary))"
-      : "hsl(var(--foreground))"};
+    props.isActive ? "hsl(var(--primary))" : "hsl(var(--foreground))"};
 
   &:hover {
     background: hsl(var(--accent) / 0.5);
@@ -1898,7 +1902,9 @@ export const FilterModalSectionSearchIcon = styled.div`
   z-index: 1;
 `;
 
-export const FilterModalSectionSearchInput = styled.input<{ disabled?: boolean }>`
+export const FilterModalSectionSearchInput = styled.input<{
+  disabled?: boolean;
+}>`
   width: 100%;
   padding-left: 36px;
   padding-right: 12px;
