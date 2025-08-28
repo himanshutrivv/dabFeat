@@ -861,11 +861,11 @@ export const FilterModalContainer = styled.div`
   right: 0;
   width: 33.333333%;
   height: 100vh;
-  background-color: white;
+  background-color: hsl(var(--card));
   border-left: 1px solid hsl(var(--border));
-  border-top-left-radius: 24px;
-  border-bottom-left-radius: 24px;
-  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -996,11 +996,21 @@ export const FilterModalSearchInputStyled = styled.input`
   padding-right: 12px;
   padding-top: 12px;
   padding-bottom: 12px;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid hsl(var(--input));
   border-radius: 8px;
   font-size: 14px;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+
+  &:focus {
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+    border-color: hsl(var(--ring));
+    outline: none;
+  }
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
 `;
 
 export const FilterModalSectionContentStyled = styled.div`
@@ -1042,11 +1052,21 @@ export const FilterModalSectionSearchInputStyled = styled.input`
   padding-right: 12px;
   padding-top: 8px;
   padding-bottom: 8px;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid hsl(var(--input));
   border-radius: 6px;
   font-size: 13px;
-  background-color: hsl(var(--muted));
+  background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+
+  &:focus {
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+    border-color: hsl(var(--ring));
+    outline: none;
+  }
+
+  &::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
 `;
 
 export const FilterModalOptionItemStyled = styled.div<{ isSelected?: boolean }>`
