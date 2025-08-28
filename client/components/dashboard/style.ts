@@ -269,7 +269,7 @@ export const FilterContainer = styled.div<{ show: boolean }>`
   background: transparent;
   display: ${(props) => (props.show ? "block" : "none")};
   position: relative;
-  z-index: 999999;
+  z-index: 10;
   isolation: isolate;
 `;
 
@@ -293,7 +293,7 @@ export const FilterGrid = styled.div`
   gap: 16px;
   margin-bottom: 24px;
   position: relative;
-  z-index: 999999;
+  z-index: 10;
   isolation: isolate;
 
   @media (min-width: 768px) {
@@ -623,7 +623,7 @@ export const ErrorText = styled.div`
 // Select components with fixed hover effects
 export const SelectContainer = styled.div`
   position: relative;
-  z-index: 999999;
+  z-index: 15;
 `;
 
 export const SelectTrigger = styled.button`
@@ -670,7 +670,7 @@ export const SelectContent = styled.div`
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 9999999;
+  z-index: 20;
   max-height: 384px;
   min-width: 200px;
   overflow-y: auto;
@@ -1159,7 +1159,7 @@ export const FilterDropdownFilterGroup = styled.div``;
 
 export const FilterDropdownSelectContainer = styled.div`
   position: relative;
-  z-index: 999999;
+  z-index: 15;
   isolation: isolate;
 `;
 
@@ -1208,7 +1208,7 @@ export const FilterDropdownSelectContent = styled.div`
   top: 100%;
   left: 0;
   right: auto;
-  z-index: 9999999;
+  z-index: 20;
   max-height: 384px;
   min-width: 320px;
   max-width: calc(100vw - 32px);
@@ -1270,7 +1270,7 @@ export const TimelineFilterGroup = styled.div``;
 
 export const TimelineFilterSelectContainer = styled.div`
   position: relative;
-  z-index: 999999;
+  z-index: 15;
 `;
 
 export const TimelineFilterSelectTrigger = styled.button`
@@ -1343,6 +1343,7 @@ export const TimelineFilterContentStyled = styled(SelectContent)`
   min-width: 320px;
   background-color: white !important;
   opacity: 1 !important;
+  z-index: 20;
 
   &.filter-content {
     background-color: white !important;
