@@ -802,7 +802,6 @@ export const TableHeader = styled.th`
   min-width: 150px;
   position: sticky;
   top: 0;
-  backdrop-filter: blur(12px);
   z-index: 5;
   border: 1px solid #1d4ed8;
   border-bottom: 2px solid #1e40af;
