@@ -15,7 +15,7 @@ import {
   DashboardTitle,
   DashboardSubtitle,
   MainContentLayout,
-  TableContainer,
+  TableSection,
   FilterCard,
   FilterCardHeader,
   FilterCardTitle,
@@ -675,12 +675,12 @@ export default function TaskManagementDashboard() {
               </FilterCard>
             )}
 
-            <TableContainer>
+            <TableSection>
               <DashboardTable
                 data={filteredData}
                 columnData={data?.columnData || {}}
               />
-            </TableContainer>
+            </TableSection>
           </MainContentLayout>
         </MainContent>
 
