@@ -1233,25 +1233,25 @@ export const FilterDropdownSelectTrigger = styled.button`
   height: 40px;
   width: 100%;
   border-radius: 8px;
-  border: 1px solid hsl(var(--border));
-  background-color: hsl(var(--background));
+  border: 1px solid #e5e7eb;
+  background-color: #ffffff;
   padding: 0 12px;
   font-size: 14px;
-  color: hsl(var(--foreground));
+  color: #374151;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
+    box-shadow: 0 0 0 2px #2563eb;
     outline-offset: 2px;
   }
 
   &:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-    border-color: hsl(var(--border));
+    background-color: #f3f4f6;
+    color: #1f2937;
+    border-color: #d1d5db;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
