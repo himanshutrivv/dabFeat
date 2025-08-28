@@ -95,12 +95,12 @@ const buttonVariant = (bg: string, fg: string) => (theme: Theme) =>
 
 export const primaryButtonStyles = buttonVariant(
   theme.colors?.primary!,
-  theme.colors?.primaryForeground!,
+  theme.colors?.primaryForeground!
 );
 
 export const secondaryButtonStyles = buttonVariant(
   theme.colors?.secondary!,
-  theme.colors?.secondaryForeground!,
+  theme.colors?.secondaryForeground!
 );
 
 export const outlineButtonStyles = (theme: Theme) => `
@@ -128,7 +128,7 @@ export const ghostButtonStyles = () => `
 
 export const destructiveButtonStyles = buttonVariant(
   theme.colors?.destructive!,
-  theme.colors?.destructiveForeground!,
+  theme.colors?.destructiveForeground!
 );
 
 export const inputStyles = () => `

@@ -14,6 +14,7 @@ import {
   FilterCard,
   FilterCardHeader,
   FilterCardTitle,
+  FilterCardSubtitle,
   FilterContainer,
   FilterGrid,
   FilterGroup,
@@ -46,6 +47,7 @@ import Loader from "../common/loader";
 interface FilterState {
   [key: string]: string[];
 }
+
 
 export interface ColumnData {
   [key: string]: ColumnMetadata;
@@ -164,8 +166,6 @@ export default function TaskManagementDashboard() {
     [key: string]: boolean;
   }>({});
   const [isFilterLoading, setIsFilterLoading] = useState(false);
-  const [isUsingServerFiltering, setIsUsingServerFiltering] = useState(false);
-  const [searchableColumns, setSearchableColumns] = useState<string[]>([]);
   const { selectedBusiness } = useBusinessStore();
 
   // Function to apply filters and fetch data from API
@@ -194,8 +194,7 @@ export default function TaskManagementDashboard() {
 
       console.log("Filtered dashboard data received:", response);
       setData(response);
-      setFilteredData(response.tableData || []);
-      setIsUsingServerFiltering(true);
+      setFilteredData(response.tableData);
     } catch (err) {
       console.error("Filter fetch error:", err);
       setError("Failed to apply filters and fetch data.");
@@ -231,37 +230,27 @@ export default function TaskManagementDashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const bussId = selectedBusiness?.bussId;
+      if (!bussId) return;
       try {
         setLoading(true);
         setError(null);
 
-        const bussId = selectedBusiness?.bussId || "TESTORG2";
-        console.log("🚀 Dashboard fetching data for business:", bussId);
-
         const response = await srGetDashboardTableData({
-          bussId,
+          bussId: selectedBusiness?.bussId,
           filterData: null,
         });
-
-        console.log("✅ Dashboard data received:", response);
         setData(response);
-        setFilteredData(response.tableData || []);
-        setIsUsingServerFiltering(false);
+        setFilteredData(response.tableData);
 
         const initialFilters: FilterState = {};
-        const searchableColumnsList: string[] = [];
         Object.keys(response.columnData).forEach((key) => {
           if (response.columnData[key].filterable) {
             initialFilters[key] = [];
           }
-          if (response.columnData[key].searchable) {
-            searchableColumnsList.push(response.columnData[key].label);
-          }
         });
         setFilters(initialFilters);
-        setSearchableColumns(searchableColumnsList);
       } catch (err) {
-        console.error("❌ Dashboard data fetch error:", err);
         setError("Failed to initialize dashboard data.");
       } finally {
         setLoading(false);
@@ -271,11 +260,11 @@ export default function TaskManagementDashboard() {
     fetchData();
   }, [selectedBusiness]);
 
-  // Apply filters and search (only for local/client-side filtering)
+  // Apply filters and search
   useEffect(() => {
-    if (!data || isUsingServerFiltering) return;
+    if (!data) return;
 
-    let filtered = data.tableData || [];
+    let filtered = data.tableData;
 
     // Apply search
     if (searchTerm) {
@@ -302,35 +291,7 @@ export default function TaskManagementDashboard() {
     });
 
     setFilteredData(filtered);
-  }, [data, filters, searchTerm, isUsingServerFiltering]);
-
-  // Auto-apply server filtering when filters, search, or date range change
-  useEffect(() => {
-    const hasActiveFilters = Object.values(filters).some(
-      (filterValues) => filterValues.length > 0,
-    );
-    const hasSearchTerm = searchTerm.trim().length > 0;
-    const hasDateRange = startDateTime && endDateTime;
-
-    if (
-      (hasActiveFilters || hasSearchTerm || hasDateRange) &&
-      !isUsingServerFiltering
-    ) {
-      // Debounce the API call to avoid too many requests
-      const timeoutId = setTimeout(() => {
-        applyFiltersAndFetchData();
-      }, 300);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [
-    filters,
-    searchTerm,
-    startDateTime,
-    endDateTime,
-    isUsingServerFiltering,
-    applyFiltersAndFetchData,
-  ]);
+  }, [data, filters, searchTerm]);
 
   const handleFilterChange = useCallback((columnKey: string, value: string) => {
     if (value === "all") {
@@ -353,8 +314,6 @@ export default function TaskManagementDashboard() {
         };
       });
     }
-    // Trigger server-side filtering after filter change
-    setIsUsingServerFiltering(false);
   }, []);
 
   const toggleFilterDropdown = useCallback(
@@ -387,43 +346,21 @@ export default function TaskManagementDashboard() {
     setShowTimelineFilter(!showTimelineFilter);
   }, [showTimelineFilter]);
 
-  const clearAllFilters = useCallback(async () => {
+  const clearAllFilters = useCallback(() => {
     const clearedFilters: FilterState = {};
     Object.keys(filters).forEach((key) => {
       clearedFilters[key] = [];
     });
     setFilters(clearedFilters);
     setSearchTerm("");
-    setStartDateTime("");
-    setEndDateTime("");
     setOpenFilterDropdowns({});
-    setIsUsingServerFiltering(false);
-    initializeDefaultTimeRange();
-
-    // Refetch original data without any filters
-    try {
-      setIsFilterLoading(true);
-      const bussId = selectedBusiness?.bussId || "TESTORG2";
-      const response = await srGetDashboardTableData({
-        bussId,
-        filterData: null,
-      });
-      setData(response);
-      setFilteredData(response.tableData || []);
-    } catch (err) {
-      console.error("Error refetching original data:", err);
-      toast.error("Failed to reset filters");
-    } finally {
-      setIsFilterLoading(false);
-    }
-  }, [filters, selectedBusiness]);
+  }, [filters]);
 
   const clearIndividualFilter = useCallback((filterKey: string) => {
     setFilters((prev) => ({
       ...prev,
       [filterKey]: [],
     }));
-    setIsUsingServerFiltering(false);
   }, []);
 
   const getFilterOptions = useCallback(
@@ -482,15 +419,6 @@ export default function TaskManagementDashboard() {
     return activeFilters;
   }, [filters, searchTerm, data]);
 
-  const getSearchPlaceholder = useCallback(() => {
-    if (searchableColumns.length === 0) {
-      return "Search records...";
-    }
-    if (searchableColumns.length <= 3) {
-      return `Search in ${searchableColumns.join(", ")}...`;
-    }
-    return `Search in ${searchableColumns.slice(0, 2).join(", ")} and ${searchableColumns.length - 2} more...`;
-  }, [searchableColumns]);
 
   // Timeline Filter helpers
   const formatDateTimeForInput = useCallback((date: Date) => {
@@ -626,27 +554,54 @@ export default function TaskManagementDashboard() {
         <MainContent>
           <Header>
             {(hasSearchableColumns || hasFilterableColumns) && (
-              <FilterCard show={true}>
+              <FilterCard>
                 <FilterCardHeader>
                   <FilterCardTitle>
-                    <Filter size={18} />
-                    Filters & Search
+                    <Filter size={20} />
+                    Filter & Search
                   </FilterCardTitle>
-                  {activeFilters.length > 0 && (
-                    <ClearAllFiltersButton
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        e.preventDefault();
-                        clearAllFilters();
-                      }}
-                    >
-                      <X size={12} />
-                      Clear All
-                    </ClearAllFiltersButton>
-                  )}
+                  <FilterCardSubtitle>
+                    Filter your data by categories, search through records, or set time ranges to find exactly what you need
+                  </FilterCardSubtitle>
                 </FilterCardHeader>
 
-                <FilterGrid>
+                <FilterContainer show={true}>
+                  <FilterGrid>
+                    <TimelineFilter
+                      startDateTime={startDateTime}
+                      endDateTime={endDateTime}
+                      isOpen={showTimelineFilter}
+                      onToggle={toggleTimelineDropdown}
+                      onStartDateTimeChange={handleStartDateTimeChange}
+                      onEndDateTimeChange={handleEndDateTimeChange}
+                      onReset={initializeDefaultTimeRange}
+                      onApply={() => setShowTimelineFilter(false)}
+                    />
+
+                    {Object.entries(data?.columnData || [])
+                      .filter(([, columnInfo]) => columnInfo.filterable === true)
+                      .slice(0, 3)
+                      .map(([columnKey, columnInfo]) => (
+                        <FilterDropdown
+                          key={columnKey}
+                          label={columnInfo.label}
+                          columnKey={columnKey}
+                          options={getFilterOptions(columnKey)}
+                          selectedValues={filters[columnKey] || []}
+                          isOpen={openFilterDropdowns[columnKey] || false}
+                          onToggle={toggleFilterDropdown}
+                          onFilterChange={handleFilterChange}
+                        />
+                      ))}
+
+                    <FilterGroup>
+                      <AllFiltersButton onClick={() => setShowMainFilter(true)}>
+                        <Filter size={16} />
+                        <span>All Filters</span>
+                      </AllFiltersButton>
+                    </FilterGroup>
+                  </FilterGrid>
+
                   {hasSearchableColumns && (
                     <SearchBarContainer>
                       <SearchIcon>
@@ -654,81 +609,54 @@ export default function TaskManagementDashboard() {
                       </SearchIcon>
                       <SearchInput
                         type="text"
-                        placeholder={getSearchPlaceholder()}
+                        placeholder="Search records..."
                         value={searchTerm}
-                        onChange={(e) => {
-                          setSearchTerm(e.target.value);
-                          setIsUsingServerFiltering(false);
-                        }}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                       />
                     </SearchBarContainer>
                   )}
 
-                  <TimelineFilter
-                    startDateTime={startDateTime}
-                    endDateTime={endDateTime}
-                    isOpen={showTimelineFilter}
-                    onToggle={toggleTimelineDropdown}
-                    onStartDateTimeChange={handleStartDateTimeChange}
-                    onEndDateTimeChange={handleEndDateTimeChange}
-                    onReset={initializeDefaultTimeRange}
-                    onApply={() => setShowTimelineFilter(false)}
-                  />
+                  {activeFilters.length > 0 && (
+                    <ActiveFiltersSection>
+                      <ActiveFiltersLabel>Active Filters:</ActiveFiltersLabel>
+                      <ActiveFiltersContainer>
+                        {activeFilters.map((filter) => (
+                          <FilterBadge key={`${filter.key}-${filter.value}`}>
+                            {filter.label}: {filter.value}
+                            <FilterBadgeClose
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                if (filter.key === "search") {
+                                  setSearchTerm("");
+                                } else {
+                                  clearIndividualFilter(filter.key);
+                                }
+                              }}
+                            >
+                              <X size={12} />
+                            </FilterBadgeClose>
+                          </FilterBadge>
+                        ))}
+                        <ClearAllFiltersButton
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            clearAllFilters();
+                          }}
+                        >
+                          <X size={12} />
+                          Clear All
+                        </ClearAllFiltersButton>
+                      </ActiveFiltersContainer>
+                    </ActiveFiltersSection>
+                  )}
 
-                  {Object.entries(data?.columnData || [])
-                    .filter(([, columnInfo]) => columnInfo.filterable === true)
-                    .slice(0, 2)
-                    .map(([columnKey, columnInfo]) => (
-                      <FilterDropdown
-                        key={columnKey}
-                        label={columnInfo.label}
-                        columnKey={columnKey}
-                        options={getFilterOptions(columnKey)}
-                        selectedValues={filters[columnKey] || []}
-                        isOpen={openFilterDropdowns[columnKey] || false}
-                        onToggle={toggleFilterDropdown}
-                        onFilterChange={handleFilterChange}
-                      />
-                    ))}
-
-                  <FilterGroup>
-                    <AllFiltersButton onClick={() => setShowMainFilter(true)}>
-                      <Filter size={16} />
-                      <span>All Filters</span>
-                    </AllFiltersButton>
-                  </FilterGroup>
-                </FilterGrid>
-
-                {activeFilters.length > 0 && (
-                  <ActiveFiltersSection>
-                    <ActiveFiltersLabel>Active Filters:</ActiveFiltersLabel>
-                    <ActiveFiltersContainer>
-                      {activeFilters.map((filter) => (
-                        <FilterBadge key={`${filter.key}-${filter.value}`}>
-                          {filter.label}: {filter.value}
-                          <FilterBadgeClose
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              e.preventDefault();
-                              if (filter.key === "search") {
-                                setSearchTerm("");
-                              } else {
-                                clearIndividualFilter(filter.key);
-                              }
-                            }}
-                          >
-                            <X size={12} />
-                          </FilterBadgeClose>
-                        </FilterBadge>
-                      ))}
-                    </ActiveFiltersContainer>
-                  </ActiveFiltersSection>
-                )}
-
-                <FilterResults>
-                  Showing {filteredData.length} of {data?.tableData?.length}{" "}
-                  results
-                </FilterResults>
+                  <FilterResults>
+                    Showing {filteredData.length} of {data?.tableData?.length}{" "}
+                    results
+                  </FilterResults>
+                </FilterContainer>
               </FilterCard>
             )}
           </Header>
