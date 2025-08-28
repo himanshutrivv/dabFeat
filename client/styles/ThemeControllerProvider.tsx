@@ -1,53 +1,47 @@
-"use client";
+/** @jsxImportSource @emotion/react */
 
-import React, { createContext, useContext, useState, useMemo } from "react";
-import { ThemeProvider } from "@emotion/react";
-import { appTheme, AppTheme } from "./themes";
+import { useState, createContext, useContext, ReactNode } from "react";
+import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
+import { themeVariants, ThemeVariant, AppTheme } from "../styles/themes";
 
-type ThemeControllerContextType = {
-  setBackground: (bg: string) => void;
-  setFont: (font: string) => void;
+interface ThemeContextType {
+  currentTheme: ThemeVariant;
   theme: AppTheme;
-};
+  setTheme: (variant: ThemeVariant) => void;
+  setBackground: (variant: ThemeVariant) => void;
+  setFont: (variant: ThemeVariant) => void;
+}
 
-const ThemeControllerContext = createContext<ThemeControllerContextType | null>(
-  null,
-);
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const useThemeController = () => {
-  const ctx = useContext(ThemeControllerContext);
-  if (!ctx)
-    throw new Error(
-      "useThemeController must be inside ThemeControllerProvider",
-    );
+export const useThemeController = (): ThemeContextType => {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) {
+    throw new Error("useThemeController must be used within a ThemeProvider");
+  }
   return ctx;
 };
 
-export const ThemeControllerProvider: React.FC<{
-  children: React.ReactNode;
-}> = ({ children }) => {
-  const [background, setBackground] = useState(appTheme.colors.background);
-  const [fontFamily, setFontFamily] = useState(appTheme.fonts.sans);
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [currentTheme, setCurrentTheme] = useState<ThemeVariant>("default");
 
-  const theme: AppTheme = useMemo(() => {
-    return {
-      ...appTheme,
-      colors: {
-        ...appTheme.colors,
-        background,
-      },
-      fonts: {
-        ...appTheme.fonts,
-        sans: fontFamily,
-      },
-    };
-  }, [background, fontFamily]);
+  const theme = themeVariants[currentTheme] as AppTheme;
+
+  const setTheme = (variant: ThemeVariant) => setCurrentTheme(variant);
+  const setBackground = setTheme;
+  const setFont = setTheme;
 
   return (
-    <ThemeControllerContext.Provider
-      value={{ setBackground, setFont: setFontFamily, theme }}
+    <ThemeContext.Provider
+      value={{
+        currentTheme,
+        theme,
+        setTheme,
+        setBackground,
+        setFont,
+      }}
     >
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
-    </ThemeControllerContext.Provider>
+      <EmotionThemeProvider theme={theme}>{children}</EmotionThemeProvider>
+    </ThemeContext.Provider>
   );
 };
