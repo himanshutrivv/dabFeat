@@ -146,7 +146,7 @@ const transformFiltersToAPIFormat = (
   // Add search term if present
   if (searchTerm.trim()) {
     filterData.push({
-      key: "search",
+      key: "search", // TODO: Make this configurable from API response
       operator: "LIKE",
       value: searchTerm.trim(),
     });
@@ -159,7 +159,7 @@ const transformFiltersToAPIFormat = (
 
     if (startDate && endDate) {
       filterData.push({
-        key: "created_at",
+        key: "created_at", // TODO: Make this configurable from API response
         operator: "BETWEEN",
         from: startDate,
         to: endDate,
@@ -196,7 +196,7 @@ export default function TaskManagementDashboard() {
       setIsFilterLoading(true);
       setError(null);
 
-      const bussId = selectedBusiness?.bussId || "TESTORG2";
+      const bussId = selectedBusiness?.bussId || "default"; // TODO: Handle missing business selection properly
       const filterData = transformFiltersToAPIFormat(
         filters,
         manualFilterInputs,
@@ -265,7 +265,7 @@ export default function TaskManagementDashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bussId = selectedBusiness?.bussId || "demo-business-id";
+      const bussId = selectedBusiness?.bussId || "default"; // TODO: Handle missing business selection properly
       try {
         setLoading(true);
         setError(null);
