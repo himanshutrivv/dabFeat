@@ -562,21 +562,20 @@ export default function TaskManagementDashboard() {
             </div>
           </Header>
 
-          <HorizontalLayout>
+          <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "24px", flex: 1, overflow: "hidden" }}>
             {(hasSearchableColumns || hasFilterableColumns) && (
-              <FilterSidebar>
-                <FilterCard>
-                  <FilterCardHeader>
-                    <FilterCardTitle>
-                      <Filter size={20} />
-                      Filter & Search
-                    </FilterCardTitle>
-                    <FilterCardSubtitle>
-                      Filter your data by categories, search through records, or set time ranges to find exactly what you need
-                    </FilterCardSubtitle>
-                  </FilterCardHeader>
+              <FilterCard>
+                <FilterCardHeader>
+                  <FilterCardTitle>
+                    <Filter size={20} />
+                    Filter & Search
+                  </FilterCardTitle>
+                  <FilterCardSubtitle>
+                    Filter your data by categories, search through records, or set time ranges to find exactly what you need
+                  </FilterCardSubtitle>
+                </FilterCardHeader>
 
-                  <FilterContainer show={true}>
+                <FilterContainer show={true}>
                   <FilterGrid>
                     <TimelineFilter
                       startDateTime={startDateTime}
@@ -663,22 +662,21 @@ export default function TaskManagementDashboard() {
                     </ActiveFiltersSection>
                   )}
 
-                    <FilterResults>
-                      Showing {filteredData.length} of {data?.tableData?.length}{" "}
-                      results
-                    </FilterResults>
-                  </FilterContainer>
-                </FilterCard>
-              </FilterSidebar>
+                  <FilterResults>
+                    Showing {filteredData.length} of {data?.tableData?.length}{" "}
+                    results
+                  </FilterResults>
+                </FilterContainer>
+              </FilterCard>
             )}
 
-            <TableSection>
+            <div style={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column" }}>
               <DashboardTable
                 data={filteredData}
                 columnData={data?.columnData || {}}
               />
-            </TableSection>
-          </HorizontalLayout>
+            </div>
+          </div>
         </MainContent>
 
         <FilterModal
