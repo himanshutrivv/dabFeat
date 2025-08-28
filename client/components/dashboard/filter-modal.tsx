@@ -476,22 +476,44 @@ const EmptyIcon = styled.div`
   opacity: 0.5;
 `;
 
-const SearchDisabledMessage = styled.div`
+const ManualFilterContainer = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 8px;
-  padding: 8px 12px;
-  background: hsl(var(--muted) / 0.3);
-  border: 1px solid hsl(var(--border));
-  border-radius: 8px;
-  font-size: 12px;
-  color: hsl(var(--muted-foreground));
   margin-bottom: 12px;
 `;
 
-const InfoIcon = styled.div`
-  font-size: 14px;
-  color: hsl(var(--muted-foreground));
+const ManualFilterLabel = styled.label`
+  font-size: 12px;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
+
+const ManualFilterInput = styled.input`
+  ${inputStyles()}
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  background: ${({ theme }) => theme.colors.background};
+  font-size: 13px;
+
+  &:focus {
+    border-color: ${({ theme }) => theme.colors.primary};
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.1);
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.mutedForeground};
+    font-size: 12px;
+  }
+`;
+
+const FilterTypeIcon = styled.div`
+  font-size: 12px;
+  color: hsl(var(--primary));
 `;
 
 const FilterModal: React.FC<FilterModalProps> = ({
@@ -508,6 +530,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sectionSearchTerms, setSectionSearchTerms] = useState<{
+    [key: string]: string;
+  }>({});
+  const [manualFilterInputs, setManualFilterInputs] = useState<{
     [key: string]: string;
   }>({});
 
@@ -544,6 +569,17 @@ const FilterModal: React.FC<FilterModalProps> = ({
   const handleSectionSearchChange = useCallback(
     (sectionKey: string, value: string) => {
       setSectionSearchTerms((prev) => ({
+        ...prev,
+        [sectionKey]: value,
+      }));
+    },
+    [],
+  );
+
+  // Handle manual filter input change
+  const handleManualFilterInputChange = useCallback(
+    (sectionKey: string, value: string) => {
+      setManualFilterInputs((prev) => ({
         ...prev,
         [sectionKey]: value,
       }));
@@ -606,6 +642,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
     if (!isOpen) {
       setSectionSearchTerms({});
       setSearchTerm("");
+      setManualFilterInputs({});
     }
   }, [isOpen]);
 
