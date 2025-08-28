@@ -443,12 +443,10 @@ export const SearchInput = styled.input`
   }
 `;
 
-export const SearchButton = styled(Button)`
+// Consistent button styling for Search and Refresh actions
+export const ControlButton = styled(Button)<{ variant?: "primary" | "secondary" }>`
   height: 48px;
   padding: 0 24px;
-  background-color: #3b82f6;
-  color: #ffffff;
-  border: 2px solid #3b82f6;
   border-radius: 8px;
   font-weight: 600;
   font-size: 14px;
@@ -457,36 +455,60 @@ export const SearchButton = styled(Button)`
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  border: 2px solid;
 
-  &:hover:not(:disabled) {
-    background-color: #2563eb;
-    color: #ffffff;
-    border-color: #2563eb;
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
-    transform: translateY(-1px);
-  }
+  ${(props) => {
+    if (props.variant === "primary") {
+      return css`
+        background-color: #6b7280;
+        color: #ffffff;
+        border-color: #6b7280;
+        box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
+
+        &:hover:not(:disabled) {
+          background-color: #4b5563;
+          border-color: #4b5563;
+          box-shadow: 0 4px 16px rgba(107, 114, 128, 0.4);
+          transform: translateY(-1px);
+        }
+      `;
+    }
+    return css`
+      background-color: #9ca3af;
+      color: #ffffff;
+      border-color: #9ca3af;
+      box-shadow: 0 2px 8px rgba(156, 163, 175, 0.3);
+
+      &:hover:not(:disabled) {
+        background-color: #6b7280;
+        border-color: #6b7280;
+        box-shadow: 0 4px 16px rgba(156, 163, 175, 0.4);
+        transform: translateY(-1px);
+      }
+    `;
+  }}
 
   &:focus:not(:disabled) {
     outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
+    box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.3);
     outline-offset: 2px;
   }
 
-  &:active:not(:disabled) {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
-  }
-
   &:disabled {
-    background-color: hsl(var(--muted));
-    color: hsl(var(--muted-foreground));
+    background-color: #e5e7eb;
+    color: #9ca3af;
     cursor: not-allowed;
     opacity: 0.6;
-    border-color: hsl(var(--border));
+    border-color: #e5e7eb;
     box-shadow: none;
+    transform: none;
   }
 `;
+
+// Keep SearchButton for backward compatibility but use ControlButton styling
+export const SearchButton = styled(ControlButton)``;
+
+export const RefreshButton = styled(ControlButton)``;
 
 // Error and loading states
 export const ErrorContainer = styled.div`
