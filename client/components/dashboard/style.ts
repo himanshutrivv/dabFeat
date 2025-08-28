@@ -1078,7 +1078,7 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%);
+  background: linear-gradient(135deg, hsl(210, 40%, 30%) 0%, hsl(210, 30%, 40%) 50%, hsl(210, 20%, 50%) 100%);
   color: white;
   border-radius: 32px 0 0 0;
   padding: 28px 32px;
@@ -1096,9 +1096,9 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
     bottom: 0;
     background: linear-gradient(
       45deg,
-      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 0%,
       transparent 50%,
-      rgba(255, 255, 255, 0.05) 100%
+      rgba(255, 255, 255, 0.03) 100%
     );
     pointer-events: none;
   }
@@ -1112,7 +1112,7 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
     height: 120px;
     background: radial-gradient(
       circle,
-      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.08) 0%,
       transparent 70%
     );
     border-radius: 50%;
