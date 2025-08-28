@@ -724,7 +724,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
                     {isExpanded && (
                       <MainFilterOptionsContainer>
-                        {/* Section-specific search or disabled message */}
+                        {/* Section-specific search or manual input */}
                         {isSearchable ? (
                           <SectionSearchContainer>
                             <FilterModalSectionSearchIcon>
@@ -742,10 +742,22 @@ const FilterModal: React.FC<FilterModalProps> = ({
                             />
                           </SectionSearchContainer>
                         ) : (
-                          <SearchDisabledMessage>
-                            <InfoIcon>ℹ️</InfoIcon>
-                            <span>This column is not opted for searchable functionality</span>
-                          </SearchDisabledMessage>
+                          <ManualFilterContainer>
+                            <ManualFilterLabel>
+                              <FilterTypeIcon>🔍</FilterTypeIcon>
+                              Enter {label.toLowerCase()} value:
+                            </ManualFilterLabel>
+                            <ManualFilterInput
+                              type="text"
+                              placeholder={`Type ${label.toLowerCase()} value...`}
+                              value={manualFilterInputs[key] || ""}
+                              onChange={(e) =>
+                                handleManualFilterInputChange(key, e.target.value)
+                              }
+                              onClick={handleInputInteraction}
+                              onFocus={handleInputInteraction}
+                            />
+                          </ManualFilterContainer>
                         )}
 
                         <OptionsContainer>
