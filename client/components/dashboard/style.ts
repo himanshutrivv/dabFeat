@@ -1153,7 +1153,7 @@ export const FilterModalSearchIcon = styled.div<{ theme?: any }>`
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+  color: #6b7280;
   z-index: 1;
 `;
 
@@ -1163,19 +1163,19 @@ export const FilterModalSearchInput = styled.input<{ theme?: any }>`
   padding-left: 40px;
   height: 44px;
   border-radius: 12px;
-  border: 2px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
-  background: ${({ theme }) => theme?.colors?.background || 'hsl(var(--background))'};
-  color: ${({ theme }) => theme?.colors?.foreground || 'hsl(var(--foreground))'};
+  border: 2px solid #e5e7eb;
+  background: #ffffff;
+  color: #1f2937;
   font-size: 14px;
 
   &:focus {
-    border-color: ${({ theme }) => theme?.colors?.primary || 'hsl(var(--primary))'};
-    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     outline: none;
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+    color: #6b7280;
   }
 `;
 
@@ -1195,7 +1195,7 @@ export const FilterModalSectionSearchIcon = styled.div<{ theme?: any }>`
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  color: ${({ theme }) => theme?.colors?.mutedForeground || 'hsl(var(--muted-foreground))'};
+  color: #6b7280;
   z-index: 1;
 `;
 
