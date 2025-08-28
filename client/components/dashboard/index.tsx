@@ -687,8 +687,7 @@ function TaskManagementDashboardInternal() {
   );
 
   return (
-    <ThemeControllerProvider>
-      <Global styles={globalStyles(appTheme)} />
+    <>
       <Toaster />
       <DashboardContainer>
         <MainContent>
@@ -912,6 +911,6 @@ function TaskManagementDashboardInternal() {
           onApplyFilters={applyFiltersAndFetchData}
         />
       </DashboardContainer>
-    </ThemeControllerProvider>
+    </>
   );
 }
