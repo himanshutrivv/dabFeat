@@ -326,6 +326,9 @@ export default function TaskManagementDashboard() {
 
   const toggleFilterDropdown = useCallback(
     (columnKey: string) => {
+      // Don't allow opening dropdowns if modal is open
+      if (showMainFilter) return;
+
       // Close timeline filter if it's open
       setShowTimelineFilter(false);
 
@@ -345,14 +348,17 @@ export default function TaskManagementDashboard() {
         return newState;
       });
     },
-    [data],
+    [data, showMainFilter],
   );
 
   const toggleTimelineDropdown = useCallback(() => {
+    // Don't allow opening timeline filter if modal is open
+    if (showMainFilter) return;
+
     // Close all other filter dropdowns
     setOpenFilterDropdowns({});
     setShowTimelineFilter(!showTimelineFilter);
-  }, [showTimelineFilter]);
+  }, [showTimelineFilter, showMainFilter]);
 
   const clearAllFilters = useCallback(() => {
     const clearedFilters: FilterState = {};
