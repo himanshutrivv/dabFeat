@@ -1032,11 +1032,7 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   height: 100vh;
   background: hsl(var(--card));
   border-left: 1px solid hsl(var(--border));
-  border-radius: 16px 0 0 16px;
-  box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.25),
-    0 15px 30px -5px rgba(0, 0, 0, 0.15),
-    0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
   z-index: 1001;
   display: flex;
   flex-direction: column;
@@ -1056,7 +1052,7 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
 
   @media (max-width: 768px) {
     width: 100%;
-    border-radius: 16px 0 0 16px;
+    border-radius: 0;
   }
 `;
 
