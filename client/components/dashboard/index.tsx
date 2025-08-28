@@ -532,6 +532,14 @@ export default function TaskManagementDashboard() {
     }
   }, [startDateTime, endDateTime, initializeDefaultTimeRange]);
 
+  // Close all dropdowns when modal opens
+  useEffect(() => {
+    if (showMainFilter) {
+      setOpenFilterDropdowns({});
+      setShowTimelineFilter(false);
+    }
+  }, [showMainFilter]);
+
   if (error) {
     return (
       <ThemeControllerProvider>
