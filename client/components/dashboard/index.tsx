@@ -805,11 +805,7 @@ function TaskManagementDashboardInternal() {
                     >
                       <RefreshCw
                         size={16}
-                        style={{
-                          animation: isRefreshing
-                            ? "spin 1s linear infinite"
-                            : "none",
-                        }}
+                        className={isRefreshing ? "animate-spin" : ""}
                       />
                       {isRefreshing ? "Refreshing..." : "Refresh"}
                     </Button>
