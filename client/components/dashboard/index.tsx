@@ -28,6 +28,7 @@ import {
   SearchIcon,
   SearchInput,
   SearchButton,
+  RefreshButton,
   ActiveFiltersSection,
   ActiveFiltersLabel,
   ActiveFiltersContainer,
