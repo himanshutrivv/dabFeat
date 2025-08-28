@@ -403,6 +403,7 @@ export default function TaskManagementDashboard() {
         key,
         label: columnInfo.label,
         options: getFilterOptions(key),
+        searchable: columnInfo.searchable,
       }));
   }, [data, getFilterOptions]);
 
