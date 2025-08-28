@@ -1418,46 +1418,46 @@ export const FilterModalButton = styled.button<{
     switch (props.variant) {
       case "outline":
         return css`
-          border: 2px solid rgba(226, 232, 240, 0.8);
+          border: 2px solid hsl(210, 20%, 80%);
           background: linear-gradient(
             145deg,
-            rgba(248, 250, 252, 0.8) 0%,
-            rgba(241, 245, 249, 0.6) 100%
+            hsl(210, 20%, 96%) 0%,
+            hsl(210, 20%, 93%) 100%
           );
-          color: #475569;
+          color: hsl(210, 20%, 30%);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
 
           &:hover {
-            border-color: rgba(139, 92, 246, 0.4);
+            border-color: hsl(210, 30%, 60%);
             background: linear-gradient(
               145deg,
-              rgba(241, 245, 249, 0.9) 0%,
-              rgba(226, 232, 240, 0.7) 100%
+              hsl(210, 20%, 93%) 0%,
+              hsl(210, 20%, 88%) 100%
             );
-            color: #334155;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            color: hsl(210, 20%, 20%);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
           }
         `;
       default:
         return css`
           background: linear-gradient(
             135deg,
-            #667eea 0%,
-            #764ba2 50%,
-            #8b5cf6 100%
+            hsl(210, 40%, 30%) 0%,
+            hsl(210, 30%, 40%) 50%,
+            hsl(210, 20%, 50%) 100%
           );
           color: white;
-          box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+          box-shadow: 0 4px 15px hsl(210, 30%, 40%, 0.3);
 
           &:hover {
             background: linear-gradient(
               135deg,
-              #5a67d8 0%,
-              #6b46c1 50%,
-              #7c3aed 100%
+              hsl(210, 40%, 25%) 0%,
+              hsl(210, 30%, 35%) 50%,
+              hsl(210, 20%, 45%) 100%
             );
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 25px hsl(210, 30%, 40%, 0.4);
           }
         `;
     }
