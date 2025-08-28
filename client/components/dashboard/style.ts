@@ -1010,26 +1010,16 @@ export const TimeLineFilterButtonGrid = styled.div<{ theme?: any }>`
 export const FilterModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.1);
   z-index: 1000;
   animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      backdrop-filter: blur(0px);
-      -webkit-backdrop-filter: blur(0px);
     }
     to {
       opacity: 1;
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
     }
   }
 `;
