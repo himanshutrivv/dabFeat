@@ -177,6 +177,7 @@ export const MainContent = styled.div`
 
 export const HorizontalLayout = styled.div`
   display: flex;
+  flex-direction: column;
   flex: 1;
   gap: 24px;
   padding: 32px;
@@ -184,11 +185,10 @@ export const HorizontalLayout = styled.div`
 `;
 
 export const FilterSidebar = styled.div`
-  flex: 0 0 350px;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  max-height: 100%;
+  width: 100%;
 `;
 
 export const TableSection = styled.div`
@@ -197,6 +197,7 @@ export const TableSection = styled.div`
   flex-direction: column;
   overflow: hidden;
   min-width: 0;
+  width: 100%;
 `;
 
 export const Header = styled.div`
