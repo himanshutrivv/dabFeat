@@ -121,6 +121,7 @@ export const SearchBarContainer = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
+  z-index: 20;
 `;
 
 export const SearchInputWrapper = styled.div`
