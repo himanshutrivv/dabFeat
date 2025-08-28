@@ -879,16 +879,22 @@ export const TimeLineFilterButtonGrid = styled.div<{ theme?: any }>`
 export const FilterModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 1000;
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   @keyframes fadeIn {
     from {
       opacity: 0;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
     }
     to {
       opacity: 1;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
   }
 `;
@@ -897,32 +903,38 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   position: fixed;
   top: 0;
   right: 0;
-  width: 420px;
+  width: 440px;
   height: 100vh;
-  background-color: ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'};
-  border-left: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
-  border-radius: 24px 0 0 24px;
+  background: linear-gradient(145deg,
+    ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'} 0%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  border-left: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 32px 0 0 32px;
   box-shadow:
+    0 32px 64px -12px rgba(0, 0, 0, 0.25),
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 4px 16px rgba(0, 0, 0, 0.08);
+    0 8px 32px rgba(139, 92, 246, 0.1);
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  animation: slideInFromRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideInFromRight 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
 
   @keyframes slideInFromRight {
     from {
-      transform: translateX(100%);
+      transform: translateX(100%) scale(0.95);
       opacity: 0;
     }
     to {
-      transform: translateX(0);
+      transform: translateX(0) scale(1);
       opacity: 1;
     }
   }
 
   @media (max-width: 768px) {
     width: 100%;
+    border-radius: 24px 0 0 24px;
   }
 `;
 
@@ -930,22 +942,76 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, ${({ theme }) =>
-    theme?.colors?.primary || 'hsl(var(--primary))'} 0%, hsl(215, 25%, 20%) 100%);
-  color: ${({ theme }) => theme?.colors?.primaryForeground || 'hsl(var(--primary-foreground))'};
-  border-radius: 24px 0 0 0;
-  padding: ${({ theme }) => theme?.spacing?.[6] || '24px'};
-  border-bottom: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
+  background: linear-gradient(135deg,
+    #667eea 0%,
+    #764ba2 50%,
+    #8b5cf6 100%
+  );
+  color: white;
+  border-radius: 32px 0 0 0;
+  padding: 28px 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
 `;
 
 export const FilterModalContent = styled.div<{ theme?: any }>`
   flex: 1;
   overflow-y: auto;
-  padding: ${({ theme }) => theme?.spacing?.[6] || '24px'};
+  padding: 28px 32px;
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme?.spacing?.[5] || '20px'};
+  gap: 24px;
+  background: linear-gradient(180deg,
+    rgba(248, 250, 252, 0.5) 0%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(241, 245, 249, 0.5);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #cbd5e1, #94a3b8);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #94a3b8, #64748b);
+  }
 `;
 
 export const FilterModalSearch = styled.div<{ theme?: any }>`
@@ -954,19 +1020,49 @@ export const FilterModalSearch = styled.div<{ theme?: any }>`
 `;
 
 export const FilterModalListItem = styled.div<{ theme?: any }>`
-  border: 1px solid ${({ theme }) => theme?.colors?.border || 'hsl(var(--border))'};
-  border-radius: 12px;
-  background: ${({ theme }) => theme?.colors?.card || 'hsl(var(--card))'};
-  transition: all 0.2s ease;
-  margin-bottom: ${({ theme }) => theme?.spacing?.[3] || '12px'};
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  border-radius: 16px;
+  background: linear-gradient(145deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(248, 250, 252, 0.8) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 16px;
+  overflow: hidden;
+  position: relative;
 
   &:hover {
-    border-color: hsl(var(--primary) / 0.3);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-color: rgba(139, 92, 246, 0.3);
+    box-shadow:
+      0 8px 25px rgba(0, 0, 0, 0.1),
+      0 4px 12px rgba(139, 92, 246, 0.15);
+    transform: translateY(-2px);
   }
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(139, 92, 246, 0.3) 50%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
   }
 `;
 
