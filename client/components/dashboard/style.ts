@@ -608,7 +608,8 @@ export const SelectTrigger = styled.button`
   }
 
   &:hover {
-    background-color: hsl(var(--muted) / 0.5);
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
   }
 
   &:disabled {
@@ -632,29 +633,26 @@ export const SelectContent = styled.div`
   overflow-y: auto;
   border-radius: 8px;
   border: 1px solid hsl(var(--border));
-  background-color: white;
+  background-color: hsl(var(--card));
   color: hsl(var(--card-foreground));
   opacity: 1;
-  box-shadow:
-    0 20px 80px rgba(0, 0, 0, 0.4),
-    0 12px 40px rgba(0, 0, 0, 0.3),
-    0 4px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 
   &.filter-content {
-    background-color: white !important;
+    background-color: hsl(var(--card)) !important;
     opacity: 1 !important;
   }
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(-8px) scale(0.95);
+      transform: scale(0.95);
     }
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: scale(1);
     }
   }
 `;
@@ -666,7 +664,7 @@ export const SelectItem = styled.div<{ selected?: boolean }>`
   cursor: pointer;
   user-select: none;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 8px 12px;
   font-size: 14px;
   outline: none;
