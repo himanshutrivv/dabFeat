@@ -448,7 +448,7 @@ export const SearchButton = styled(Button)`
   padding: 0 24px;
   background: hsl(215, 25%, 27%);
   color: white;
-  border: none;
+  border: 1px solid hsl(215, 25%, 35%);
   border-radius: 8px;
   font-weight: 500;
   font-size: 14px;
@@ -491,7 +491,7 @@ export const RefreshButton = styled(Button)`
   padding: 0 24px;
   background: hsl(215, 25%, 27%);
   color: white;
-  border: none;
+  border: 1px solid hsl(215, 25%, 35%);
   border-radius: 8px;
   font-weight: 500;
   font-size: 14px;
