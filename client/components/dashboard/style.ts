@@ -589,6 +589,17 @@ export const SearchInput = styled.input`
   &::placeholder {
     color: hsl(var(--muted-foreground));
   }
+
+  &:disabled {
+    background-color: hsl(var(--muted) / 0.5);
+    color: hsl(var(--muted-foreground));
+    cursor: not-allowed;
+    border-color: hsl(var(--border) / 0.5);
+
+    &::placeholder {
+      color: hsl(var(--muted-foreground) / 0.7);
+    }
+  }
 `;
 
 export const SearchButton = styled(Button)`
