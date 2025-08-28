@@ -668,7 +668,7 @@ export const SelectContent = styled.div`
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 300;
+  z-index: 1000;
   max-height: 384px;
   min-width: 200px;
   overflow-y: auto;
@@ -680,6 +680,7 @@ export const SelectContent = styled.div`
   box-shadow: 0 10px 80px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
+  isolation: isolate;
 
   &.filter-content {
     background-color: hsl(var(--card)) !important;
@@ -879,7 +880,9 @@ export const TableEmptyStateDescription = styled.div`
 export const FilterModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 9998;
   animation: fadeIn 0.3s ease-out;
   opacity: 1;
@@ -910,6 +913,9 @@ export const FilterModalContainer = styled.div`
   flex-direction: column;
   animation: slideInFromRight 0.3s ease-out;
   opacity: 1;
+  isolation: isolate;
+  filter: none;
+  -webkit-filter: none;
 
   @keyframes slideInFromRight {
     from {
@@ -918,6 +924,11 @@ export const FilterModalContainer = styled.div`
     to {
       transform: translateX(0);
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+    right: 5%;
   }
 `;
 
@@ -1154,7 +1165,7 @@ export const FilterDropdownFilterGroup = styled.div``;
 
 export const FilterDropdownSelectContainer = styled.div`
   position: relative;
-  z-index: 200;
+  z-index: 500;
 `;
 
 export const FilterDropdownSelectTrigger = styled.button`
