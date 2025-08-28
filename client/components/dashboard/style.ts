@@ -619,15 +619,15 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
 `;
 
 // Timeline Filter Components
-export const timeLineFilterGroup = styled.div``;
+export const TimeLineFilterGroup = styled.div``;
 
-export const timeLineSelectContainer = styled.div`
+export const TimeLineSelectContainer = styled.div`
   position: relative;
   z-index: 10000;
   isolation: isolate;
 `;
 
-export const timeLineSelectTrigger = styled.button<{ theme?: any }>`
+export const TimeLineSelectTrigger = styled.button<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
