@@ -1,4 +1,4 @@
-import { appTheme } from "../../../styles/themes";
+import { appTheme } from "../../../styles/themes/appTheme";
 import styled from "@emotion/styled";
 
 const theme = appTheme; // Keep compatibility while using the new structure
