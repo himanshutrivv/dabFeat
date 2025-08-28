@@ -995,25 +995,22 @@ export const FilterModalItemHeader = styled.div<{
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 16px 20px;
+  padding: 20px 24px;
   cursor: pointer;
-  transition: ${({ theme }) => theme?.transitions?.all || "all 0.2s ease"};
+  transition: all 0.3s ease;
   background: none;
   border: none;
   text-align: left;
-  color: ${(props) =>
-    props.isActive
-      ? props.theme?.colors?.primary || "hsl(var(--primary))"
-      : props.theme?.colors?.foreground || "hsl(var(--foreground))"};
+  color: ${(props) => (props.isActive ? "#1f2937" : "#374151")};
+  font-weight: ${(props) => (props.isActive ? "600" : "500")};
 
   &:hover {
-    background: hsl(var(--accent) / 0.5);
+    background: #f8fafc;
   }
 
   &[data-state="open"] {
-    background: hsl(var(--accent));
-    border-bottom: 1px solid
-      ${({ theme }) => theme?.colors?.border || "hsl(var(--border))"};
+    background: #f1f5f9;
+    border-bottom: 1px solid #e5e7eb;
   }
 `;
 
