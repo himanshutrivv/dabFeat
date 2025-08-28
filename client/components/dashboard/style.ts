@@ -722,7 +722,6 @@ export const SelectItemsContainer = styled.div`
 // Table components
 export const TableContainer = styled.div`
   flex: 1;
-  padding: 32px;
   overflow: hidden;
   min-height: 0;
   display: flex;
