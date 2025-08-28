@@ -194,7 +194,7 @@ export const FilterCard = styled.div`
     0 2px 4px rgba(0, 0, 0, 0.08);
   margin-top: 24px;
   margin-bottom: 24px;
-  overflow: hidden;
+  overflow: visible;
   transition: all 0.3s ease;
 
   &:hover {
