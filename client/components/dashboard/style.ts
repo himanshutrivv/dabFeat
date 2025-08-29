@@ -1010,7 +1010,8 @@ export const TimeLineFilterButtonGrid = styled.div<{ theme?: any }>`
 export const FilterModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
   z-index: 1000;
   animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -1347,8 +1348,11 @@ export const FilterModalHeaderTitle = styled.h2<{ theme?: any }>`
   font-size: 20px;
   font-weight: 600;
   margin: 0;
-  color: ${({ theme }) =>
-    theme?.colors?.primaryForeground || "hsl(var(--primary-foreground))"};
+  color: #1f2937;
+
+  .dark & {
+    color: #f9fafb;
+  }
 `;
 
 export const FilterModalSearchIcon = styled.div<{ theme?: any }>`
@@ -1492,24 +1496,33 @@ export const FilterModalCloseButton = styled.button<{ theme?: any }>`
   justify-content: center;
   width: 40px;
   height: 40px;
-  border: none;
-  background: hsl(var(--primary-foreground) / 0.1);
-  border: 1px solid hsl(var(--primary-foreground) / 0.2);
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
   cursor: pointer;
   border-radius: 12px;
-  color: ${({ theme }) =>
-    theme?.colors?.primaryForeground || "hsl(var(--primary-foreground))"};
-  transition: ${({ theme }) => theme?.transitions?.all || "all 0.2s ease"};
+  color: #6b7280;
+  transition: all 0.2s ease;
 
   &:hover {
-    background: hsl(var(--primary-foreground) / 0.2);
+    background: #f3f4f6;
+    color: #374151;
     transform: scale(1.05);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px
-      ${({ theme }) => theme?.colors?.ring || "hsl(var(--ring))"};
+    box-shadow: 0 0 0 2px #3b82f6;
+  }
+
+  .dark & {
+    background: #374151;
+    border: 1px solid #4b5563;
+    color: #d1d5db;
+
+    &:hover {
+      background: #4b5563;
+      color: #f9fafb;
+    }
   }
 `;
 
