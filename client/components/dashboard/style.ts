@@ -1066,13 +1066,19 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: hsl(var(--card));
-  color: hsl(var(--foreground));
+  background: #f8fafc;
+  color: #1f2937;
   border-radius: 0;
   padding: 24px 32px;
-  border-bottom: 1px solid hsl(var(--border));
+  border-bottom: 1px solid #e5e7eb;
   flex-shrink: 0;
   position: relative;
+
+  .dark & {
+    background: #111827;
+    color: #f9fafb;
+    border-bottom: 1px solid #374151;
+  }
 `;
 
 export const FilterModalContent = styled.div<{ theme?: any }>`
@@ -1082,24 +1088,28 @@ export const FilterModalContent = styled.div<{ theme?: any }>`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: hsl(var(--card));
+  background: white;
 
   &::-webkit-scrollbar {
     width: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    background: hsl(var(--muted) / 0.3);
+    background: rgba(156, 163, 175, 0.3);
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted-foreground) / 0.3);
+    background: rgba(107, 114, 128, 0.3);
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--muted-foreground) / 0.5);
+    background: rgba(107, 114, 128, 0.5);
+  }
+
+  .dark & {
+    background: #1f2937;
   }
 `;
 
@@ -1249,9 +1259,14 @@ export const FilterModalCheckbox = styled.div<{
 
 export const FilterModalFooter = styled.div<{ theme?: any }>`
   padding: 20px 32px;
-  border-top: 1px solid hsl(var(--border));
+  border-top: 1px solid #e5e7eb;
   flex-shrink: 0;
-  background: hsl(var(--card));
+  background: white;
+
+  .dark & {
+    background: #1f2937;
+    border-top: 1px solid #374151;
+  }
 `;
 
 export const FilterModalButtonContainer = styled.div`
