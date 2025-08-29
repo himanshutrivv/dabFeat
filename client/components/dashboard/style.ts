@@ -1030,14 +1030,15 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   right: 0;
   width: 440px;
   height: 100vh;
-  background: hsl(var(--card));
-  border-left: 1px solid hsl(var(--border));
+  background: white;
+  border-left: 1px solid #e5e7eb;
   border-radius: 0;
   z-index: 1001;
   display: flex;
   flex-direction: column;
   animation: slideInFromRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
 
   @keyframes slideInFromRight {
     from {
@@ -1053,6 +1054,11 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   @media (max-width: 768px) {
     width: 100%;
     border-radius: 0;
+  }
+
+  .dark & {
+    background: #1f2937;
+    border-left: 1px solid #374151;
   }
 `;
 
