@@ -1395,11 +1395,58 @@ export const FilterModalButton = styled.button<{
         `;
       default:
         return css`
-          background-color: hsl(var(--primary, 222.2 47.4% 11.2%));
-          color: hsl(var(--primary-foreground, 210 40% 98%));
+          background: linear-gradient(
+            135deg,
+            hsl(215, 25%, 27%) 0%,
+            hsl(215, 25%, 20%) 100%
+          );
+          color: #ffffff;
+          border: 1px solid hsl(215, 25%, 35%);
 
           &:hover {
-            background-color: hsl(var(--primary, 222.2 47.4% 11.2%) / 0.9);
+            opacity: 1;
+            background: linear-gradient(
+              135deg,
+              hsl(215, 25%, 35%) 0%,
+              hsl(215, 25%, 27%) 100%
+            );
+            transform: translateY(-1px);
+            box-shadow:
+              0 8px 20px rgba(71, 85, 105, 0.3),
+              0 4px 8px rgba(71, 85, 105, 0.15);
+            border-color: hsl(215, 25%, 40%);
+          }
+
+          &:focus-visible {
+            outline: none;
+            box-shadow:
+              0 0 0 3px rgba(71, 85, 105, 0.3),
+              0 8px 20px rgba(71, 85, 105, 0.25);
+            outline-offset: 2px;
+          }
+
+          &:active {
+            background: linear-gradient(
+              135deg,
+              hsl(215, 25%, 20%) 0%,
+              hsl(215, 25%, 15%) 100%
+            );
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(71, 85, 105, 0.2);
+          }
+
+          &:disabled {
+            background: linear-gradient(
+              135deg,
+              hsl(215, 25%, 15%) 0%,
+              hsl(215, 25%, 10%) 100%
+            );
+            color: rgba(255, 255, 255, 0.4);
+            cursor: not-allowed;
+            opacity: 0.8;
+            box-shadow: none;
+            transform: none;
+            border-color: hsl(215, 25%, 20%);
           }
         `;
     }
