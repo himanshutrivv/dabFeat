@@ -675,7 +675,7 @@ export default function TaskManagementDashboard() {
 
   return (
     <>
-      <Global styles={globalStyles(appTheme)} />
+      <Global styles={globalStyles()} />
       <Toaster />
       <DashboardContainer>
         <MainContent>
