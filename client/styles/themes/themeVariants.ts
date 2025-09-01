@@ -59,7 +59,7 @@ export const themeVariants: Record<ThemeVariantKey, ThemeVariant> = Object.keys(
         ...appTheme,
         colors: {
           ...appTheme.colors,
-          default: { ...(appTheme.colors[typedKey] || {}) },
+          default: { ...appTheme.colors[typedKey] },
         },
       },
       ...variantMeta[typedKey],
