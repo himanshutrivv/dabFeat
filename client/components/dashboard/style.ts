@@ -1395,11 +1395,11 @@ export const FilterModalButton = styled.button<{
         `;
       default:
         return css`
-          background-color: hsl(var(--primary));
-          color: hsl(var(--primary-foreground));
+          background-color: hsl(var(--primary, 222.2 47.4% 11.2%));
+          color: hsl(var(--primary-foreground, 210 40% 98%));
 
           &:hover {
-            background-color: hsl(var(--primary) / 0.9);
+            background-color: hsl(var(--primary, 222.2 47.4% 11.2%) / 0.9);
           }
         `;
     }
