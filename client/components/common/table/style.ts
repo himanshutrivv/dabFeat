@@ -70,6 +70,7 @@ export const TableHeaderCell = styled.th<{ width?: string; minWidth?: string }>`
   text-align: left;
   color: ${theme.colors.default.primaryForeground};
   white-space: nowrap;
+  text-transform: capitalize;
   ${(props) => props.width && `width: ${props.width};`}
   ${(props) => props.minWidth && `min-width: ${props.minWidth};`}
 `;
@@ -85,10 +86,8 @@ export const TableRow = styled.tr<{ isEven: boolean }>`
   transform: translateY(0px);
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${theme.shadows.md};
-    z-index: 0;
-    position: relative;
+    background-color: ${(props) =>
+      props.isEven ? theme.colors.default.card : theme.colors.default.secondary};
   }
 `;
 
