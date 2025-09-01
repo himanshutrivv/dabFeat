@@ -48,7 +48,7 @@ import FilterDropdown from "./filter-dropdown";
 import FilterModal from "./filter-modal";
 import TimelineFilter from "./timeline-filter";
 import { useBusinessStore } from "@/store/business-store";
-import { srGetDashboardTableData, srGetMonitoringData } from "@/sources/dashboard";
+import { srGetDashboardTableData } from "@/sources/dashboard";
 import Loader from "../common/loader";
 
 interface FilterState {
@@ -605,9 +605,9 @@ export default function TaskManagementDashboard() {
 
       console.log("Refreshing data with time range:", timeRange);
 
-      const response = await srGetMonitoringData({
+      const response = await srGetDashboardTableData({
         bussId: bussId || "default",
-        timeRange,
+        filterData: null,
       });
 
       console.log("Monitoring data refreshed:", response);
