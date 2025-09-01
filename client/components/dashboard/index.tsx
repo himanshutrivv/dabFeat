@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import { globalStyles } from "@/styles/global";
 import {
   DashboardContainer,
@@ -693,7 +693,6 @@ export default function TaskManagementDashboard() {
   return (
     <>
       <Global styles={globalStyles()} />
-      <Toaster />
       <DashboardContainer>
         <MainContent>
           <MainContentLayout>
