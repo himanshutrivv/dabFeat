@@ -1,9 +1,9 @@
-
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 import {
   appTheme as theme,
   AppTheme as Theme,
 } from "../styles/themes/appTheme";
+import { css } from "@emotion/react";
 
 export const media = {
   sm: `@media (min-width: 640px)`,
@@ -30,15 +30,50 @@ export const flexColumn = `
   flex-direction: column;
 `;
 
-export const cardStyles = (theme: Theme) => `
-  background-color: ${theme.colors.default.card};
-  color: ${theme.colors.default.cardForeground};
-  border: 1px solid ${theme.colors.default.border};
+export const cardStyles = (theme: Theme) => css`
+  background-color: ${theme.colors.default.primaryBackground};
+  color: ${theme.colors.default.primary};
+  border: 1px solid ${theme.colors.default.mutedBackground};
   border-radius: ${theme.borderRadius.lg};
   box-shadow: ${theme.shadows.sm};
 `;
 
-export const buttonBaseStyles = `
+export const inputStyles = (theme: Theme) => css`
+  display: flex;
+  width: 100%;
+  border-radius: ${theme.borderRadius.md};
+  border: 1px solid ${theme.colors.default.muted};
+  background-color: ${theme.colors.default.primaryBackground};
+  padding: ${theme.spacing[2]} ${theme.spacing[3]};
+  font-size: ${theme.fontSizes.sm};
+  color: ${theme.colors.default.primary};
+  transition: ${theme.transitions.colors};
+
+  &::placeholder {
+    color: ${theme.colors.default.muted};
+  }
+
+  &:focus {
+    outline: none;
+    border-color: ${theme.colors.default.primary};
+    box-shadow: 0 0 0 2px ${theme.colors.default.primary};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+`;
+
+type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
+
+interface ButtonProps {
+  $loading?: boolean;
+  fullWidth?: boolean;
+  variant?: ButtonVariant;
+}
+
+const baseButtonStyles = (theme: Theme) => css`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -51,6 +86,7 @@ export const buttonBaseStyles = `
   cursor: pointer;
   border: none;
   text-decoration: none;
+  position: relative;
 
   &:disabled {
     opacity: 0.5;
@@ -58,80 +94,85 @@ export const buttonBaseStyles = `
   }
 `;
 
-const buttonVariant = (bg: string, fg: string) => (theme: Theme) =>
-  `
-  ${buttonBaseStyles}
-  background-color: ${bg};
-  color: ${fg};
+const variantStyles = (variant: ButtonVariant = "primary", theme: Theme) => {
+  switch (variant) {
+    case "primary":
+      return css`
+        background-color: ${theme.colors.default.primary};
+        color: ${theme.colors.default.primaryBackground};
 
-  &:hover:not(:disabled) {
-    opacity: 0.9;
+        &:hover:not(:disabled) {
+          opacity: 0.9;
+        }
+
+        &:focus-visible {
+          outline: none;
+          box-shadow: 0 0 0 2px ${theme.colors.default.primary};
+        }
+      `;
+
+    case "secondary":
+      return css`
+        border: 1px solid ${theme.colors.default.muted};
+        background-color: ${theme.colors.default.primaryBackground};
+        color: ${theme.colors.default.primary};
+
+        &:hover:not(:disabled) {
+          background-color: ${theme.colors.default.primary};
+          color: ${theme.colors.default.primaryBackground};
+        }
+
+        &:focus-visible {
+          outline: none;
+          box-shadow: 0 0 0 2px ${theme.colors.default.primary};
+        }
+      `;
+
+    case "outline":
+      return css`
+        border: 1px solid ${theme.colors.default.muted};
+        background-color: ${theme.colors.default.primaryBackground};
+        color: ${theme.colors.default.primary};
+
+        &:hover:not(:disabled) {
+          background-color: ${theme.colors.default.mutedBackground};
+          color: ${theme.colors.default.muted};
+        }
+      `;
+
+    case "ghost":
+      return css`
+        border-radius: 50%;
+        padding: ${theme.spacing[2]};
+        background-color: transparent;
+        color: ${theme.colors.default.primary};
+
+        &:hover:not(:disabled) {
+          background-color: ${theme.colors.default.mutedBackground};
+          color: ${theme.colors.default.primary};
+        }
+      `;
+
+    default:
+      return css``;
   }
+};
 
-  &:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px ${theme.colors.default.ring};
-  }
-`;
+export const Button = styled.button<ButtonProps>`
+  ${({ theme }) => baseButtonStyles(theme)};
+  ${({ theme, variant }) => variantStyles(variant, theme)};
 
-export const primaryButtonStyles = buttonVariant(
-  theme.colors.default.primary,
-  theme.colors.default.primaryForeground
-);
+  ${({ fullWidth }) =>
+    fullWidth &&
+    css`
+      width: 100%;
+    `};
 
-export const secondaryButtonStyles = buttonVariant(
-  theme.colors.default.secondary,
-  theme.colors.default.secondaryForeground
-);
-
-export const outlineButtonStyles = (theme: Theme) => `
-  ${buttonBaseStyles}
-  border: 1px solid ${theme.colors.default.border};
-  background-color: ${theme.colors.default.background};
-  color: ${theme.colors.default.foreground};
-
-  &:hover:not(:disabled) {
-    background-color: ${theme.colors.default.accent};
-    color: ${theme.colors.default.accentForeground};
-  }
-`;
-
-export const ghostButtonStyles = `
-  ${buttonBaseStyles}
-  background-color: transparent;
-  color: ${theme.colors.default.foreground};
-
-  &:hover:not(:disabled) {
-    background-color: ${theme.colors.default.accent};
-    color: ${theme.colors.default.accentForeground};
-  }
-`;
-
-export const inputStyles = `
-  display: flex;
-  width: 100%;
-  border-radius: ${theme.borderRadius.md};
-  border: 1px solid ${theme.colors.default.border};
-  background-color: ${theme.colors.default.background};
-  padding: ${theme.spacing[2]} ${theme.spacing[3]};
-  font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.default.foreground};
-  transition: ${theme.transitions.colors};
-
-  &::placeholder {
-    color: ${theme.colors.default.mutedForeground};
-  }
-
-  &:focus {
-    outline: none;
-    border-color: ${theme.colors.default.ring};
-    box-shadow: 0 0 0 2px ${theme.colors.default.ring};
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
+  ${({ $loading }) =>
+    $loading &&
+    css`
+      color: transparent;
+    `};
 `;
 
 export const ErrorMessage = styled.p`
