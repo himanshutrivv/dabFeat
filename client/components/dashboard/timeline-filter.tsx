@@ -11,8 +11,8 @@ import {
   TimeLineButton,
   TimeLineFilterSection,
   TimeLineFilterLabel,
+  TimeLineFilterInlineNote,
   TimeLineFilterInputGrid,
-  TimeLineFilterNote,
   TimeLineFilterButtonGrid,
 } from "./style";
 
@@ -113,7 +113,10 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
           <TimeLineFilterContent>
             <TimeLineFilterSection>
               <div>
-                <TimeLineFilterLabel>Start Date & Time</TimeLineFilterLabel>
+                <TimeLineFilterLabel>
+  Start Date & Time
+  <TimeLineFilterInlineNote>(Maximum time range: 5 minutes)</TimeLineFilterInlineNote>
+</TimeLineFilterLabel>
                 <TimeLineFilterInputGrid>
                   <TimeLineInput
                     type="date"
@@ -170,9 +173,6 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                   />
                 </TimeLineFilterInputGrid>
               </div>
-              <TimeLineFilterNote>
-                Maximum time range: 5 minutes
-              </TimeLineFilterNote>
               <TimeLineFilterButtonGrid>
                 <TimeLineButton
                   size="sm"
