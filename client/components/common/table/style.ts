@@ -1,5 +1,6 @@
 import { appTheme } from "../../../styles/themes/appTheme";
 import styled from "@emotion/styled";
+import { appTheme } from "@/styles/themes/appTheme";
 
 const theme = appTheme; // Keep compatibility while using the new structure
 
@@ -45,7 +46,7 @@ export const StyledTable = styled.table`
   width: 100%;
   min-width: max-content;
   border-collapse: collapse;
-  font-family: ${theme.fonts.default};
+  font-family: ${theme.fonts};
 `;
 
 export const TableHeader = styled.thead`
