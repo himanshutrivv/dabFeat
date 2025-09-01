@@ -1014,6 +1014,49 @@ export const TimeLineFilterInputGrid = styled.div<{ theme?: any }>`
   margin-bottom: 16px;
 `;
 
+export const TimeLineTimeWithToggle = styled.div<{ theme?: any }>`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const TimeLineAmPmToggle = styled.div<{ theme?: any }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--muted))"};
+  border: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  border-radius: 9999px;
+  padding: 2px;
+`;
+
+export const TimeLineAmPmOption = styled.button<{ active?: boolean; theme?: any }>`
+  min-width: 36px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: ${({ active, theme }) =>
+    active
+      ? theme?.colors?.default?.primaryForeground || "#fff"
+      : theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+  background: ${({ active, theme }) =>
+    active
+      ? theme?.colors?.default?.primary || "hsl(var(--primary))"
+      : "transparent"};
+  transition: ${({ theme }) => theme?.transitions?.all || "all 0.2s ease"};
+
+  &:hover {
+    background: ${({ active, theme }) =>
+      active
+        ? theme?.colors?.default?.primary || "hsl(var(--primary))"
+        : theme?.colors?.default?.accent || "hsl(var(--accent))"};
+  }
+`;
+
 export const TimeLineFilterNote = styled.div<{ theme?: any }>`
   font-size: 12px;
   color: hsl(var(--muted-foreground));
