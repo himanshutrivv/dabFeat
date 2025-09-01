@@ -1000,6 +1000,13 @@ export const TimeLineFilterLabel = styled.label<{ theme?: any }>`
   color: hsl(var(--foreground));
 `;
 
+export const TimeLineFilterInlineNote = styled.span<{ theme?: any }>`
+  font-size: 12px;
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+  margin-left: 6px;
+`;
+
 export const TimeLineFilterInputGrid = styled.div<{ theme?: any }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
