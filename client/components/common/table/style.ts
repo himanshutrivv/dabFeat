@@ -70,7 +70,6 @@ export const TableHeaderCell = styled.th<{ width?: string; minWidth?: string }>`
   text-align: left;
   color: ${theme.colors.default.primaryForeground};
   white-space: nowrap;
-  text-transform: capitalize;
   ${(props) => props.width && `width: ${props.width};`}
   ${(props) => props.minWidth && `min-width: ${props.minWidth};`}
 `;
@@ -97,6 +96,7 @@ export const TableCell = styled.td<{ isClickable?: boolean }>`
   font-size: ${theme.fontSizes.sm};
   line-height: ${theme.lineHeights.normal};
   white-space: nowrap;
+  color: #374151;
   cursor: ${(props) => (props.isClickable ? "pointer" : "default")};
   user-select: ${(props) => (props.isClickable ? "none" : "text")};
 `;
