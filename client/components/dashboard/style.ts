@@ -847,19 +847,27 @@ export const TimeLineSelectContent = styled.div<{ theme?: any }>`
 
 export const TimeLineInput = styled.input<{ theme?: any }>`
   width: 100%;
-  padding: 8px 12px;
-  background-color: hsl(var(--background));
+  height: 44px;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   border: 1px solid hsl(var(--border));
-  border-radius: 6px;
+  border-radius: 12px;
   color: hsl(var(--foreground));
   font-size: 14px;
-  font-family:
-    ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
-    "DejaVu Sans Mono", monospace;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6);
+
+  &:hover {
+    border-color: hsl(var(--accent));
+  }
 
   &:focus {
-    box-shadow: 0 0 0 2px hsl(var(--primary));
     border-color: hsl(var(--primary));
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15), 0 1px 2px rgba(0,0,0,0.08);
     outline: none;
   }
 
@@ -915,14 +923,19 @@ export const TimeLineButton = styled.button<{
         `;
       default:
         return css`
-          background-color: ${props.theme?.colors?.primary ||
-          "hsl(var(--primary))"};
-          color: ${props.theme?.colors?.primaryForeground ||
-          "hsl(var(--primary-foreground))"};
+          background: linear-gradient(
+            135deg,
+            hsl(215, 25%, 27%) 0%,
+            hsl(215, 25%, 20%) 100%
+          );
+          color: #ffffff;
+          border: 1px solid hsl(215, 25%, 35%);
           &:hover {
-            background-color: ${props.theme?.colors?.primary
-              ? `${props.theme.colors.primary} / 0.9`
-              : "hsl(var(--primary) / 0.9)"};
+            background: linear-gradient(
+              135deg,
+              hsl(215, 25%, 35%) 0%,
+              hsl(215, 25%, 27%) 100%
+            );
           }
         `;
     }
@@ -949,26 +962,26 @@ export const TimeLineButton = styled.button<{
 `;
 
 export const TimeLineFilterContent = styled(TimeLineSelectContent)`
-  width: 380px;
-  padding: 16px;
+  width: 420px;
+  padding: 20px 20px 16px 20px;
   z-index: 100;
   isolation: isolate;
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 8px);
   left: 0;
   right: auto;
   min-width: 320px;
   max-width: calc(100vw - 32px);
   box-shadow:
-    0 10px 80px rgba(0, 0, 0, 0.12),
-    0 4px 16px rgba(0, 0, 0, 0.08);
+    0 24px 80px rgba(0, 0, 0, 0.18),
+    0 8px 20px rgba(0, 0, 0, 0.08);
   background-color: white;
   border: 1px solid hsl(var(--border));
-  border-radius: 8px;
+  border-radius: 16px;
   margin-top: 4px;
 
   @media (max-width: 768px) {
-    width: 300px;
+    width: 320px;
     min-width: 280px;
   }
 `;
@@ -981,7 +994,7 @@ export const TimeLineFilterSection = styled.div<{ theme?: any }>`
 
 export const TimeLineFilterLabel = styled.label<{ theme?: any }>`
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 8px;
   display: block;
   color: hsl(var(--foreground));
@@ -998,16 +1011,42 @@ export const TimeLineFilterNote = styled.div<{ theme?: any }>`
   font-size: 12px;
   color: hsl(var(--muted-foreground));
   text-align: center;
-  margin: 12px 0;
+  margin: 8px 0 4px 0;
   padding: 8px;
-  background: hsl(var(--muted) / 0.3);
-  border-radius: 6px;
+  background: hsl(var(--muted) / 0.4);
+  border-radius: 10px;
 `;
 
 export const TimeLineFilterButtonGrid = styled.div<{ theme?: any }>`
   display: flex;
   gap: 8px;
   margin-top: 16px;
+  justify-content: flex-end;
+`;
+
+export const TimeLineQuickRanges = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 4px 0;
+`;
+
+export const TimeLineQuickChip = styled.button`
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--muted));
+  color: hsl(var(--foreground));
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    transform: translateY(-1px);
+  }
 `;
 
 // Filter Modal Components
