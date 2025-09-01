@@ -1,4 +1,3 @@
-import { appTheme } from "../../../styles/themes/appTheme";
 import styled from "@emotion/styled";
 import { appTheme } from "@/styles/themes/appTheme";
 
