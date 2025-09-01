@@ -49,23 +49,20 @@ const variantMeta: Record<
 };
 
 export const themeVariants: Record<ThemeVariantKey, ThemeVariant> = Object.keys(
-  variantMeta,
-).reduce(
-  (acc, key) => {
-    const typedKey = key as ThemeVariantKey;
+  variantMeta
+).reduce((acc, key) => {
+  const typedKey = key as ThemeVariantKey;
 
-    acc[typedKey] = {
-      theme: {
-        ...appTheme,
-        colors: {
-          ...appTheme.colors,
-          default: { ...appTheme.colors[typedKey] },
-        },
+  acc[typedKey] = {
+    theme: {
+      ...appTheme,
+      colors: {
+        ...appTheme.colors,
+        default: { ...(appTheme.colors[typedKey] || {}) },
       },
-      ...variantMeta[typedKey],
-    };
+    },
+    ...variantMeta[typedKey],
+  };
 
-    return acc;
-  },
-  {} as Record<ThemeVariantKey, ThemeVariant>,
-);
+  return acc;
+}, {} as Record<ThemeVariantKey, ThemeVariant>);
