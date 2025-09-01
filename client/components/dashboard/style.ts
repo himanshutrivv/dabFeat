@@ -803,7 +803,8 @@ export const TimeLineSelectTrigger = styled.button<{ theme?: any }>`
     background-color: ${({ theme }) =>
       theme?.colors?.default?.accent || "hsl(var(--accent))"};
     color: ${({ theme }) =>
-      theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
+      theme?.colors?.default?.accentForeground ||
+      "hsl(var(--accent-foreground))"};
   }
 `;
 
@@ -854,11 +855,25 @@ export const TimeLineInput = styled.input<{ theme?: any }>`
   border-radius: 12px;
   color: hsl(var(--foreground));
   font-size: 14px;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-    Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji",
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Noto Sans,
+    Ubuntu,
+    Cantarell,
+    Helvetica Neue,
+    Arial,
+    "Apple Color Emoji",
     "Segoe UI Emoji";
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
   &:hover {
     border-color: hsl(var(--accent));
@@ -867,7 +882,9 @@ export const TimeLineInput = styled.input<{ theme?: any }>`
   &:focus {
     border-color: hsl(var(--primary));
     background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15), 0 1px 2px rgba(0,0,0,0.08);
+    box-shadow:
+      0 0 0 3px rgba(59, 130, 246, 0.15),
+      0 1px 2px rgba(0, 0, 0, 0.08);
     outline: none;
   }
 
@@ -913,7 +930,8 @@ export const TimeLineButton = styled.button<{
             ${props.theme?.colors?.default?.border || "hsl(var(--border))"};
           background-color: ${props.theme?.colors?.default?.background ||
           "hsl(var(--background))"};
-          color: ${props.theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+          color: ${props.theme?.colors?.default?.foreground ||
+          "hsl(var(--foreground))"};
           &:hover {
             background-color: ${props.theme?.colors?.default?.accent ||
             "hsl(var(--accent))"};
@@ -1024,13 +1042,18 @@ export const TimeLineAmPmToggle = styled.div<{ theme?: any }>`
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  background: ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--muted))"};
-  border: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  background: ${({ theme }) =>
+    theme?.colors?.default?.muted || "hsl(var(--muted))"};
+  border: 1px solid
+    ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
   border-radius: 9999px;
   padding: 2px;
 `;
 
-export const TimeLineAmPmOption = styled.button<{ active?: boolean; theme?: any }>`
+export const TimeLineAmPmOption = styled.button<{
+  active?: boolean;
+  theme?: any;
+}>`
   min-width: 36px;
   height: 28px;
   padding: 0 10px;
@@ -1334,9 +1357,11 @@ export const FilterModalTitle = styled.h3<{ hasActive: boolean }>`
 `;
 
 export const FilterModalCount = styled.div<{ theme?: any }>`
-  background: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--primary))"};
+  background: ${({ theme }) =>
+    theme?.colors?.default?.primary || "hsl(var(--primary))"};
   color: ${({ theme }) =>
-    theme?.colors?.default?.primaryForeground || "hsl(var(--primary-foreground))"};
+    theme?.colors?.default?.primaryForeground ||
+    "hsl(var(--primary-foreground))"};
   font-size: 11px;
   min-width: 20px;
   height: 20px;
@@ -1674,7 +1699,8 @@ export const FilterModalSectionSearchInput = styled.input<{
 
   &::placeholder {
     color: ${({ theme }) =>
-      theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"};
+      theme?.colors?.default?.mutedForeground ||
+      "hsl(var(--muted-foreground))"};
     font-size: 13px;
   }
 `;
@@ -1713,7 +1739,8 @@ export const FilterModalCheckIcon = styled.svg<{ theme?: any }>`
   width: 10px;
   height: 10px;
   color: ${({ theme }) =>
-    theme?.colors?.default?.primaryForeground || "hsl(var(--primary-foreground))"};
+    theme?.colors?.default?.primaryForeground ||
+    "hsl(var(--primary-foreground))"};
 `;
 
 export const FilterModalCloseButton = styled.button<{ theme?: any }>`
@@ -1754,7 +1781,8 @@ export const FilterModalCloseButton = styled.button<{ theme?: any }>`
 
 export const FilterModalSeparator = styled.div<{ theme?: any }>`
   flex-shrink: 0;
-  background: ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  background: ${({ theme }) =>
+    theme?.colors?.default?.border || "hsl(var(--border))"};
   height: 1px;
   width: 100%;
 `;
@@ -1822,7 +1850,8 @@ export const FilterModalManualInput = styled.input<{ theme?: any }>`
 
   &::placeholder {
     color: ${({ theme }) =>
-      theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"};
+      theme?.colors?.default?.mutedForeground ||
+      "hsl(var(--muted-foreground))"};
     font-size: 13px;
   }
 `;

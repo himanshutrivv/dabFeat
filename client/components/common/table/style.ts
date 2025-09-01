@@ -86,7 +86,9 @@ export const TableRow = styled.tr<{ isEven: boolean }>`
 
   &:hover {
     background-color: ${(props) =>
-      props.isEven ? theme.colors.default.card : theme.colors.default.secondary};
+      props.isEven
+        ? theme.colors.default.card
+        : theme.colors.default.secondary};
   }
 `;
 
