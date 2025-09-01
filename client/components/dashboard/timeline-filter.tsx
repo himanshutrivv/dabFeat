@@ -13,6 +13,9 @@ import {
   TimeLineFilterLabel,
   TimeLineFilterInlineNote,
   TimeLineFilterInputGrid,
+  TimeLineTimeWithToggle,
+  TimeLineAmPmToggle,
+  TimeLineAmPmOption,
   TimeLineFilterButtonGrid,
 } from "./style";
 
@@ -85,6 +88,37 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
     [startDateTime, endDateTime, onStartDateTimeChange, onEndDateTimeChange],
   );
 
+  const getTimePart = useCallback((dt: string) => (dt ? (dt.split(" ")[1] || "00:00:00") : "00:00:00"), []);
+  const getMeridiem = useCallback((timePart: string) => {
+    const h = parseInt(timePart.split(":")[0] || "0", 10);
+    return h < 12 ? "AM" : "PM";
+  }, []);
+
+  const setMeridiem = useCallback(
+    (isStart: boolean, meridiem: "AM" | "PM") => {
+      const currentDateTime = isStart ? startDateTime : endDateTime;
+      const datePart = currentDateTime
+        ? currentDateTime.split(" ")[0]
+        : new Date().toLocaleDateString("en-GB");
+      const timePart = getTimePart(currentDateTime);
+      const [hStr, m = "00", s = "00"] = timePart.split(":");
+      let h = Math.min(23, Math.max(0, parseInt(hStr || "0", 10)));
+
+      if (meridiem === "AM") {
+        if (h === 12) h = 0; // 12 AM -> 00
+        else if (h > 12) h -= 12;
+      } else {
+        if (h < 12) h += 12; // PM
+      }
+
+      const hh = String(h).padStart(2, "0");
+      const newDateTime = `${datePart} ${hh}:${m}:${s}`;
+      if (isStart) onStartDateTimeChange(newDateTime);
+      else onEndDateTimeChange(newDateTime);
+    },
+    [startDateTime, endDateTime, onStartDateTimeChange, onEndDateTimeChange, getTimePart],
+  );
+
   const handleButtonClick = useCallback(
     (e: React.MouseEvent, action: "reset" | "apply") => {
       e.stopPropagation();
@@ -132,17 +166,46 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleDateChange(e, true)}
                   />
-                  <TimeLineInput
-                    type="time"
-                    step="1"
-                    value={
-                      startDateTime
-                        ? startDateTime.split(" ")[1] || "00:00:00"
-                        : ""
-                    }
-                    onClick={handleInputInteraction}
-                    onChange={(e) => handleTimeChange(e, true)}
-                  />
+                  <TimeLineTimeWithToggle>
+                    <TimeLineInput
+                      type="time"
+                      step="1"
+                      value={
+                        startDateTime
+                          ? startDateTime.split(" ")[1] || "00:00:00"
+                          : ""
+                      }
+                      onClick={handleInputInteraction}
+                      onChange={(e) => handleTimeChange(e, true)}
+                    />
+                    <TimeLineAmPmToggle onClick={handleInputInteraction as any}>
+                      {(() => {
+                        const mer = getMeridiem(getTimePart(startDateTime));
+                        return (
+                          <>
+                            <TimeLineAmPmOption
+                              active={mer === "AM"}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setMeridiem(true, "AM");
+                              }}
+                            >
+                              AM
+                            </TimeLineAmPmOption>
+                            <TimeLineAmPmOption
+                              active={mer === "PM"}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setMeridiem(true, "PM");
+                              }}
+                            >
+                              PM
+                            </TimeLineAmPmOption>
+                          </>
+                        );
+                      })()}
+                    </TimeLineAmPmToggle>
+                  </TimeLineTimeWithToggle>
                 </TimeLineFilterInputGrid>
               </div>
               <div>
@@ -162,15 +225,44 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
                     onClick={handleInputInteraction}
                     onChange={(e) => handleDateChange(e, false)}
                   />
-                  <TimeLineInput
-                    type="time"
-                    step="1"
-                    value={
-                      endDateTime ? endDateTime.split(" ")[1] || "00:00:00" : ""
-                    }
-                    onClick={handleInputInteraction}
-                    onChange={(e) => handleTimeChange(e, false)}
-                  />
+                  <TimeLineTimeWithToggle>
+                    <TimeLineInput
+                      type="time"
+                      step="1"
+                      value={
+                        endDateTime ? endDateTime.split(" ")[1] || "00:00:00" : ""
+                      }
+                      onClick={handleInputInteraction}
+                      onChange={(e) => handleTimeChange(e, false)}
+                    />
+                    <TimeLineAmPmToggle onClick={handleInputInteraction as any}>
+                      {(() => {
+                        const mer = getMeridiem(getTimePart(endDateTime));
+                        return (
+                          <>
+                            <TimeLineAmPmOption
+                              active={mer === "AM"}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setMeridiem(false, "AM");
+                              }}
+                            >
+                              AM
+                            </TimeLineAmPmOption>
+                            <TimeLineAmPmOption
+                              active={mer === "PM"}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setMeridiem(false, "PM");
+                              }}
+                            >
+                              PM
+                            </TimeLineAmPmOption>
+                          </>
+                        );
+                      })()}
+                    </TimeLineAmPmToggle>
+                  </TimeLineTimeWithToggle>
                 </TimeLineFilterInputGrid>
               </div>
               <TimeLineFilterButtonGrid>
