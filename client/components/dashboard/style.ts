@@ -910,14 +910,14 @@ export const TimeLineButton = styled.button<{
       case "outline":
         return css`
           border: 1px solid
-            ${props.theme?.colors?.border || "hsl(var(--border))"};
-          background-color: ${props.theme?.colors?.background ||
+            ${props.theme?.colors?.default?.border || "hsl(var(--border))"};
+          background-color: ${props.theme?.colors?.default?.background ||
           "hsl(var(--background))"};
-          color: ${props.theme?.colors?.foreground || "hsl(var(--foreground))"};
+          color: ${props.theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
           &:hover {
-            background-color: ${props.theme?.colors?.accent ||
+            background-color: ${props.theme?.colors?.default?.accent ||
             "hsl(var(--accent))"};
-            color: ${props.theme?.colors?.accentForeground ||
+            color: ${props.theme?.colors?.default?.accentForeground ||
             "hsl(var(--accent-foreground))"};
           }
         `;
@@ -1393,12 +1393,12 @@ export const FilterModalCheckbox = styled.div<{
   border: 2px solid
     ${(props) =>
       props.selected
-        ? props.theme?.colors?.primary || "hsl(var(--primary))"
-        : props.theme?.colors?.border || "hsl(var(--border))"};
+        ? props.theme?.colors?.default?.primary || "hsl(var(--primary))"
+        : props.theme?.colors?.default?.border || "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected
-      ? props.theme?.colors?.primary || "hsl(var(--primary))"
+      ? props.theme?.colors?.default?.primary || "hsl(var(--primary))"
       : "transparent"};
   display: flex;
   align-items: center;
