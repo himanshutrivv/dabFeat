@@ -777,20 +777,20 @@ export const TimeLineSelectTrigger = styled.button<{ theme?: any }>`
   width: 100%;
   border-radius: ${({ theme }) => theme?.borderRadius?.lg || "8px"};
   border: 1px solid
-    ${({ theme }) => theme?.colors?.input || "hsl(var(--input))"};
+    ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
   background-color: ${({ theme }) =>
-    theme?.colors?.background || "hsl(var(--background))"};
+    theme?.colors?.default?.background || "hsl(var(--background))"};
   padding: 0 ${({ theme }) => theme?.spacing?.[3] || "12px"};
   font-size: ${({ theme }) => theme?.fontSizes?.sm || "14px"};
   color: ${({ theme }) =>
-    theme?.colors?.foreground || "hsl(var(--foreground))"};
+    theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
   cursor: pointer;
   transition: ${({ theme }) => theme?.transitions?.all || "all 0.2s ease"};
 
   &:focus {
     outline: none;
     box-shadow: 0 0 0 2px
-      ${({ theme }) => theme?.colors?.ring || "hsl(var(--ring))"};
+      ${({ theme }) => theme?.colors?.default?.ring || "hsl(var(--ring))"};
     outline-offset: 2px;
   }
 
@@ -801,9 +801,9 @@ export const TimeLineSelectTrigger = styled.button<{ theme?: any }>`
 
   &:hover {
     background-color: ${({ theme }) =>
-      theme?.colors?.accent || "hsl(var(--accent))"};
+      theme?.colors?.default?.accent || "hsl(var(--accent))"};
     color: ${({ theme }) =>
-      theme?.colors?.accentForeground || "hsl(var(--accent-foreground))"};
+      theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
   }
 `;
 
