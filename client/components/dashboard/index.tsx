@@ -528,33 +528,50 @@ export default function TaskManagementDashboard() {
 
       if (!startDate || !endDate) return { start, end };
 
-      const diffInMs = endDate.getTime() - startDate.getTime();
-      const maxDiffMs = 5 * 60 * 1000; // 5 minutes in milliseconds
+      const diffMs = endDate.getTime() - startDate.getTime();
+      const absDiffSec = Math.abs(Math.floor(diffMs / 1000));
+      const clamp = (n: number, min: number, max: number) =>
+        Math.min(max, Math.max(min, n));
+      const maxSec = 5 * 60; // 300 seconds
 
-      if (diffInMs > maxDiffMs) {
+      // If exactly same timestamp
+      if (diffMs === 0) {
+        toast.error("Start time and end time cannot be the same.");
         if (isStartChanged) {
-          // Adjust end time to be start + 5 minutes
-          const newEndDate = new Date(startDate.getTime() + maxDiffMs);
-          return { start, end: formatDateTimeForInput(newEndDate) };
+          const newEnd = new Date(startDate.getTime() + 1000);
+          return { start, end: formatDateTimeForInput(newEnd) };
         } else {
-          // Adjust start time to be end - 5 minutes
-          const newStartDate = new Date(endDate.getTime() - maxDiffMs);
-          return { start: formatDateTimeForInput(newStartDate), end };
+          const newStart = new Date(endDate.getTime() - 1000);
+          return { start: formatDateTimeForInput(newStart), end };
         }
       }
 
-      if (diffInMs < 0) {
+      // If start is after end, or end after start, handle using absolute diff
+      if (diffMs < 0) {
+        // start > end → adjust the non-edited value to ensure start < end
+        const desired = clamp(absDiffSec, 1, maxSec);
         if (isStartChanged) {
-          // Set end to start + 1 minute
-          const newEndDate = new Date(startDate.getTime() + 60000);
-          return { start, end: formatDateTimeForInput(newEndDate) };
+          const newEnd = new Date(startDate.getTime() + desired * 1000);
+          return { start, end: formatDateTimeForInput(newEnd) };
         } else {
-          // Set start to end - 1 minute
-          const newStartDate = new Date(endDate.getTime() - 60000);
-          return { start: formatDateTimeForInput(newStartDate), end };
+          const newStart = new Date(endDate.getTime() - desired * 1000);
+          return { start: formatDateTimeForInput(newStart), end };
         }
       }
 
+      // diffMs > 0 (end after start)
+      if (absDiffSec > maxSec) {
+        // Too large → clamp to exactly 5 minutes, preserving last edit
+        if (isStartChanged) {
+          const newEnd = new Date(startDate.getTime() + maxSec * 1000);
+          return { start, end: formatDateTimeForInput(newEnd) };
+        } else {
+          const newStart = new Date(endDate.getTime() - maxSec * 1000);
+          return { start: formatDateTimeForInput(newStart), end };
+        }
+      }
+
+      // Within (0, 300] seconds and chronological → valid as-is
       return { start, end };
     },
     [parseDateTimeFromInput, formatDateTimeForInput],
