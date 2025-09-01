@@ -5,7 +5,6 @@ import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast, Toaster } from "sonner";
 import { globalStyles } from "@/styles/global";
-import { appTheme } from "@/styles/themes/appTheme";
 import {
   DashboardContainer,
   MainContent,
@@ -650,7 +649,7 @@ export default function TaskManagementDashboard() {
   if (error) {
     return (
       <>
-        <Global styles={globalStyles(appTheme)} />
+        <Global styles={globalStyles()} />
         <ErrorContainer>
           <ErrorText>Error: {error}</ErrorText>
           <RetryButton onClick={() => window.location.reload()}>
