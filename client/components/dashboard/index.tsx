@@ -48,7 +48,7 @@ import FilterDropdown from "./filter-dropdown";
 import FilterModal from "./filter-modal";
 import TimelineFilter from "./timeline-filter";
 import { useBusinessStore } from "@/store/business-store";
-import { srGetDashboardTableData } from "@/sources/dashboard";
+import { srGetDashboardTableData, srGetMonitoringData } from "@/sources/dashboard";
 import Loader from "../common/loader";
 
 interface FilterState {
@@ -605,8 +605,8 @@ export default function TaskManagementDashboard() {
 
       console.log("Refreshing data with time range:", timeRange);
 
-      const response = await srGetDashboardTableData({
-        bussId,
+      const response = await srGetMonitoringData({
+        bussId: bussId || "default",
         timeRange,
       });
 
@@ -787,13 +787,7 @@ export default function TaskManagementDashboard() {
                     >
                       <RefreshCw
                         size={16}
-                        css={{
-                          animation: isRefreshing ? 'spin 1s linear infinite' : 'none',
-                          '@keyframes spin': {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '100%': { transform: 'rotate(360deg)' },
-                          },
-                        }}
+                        className={isRefreshing ? 'animate-spin' : undefined}
                       />
                       {isRefreshing ? 'Refreshing...' : 'Refresh'}
                     </RefreshButton>
