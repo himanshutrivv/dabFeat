@@ -62,6 +62,8 @@ export const TableSection = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 `;
 
 export const FilterCard = styled.div`
@@ -75,6 +77,8 @@ export const FilterCard = styled.div`
   margin-bottom: 24px;
   overflow: visible;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 100;
 
   &:hover {
     box-shadow:
