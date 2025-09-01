@@ -251,7 +251,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 const isSearchable = searchable !== false;
 
                 return (
-                  <FilterModalListItem key={key}>
+                  <FilterModalListItem
+                    key={key}
+                    className={isExpanded ? "expanded" : ""}
+                  >
                     <FilterModalItemHeader
                       onClick={(e) => handleSectionToggle(e, key)}
                       onMouseDown={handleModalClick}
