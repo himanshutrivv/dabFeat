@@ -137,11 +137,18 @@ export const PaginationButton = styled.button<{ isActive?: boolean }>`
   height: 40px;
   padding: ${theme.spacing[2]} ${theme.spacing[3]};
   background: ${(props) =>
-    props.isActive ? theme.colors.default.primary : theme.colors.default.background};
+    props.isActive
+      ? theme.colors.default.primary
+      : theme.colors.default.background};
   color: ${(props) =>
-    props.isActive ? theme.colors.default.primaryForeground : theme.colors.default.foreground};
+    props.isActive
+      ? theme.colors.default.primaryForeground
+      : theme.colors.default.foreground};
   border: 1px solid
-    ${(props) => (props.isActive ? theme.colors.default.primary : theme.colors.default.border)};
+    ${(props) =>
+      props.isActive
+        ? theme.colors.default.primary
+        : theme.colors.default.border};
   border-radius: ${theme.borderRadius.md};
   font-size: ${theme.fontSizes.sm};
   font-weight: ${theme.fontWeights.medium};

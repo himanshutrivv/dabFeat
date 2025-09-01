@@ -249,12 +249,12 @@ export const FilterResults = styled.div`
 // Button components
 export const Button = styled.button<{
   variant?:
-  | "default"
-  | "destructive"
-  | "outline"
-  | "secondary"
-  | "ghost"
-  | "link";
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
   size?: "default" | "sm" | "lg" | "icon";
 }>`
   display: inline-flex;
@@ -801,9 +801,9 @@ export const TimeLineSelectTrigger = styled.button<{ theme?: any }>`
 
   &:hover {
     background-color: ${({ theme }) =>
-    theme?.colors?.accent || "hsl(var(--accent))"};
+      theme?.colors?.accent || "hsl(var(--accent))"};
     color: ${({ theme }) =>
-    theme?.colors?.accentForeground || "hsl(var(--accent-foreground))"};
+      theme?.colors?.accentForeground || "hsl(var(--accent-foreground))"};
   }
 `;
 
@@ -908,9 +908,9 @@ export const TimeLineButton = styled.button<{
           color: ${props.theme?.colors?.foreground || "hsl(var(--foreground))"};
           &:hover {
             background-color: ${props.theme?.colors?.accent ||
-          "hsl(var(--accent))"};
+            "hsl(var(--accent))"};
             color: ${props.theme?.colors?.accentForeground ||
-          "hsl(var(--accent-foreground))"};
+            "hsl(var(--accent-foreground))"};
           }
         `;
       default:
@@ -921,8 +921,8 @@ export const TimeLineButton = styled.button<{
           "hsl(var(--primary-foreground))"};
           &:hover {
             background-color: ${props.theme?.colors?.primary
-            ? `${props.theme.colors.primary} / 0.9`
-            : "hsl(var(--primary) / 0.9)"};
+              ? `${props.theme.colors.primary} / 0.9`
+              : "hsl(var(--primary) / 0.9)"};
           }
         `;
     }
@@ -1189,8 +1189,7 @@ export const FilterModalItemHeader = styled.div<{
   background: none;
   border: none;
   text-align: left;
-  color: ${(props) =>
-    props.isActive ? "#3b82f6" : "#1f2937"};
+  color: ${(props) => (props.isActive ? "#3b82f6" : "#1f2937")};
 
   &:hover {
     background: rgba(243, 244, 246, 0.5);
@@ -1304,9 +1303,9 @@ export const FilterModalCheckbox = styled.div<{
   height: 18px;
   border: 2px solid
     ${(props) =>
-    props.selected
-      ? props.theme?.colors?.primary || "hsl(var(--primary))"
-      : props.theme?.colors?.border || "hsl(var(--border))"};
+      props.selected
+        ? props.theme?.colors?.primary || "hsl(var(--primary))"
+        : props.theme?.colors?.border || "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected
@@ -1319,7 +1318,7 @@ export const FilterModalCheckbox = styled.div<{
 
   &:hover {
     border-color: ${({ theme }) =>
-    theme?.colors?.primary || "hsl(var(--primary))"};
+      theme?.colors?.primary || "hsl(var(--primary))"};
   }
 `;
 
@@ -1552,14 +1551,21 @@ export const FilterModalSectionSearchInput = styled.input<{
   padding: 10px 14px;
   padding-left: 52px;
   border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme?.colors?.border || "hsl(var(--border))"};
+  border: 1px solid
+    ${({ theme }) => theme?.colors?.border || "hsl(var(--border))"};
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   font-size: 14px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
   opacity: ${(props) => (props.disabled ? "0.6" : "1")};
-  color: ${({ theme }) => theme?.colors?.foreground || "hsl(var(--foreground))"};
-  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.06s ease;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6);
+  color: ${({ theme }) =>
+    theme?.colors?.foreground || "hsl(var(--foreground))"};
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.06s ease;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
   &:hover {
     border-color: hsl(var(--accent));
@@ -1567,14 +1573,19 @@ export const FilterModalSectionSearchInput = styled.input<{
 
   &:focus {
     border-color: ${({ theme, disabled }) =>
-      disabled ? theme?.colors?.border || "hsl(var(--border))" : theme?.colors?.primary || "hsl(var(--primary))"};
+      disabled
+        ? theme?.colors?.border || "hsl(var(--border))"
+        : theme?.colors?.primary || "hsl(var(--primary))"};
     background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15), 0 1px 2px rgba(0,0,0,0.08);
+    box-shadow:
+      0 0 0 3px rgba(59, 130, 246, 0.15),
+      0 1px 2px rgba(0, 0, 0, 0.08);
     outline: none;
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme?.colors?.mutedForeground || "hsl(var(--muted-foreground))"};
+    color: ${({ theme }) =>
+      theme?.colors?.mutedForeground || "hsl(var(--muted-foreground))"};
     font-size: 13px;
   }
 `;
@@ -1594,7 +1605,7 @@ export const FilterModalOptionItem = styled.div<{
     props.isSelected ? "hsl(var(--primary) / 0.1)" : "transparent"};
   border: 1px solid
     ${(props) =>
-    props.isSelected ? "hsl(var(--primary) / 0.3)" : "transparent"};
+      props.isSelected ? "hsl(var(--primary) / 0.3)" : "transparent"};
   margin-bottom: ${({ theme }) => theme?.spacing?.[1] || "4px"};
 
   &:hover {
@@ -1693,26 +1704,36 @@ export const FilterModalManualInput = styled.input<{ theme?: any }>`
   height: 44px;
   padding: 10px 14px;
   border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme?.colors?.border || "hsl(var(--border))"};
+  border: 1px solid
+    ${({ theme }) => theme?.colors?.border || "hsl(var(--border))"};
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   font-size: 14px;
-  color: ${({ theme }) => theme?.colors?.foreground || "hsl(var(--foreground))"};
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6);
+  color: ${({ theme }) =>
+    theme?.colors?.foreground || "hsl(var(--foreground))"};
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
   &:hover {
     border-color: hsl(var(--accent));
   }
 
   &:focus {
-    border-color: ${({ theme }) => theme?.colors?.primary || "hsl(var(--primary))"};
+    border-color: ${({ theme }) =>
+      theme?.colors?.primary || "hsl(var(--primary))"};
     background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15), 0 1px 2px rgba(0,0,0,0.08);
+    box-shadow:
+      0 0 0 3px rgba(59, 130, 246, 0.15),
+      0 1px 2px rgba(0, 0, 0, 0.08);
     outline: none;
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme?.colors?.mutedForeground || "hsl(var(--muted-foreground))"};
+    color: ${({ theme }) =>
+      theme?.colors?.mutedForeground || "hsl(var(--muted-foreground))"};
     font-size: 13px;
   }
 `;

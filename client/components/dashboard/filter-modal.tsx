@@ -71,7 +71,6 @@ interface FilterModalProps {
   onApplyFilters: () => Promise<void>;
 }
 
-
 const FilterModal: React.FC<FilterModalProps> = ({
   isOpen,
   filterOptions,
@@ -267,7 +266,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
                           {label}
                         </FilterModalTitle>
                         {hasActiveFilters && (
-                          <FilterModalCount>{filters[key]?.length}</FilterModalCount>
+                          <FilterModalCount>
+                            {filters[key]?.length}
+                          </FilterModalCount>
                         )}
                       </FilterModalHeaderContent>
                       <FilterModalExpandIcon isOpen={isExpanded}>
@@ -409,7 +410,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 Clear All Filters ({activeFilters.length})
               </FilterModalButton>
             )}
-            <FilterModalButton onClick={handleApplyFilters}>Apply Filters</FilterModalButton>
+            <FilterModalButton onClick={handleApplyFilters}>
+              Apply Filters
+            </FilterModalButton>
           </FilterModalButtonContainer>
         </FilterModalFooter>
       </FilterModalContainer>

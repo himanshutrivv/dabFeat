@@ -787,9 +787,9 @@ export default function TaskManagementDashboard() {
                     >
                       <RefreshCw
                         size={16}
-                        className={isRefreshing ? 'animate-spin' : undefined}
+                        className={isRefreshing ? "animate-spin" : undefined}
                       />
-                      {isRefreshing ? 'Refreshing...' : 'Refresh'}
+                      {isRefreshing ? "Refreshing..." : "Refresh"}
                     </RefreshButton>
                   </SearchBarContainer>
 
