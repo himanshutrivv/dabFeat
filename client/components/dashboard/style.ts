@@ -1527,12 +1527,20 @@ export const FilterModalSectionSearchContainer = styled.div`
 
 export const FilterModalSectionSearchIcon = styled.div<{ theme?: any }>`
   position: absolute;
-  left: 10px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: hsl(var(--muted) / 0.6);
   color: ${({ theme }) =>
     theme?.colors?.mutedForeground || "hsl(var(--muted-foreground))"};
-  z-index: 1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 `;
 
 export const FilterModalSectionSearchInput = styled.input<{
@@ -1540,38 +1548,34 @@ export const FilterModalSectionSearchInput = styled.input<{
   theme?: any;
 }>`
   width: 100%;
-  padding: 8px 12px;
-  padding-left: 36px;
-  height: 36px;
-  border-radius: 8px;
-  border: 1px solid
-    ${({ theme }) => theme?.colors?.border || "hsl(var(--border))"};
-  background: ${(props) =>
-    props.disabled ? "hsl(var(--muted) / 0.1)" : "hsl(var(--muted) / 0.3)"};
-  font-size: 13px;
+  height: 44px;
+  padding: 10px 14px;
+  padding-left: 52px;
+  border-radius: 12px;
+  border: 1px solid ${({ theme }) => theme?.colors?.border || "hsl(var(--border))"};
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  font-size: 14px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
   opacity: ${(props) => (props.disabled ? "0.6" : "1")};
-  color: ${({ theme }) =>
-    theme?.colors?.foreground || "hsl(var(--foreground))"};
+  color: ${({ theme }) => theme?.colors?.foreground || "hsl(var(--foreground))"};
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.06s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6);
+
+  &:hover {
+    border-color: hsl(var(--accent));
+  }
 
   &:focus {
     border-color: ${({ theme, disabled }) =>
-    disabled
-      ? theme?.colors?.border || "hsl(var(--border))"
-      : theme?.colors?.primary || "hsl(var(--primary))"};
-    background: ${({ theme, disabled }) =>
-    disabled
-      ? "hsl(var(--muted) / 0.1)"
-      : theme?.colors?.background || "hsl(var(--background))"};
-    box-shadow: ${({ disabled }) =>
-    disabled ? "none" : "0 0 0 2px hsl(var(--primary) / 0.1)"};
+      disabled ? theme?.colors?.border || "hsl(var(--border))" : theme?.colors?.primary || "hsl(var(--primary))"};
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15), 0 1px 2px rgba(0,0,0,0.08);
     outline: none;
   }
 
   &::placeholder {
-    color: ${({ theme }) =>
-    theme?.colors?.mutedForeground || "hsl(var(--muted-foreground))"};
-    font-size: 12px;
+    color: ${({ theme }) => theme?.colors?.mutedForeground || "hsl(var(--muted-foreground))"};
+    font-size: 13px;
   }
 `;
 
@@ -1686,28 +1690,30 @@ export const FilterModalManualLabel = styled.label`
 
 export const FilterModalManualInput = styled.input<{ theme?: any }>`
   width: 100%;
-  padding: 8px 12px;
-  height: 36px;
-  border-radius: 8px;
-  border: 1px solid
-    ${({ theme }) => theme?.colors?.border || "hsl(var(--border))"};
-  background: ${({ theme }) =>
-    theme?.colors?.background || "hsl(var(--background))"};
-  font-size: 13px;
-  color: ${({ theme }) =>
-    theme?.colors?.foreground || "hsl(var(--foreground))"};
+  height: 44px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid ${({ theme }) => theme?.colors?.border || "hsl(var(--border))"};
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  font-size: 14px;
+  color: ${({ theme }) => theme?.colors?.foreground || "hsl(var(--foreground))"};
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6);
+
+  &:hover {
+    border-color: hsl(var(--accent));
+  }
 
   &:focus {
-    border-color: ${({ theme }) =>
-    theme?.colors?.primary || "hsl(var(--primary))"};
-    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.1);
+    border-color: ${({ theme }) => theme?.colors?.primary || "hsl(var(--primary))"};
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15), 0 1px 2px rgba(0,0,0,0.08);
     outline: none;
   }
 
   &::placeholder {
-    color: ${({ theme }) =>
-    theme?.colors?.mutedForeground || "hsl(var(--muted-foreground))"};
-    font-size: 12px;
+    color: ${({ theme }) => theme?.colors?.mutedForeground || "hsl(var(--muted-foreground))"};
+    font-size: 13px;
   }
 `;
 
