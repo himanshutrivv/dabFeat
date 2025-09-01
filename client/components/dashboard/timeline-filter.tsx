@@ -14,6 +14,8 @@ import {
   TimeLineFilterInputGrid,
   TimeLineFilterNote,
   TimeLineFilterButtonGrid,
+  TimeLineQuickRanges,
+  TimeLineQuickChip,
 } from "./style";
 
 interface TimelineFilterProps {
@@ -97,6 +99,26 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
     [onReset, onApply],
   );
 
+  const formatDateTimeForInput = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+  };
+
+  const handleQuickRange = useCallback(
+    (minutes: number) => {
+      const now = new Date();
+      const start = new Date(now.getTime() - minutes * 60 * 1000);
+      onStartDateTimeChange(formatDateTimeForInput(start));
+      onEndDateTimeChange(formatDateTimeForInput(now));
+    },
+    [onStartDateTimeChange, onEndDateTimeChange],
+  );
+
   return (
     <TimeLineFilterGroup>
       <TimeLineSelectContainer data-dropdown-container>
@@ -111,6 +133,11 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
         {isOpen && (
           <TimeLineFilterContent>
             <TimeLineFilterSection>
+              <TimeLineQuickRanges>
+                <TimeLineQuickChip onClick={() => handleQuickRange(1)}>Last 1 min</TimeLineQuickChip>
+                <TimeLineQuickChip onClick={() => handleQuickRange(3)}>Last 3 min</TimeLineQuickChip>
+                <TimeLineQuickChip onClick={() => handleQuickRange(5)}>Last 5 min</TimeLineQuickChip>
+              </TimeLineQuickRanges>
               <div>
                 <TimeLineFilterLabel>Start Date & Time</TimeLineFilterLabel>
                 <TimeLineFilterInputGrid>
