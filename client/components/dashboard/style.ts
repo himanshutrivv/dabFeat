@@ -249,12 +249,12 @@ export const FilterResults = styled.div`
 // Button components
 export const Button = styled.button<{
   variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link";
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link";
   size?: "default" | "sm" | "lg" | "icon";
 }>`
   display: inline-flex;
@@ -801,10 +801,10 @@ export const TimeLineSelectTrigger = styled.button<{ theme?: any }>`
 
   &:hover {
     background-color: ${({ theme }) =>
-      theme?.colors?.default?.accent || "hsl(var(--accent))"};
+    theme?.colors?.default?.accent || "hsl(var(--accent))"};
     color: ${({ theme }) =>
-      theme?.colors?.default?.accentForeground ||
-      "hsl(var(--accent-foreground))"};
+    theme?.colors?.default?.accentForeground ||
+    "hsl(var(--accent-foreground))"};
   }
 `;
 
@@ -934,9 +934,9 @@ export const TimeLineButton = styled.button<{
           "hsl(var(--foreground))"};
           &:hover {
             background-color: ${props.theme?.colors?.default?.accent ||
-            "hsl(var(--accent))"};
+          "hsl(var(--accent))"};
             color: ${props.theme?.colors?.default?.accentForeground ||
-            "hsl(var(--accent-foreground))"};
+          "hsl(var(--accent-foreground))"};
           }
         `;
       default:
@@ -1074,9 +1074,9 @@ export const TimeLineAmPmOption = styled.button<{
 
   &:hover {
     background: ${({ active, theme }) =>
-      active
-        ? theme?.colors?.default?.primary || "hsl(var(--primary))"
-        : theme?.colors?.default?.accent || "hsl(var(--accent))"};
+    active
+      ? theme?.colors?.default?.primary || "hsl(var(--primary))"
+      : theme?.colors?.default?.accent || "hsl(var(--accent))"};
   }
 `;
 
@@ -1417,9 +1417,9 @@ export const FilterModalCheckbox = styled.div<{
   height: 18px;
   border: 2px solid
     ${(props) =>
-      props.selected
-        ? props.theme?.colors?.default?.primary || "hsl(var(--primary))"
-        : props.theme?.colors?.default?.border || "hsl(var(--border))"};
+    props.selected
+      ? props.theme?.colors?.default?.primary || "hsl(var(--primary))"
+      : props.theme?.colors?.default?.border || "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected
@@ -1432,7 +1432,7 @@ export const FilterModalCheckbox = styled.div<{
 
   &:hover {
     border-color: ${({ theme }) =>
-      theme?.colors?.default?.primary || "hsl(var(--primary))"};
+    theme?.colors?.default?.primary || "hsl(var(--primary))"};
   }
 `;
 
@@ -1687,9 +1687,9 @@ export const FilterModalSectionSearchInput = styled.input<{
 
   &:focus {
     border-color: ${({ theme, disabled }) =>
-      disabled
-        ? theme?.colors?.default?.border || "hsl(var(--border))"
-        : theme?.colors?.default?.primary || "hsl(var(--primary))"};
+    disabled
+      ? theme?.colors?.default?.border || "hsl(var(--border))"
+      : theme?.colors?.default?.primary || "hsl(var(--primary))"};
     background: #ffffff;
     box-shadow:
       0 0 0 3px rgba(59, 130, 246, 0.15),
@@ -1699,8 +1699,8 @@ export const FilterModalSectionSearchInput = styled.input<{
 
   &::placeholder {
     color: ${({ theme }) =>
-      theme?.colors?.default?.mutedForeground ||
-      "hsl(var(--muted-foreground))"};
+    theme?.colors?.default?.mutedForeground ||
+    "hsl(var(--muted-foreground))"};
     font-size: 13px;
   }
 `;
@@ -1720,7 +1720,7 @@ export const FilterModalOptionItem = styled.div<{
     props.isSelected ? "hsl(var(--primary) / 0.1)" : "transparent"};
   border: 1px solid
     ${(props) =>
-      props.isSelected ? "hsl(var(--primary) / 0.3)" : "transparent"};
+    props.isSelected ? "hsl(var(--primary) / 0.3)" : "transparent"};
   margin-bottom: ${({ theme }) => theme?.spacing?.[1] || "4px"};
 
   &:hover {
@@ -1840,7 +1840,7 @@ export const FilterModalManualInput = styled.input<{ theme?: any }>`
 
   &:focus {
     border-color: ${({ theme }) =>
-      theme?.colors?.default?.primary || "hsl(var(--primary))"};
+    theme?.colors?.default?.primary || "hsl(var(--primary))"};
     background: #ffffff;
     box-shadow:
       0 0 0 3px rgba(59, 130, 246, 0.15),
@@ -1850,8 +1850,8 @@ export const FilterModalManualInput = styled.input<{ theme?: any }>`
 
   &::placeholder {
     color: ${({ theme }) =>
-      theme?.colors?.default?.mutedForeground ||
-      "hsl(var(--muted-foreground))"};
+    theme?.colors?.default?.mutedForeground ||
+    "hsl(var(--muted-foreground))"};
     font-size: 13px;
   }
 `;
