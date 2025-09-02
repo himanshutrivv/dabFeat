@@ -39,15 +39,17 @@ export const HeaderContent = styled.div`
 
 export const DashboardTitle = styled.h1`
   margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-  color: hsl(var(--foreground));
+  font-size: ${({ theme }) => theme.fontSizes?.['2xl']};
+  font-weight: ${({ theme }) => theme.fontWeights?.semibold};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 export const DashboardSubtitle = styled.p`
   margin: 0;
-  color: #6b7280;
-  font-size: 14px;
+  color: ${({ theme }) => theme.colors.default?.muted};
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 export const MainContentLayout = styled.div`
