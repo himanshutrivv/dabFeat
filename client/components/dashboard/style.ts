@@ -71,23 +71,19 @@ export const TableSection = styled.div`
 `;
 
 export const FilterCard = styled.div`
-  background: white;
-  border-radius: 16px;
-  border: 1px solid hsl(var(--border));
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.05),
-    0 2px 4px rgba(0, 0, 0, 0.08);
-  margin-top: 24px;
-  margin-bottom: 24px;
+  background: ${({ theme }) => theme.colors.default?.primaryBackground};
+  border-radius: ${({ theme }) => theme.borderRadius?.xl};
+  border: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
+  box-shadow: ${({ theme }) => theme.shadows?.md};
+  margin-top: ${({ theme }) => theme.spacing?.[6]};
+  margin-bottom: ${({ theme }) => theme.spacing?.[6]};
   overflow: visible;
-  transition: all 0.3s ease;
+  transition: ${({ theme }) => theme.transitions?.all};
   position: relative;
   z-index: 100;
 
   &:hover {
-    box-shadow:
-      0 8px 24px rgba(0, 0, 0, 0.08),
-      0 4px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: ${({ theme }) => theme.shadows?.lg};
     transform: translateY(-1px);
   }
 `;
