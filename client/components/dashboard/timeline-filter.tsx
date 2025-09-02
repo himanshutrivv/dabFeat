@@ -42,6 +42,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
   onEndDateTimeChange,
   onReset,
   onApply,
+  theme,
 }) => {
   const handleInputInteraction = useCallback(
     (e: React.MouseEvent | React.FocusEvent) => {
