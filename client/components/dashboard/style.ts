@@ -426,30 +426,31 @@ export const SearchInput = styled.input`
   padding-left: 48px;
   height: 48px;
   width: 100%;
-  background-color: hsl(var(--background));
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  color: hsl(var(--foreground));
-  font-size: 18px;
+  background-color: ${({ theme }) => theme.colors.default?.primaryBackground};
+  border: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
+  border-radius: ${({ theme }) => theme.borderRadius?.xl};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-size: ${({ theme }) => theme.fontSizes?.lg};
+  font-family: ${({ theme }) => theme.fonts};
 
   &:focus {
-    box-shadow: 0 0 0 2px hsl(var(--primary));
-    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.default?.primary};
+    border-color: ${({ theme }) => theme.colors.default?.primary};
     outline: none;
   }
 
   &::placeholder {
-    color: hsl(var(--muted-foreground));
+    color: ${({ theme }) => theme.colors.default?.muted};
   }
 
   &:disabled {
-    background-color: hsl(var(--muted) / 0.5);
-    color: hsl(var(--muted-foreground));
+    background-color: ${({ theme }) => theme.colors.default?.mutedBackground};
+    color: ${({ theme }) => theme.colors.default?.muted};
     cursor: not-allowed;
-    border-color: hsl(var(--border) / 0.5);
+    border-color: ${({ theme }) => theme.colors.default?.mutedBackground};
 
     &::placeholder {
-      color: hsl(var(--muted-foreground) / 0.7);
+      color: ${({ theme }) => theme.colors.default?.muted};
     }
   }
 `;
