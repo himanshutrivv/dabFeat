@@ -213,13 +213,13 @@ export const FilterBadgeClose = styled.button`
   border: none;
   background: none;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.borderRadius?.full};
   padding: 2px;
-  transition: background-color 0.3s ease;
-  color: hsl(var(--primary));
+  transition: ${({ theme }) => theme.transitions?.colors};
+  color: ${({ theme }) => theme.colors.default?.primary};
 
   &:hover {
-    background-color: hsl(var(--primary) / 0.2);
+    background-color: ${({ theme }) => theme.colors.default?.secondaryBackground};
   }
 `;
 
