@@ -654,32 +654,32 @@ export const FilterDropdownSelectContainer = styled.div`
   isolation: isolate;
 `;
 
-export const FilterDropdownSelectTrigger = styled.button`
+export const FilterDropdownSelectTrigger = styled.button<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 40px;
   width: 100%;
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  background-color: #ffffff;
+  border: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  background-color: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"};
   padding: 0 12px;
   font-size: 14px;
-  color: #374151;
+  color: ${({ theme }) => theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #2563eb;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--primary))"};
     outline-offset: 2px;
   }
 
   &:hover {
-    background-color: #f3f4f6;
-    color: #1f2937;
-    border-color: #d1d5db;
+    background-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
+    color: ${({ theme }) => theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
+    border-color: ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
@@ -689,12 +689,12 @@ export const FilterDropdownSelectTrigger = styled.button`
   }
 `;
 
-export const FilterDropdownSelectValue = styled.span`
-  color: #374151;
+export const FilterDropdownSelectValue = styled.span<{ theme?: any }>`
+  color: ${({ theme }) => theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
   font-weight: 500;
 `;
 
-export const FilterDropdownSelectContent = styled.div`
+export const FilterDropdownSelectContent = styled.div<{ theme?: any }>`
   position: absolute;
   top: 100%;
   left: 0;
@@ -705,9 +705,9 @@ export const FilterDropdownSelectContent = styled.div`
   max-width: calc(100vw - 32px);
   overflow-y: auto;
   border-radius: 8px;
-  border: 1px solid hsl(var(--border));
-  background-color: white !important;
-  color: hsl(var(--foreground));
+  border: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  background-color: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"} !important;
+  color: ${({ theme }) => theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
   opacity: 1 !important;
   padding: 16px;
   box-shadow:
@@ -718,7 +718,7 @@ export const FilterDropdownSelectContent = styled.div`
   pointer-events: auto;
 
   &.filter-content {
-    background-color: white !important;
+    background-color: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"} !important;
     opacity: 1 !important;
   }
 `;
@@ -727,7 +727,7 @@ export const SelectItemsContainer = styled.div`
   padding: 8px 4px;
 `;
 
-export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
+export const FilterDropdownSelectItem = styled.div<{ selected?: boolean; theme?: any }>`
   position: relative;
   display: flex;
   width: 100%;
@@ -739,24 +739,24 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
   font-size: 14px;
   outline: none;
   transition: all 0.2s ease;
-  color: hsl(var(--foreground));
+  color: ${({ theme }) => theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
   font-weight: ${(props) => (props.selected ? "600" : "400")};
 
   &:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    background-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
+    color: ${({ theme }) => theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
   }
 
   &:focus {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    background-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
+    color: ${({ theme }) => theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
   }
 
   ${(props) =>
     props.selected &&
     css`
-      background-color: hsl(var(--accent));
-      color: hsl(var(--accent-foreground));
+      background-color: ${props.theme?.colors?.default?.accent || "hsl(var(--accent))"};
+      color: ${props.theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
     `}
 `;
 
@@ -1130,8 +1130,8 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   right: 0;
   width: 440px;
   height: 100vh;
-  background: white;
-  border-left: 1px solid #e5e7eb;
+  background: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"};
+  border-left: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
   border-radius: 0;
   z-index: 1001;
   display: flex;
@@ -1155,30 +1155,19 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
     width: 100%;
     border-radius: 0;
   }
-
-  .dark & {
-    background: #1f2937;
-    border-left: 1px solid #374151;
-  }
 `;
 
 export const FilterModalHeader = styled.div<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f8fafc;
-  color: #1f2937;
+  background: ${({ theme }) => theme?.colors?.default?.card || "hsl(var(--card))"};
+  color: ${({ theme }) => theme?.colors?.default?.cardForeground || "hsl(var(--card-foreground))"};
   border-radius: 0;
   padding: 24px 32px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
   flex-shrink: 0;
   position: relative;
-
-  .dark & {
-    background: #111827;
-    color: #f9fafb;
-    border-bottom: 1px solid #374151;
-  }
 `;
 
 export const FilterModalContent = styled.div<{ theme?: any }>`
@@ -1188,28 +1177,24 @@ export const FilterModalContent = styled.div<{ theme?: any }>`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: white;
+  background: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"};
 
   &::-webkit-scrollbar {
     width: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    background: rgba(156, 163, 175, 0.3);
+    background: ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--muted))"} / 0.3;
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(107, 114, 128, 0.3);
+    background: ${({ theme }) => theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"} / 0.3;
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: rgba(107, 114, 128, 0.5);
-  }
-
-  .dark & {
-    background: #1f2937;
+    background: ${({ theme }) => theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"} / 0.5;
   }
 `;
 
@@ -1219,54 +1204,33 @@ export const FilterModalSearch = styled.div<{ theme?: any }>`
 `;
 
 export const FilterModalListItem = styled.div<{ theme?: any }>`
-  border: 1px solid #e5e7eb;
+  border: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
   border-radius: 8px;
-  background: #f9fafb;
+  background: ${({ theme }) => theme?.colors?.default?.card || "hsl(var(--card))"};
   transition: all 0.2s ease;
   margin-bottom: 12px;
   overflow: hidden;
 
   &:hover {
-    border-color: rgba(59, 130, 246, 0.3);
+    border-color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--primary))"} / 0.3;
   }
 
   &:last-child {
     margin-bottom: 0;
   }
 
-  /* Active/clicked state - greyish border */
+  /* Active/clicked state */
   &.expanded {
-    border-color: #9ca3af;
+    border-color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--primary))"} / 0.5;
     border-width: 2px;
-    box-shadow: 0 0 0 1px rgba(156, 163, 175, 0.2);
+    box-shadow: 0 0 0 1px ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--primary))"} / 0.2;
   }
 
   /* Fallback for browsers that support :has() */
   &:has([data-state="open"]) {
-    border-color: #9ca3af;
+    border-color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--primary))"} / 0.5;
     border-width: 2px;
-    box-shadow: 0 0 0 1px rgba(156, 163, 175, 0.2);
-  }
-
-  .dark & {
-    background: #374151;
-    border: 1px solid #4b5563;
-
-    &:hover {
-      border-color: rgba(96, 165, 250, 0.3);
-    }
-
-    &.expanded {
-      border-color: #6b7280;
-      border-width: 2px;
-      box-shadow: 0 0 0 1px rgba(107, 114, 128, 0.2);
-    }
-
-    &:has([data-state="open"]) {
-      border-color: #6b7280;
-      border-width: 2px;
-      box-shadow: 0 0 0 1px rgba(107, 114, 128, 0.2);
-    }
+    box-shadow: 0 0 0 1px ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--primary))"} / 0.2;
   }
 `;
 
@@ -1421,14 +1385,9 @@ export const FilterModalCheckbox = styled.div<{
 
 export const FilterModalFooter = styled.div<{ theme?: any }>`
   padding: 20px 32px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
   flex-shrink: 0;
-  background: white;
-
-  .dark & {
-    background: #1f2937;
-    border-top: 1px solid #374151;
-  }
+  background: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"};
 `;
 
 export const FilterModalButtonContainer = styled.div`
@@ -1556,11 +1515,7 @@ export const FilterModalHeaderTitle = styled.h2<{ theme?: any }>`
   font-size: 20px;
   font-weight: 600;
   margin: 0;
-  color: #1f2937;
-
-  .dark & {
-    color: #f9fafb;
-  }
+  color: ${({ theme }) => theme?.colors?.default?.cardForeground || "hsl(var(--card-foreground))"};
 `;
 
 export const FilterModalSearchIcon = styled.div<{ theme?: any }>`
@@ -1732,33 +1687,22 @@ export const FilterModalCloseButton = styled.button<{ theme?: any }>`
   justify-content: center;
   width: 40px;
   height: 40px;
-  border: 1px solid #e5e7eb;
-  background: #f9fafb;
+  border: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  background: ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--muted))"};
   cursor: pointer;
   border-radius: 12px;
-  color: #6b7280;
+  color: ${({ theme }) => theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"};
   transition: all 0.2s ease;
 
   &:hover {
-    background: #f3f4f6;
-    color: #374151;
+    background: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
+    color: ${({ theme }) => theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
     transform: scale(1.05);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #3b82f6;
-  }
-
-  .dark & {
-    background: #374151;
-    border: 1px solid #4b5563;
-    color: #d1d5db;
-
-    &:hover {
-      background: #4b5563;
-      color: #f9fafb;
-    }
+    box-shadow: 0 0 0 2px ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--primary))"};
   }
 `;
 
