@@ -243,11 +243,12 @@ export const ClearAllButton = css`
 `;
 
 export const FilterResults = styled.div`
-  margin-top: 16px;
+  margin-top: ${({ theme }) => theme.spacing?.[4]};
   padding: 0;
   border-top: none;
-  font-size: 14px;
-  color: hsl(var(--muted-foreground));
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  color: ${({ theme }) => theme.colors.default?.muted};
+  font-family: ${({ theme }) => theme.fonts};
   text-align: right;
 `;
 
