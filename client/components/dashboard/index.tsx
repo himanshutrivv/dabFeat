@@ -743,6 +743,7 @@ export default function TaskManagementDashboard() {
                             isOpen={openFilterDropdowns[columnKey] || false}
                             onToggle={toggleFilterDropdown}
                             onFilterChange={handleFilterChange}
+                            theme={theme}
                           />
                         ))}
 
