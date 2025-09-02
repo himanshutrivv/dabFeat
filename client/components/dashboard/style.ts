@@ -137,10 +137,10 @@ export const SearchInputWrapper = styled.div`
 
 export const SearchIcon = styled.div`
   position: absolute;
-  left: 16px;
+  left: ${({ theme }) => theme.spacing?.[4]};
   top: 50%;
   transform: translateY(-50%);
-  color: hsl(var(--muted-foreground));
+  color: ${({ theme }) => theme.colors.default?.muted};
 `;
 
 export const FilterGrid = styled.div`
