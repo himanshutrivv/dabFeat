@@ -1,6 +1,7 @@
 "use client";
 import React, { useCallback, useState, useMemo } from "react";
 import { Search, X, Filter, ChevronRight, Sparkles } from "lucide-react";
+import { AppTheme } from "@/styles/themes/appTheme";
 import {
   FilterModalBackdrop,
   FilterModalContainer,
