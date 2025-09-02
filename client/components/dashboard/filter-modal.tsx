@@ -376,17 +376,19 @@ const FilterModal: React.FC<FilterModalProps> = ({
                               return (
                                 <FilterModalOptionItem
                                   key={option}
+                                  theme={theme}
                                   onClick={(e) =>
                                     handleFilterOptionClick(e, key, option)
                                   }
                                   isSelected={isSelected}
                                 >
-                                  <FilterModalOptionText>
+                                  <FilterModalOptionText theme={theme}>
                                     {option}
                                   </FilterModalOptionText>
-                                  <FilterModalCheckbox selected={isSelected}>
+                                  <FilterModalCheckbox theme={theme} selected={isSelected}>
                                     {isSelected && (
                                       <FilterModalCheckIcon
+                                        theme={theme}
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                       >
