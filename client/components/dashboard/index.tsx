@@ -722,6 +722,7 @@ export default function TaskManagementDashboard() {
                       onEndDateTimeChange={handleEndDateTimeChange}
                       onReset={initializeDefaultTimeRange}
                       onApply={() => setShowTimelineFilter(false)}
+                      theme={theme}
                     />
 
                     {data &&
