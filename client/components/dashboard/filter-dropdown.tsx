@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
-import { ThemeProvider } from "@emotion/react";
 import { ChevronDown } from "lucide-react";
-import { appTheme } from "@/styles/themes/appTheme";
 import {
   FilterDropdownFilterGroup,
   FilterDropdownSelectContainer,
@@ -51,7 +49,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   };
 
   return (
-    <ThemeProvider theme={appTheme}>
+    <>
       <FilterDropdownFilterGroup>
         <FilterDropdownSelectContainer
           data-dropdown-container="true"
@@ -97,7 +95,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
           )}
         </FilterDropdownSelectContainer>
       </FilterDropdownFilterGroup>
-    </ThemeProvider>
+    </>
   );
 };
 
