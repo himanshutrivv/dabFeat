@@ -224,11 +224,12 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
         <FilterModalContent theme={theme}>
           {/* Internal search for filtering available filter options/columns */}
-          <FilterModalSearch>
-            <FilterModalSearchIcon>
+          <FilterModalSearch theme={theme}>
+            <FilterModalSearchIcon theme={theme}>
               <Search size={16} />
             </FilterModalSearchIcon>
             <FilterModalSearchInput
+              theme={theme}
               type="text"
               placeholder="Search filter categories..."
               value={searchTerm}
@@ -238,9 +239,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
             />
           </FilterModalSearch>
 
-          <FilterModalSeparator />
+          <FilterModalSeparator theme={theme} />
 
-          <FilterModalSectionContent>
+          <FilterModalSectionContent theme={theme}>
             {filteredOptions.length === 0 ? (
               <FilterModalEmptyState>
                 <FilterModalEmptyIcon>🔍</FilterModalEmptyIcon>
