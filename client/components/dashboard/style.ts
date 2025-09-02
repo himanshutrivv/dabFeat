@@ -53,10 +53,10 @@ export const DashboardSubtitle = styled.p`
 `;
 
 export const MainContentLayout = styled.div`
-  padding: 32px;
+  padding: ${({ theme }) => theme.spacing?.[8]};
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: ${({ theme }) => theme.spacing?.[6]};
   flex: 1;
   overflow: visible;
 `;
