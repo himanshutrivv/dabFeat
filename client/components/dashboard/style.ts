@@ -4,8 +4,9 @@ import { css } from "@emotion/react";
 // Main layout components
 export const DashboardContainer = styled.div`
   min-height: 100vh;
-  background-color: hsl(var(--background));
+  background-color: ${({ theme }) => theme.colors.default?.primaryBackground};
   display: flex;
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 export const MainContent = styled.div`
