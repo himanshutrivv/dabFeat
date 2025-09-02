@@ -661,11 +661,11 @@ export const FilterDropdownSelectTrigger = styled.button<{ theme?: any }>`
   height: 40px;
   width: 100%;
   border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
-  background-color: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"};
+  border: 1px solid ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
+  background-color: ${({ theme }) => theme?.colors?.default?.primaryBackground || "hsl(var(--background))"};
   padding: 0 12px;
   font-size: 14px;
-  color: ${({ theme }) => theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+  color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--foreground))"};
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -677,9 +677,9 @@ export const FilterDropdownSelectTrigger = styled.button<{ theme?: any }>`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
-    color: ${({ theme }) => theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
-    border-color: ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+    background-color: ${({ theme }) => theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"};
+    color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--accent-foreground))"};
+    border-color: ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
@@ -690,7 +690,7 @@ export const FilterDropdownSelectTrigger = styled.button<{ theme?: any }>`
 `;
 
 export const FilterDropdownSelectValue = styled.span<{ theme?: any }>`
-  color: ${({ theme }) => theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+  color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--foreground))"};
   font-weight: 500;
 `;
 
@@ -705,9 +705,9 @@ export const FilterDropdownSelectContent = styled.div<{ theme?: any }>`
   max-width: calc(100vw - 32px);
   overflow-y: auto;
   border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
-  background-color: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"} !important;
-  color: ${({ theme }) => theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+  border: 1px solid ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
+  background-color: ${({ theme }) => theme?.colors?.default?.primaryBackground || "hsl(var(--background))"} !important;
+  color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--foreground))"};
   opacity: 1 !important;
   padding: 16px;
   box-shadow:
@@ -718,7 +718,7 @@ export const FilterDropdownSelectContent = styled.div<{ theme?: any }>`
   pointer-events: auto;
 
   &.filter-content {
-    background-color: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"} !important;
+    background-color: ${({ theme }) => theme?.colors?.default?.primaryBackground || "hsl(var(--background))"} !important;
     opacity: 1 !important;
   }
 `;
@@ -739,24 +739,24 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean; theme?:
   font-size: 14px;
   outline: none;
   transition: all 0.2s ease;
-  color: ${({ theme }) => theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+  color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--foreground))"};
   font-weight: ${(props) => (props.selected ? "600" : "400")};
 
   &:hover {
-    background-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
-    color: ${({ theme }) => theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
+    background-color: ${({ theme }) => theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"};
+    color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--accent-foreground))"};
   }
 
   &:focus {
-    background-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
-    color: ${({ theme }) => theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
+    background-color: ${({ theme }) => theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"};
+    color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--accent-foreground))"};
   }
 
   ${(props) =>
     props.selected &&
     css`
-      background-color: ${props.theme?.colors?.default?.accent || "hsl(var(--accent))"};
-      color: ${props.theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
+      background-color: ${props.theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"};
+      color: ${props.theme?.colors?.default?.primary || "hsl(var(--accent-foreground))"};
     `}
 `;
 
@@ -777,20 +777,20 @@ export const TimeLineSelectTrigger = styled.button<{ theme?: any }>`
   width: 100%;
   border-radius: ${({ theme }) => theme?.borderRadius?.lg || "8px"};
   border: 1px solid
-    ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+    ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
   background-color: ${({ theme }) =>
-    theme?.colors?.default?.background || "hsl(var(--background))"};
+    theme?.colors?.default?.primaryBackground || "hsl(var(--background))"};
   padding: 0 ${({ theme }) => theme?.spacing?.[3] || "12px"};
   font-size: ${({ theme }) => theme?.fontSizes?.sm || "14px"};
   color: ${({ theme }) =>
-    theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+    theme?.colors?.default?.primary || "hsl(var(--foreground))"};
   cursor: pointer;
   transition: ${({ theme }) => theme?.transitions?.all || "all 0.2s ease"};
 
   &:focus {
     outline: none;
     box-shadow: 0 0 0 2px
-      ${({ theme }) => theme?.colors?.default?.ring || "hsl(var(--ring))"};
+      ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--ring))"};
     outline-offset: 2px;
   }
 
@@ -801,16 +801,16 @@ export const TimeLineSelectTrigger = styled.button<{ theme?: any }>`
 
   &:hover {
     background-color: ${({ theme }) =>
-    theme?.colors?.default?.accent || "hsl(var(--accent))"};
+    theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"};
     color: ${({ theme }) =>
-    theme?.colors?.default?.accentForeground ||
+    theme?.colors?.default?.primary ||
     "hsl(var(--accent-foreground))"};
   }
 `;
 
 export const TimeLineSelectValue = styled.span<{ theme?: any }>`
   color: ${({ theme }) =>
-    theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+    theme?.colors?.default?.primary || "hsl(var(--foreground))"};
   font-weight: ${({ theme }) => theme?.fontWeights?.medium || "500"};
   font-family: ${({ theme }) => theme?.fonts || "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto"};
 `;
@@ -865,7 +865,7 @@ export const TimeLineInput = styled.input<{ theme?: any }>`
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
   &:hover {
-    border-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
+    border-color: ${({ theme }) => theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"};
   }
 
   &:focus {
@@ -902,7 +902,7 @@ export const TimeLineButton = styled.button<{
 
   &:focus-visible {
     outline: 2px solid
-      ${({ theme }) => theme?.colors?.default?.ring || "hsl(var(--ring))"};
+      ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--ring))"};
     outline-offset: 2px;
   }
 
@@ -916,15 +916,15 @@ export const TimeLineButton = styled.button<{
       case "outline":
         return css`
           border: 1px solid
-            ${props.theme?.colors?.default?.border || "hsl(var(--border))"};
-          background-color: ${props.theme?.colors?.default?.background ||
+            ${props.theme?.colors?.default?.muted || "hsl(var(--border))"};
+          background-color: ${props.theme?.colors?.default?.primaryBackground ||
           "hsl(var(--background))"};
-          color: ${props.theme?.colors?.default?.foreground ||
+          color: ${props.theme?.colors?.default?.primary ||
           "hsl(var(--foreground))"};
           &:hover {
-            background-color: ${props.theme?.colors?.default?.accent ||
+            background-color: ${props.theme?.colors?.default?.mutedBackground ||
           "hsl(var(--accent))"};
-            color: ${props.theme?.colors?.default?.accentForeground ||
+            color: ${props.theme?.colors?.default?.primary ||
           "hsl(var(--accent-foreground))"};
           }
         `;
@@ -932,7 +932,7 @@ export const TimeLineButton = styled.button<{
         return css`
           background-color: ${props.theme?.colors?.default?.primary ||
           "hsl(var(--primary))"};
-          color: ${props.theme?.colors?.default?.primaryForeground ||
+          color: ${props.theme?.colors?.default?.primaryBackground ||
           "hsl(var(--primary-foreground))"};
           &:hover {
             background-color: ${props.theme?.colors?.default?.primary ||
@@ -1028,7 +1028,7 @@ export const TimeLineAmPmToggle = styled.div<{ theme?: any }>`
   background: ${({ theme }) =>
     theme?.colors?.default?.muted || "hsl(var(--muted))"};
   border: 1px solid
-    ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+    ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
   border-radius: 9999px;
   padding: 2px;
 `;
@@ -1047,8 +1047,8 @@ export const TimeLineAmPmOption = styled.button<{
   font-weight: 600;
   color: ${({ active, theme }) =>
     active
-      ? theme?.colors?.default?.primaryForeground || "#fff"
-      : theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+      ? theme?.colors?.default?.primaryBackground || "#fff"
+      : theme?.colors?.default?.primary || "hsl(var(--foreground))"};
   background: ${({ active, theme }) =>
     active
       ? theme?.colors?.default?.primary || "hsl(var(--primary))"
@@ -1059,7 +1059,7 @@ export const TimeLineAmPmOption = styled.button<{
     background: ${({ active, theme }) =>
     active
       ? theme?.colors?.default?.primary || "hsl(var(--primary))"
-      : theme?.colors?.default?.accent || "hsl(var(--accent))"};
+      : theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"};
   }
 `;
 
@@ -1130,8 +1130,8 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   right: 0;
   width: 440px;
   height: 100vh;
-  background: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"};
-  border-left: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  background: ${({ theme }) => theme?.colors?.default?.primaryBackground || "hsl(var(--background))"};
+  border-left: 1px solid ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
   border-radius: 0;
   z-index: 1001;
   display: flex;
@@ -1161,11 +1161,11 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: ${({ theme }) => theme?.colors?.default?.card || "hsl(var(--card))"};
-  color: ${({ theme }) => theme?.colors?.default?.cardForeground || "hsl(var(--card-foreground))"};
+  background: ${({ theme }) => theme?.colors?.default?.primaryBackground || "hsl(var(--card))"};
+  color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--card-foreground))"};
   border-radius: 0;
   padding: 24px 32px;
-  border-bottom: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  border-bottom: 1px solid ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
   flex-shrink: 0;
   position: relative;
 `;
@@ -1177,7 +1177,7 @@ export const FilterModalContent = styled.div<{ theme?: any }>`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"};
+  background: ${({ theme }) => theme?.colors?.default?.primaryBackground || "hsl(var(--background))"};
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -1189,12 +1189,12 @@ export const FilterModalContent = styled.div<{ theme?: any }>`
   }
 
   &::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"} / 0.3;
+    background: ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--muted-foreground))"} / 0.3;
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: ${({ theme }) => theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"} / 0.5;
+    background: ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--muted-foreground))"} / 0.5;
   }
 `;
 
@@ -1204,9 +1204,9 @@ export const FilterModalSearch = styled.div<{ theme?: any }>`
 `;
 
 export const FilterModalListItem = styled.div<{ theme?: any }>`
-  border: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  border: 1px solid ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
   border-radius: 8px;
-  background: ${({ theme }) => theme?.colors?.default?.card || "hsl(var(--card))"};
+  background: ${({ theme }) => theme?.colors?.default?.primaryBackground || "hsl(var(--card))"};
   transition: all 0.2s ease;
   margin-bottom: 12px;
   overflow: hidden;
@@ -1248,21 +1248,21 @@ export const FilterModalItemHeader = styled.div<{
   background: none;
   border: none;
   text-align: left;
-  color: ${(props) => (props.isActive ? props.theme?.colors?.default?.primary || "hsl(var(--primary))" : props.theme?.colors?.default?.foreground || "hsl(var(--foreground))")};
+  color: ${(props) => (props.isActive ? props.theme?.colors?.default?.primary || "hsl(var(--primary))" : props.theme?.colors?.default?.primary || "hsl(var(--foreground))")};
 
   &:hover {
-    background: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"} / 0.5;
+    background: ${({ theme }) => theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"} / 0.5;
   }
 
   &[data-state="open"] {
-    background: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"} / 0.3;
-    border-bottom: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+    background: ${({ theme }) => theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"} / 0.3;
+    border-bottom: 1px solid ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
   }
 
   /* Parent styling for clicked/expanded state */
   &[data-state="open"] {
     & + * {
-      border-top: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+      border-top: 1px solid ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
     }
   }
 `;
@@ -1276,7 +1276,7 @@ export const FilterModalHeaderContent = styled.div`
 export const FilterModalTitle = styled.h3<{ hasActive: boolean; theme?: any }>`
   font-size: 16px;
   font-weight: ${(props) => (props.hasActive ? "600" : "500")};
-  color: ${(props) => (props.hasActive ? props.theme?.colors?.default?.primary || "hsl(var(--primary))" : props.theme?.colors?.default?.foreground || "hsl(var(--foreground))")};
+  color: ${(props) => (props.hasActive ? props.theme?.colors?.default?.primary || "hsl(var(--primary))" : props.theme?.colors?.default?.primary || "hsl(var(--foreground))")};
   margin: 0;
 `;
 
@@ -1284,7 +1284,7 @@ export const FilterModalCount = styled.div<{ theme?: any }>`
   background: ${({ theme }) =>
     theme?.colors?.default?.primary || "hsl(var(--primary))"};
   color: ${({ theme }) =>
-    theme?.colors?.default?.primaryForeground ||
+    theme?.colors?.default?.primaryBackground ||
     "hsl(var(--primary-foreground))"};
   font-size: 11px;
   min-width: 20px;
@@ -1304,7 +1304,7 @@ export const FilterModalExpandIcon = styled.div<{
   transition: transform 0.2s ease;
   transform: ${(props) => (props.isOpen ? "rotate(90deg)" : "rotate(0deg)")};
   color: ${({ theme }) =>
-    theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"};
+    theme?.colors?.default?.muted || "hsl(var(--muted-foreground))"};
 `;
 
 export const FilterModalOptionsContainer = styled.div`
@@ -1343,7 +1343,7 @@ export const FilterModalCheckbox = styled.div<{
     ${(props) =>
     props.selected
       ? props.theme?.colors?.default?.primary || "hsl(var(--primary))"
-      : props.theme?.colors?.default?.border || "hsl(var(--border))"};
+      : props.theme?.colors?.default?.muted || "hsl(var(--border))"};
   border-radius: 4px;
   background-color: ${(props) =>
     props.selected
@@ -1362,9 +1362,9 @@ export const FilterModalCheckbox = styled.div<{
 
 export const FilterModalFooter = styled.div<{ theme?: any }>`
   padding: 20px 32px;
-  border-top: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  border-top: 1px solid ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
   flex-shrink: 0;
-  background: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"};
+  background: ${({ theme }) => theme?.colors?.default?.primaryBackground || "hsl(var(--background))"};
 `;
 
 export const FilterModalButtonContainer = styled.div`
@@ -1492,7 +1492,7 @@ export const FilterModalHeaderTitle = styled.h2<{ theme?: any }>`
   font-size: 20px;
   font-weight: 600;
   margin: 0;
-  color: ${({ theme }) => theme?.colors?.default?.cardForeground || "hsl(var(--card-foreground))"};
+  color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--card-foreground))"};
 `;
 
 export const FilterModalSearchIcon = styled.div<{ theme?: any }>`
@@ -1501,7 +1501,7 @@ export const FilterModalSearchIcon = styled.div<{ theme?: any }>`
   top: 50%;
   transform: translateY(-50%);
   color: ${({ theme }) =>
-    theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"};
+    theme?.colors?.default?.muted || "hsl(var(--muted-foreground))"};
   z-index: 1;
 `;
 
@@ -1511,9 +1511,9 @@ export const FilterModalSearchInput = styled.input<{ theme?: any }>`
   padding-left: 40px;
   height: 44px;
   border-radius: 12px;
-  border: 2px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
-  background: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"};
-  color: ${({ theme }) => theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+  border: 2px solid ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
+  background: ${({ theme }) => theme?.colors?.default?.primaryBackground || "hsl(var(--background))"};
+  color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--foreground))"};
   font-size: 14px;
 
   &:focus {
@@ -1523,7 +1523,7 @@ export const FilterModalSearchInput = styled.input<{ theme?: any }>`
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"};
+    color: ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--muted-foreground))"};
   }
 `;
 
@@ -1552,7 +1552,7 @@ export const FilterModalSectionSearchIcon = styled.div<{ theme?: any }>`
   justify-content: center;
   background: hsl(var(--muted) / 0.6);
   color: ${({ theme }) =>
-    theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"};
+    theme?.colors?.default?.muted || "hsl(var(--muted-foreground))"};
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 `;
 
@@ -1566,13 +1566,13 @@ export const FilterModalSectionSearchInput = styled.input<{
   padding-left: 52px;
   border-radius: 12px;
   border: 1px solid
-    ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+    ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   font-size: 14px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "text")};
   opacity: ${(props) => (props.disabled ? "0.6" : "1")};
   color: ${({ theme }) =>
-    theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+    theme?.colors?.default?.primary || "hsl(var(--foreground))"};
   transition:
     box-shadow 0.2s ease,
     border-color 0.2s ease,
@@ -1582,13 +1582,13 @@ export const FilterModalSectionSearchInput = styled.input<{
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
   &:hover {
-    border-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
+    border-color: ${({ theme }) => theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"};
   }
 
   &:focus {
     border-color: ${({ theme, disabled }) =>
     disabled
-      ? theme?.colors?.default?.border || "hsl(var(--border))"
+      ? theme?.colors?.default?.muted || "hsl(var(--border))"
       : theme?.colors?.default?.primary || "hsl(var(--primary))"};
     background: #ffffff;
     box-shadow:
@@ -1599,7 +1599,7 @@ export const FilterModalSectionSearchInput = styled.input<{
 
   &::placeholder {
     color: ${({ theme }) =>
-    theme?.colors?.default?.mutedForeground ||
+    theme?.colors?.default?.muted ||
     "hsl(var(--muted-foreground))"};
     font-size: 13px;
   }
@@ -1624,7 +1624,7 @@ export const FilterModalOptionItem = styled.div<{
   margin-bottom: ${({ theme }) => theme?.spacing?.[1] || "4px"};
 
   &:hover {
-    background: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
+    background: ${({ theme }) => theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"};
     transform: translateX(2px);
   }
 `;
@@ -1632,14 +1632,14 @@ export const FilterModalOptionItem = styled.div<{
 export const FilterModalOptionText = styled.span<{ theme?: any }>`
   font-size: 14px;
   color: ${({ theme }) =>
-    theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+    theme?.colors?.default?.primary || "hsl(var(--foreground))"};
 `;
 
 export const FilterModalCheckIcon = styled.svg<{ theme?: any }>`
   width: 10px;
   height: 10px;
   color: ${({ theme }) =>
-    theme?.colors?.default?.primaryForeground ||
+    theme?.colors?.default?.primaryBackground ||
     "hsl(var(--primary-foreground))"};
 `;
 
@@ -1649,16 +1649,16 @@ export const FilterModalCloseButton = styled.button<{ theme?: any }>`
   justify-content: center;
   width: 40px;
   height: 40px;
-  border: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  border: 1px solid ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
   background: ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--muted))"};
   cursor: pointer;
   border-radius: 12px;
-  color: ${({ theme }) => theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"};
+  color: ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--muted-foreground))"};
   transition: all 0.2s ease;
 
   &:hover {
-    background: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
-    color: ${({ theme }) => theme?.colors?.default?.accentForeground || "hsl(var(--accent-foreground))"};
+    background: ${({ theme }) => theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"};
+    color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--accent-foreground))"};
     transform: scale(1.05);
   }
 
@@ -1671,7 +1671,7 @@ export const FilterModalCloseButton = styled.button<{ theme?: any }>`
 export const FilterModalSeparator = styled.div<{ theme?: any }>`
   flex-shrink: 0;
   background: ${({ theme }) =>
-    theme?.colors?.default?.border || "hsl(var(--border))"};
+    theme?.colors?.default?.muted || "hsl(var(--border))"};
   height: 1px;
   width: 100%;
 `;
@@ -1680,7 +1680,7 @@ export const FilterModalEmptyState = styled.div<{ theme?: any }>`
   text-align: center;
   padding: 40px 20px;
   color: ${({ theme }) =>
-    theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"};
+    theme?.colors?.default?.muted || "hsl(var(--muted-foreground))"};
 `;
 
 export const FilterModalEmptyIcon = styled.div`
@@ -1711,11 +1711,11 @@ export const FilterModalManualInput = styled.input<{ theme?: any }>`
   padding: 10px 14px;
   border-radius: 12px;
   border: 1px solid
-    ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+    ${({ theme }) => theme?.colors?.default?.muted || "hsl(var(--border))"};
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   font-size: 14px;
   color: ${({ theme }) =>
-    theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
+    theme?.colors?.default?.primary || "hsl(var(--foreground))"};
   transition:
     box-shadow 0.2s ease,
     border-color 0.2s ease;
@@ -1724,7 +1724,7 @@ export const FilterModalManualInput = styled.input<{ theme?: any }>`
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
   &:hover {
-    border-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
+    border-color: ${({ theme }) => theme?.colors?.default?.mutedBackground || "hsl(var(--accent))"};
   }
 
   &:focus {
@@ -1739,7 +1739,7 @@ export const FilterModalManualInput = styled.input<{ theme?: any }>`
 
   &::placeholder {
     color: ${({ theme }) =>
-    theme?.colors?.default?.mutedForeground ||
+    theme?.colors?.default?.muted ||
     "hsl(var(--muted-foreground))"};
     font-size: 13px;
   }

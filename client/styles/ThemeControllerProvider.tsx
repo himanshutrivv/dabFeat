@@ -31,25 +31,8 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const baseTheme = themeVariants[currentTheme].theme;
   const fontStack = fontVariants[currentFont].stack;
 
-  const extendedDefault = {
-    ...baseTheme.colors.default,
-    background: baseTheme.colors.default.primaryBackground,
-    foreground: baseTheme.colors.default.primary,
-    border: baseTheme.colors.default.muted,
-    accent: baseTheme.colors.default.mutedBackground,
-    accentForeground: baseTheme.colors.default.primary,
-    ring: baseTheme.colors.default.primary,
-    card: baseTheme.colors.default.primaryBackground,
-    cardForeground: baseTheme.colors.default.primary,
-    mutedForeground: baseTheme.colors.default.muted,
-  } as any;
-
   const theme: AppTheme = {
     ...baseTheme,
-    colors: {
-      ...baseTheme.colors,
-      default: extendedDefault as any,
-    },
     fonts: fontStack,
   };
 
