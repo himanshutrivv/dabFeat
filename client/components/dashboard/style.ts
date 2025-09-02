@@ -191,7 +191,7 @@ export const ActiveFiltersLabel = styled.div`
 export const ActiveFiltersContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing?.[2]};
   align-items: center;
 `;
 
