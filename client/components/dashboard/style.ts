@@ -714,21 +714,20 @@ export const FilterDropdownSelectContent = styled.div`
   min-width: 320px;
   max-width: calc(100vw - 32px);
   overflow-y: auto;
-  border-radius: 8px;
-  border: 1px solid hsl(var(--border));
-  background-color: white !important;
-  color: hsl(var(--foreground));
+  border-radius: ${({ theme }) => theme.borderRadius?.md};
+  border: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
+  background-color: ${({ theme }) => theme.colors.default?.primaryBackground} !important;
+  color: ${({ theme }) => theme.colors.default?.primary};
   opacity: 1 !important;
-  padding: 16px;
-  box-shadow:
-    0 10px 80px rgba(0, 0, 0, 0.12),
-    0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: ${({ theme }) => theme.spacing?.[4]};
+  box-shadow: ${({ theme }) => theme.shadows?.lg};
   margin-top: 4px;
   animation: none;
   pointer-events: auto;
+  font-family: ${({ theme }) => theme.fonts};
 
   &.filter-content {
-    background-color: white !important;
+    background-color: ${({ theme }) => theme.colors.default?.primaryBackground} !important;
     opacity: 1 !important;
   }
 `;
