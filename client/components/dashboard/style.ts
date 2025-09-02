@@ -743,29 +743,33 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
   cursor: pointer;
   user-select: none;
   align-items: center;
-  border-radius: 6px;
-  padding: 8px 12px;
-  font-size: 14px;
+  border-radius: ${({ theme }) => theme.borderRadius?.sm};
+  padding: ${({ theme }) => theme.spacing?.[2]} ${({ theme }) => theme.spacing?.[3]};
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
   outline: none;
-  transition: all 0.2s ease;
-  color: hsl(var(--foreground));
-  font-weight: ${(props) => (props.selected ? "600" : "400")};
+  transition: ${({ theme }) => theme.transitions?.all};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
+  font-weight: ${(props) =>
+    props.selected
+      ? props.theme?.fontWeights?.semibold
+      : props.theme?.fontWeights?.normal};
 
   &:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    background-color: ${({ theme }) => theme.colors.default?.secondaryBackground};
+    color: ${({ theme }) => theme.colors.default?.primary};
   }
 
   &:focus {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    background-color: ${({ theme }) => theme.colors.default?.secondaryBackground};
+    color: ${({ theme }) => theme.colors.default?.primary};
   }
 
   ${(props) =>
     props.selected &&
     css`
-      background-color: hsl(var(--accent));
-      color: hsl(var(--accent-foreground));
+      background-color: ${props.theme?.colors.default?.secondaryBackground};
+      color: ${props.theme?.colors.default?.primary};
     `}
 `;
 
