@@ -19,9 +19,9 @@ export const MainContent = styled.div`
 `;
 
 export const Header = styled.div`
-  background-color: hsl(var(--card));
-  border-bottom: 1px solid hsl(var(--border));
-  padding: 16px 32px;
+  background-color: ${({ theme }) => theme.colors.default?.primaryBackground};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
+  padding: ${({ theme }) => theme.spacing?.[4]} ${({ theme }) => theme.spacing?.[8]};
   position: sticky;
   top: 0;
   z-index: 50;
