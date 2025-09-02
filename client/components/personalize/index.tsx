@@ -1,252 +1,186 @@
-import { useState, useEffect } from "react";
-import { UserPlus, Trash2, Search, Users } from "lucide-react";
-import { useBusinessStore } from "@/store/business-store";
-import { DeleteUserReq, User, UserResp } from "@/types/user";
-import { appTheme as theme } from "@/styles/themes/appTheme";
-
+import React, { useState } from "react";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardHeaderTop,
-  CardTitle,
-  FiltersContainer,
-  Main,
-  SearchContainer,
-  SearchInput,
+  Palette,
+  Sun,
+  Moon,
+  Waves,
+  TreePine,
+  Sunset,
+  Crown,
+  Square,
+  Building2,
+  Type,
+  ChevronDown,
+} from "lucide-react";
+import {
+  ChevronWrapper,
+  CollapsibleContent,
   Container,
-  SearchIcon,
-  StatusBadge,
-  EmptyState,
-  EmptyIcon,
-  EmptyTitle,
-  EmptyDescription,
+  Grid,
+  IconWrapper,
+  MainCard,
+  Section,
+  SectionDescription,
+  SectionHeaderClickable,
+  SectionTitle,
+  SectionTitleText,
+  SectionTitleWrapper,
 } from "./style";
-import { AddUserModal } from "./add-user-modal";
-import { srDeleteUser, srGetUsers } from "@/sources/users";
-import { toast } from "@/components/common/toast";
-import { useTranslation } from "react-i18next";
-import { ApiResponseCommon } from "@/types/common";
-import { DeleteUserModal } from "./delete-user-modal";
-import React from "react";
-import Loader, { TableLoader } from "../common/loader";
-import Table, { TableColumn } from "../common/table";
-import { TFunction } from "i18next";
-import { Button } from "@/styles/styled";
+import { useThemeController } from "@/styles/ThemeControllerProvider";
+import { ThemeVariantKey, themeVariants } from "@/styles/themes/themeVariants";
+import { FontVariant, fontVariants } from "@/styles/themes/fontVariants";
+import { ThemeCard } from "./theme-card";
+import { FontCard } from "./font-card";
 
-const getUserManagementHeaders = (
-  t: TFunction,
-  readOnly: boolean
-): TableColumn[] => {
-  const headersArray = t("lblUserManagementTableHeaders", {
-    returnObjects: true,
-  }) as { key: string; label: string }[];
+const Personalize: React.FC = () => {
+  const { currentTheme, currentFont, setTheme, setFont } = useThemeController();
 
-  return headersArray
-    .filter(({ key }) => !(readOnly && key === "action"))
-    .map(({ key, label }) => ({
-      key,
-      label,
-    }));
-};
+  const [selectedTheme, setSelectedTheme] = useState<ThemeVariantKey>(currentTheme);
+  const [selectedFont, setSelectedFont] = useState<FontVariant>(currentFont);
+  const [isThemeSectionExpanded, setIsThemeSectionExpanded] = useState(false);
+  const [isFontSectionExpanded, setIsFontSectionExpanded] = useState(false);
 
-export const UserManagement: React.FC = () => {
-  const { selectedBusiness } = useBusinessStore();
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [userToDelete, setUserToDelete] = useState<User | null>(null);
-  const [users, setUsers] = useState<User[]>([]);
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const { t } = useTranslation();
-  const businessId = selectedBusiness?.bussId || "";
-  const readOnly = selectedBusiness?.role === "READ_ONLY";
-
-  const [columns, setColumns] = useState<Record<string, any>[]>([]);
-  const header = getUserManagementHeaders(t, readOnly);
-
-  const fetchUserData = () => {
-    setIsRefreshing(true);
-
-    srGetUsers(businessId)
-      .then((resp: UserResp) => {
-        setUsers(resp?.users);
-      })
-      .catch((err: any) => toast.error(err.errorMsg))
-      .finally(() => {
-        setIsLoading(false);
-        setIsRefreshing(false);
-      });
+  const getThemeIcon = (variant: ThemeVariantKey) => {
+    const icons = {
+      default: <Sun size={16} />,
+      dark: <Moon size={16} />,
+      ocean: <Waves size={16} />,
+      forest: <TreePine size={16} />,
+      sunset: <Sunset size={16} />,
+      purple: <Crown size={16} />,
+      minimal: <Square size={16} />,
+      slate: <Building2 size={16} />,
+    } as const;
+    return icons[variant];
   };
 
-  const deleteUser = (req: DeleteUserReq) => {
-    srDeleteUser({ bussId: businessId, req })
-      .then((resp: ApiResponseCommon) => {
-        toast.success(resp?.respMessage);
-        fetchUserData();
-      })
-      .catch((err: any) => toast.error(err.errorMsg))
-      .finally(() => {
-        setUserToDelete(null);
-        setIsDeleting(false);
-      });
+  const getThemeColors = (variant: ThemeVariantKey) => {
+    const themeData = themeVariants[variant].theme;
+    const colors = (themeData.colors as any)[variant] || themeData.colors.default;
+    return [colors.primary, colors.secondary, colors.primary, colors.primaryBackground];
   };
 
-  const filteredUsers = users.filter((user) => {
-    const matchesSearch = `${user?.userName} ${user?.email} ${user?.mobile}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-
-    return matchesSearch;
-  });
-
-  useEffect(() => {
-    if (!businessId) return;
-    fetchUserData();
-  }, [businessId]);
-
-  useEffect(() => {
-    const columnList = filteredUsers?.map((user) => ({
-      user: user?.userName,
-      mobile: user?.mobile,
-      status: (
-        <StatusBadge status={user?.status}>
-          {user?.status === "active" ? "Active" : "Inactive"}
-        </StatusBadge>
-      ),
-      created: formatDate(user?.createdAt),
-      action: (
-        <div style={{ paddingLeft: "10px" }}>
-          <Trash2
-            color="#e70d0d"
-            size="18px"
-            onClick={() => handleDeleteUser(user)}
-            style={{ cursor: "pointer" }}
-          />
-        </div>
-      ),
-    }));
-
-    setColumns(columnList);
-  }, [filteredUsers, setColumns]);
-
-  const handleDeleteUser = (user: User) => {
-    setUserToDelete(user);
+  const getFontCategory = (variant: FontVariant) => {
+    const categoryMap: Record<FontVariant, string> = {
+      arial: "Sans-serif",
+      segoe: "Modern",
+      trebuchet: "Friendly",
+      gillSans: "Humanist",
+      georgia: "Serif",
+      palatino: "Classic",
+      courier: "Monospace",
+      lucida: "Neutral",
+    };
+    return categoryMap[variant];
   };
-
-  const confirmDelete = () => {
-    if (userToDelete) {
-      setIsDeleting(true);
-      deleteUser({ userId: userToDelete?.email });
-    }
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
-
-  const renderEmptyState = () => (
-    <EmptyState theme={theme}>
-      <EmptyIcon theme={theme}>
-        <Users size={48} />
-      </EmptyIcon>
-      <EmptyTitle theme={theme}>{t("lblNoUsers")}</EmptyTitle>
-      <EmptyDescription theme={theme}>
-        {searchTerm ? t("lblAdjSearchCriteria") : t("lblNoUser")}
-      </EmptyDescription>
-      {!readOnly && (
-        <Button variant="primary" onClick={() => setIsAddModalOpen(true)}>
-          <UserPlus size={16} />
-          {t("lblAddUser")}
-        </Button>
-      )}
-    </EmptyState>
-  );
-
-  if (isLoading) {
-    return <Loader size="md" />;
-  }
 
   return (
     <Container>
-      <Main>
-        <Card>
-          {isRefreshing ? (
-            <Loader isComponentLoader />
-          ) : (
-            <>
-              <CardHeader>
-                <CardHeaderTop>
-                  <div>
-                    <CardTitle>{t("lblUserDirectory")}</CardTitle>
-                    <CardDescription>{t("lblSearchUsersDesc")}</CardDescription>
-                  </div>
-                  {!readOnly && (
-                    <Button
-                      variant="primary"
-                      onClick={() => setIsAddModalOpen(true)}
-                    >
-                      <UserPlus size={16} />
-                      <span>{t("lblAddUser")}</span>
-                    </Button>
-                  )}
-                </CardHeaderTop>
-              </CardHeader>
-              <CardContent>
-                <FiltersContainer>
-                  <SearchContainer>
-                    <SearchIcon>
-                      <Search size={16} />
-                    </SearchIcon>
-                    <SearchInput
-                      type="text"
-                      placeholder={t("lblSearchUsersPlaceholder")}
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                  </SearchContainer>
-                </FiltersContainer>
-              </CardContent>
-            </>
-          )}
-        </Card>
+      <MainCard>
+        <Section>
+          <SectionHeaderClickable
+            isExpanded={isThemeSectionExpanded}
+            onClick={() => setIsThemeSectionExpanded(!isThemeSectionExpanded)}
+          >
+            <SectionTitleWrapper>
+              <IconWrapper>
+                <Palette size={24} color="white" />
+              </IconWrapper>
+              <SectionTitleText>
+                <SectionTitle>Theme Collection</SectionTitle>
+                <SectionDescription>
+                  Choose from our professionally crafted color schemes
+                </SectionDescription>
+              </SectionTitleText>
+            </SectionTitleWrapper>
 
-        <Card>
-          {isRefreshing ? (
-            <TableLoader />
-          ) : (
-            <Table
-              columns={header}
-              data={columns}
-              showPagination={false}
-              noData={renderEmptyState()}
-            />
-          )}
-        </Card>
-      </Main>
+            <ChevronWrapper isExpanded={isThemeSectionExpanded}>
+              <ChevronDown size={18} />
+            </ChevronWrapper>
+          </SectionHeaderClickable>
 
-      <AddUserModal
-        bussId={businessId}
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onUserAdded={() => {
-          fetchUserData();
-        }}
-      />
+          <CollapsibleContent isExpanded={isThemeSectionExpanded}>
+            <Grid>
+              {(Object.keys(themeVariants) as ThemeVariantKey[]).map((variant) => {
+                const themeData = themeVariants[variant];
+                const isSelected = selectedTheme === variant;
+                const icon = getThemeIcon(variant);
+                const colors = getThemeColors(variant);
+                const category = variant.charAt(0).toUpperCase() + variant.slice(1);
 
-      <DeleteUserModal
-        user={userToDelete}
-        isOpen={!!userToDelete}
-        onClose={() => setUserToDelete(null)}
-        onConfirmDelete={confirmDelete}
-        deleting={isDeleting}
-      />
+                return (
+                  <ThemeCard
+                    key={variant}
+                    name={themeData.name}
+                    description={themeData.description}
+                    icon={icon}
+                    colors={colors}
+                    category={category}
+                    isSelected={isSelected}
+                    onClick={() => {
+                      setSelectedTheme(variant);
+                      setTheme(variant);
+                    }}
+                    variant={variant}
+                  />
+                );
+              })}
+            </Grid>
+          </CollapsibleContent>
+        </Section>
+      </MainCard>
+
+      <MainCard>
+        <Section>
+          <SectionHeaderClickable
+            isExpanded={isFontSectionExpanded}
+            onClick={() => setIsFontSectionExpanded(!isFontSectionExpanded)}
+          >
+            <SectionTitleWrapper>
+              <IconWrapper>
+                <Type size={24} color="white" />
+              </IconWrapper>
+              <SectionTitleText>
+                <SectionTitle>Typography Collection</SectionTitle>
+                <SectionDescription>
+                  Select the perfect typeface for your brand identity
+                </SectionDescription>
+              </SectionTitleText>
+            </SectionTitleWrapper>
+
+            <ChevronWrapper isExpanded={isFontSectionExpanded}>
+              <ChevronDown size={18} />
+            </ChevronWrapper>
+          </SectionHeaderClickable>
+
+          <CollapsibleContent isExpanded={isFontSectionExpanded}>
+            <Grid>
+              {(Object.keys(fontVariants) as FontVariant[]).map((variant) => {
+                const fontData = fontVariants[variant];
+                const isSelected = selectedFont === variant;
+                const category = getFontCategory(variant);
+
+                return (
+                  <FontCard
+                    key={variant}
+                    name={fontData.name}
+                    fontFamily={fontData.stack}
+                    category={category}
+                    description={fontData.description}
+                    isSelected={isSelected}
+                    onClick={() => {
+                      setSelectedFont(variant);
+                      setFont(variant);
+                    }}
+                  />
+                );
+              })}
+            </Grid>
+          </CollapsibleContent>
+        </Section>
+      </MainCard>
     </Container>
   );
 };
+
+export default Personalize;
