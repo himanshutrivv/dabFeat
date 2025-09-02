@@ -31,6 +31,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   isOpen,
   onToggle,
   onFilterChange,
+  theme,
 }) => {
   const handleContainerClick = (e: React.MouseEvent) => {
     e.stopPropagation();
