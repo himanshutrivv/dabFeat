@@ -243,8 +243,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
           <FilterModalSectionContent theme={theme}>
             {filteredOptions.length === 0 ? (
-              <FilterModalEmptyState>
-                <FilterModalEmptyIcon>🔍</FilterModalEmptyIcon>
+              <FilterModalEmptyState theme={theme}>
+                <FilterModalEmptyIcon theme={theme}>🔍</FilterModalEmptyIcon>
                 <h3>No filters found</h3>
                 <p>Try adjusting your search terms</p>
               </FilterModalEmptyState>
