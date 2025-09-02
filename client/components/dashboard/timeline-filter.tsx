@@ -30,6 +30,7 @@ interface TimelineFilterProps {
   onEndDateTimeChange: (value: string) => void;
   onReset: () => void;
   onApply: () => void;
+  theme: AppTheme;
 }
 
 const TimelineFilter: React.FC<TimelineFilterProps> = ({
