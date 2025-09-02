@@ -1248,40 +1248,21 @@ export const FilterModalItemHeader = styled.div<{
   background: none;
   border: none;
   text-align: left;
-  color: ${(props) => (props.isActive ? "#3b82f6" : "#1f2937")};
+  color: ${(props) => (props.isActive ? props.theme?.colors?.default?.primary || "hsl(var(--primary))" : props.theme?.colors?.default?.foreground || "hsl(var(--foreground))")};
 
   &:hover {
-    background: rgba(243, 244, 246, 0.5);
+    background: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"} / 0.5;
   }
 
   &[data-state="open"] {
-    background: #f3f4f6;
-    border-bottom: 1px solid #e5e7eb;
+    background: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"} / 0.3;
+    border-bottom: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
   }
 
   /* Parent styling for clicked/expanded state */
   &[data-state="open"] {
     & + * {
-      border-top: 1px solid #9ca3af;
-    }
-  }
-
-  .dark & {
-    color: ${(props) => (props.isActive ? "#60a5fa" : "#f9fafb")};
-
-    &:hover {
-      background: rgba(75, 85, 99, 0.5);
-    }
-
-    &[data-state="open"] {
-      background: #4b5563;
-      border-bottom: 1px solid #6b7280;
-    }
-
-    &[data-state="open"] {
-      & + * {
-        border-top: 1px solid #6b7280;
-      }
+      border-top: 1px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
     }
   }
 `;
@@ -1292,15 +1273,11 @@ export const FilterModalHeaderContent = styled.div`
   gap: 12px;
 `;
 
-export const FilterModalTitle = styled.h3<{ hasActive: boolean }>`
+export const FilterModalTitle = styled.h3<{ hasActive: boolean; theme?: any }>`
   font-size: 16px;
   font-weight: ${(props) => (props.hasActive ? "600" : "500")};
-  color: ${(props) => (props.hasActive ? "#3b82f6" : "#1f2937")};
+  color: ${(props) => (props.hasActive ? props.theme?.colors?.default?.primary || "hsl(var(--primary))" : props.theme?.colors?.default?.foreground || "hsl(var(--foreground))")};
   margin: 0;
-
-  .dark & {
-    color: ${(props) => (props.hasActive ? "#60a5fa" : "#f9fafb")};
-  }
 `;
 
 export const FilterModalCount = styled.div<{ theme?: any }>`
@@ -1534,34 +1511,19 @@ export const FilterModalSearchInput = styled.input<{ theme?: any }>`
   padding-left: 40px;
   height: 44px;
   border-radius: 12px;
-  border: 2px solid #e5e7eb;
-  background: #ffffff;
-  color: #1f2937;
+  border: 2px solid ${({ theme }) => theme?.colors?.default?.border || "hsl(var(--border))"};
+  background: ${({ theme }) => theme?.colors?.default?.background || "hsl(var(--background))"};
+  color: ${({ theme }) => theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
   font-size: 14px;
 
   &:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--primary))"};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme?.colors?.default?.primary || "hsl(var(--primary))"} / 0.1;
     outline: none;
   }
 
   &::placeholder {
-    color: #9ca3af;
-  }
-
-  .dark & {
-    background: #374151;
-    border: 2px solid #4b5563;
-    color: #f9fafb;
-
-    &:focus {
-      border-color: #60a5fa;
-      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
-    }
-
-    &::placeholder {
-      color: #6b7280;
-    }
+    color: ${({ theme }) => theme?.colors?.default?.mutedForeground || "hsl(var(--muted-foreground))"};
   }
 `;
 
@@ -1655,14 +1617,14 @@ export const FilterModalOptionItem = styled.div<{
   border-radius: 8px;
   transition: all 0.2s ease;
   background: ${(props) =>
-    props.isSelected ? "hsl(var(--primary) / 0.1)" : "transparent"};
+    props.isSelected ? (props.theme?.colors?.default?.primary || "hsl(var(--primary))") + " / 0.1" : "transparent"};
   border: 1px solid
     ${(props) =>
-    props.isSelected ? "hsl(var(--primary) / 0.3)" : "transparent"};
+      props.isSelected ? (props.theme?.colors?.default?.primary || "hsl(var(--primary))") + " / 0.3" : "transparent"};
   margin-bottom: ${({ theme }) => theme?.spacing?.[1] || "4px"};
 
   &:hover {
-    background: hsl(var(--accent));
+    background: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
     transform: translateX(2px);
   }
 `;
