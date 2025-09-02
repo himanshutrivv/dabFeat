@@ -148,9 +148,9 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
             <TimeLineFilterSection>
               <div>
                 <TimeLineFilterLabel>
-                  Start Date & Time
-                  <TimeLineFilterInlineNote>(Maximum time range: 5 minutes)</TimeLineFilterInlineNote>
-                </TimeLineFilterLabel>
+  Start Date & Time
+  <TimeLineFilterInlineNote>(Maximum time range: 5 minutes)</TimeLineFilterInlineNote>
+</TimeLineFilterLabel>
                 <TimeLineFilterInputGrid>
                   <TimeLineInput
                     type="date"
