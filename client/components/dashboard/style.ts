@@ -15,6 +15,7 @@ export const MainContent = styled.div`
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  color: ${({ theme }) => theme.colors.default?.primary};
 `;
 
 export const Header = styled.div`
