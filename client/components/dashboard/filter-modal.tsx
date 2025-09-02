@@ -257,26 +257,28 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 return (
                   <FilterModalListItem
                     key={key}
+                    theme={theme}
                     className={isExpanded ? "expanded" : ""}
                   >
                     <FilterModalItemHeader
+                      theme={theme}
                       onClick={(e) => handleSectionToggle(e, key)}
                       onMouseDown={handleModalClick}
                       isActive={hasActiveFilters}
                       data-state={isExpanded ? "open" : "closed"}
                     >
-                      <FilterModalHeaderContent>
+                      <FilterModalHeaderContent theme={theme}>
                         <Filter size={16} />
-                        <FilterModalTitle hasActive={hasActiveFilters}>
+                        <FilterModalTitle theme={theme} hasActive={hasActiveFilters}>
                           {label}
                         </FilterModalTitle>
                         {hasActiveFilters && (
-                          <FilterModalCount>
+                          <FilterModalCount theme={theme}>
                             {filters[key]?.length}
                           </FilterModalCount>
                         )}
                       </FilterModalHeaderContent>
-                      <FilterModalExpandIcon isOpen={isExpanded}>
+                      <FilterModalExpandIcon theme={theme} isOpen={isExpanded}>
                         <ChevronRight size={16} />
                       </FilterModalExpandIcon>
                     </FilterModalItemHeader>
