@@ -53,13 +53,14 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
 
   return (
     <>
-      <FilterDropdownFilterGroup>
+      <FilterDropdownFilterGroup theme={theme}>
         <FilterDropdownSelectContainer
+          theme={theme}
           data-dropdown-container="true"
           onClick={handleContainerClick}
         >
-          <FilterDropdownSelectTrigger onClick={handleTriggerClick}>
-            <FilterDropdownSelectValue>
+          <FilterDropdownSelectTrigger theme={theme} onClick={handleTriggerClick}>
+            <FilterDropdownSelectValue theme={theme}>
               {selectedValues.length === 0
                 ? `All ${label}`
                 : `${selectedValues.length} selected`}
@@ -69,12 +70,14 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
 
           {isOpen && (
             <FilterDropdownSelectContent
+              theme={theme}
               className="filter-content"
               onMouseDown={handleContentMouseDown}
               onClick={handleContainerClick}
             >
-              <SelectItemsContainer>
+              <SelectItemsContainer theme={theme}>
                 <FilterDropdownSelectItem
+                  theme={theme}
                   onClick={(e) => handleItemClick(e, "all")}
                   selected={selectedValues.length === 0}
                 >
@@ -86,6 +89,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
                   return (
                     <FilterDropdownSelectItem
                       key={option}
+                      theme={theme}
                       onClick={(e) => handleItemClick(e, option)}
                       selected={isSelected}
                     >
