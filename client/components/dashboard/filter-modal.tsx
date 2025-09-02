@@ -204,24 +204,25 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
   return (
     <>
-      <FilterModalBackdrop onClick={onClose} />
+      <FilterModalBackdrop theme={theme} onClick={onClose} />
       <FilterModalContainer
+        theme={theme}
         data-modal-container
         onClick={handleModalClick}
         onMouseDown={handleModalClick}
         onMouseUp={handleModalClick}
       >
-        <FilterModalHeader>
-          <FilterModalHeaderTitle>
+        <FilterModalHeader theme={theme}>
+          <FilterModalHeaderTitle theme={theme}>
             <Sparkles size={20} />
             Advanced Filters
           </FilterModalHeaderTitle>
-          <FilterModalCloseButton onClick={onClose}>
+          <FilterModalCloseButton theme={theme} onClick={onClose}>
             <X size={18} />
           </FilterModalCloseButton>
         </FilterModalHeader>
 
-        <FilterModalContent>
+        <FilterModalContent theme={theme}>
           {/* Internal search for filtering available filter options/columns */}
           <FilterModalSearch>
             <FilterModalSearchIcon>
