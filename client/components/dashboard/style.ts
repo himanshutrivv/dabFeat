@@ -1160,15 +1160,16 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   right: 0;
   width: 440px;
   height: 100vh;
-  background: white;
-  border-left: 1px solid #e5e7eb;
+  background: ${({ theme }) => theme?.colors?.default?.primaryBackground || "white"};
+  border-left: 1px solid ${({ theme }) => theme?.colors?.default?.mutedBackground};
   border-radius: 0;
   z-index: 1001;
   display: flex;
   flex-direction: column;
   animation: slideInFromRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+  box-shadow: ${({ theme }) => theme?.shadows?.xl};
+  font-family: ${({ theme }) => theme?.fonts};
 
   @keyframes slideInFromRight {
     from {
@@ -1181,14 +1182,9 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme?.breakpoints?.md}) {
     width: 100%;
     border-radius: 0;
-  }
-
-  .dark & {
-    background: #1f2937;
-    border-left: 1px solid #374151;
   }
 `;
 
