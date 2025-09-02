@@ -1,6 +1,7 @@
 "use client";
 import React, { useCallback, useState, useMemo } from "react";
 import { Search, X, Filter, ChevronRight, Sparkles } from "lucide-react";
+import { AppTheme } from "@/styles/themes/appTheme";
 import {
   FilterModalBackdrop,
   FilterModalContainer,
@@ -69,6 +70,7 @@ interface FilterModalProps {
   onClearAllFilters: () => void;
   onToggleFilterSection: (key: string) => void;
   onApplyFilters: () => Promise<void>;
+  theme: AppTheme;
 }
 
 const FilterModal: React.FC<FilterModalProps> = ({
@@ -84,6 +86,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   onClearAllFilters,
   onToggleFilterSection,
   onApplyFilters,
+  theme,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sectionSearchTerms, setSectionSearchTerms] = useState<{
@@ -201,30 +204,32 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
   return (
     <>
-      <FilterModalBackdrop onClick={onClose} />
+      <FilterModalBackdrop theme={theme} onClick={onClose} />
       <FilterModalContainer
+        theme={theme}
         data-modal-container
         onClick={handleModalClick}
         onMouseDown={handleModalClick}
         onMouseUp={handleModalClick}
       >
-        <FilterModalHeader>
-          <FilterModalHeaderTitle>
+        <FilterModalHeader theme={theme}>
+          <FilterModalHeaderTitle theme={theme}>
             <Sparkles size={20} />
             Advanced Filters
           </FilterModalHeaderTitle>
-          <FilterModalCloseButton onClick={onClose}>
+          <FilterModalCloseButton theme={theme} onClick={onClose}>
             <X size={18} />
           </FilterModalCloseButton>
         </FilterModalHeader>
 
-        <FilterModalContent>
+        <FilterModalContent theme={theme}>
           {/* Internal search for filtering available filter options/columns */}
-          <FilterModalSearch>
-            <FilterModalSearchIcon>
+          <FilterModalSearch theme={theme}>
+            <FilterModalSearchIcon theme={theme}>
               <Search size={16} />
             </FilterModalSearchIcon>
             <FilterModalSearchInput
+              theme={theme}
               type="text"
               placeholder="Search filter categories..."
               value={searchTerm}
@@ -234,12 +239,12 @@ const FilterModal: React.FC<FilterModalProps> = ({
             />
           </FilterModalSearch>
 
-          <FilterModalSeparator />
+          <FilterModalSeparator theme={theme} />
 
-          <FilterModalSectionContent>
+          <FilterModalSectionContent theme={theme}>
             {filteredOptions.length === 0 ? (
-              <FilterModalEmptyState>
-                <FilterModalEmptyIcon>🔍</FilterModalEmptyIcon>
+              <FilterModalEmptyState theme={theme}>
+                <FilterModalEmptyIcon theme={theme}>🔍</FilterModalEmptyIcon>
                 <h3>No filters found</h3>
                 <p>Try adjusting your search terms</p>
               </FilterModalEmptyState>
@@ -252,39 +257,45 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 return (
                   <FilterModalListItem
                     key={key}
+                    theme={theme}
                     className={isExpanded ? "expanded" : ""}
                   >
                     <FilterModalItemHeader
+                      theme={theme}
                       onClick={(e) => handleSectionToggle(e, key)}
                       onMouseDown={handleModalClick}
                       isActive={hasActiveFilters}
                       data-state={isExpanded ? "open" : "closed"}
                     >
-                      <FilterModalHeaderContent>
+                      <FilterModalHeaderContent theme={theme}>
                         <Filter size={16} />
-                        <FilterModalTitle hasActive={hasActiveFilters}>
+                        <FilterModalTitle
+                          theme={theme}
+                          hasActive={hasActiveFilters}
+                        >
                           {label}
                         </FilterModalTitle>
                         {hasActiveFilters && (
-                          <FilterModalCount>
+                          <FilterModalCount theme={theme}>
                             {filters[key]?.length}
                           </FilterModalCount>
                         )}
                       </FilterModalHeaderContent>
-                      <FilterModalExpandIcon isOpen={isExpanded}>
+                      <FilterModalExpandIcon theme={theme} isOpen={isExpanded}>
                         <ChevronRight size={16} />
                       </FilterModalExpandIcon>
                     </FilterModalItemHeader>
 
                     {isExpanded && (
-                      <FilterModalOptionsContainer>
+                      <FilterModalOptionsContainer theme={theme}>
                         {/* Section-specific search or manual input */}
                         {isSearchable ? (
-                          <FilterModalSectionSearchContainer>
-                            <FilterModalSectionSearchIcon>
+                          <FilterModalSectionSearchContainer theme={theme}>
+                            <FilterModalSectionSearchIcon theme={theme}>
                               <Search size={14} />
                             </FilterModalSectionSearchIcon>
                             <FilterModalSectionSearchInput
+                              theme={theme}
                               type="text"
                               placeholder={`Search ${label.toLowerCase()}...`}
                               value={sectionSearchTerms[key] || ""}
@@ -296,12 +307,15 @@ const FilterModal: React.FC<FilterModalProps> = ({
                             />
                           </FilterModalSectionSearchContainer>
                         ) : (
-                          <FilterModalManualContainer>
-                            <FilterModalManualLabel>
-                              <FilterModalTypeIcon>🔍</FilterModalTypeIcon>
+                          <FilterModalManualContainer theme={theme}>
+                            <FilterModalManualLabel theme={theme}>
+                              <FilterModalTypeIcon theme={theme}>
+                                🔍
+                              </FilterModalTypeIcon>
                               Enter {label.toLowerCase()} value:
                             </FilterModalManualLabel>
                             <FilterModalManualInput
+                              theme={theme}
                               type="text"
                               placeholder={`Type ${label.toLowerCase()} value...`}
                               value={manualFilterInputs[key] || ""}
@@ -317,7 +331,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                           </FilterModalManualContainer>
                         )}
 
-                        <FilterModalOptionsInner>
+                        <FilterModalOptionsInner theme={theme}>
                           {(() => {
                             const filteredSectionOptions =
                               getFilteredSectionOptions(
@@ -367,17 +381,22 @@ const FilterModal: React.FC<FilterModalProps> = ({
                               return (
                                 <FilterModalOptionItem
                                   key={option}
+                                  theme={theme}
                                   onClick={(e) =>
                                     handleFilterOptionClick(e, key, option)
                                   }
                                   isSelected={isSelected}
                                 >
-                                  <FilterModalOptionText>
+                                  <FilterModalOptionText theme={theme}>
                                     {option}
                                   </FilterModalOptionText>
-                                  <FilterModalCheckbox selected={isSelected}>
+                                  <FilterModalCheckbox
+                                    theme={theme}
+                                    selected={isSelected}
+                                  >
                                     {isSelected && (
                                       <FilterModalCheckIcon
+                                        theme={theme}
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                       >
@@ -403,14 +422,18 @@ const FilterModal: React.FC<FilterModalProps> = ({
           </FilterModalSectionContent>
         </FilterModalContent>
 
-        <FilterModalFooter>
-          <FilterModalButtonContainer>
+        <FilterModalFooter theme={theme}>
+          <FilterModalButtonContainer theme={theme}>
             {activeFilters.length > 0 && (
-              <FilterModalButton variant="outline" onClick={handleClearAll}>
+              <FilterModalButton
+                theme={theme}
+                variant="outline"
+                onClick={handleClearAll}
+              >
                 Clear All Filters ({activeFilters.length})
               </FilterModalButton>
             )}
-            <FilterModalButton onClick={handleApplyFilters}>
+            <FilterModalButton theme={theme} onClick={handleApplyFilters}>
               Apply Filters
             </FilterModalButton>
           </FilterModalButtonContainer>

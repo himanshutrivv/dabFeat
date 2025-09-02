@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import { ThemeProvider } from "@emotion/react";
 import { ChevronDown } from "lucide-react";
-import { appTheme } from "@/styles/themes/appTheme";
+import { AppTheme } from "@/styles/themes/appTheme";
 import {
   TimeLineFilterGroup,
   TimeLineSelectContainer,
@@ -30,6 +30,7 @@ interface TimelineFilterProps {
   onEndDateTimeChange: (value: string) => void;
   onReset: () => void;
   onApply: () => void;
+  theme: AppTheme;
 }
 
 const TimelineFilter: React.FC<TimelineFilterProps> = ({
@@ -41,6 +42,7 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
   onEndDateTimeChange,
   onReset,
   onApply,
+  theme,
 }) => {
   const handleInputInteraction = useCallback(
     (e: React.MouseEvent | React.FocusEvent) => {
@@ -144,11 +146,11 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
   );
 
   return (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={theme}>
       <TimeLineFilterGroup>
         <TimeLineSelectContainer data-dropdown-container>
-          <TimeLineSelectTrigger onClick={onToggle}>
-            <TimeLineSelectValue>
+          <TimeLineSelectTrigger theme={theme} onClick={onToggle}>
+            <TimeLineSelectValue theme={theme}>
               {startDateTime && endDateTime
                 ? "Custom Range"
                 : "Select Time Range"}
@@ -156,8 +158,8 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
             <ChevronDown size={16} />
           </TimeLineSelectTrigger>
           {isOpen && (
-            <TimeLineFilterContent>
-              <TimeLineFilterSection>
+            <TimeLineFilterContent theme={theme}>
+              <TimeLineFilterSection theme={theme}>
                 <div>
                   <TimeLineFilterLabel>
                     Start Date & Time

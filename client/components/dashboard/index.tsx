@@ -5,6 +5,7 @@ import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast } from "sonner";
 import { globalStyles } from "@/styles/global";
+import { useThemeController } from "@/styles/ThemeControllerProvider";
 import {
   DashboardContainer,
   MainContent,
@@ -170,6 +171,7 @@ const transformFiltersToAPIFormat = (
 };
 
 export default function TaskManagementDashboard() {
+  const { theme } = useThemeController();
   const [data, setData] = useState<DashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -667,9 +669,9 @@ export default function TaskManagementDashboard() {
     return (
       <>
         <Global styles={globalStyles()} />
-        <ErrorContainer>
-          <ErrorText>Error: {error}</ErrorText>
-          <RetryButton onClick={() => window.location.reload()}>
+        <ErrorContainer theme={theme}>
+          <ErrorText theme={theme}>Error: {error}</ErrorText>
+          <RetryButton theme={theme} onClick={() => window.location.reload()}>
             <RefreshCw size={16} />
             Retry
           </RetryButton>
@@ -693,24 +695,24 @@ export default function TaskManagementDashboard() {
   return (
     <>
       <Global styles={globalStyles()} />
-      <DashboardContainer>
-        <MainContent>
-          <MainContentLayout>
+      <DashboardContainer theme={theme}>
+        <MainContent theme={theme}>
+          <MainContentLayout theme={theme}>
             {(hasSearchableColumns || hasFilterableColumns) && (
-              <FilterCard>
-                <FilterCardHeader>
-                  <FilterCardTitle>
+              <FilterCard theme={theme}>
+                <FilterCardHeader theme={theme}>
+                  <FilterCardTitle theme={theme}>
                     <Filter size={20} />
                     Filter & Search
                   </FilterCardTitle>
-                  <FilterCardSubtitle>
+                  <FilterCardSubtitle theme={theme}>
                     Filter your data by categories, search through records, or
                     set time ranges to find exactly what you need
                   </FilterCardSubtitle>
                 </FilterCardHeader>
 
-                <FilterContainer show={true}>
-                  <FilterGrid>
+                <FilterContainer show={true} theme={theme}>
+                  <FilterGrid theme={theme}>
                     <TimelineFilter
                       startDateTime={startDateTime}
                       endDateTime={endDateTime}
@@ -720,6 +722,7 @@ export default function TaskManagementDashboard() {
                       onEndDateTimeChange={handleEndDateTimeChange}
                       onReset={initializeDefaultTimeRange}
                       onApply={() => setShowTimelineFilter(false)}
+                      theme={theme}
                     />
 
                     {data &&
@@ -740,6 +743,7 @@ export default function TaskManagementDashboard() {
                             isOpen={openFilterDropdowns[columnKey] || false}
                             onToggle={toggleFilterDropdown}
                             onFilterChange={handleFilterChange}
+                            theme={theme}
                           />
                         ))}
 
@@ -757,12 +761,13 @@ export default function TaskManagementDashboard() {
                     </FilterGroup>
                   </FilterGrid>
 
-                  <SearchBarContainer>
-                    <SearchInputWrapper>
-                      <SearchIcon>
+                  <SearchBarContainer theme={theme}>
+                    <SearchInputWrapper theme={theme}>
+                      <SearchIcon theme={theme}>
                         <Search size={20} />
                       </SearchIcon>
                       <SearchInput
+                        theme={theme}
                         type="text"
                         placeholder={
                           hasSearchableColumns
@@ -782,6 +787,7 @@ export default function TaskManagementDashboard() {
                       />
                     </SearchInputWrapper>
                     <SearchButton
+                      theme={theme}
                       onClick={
                         hasSearchableColumns ? handleSearchClick : undefined
                       }
@@ -796,6 +802,7 @@ export default function TaskManagementDashboard() {
                       Search
                     </SearchButton>
                     <RefreshButton
+                      theme={theme}
                       onClick={handleRefreshClick}
                       disabled={isRefreshing}
                       title="Refresh monitoring data (current time - 15 minutes)"
@@ -809,15 +816,21 @@ export default function TaskManagementDashboard() {
                   </SearchBarContainer>
 
                   {activeFilters.length > 0 && (
-                    <ActiveFiltersSection>
-                      <ActiveFiltersLabel>Active Filters:</ActiveFiltersLabel>
-                      <ActiveFiltersContainer>
+                    <ActiveFiltersSection theme={theme}>
+                      <ActiveFiltersLabel theme={theme}>
+                        Active Filters:
+                      </ActiveFiltersLabel>
+                      <ActiveFiltersContainer theme={theme}>
                         {activeFilters.map((filter) => (
-                          <FilterBadge key={`${filter.key}-${filter.value}`}>
+                          <FilterBadge
+                            key={`${filter.key}-${filter.value}`}
+                            theme={theme}
+                          >
                             {filter.type === "manual" && "?? "}
                             {filter.type === "search" && "?? "}
                             {filter.label}: {filter.value}
                             <FilterBadgeClose
+                              theme={theme}
                               onClick={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
@@ -847,6 +860,7 @@ export default function TaskManagementDashboard() {
                           </FilterBadge>
                         ))}
                         <ClearAllFiltersButton
+                          theme={theme}
                           onClick={(e) => {
                             e.stopPropagation();
                             e.preventDefault();
@@ -860,7 +874,7 @@ export default function TaskManagementDashboard() {
                     </ActiveFiltersSection>
                   )}
 
-                  <FilterResults>
+                  <FilterResults theme={theme}>
                     Showing {filteredData.length} of {data?.tableData?.length}{" "}
                     results
                   </FilterResults>
@@ -868,7 +882,7 @@ export default function TaskManagementDashboard() {
               </FilterCard>
             )}
 
-            <TableSection>
+            <TableSection theme={theme}>
               <DashboardTable
                 data={filteredData}
                 columnData={data?.columnData || {}}
@@ -895,6 +909,7 @@ export default function TaskManagementDashboard() {
             }));
           }}
           onApplyFilters={applyFiltersAndFetchData}
+          theme={theme}
         />
       </DashboardContainer>
     </>

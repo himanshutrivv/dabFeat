@@ -4,8 +4,9 @@ import { css } from "@emotion/react";
 // Main layout components
 export const DashboardContainer = styled.div`
   min-height: 100vh;
-  background-color: hsl(var(--background));
+  background-color: ${({ theme }) => theme.colors.default?.primaryBackground};
   display: flex;
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 export const MainContent = styled.div`
@@ -14,12 +15,15 @@ export const MainContent = styled.div`
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  color: ${({ theme }) => theme.colors.default?.primary};
 `;
 
 export const Header = styled.div`
-  background-color: hsl(var(--card));
-  border-bottom: 1px solid hsl(var(--border));
-  padding: 16px 32px;
+  background-color: ${({ theme }) => theme.colors.default?.primaryBackground};
+  border-bottom: 1px solid
+    ${({ theme }) => theme.colors.default?.mutedBackground};
+  padding: ${({ theme }) => theme.spacing?.[4]}
+    ${({ theme }) => theme.spacing?.[8]};
   position: sticky;
   top: 0;
   z-index: 50;
@@ -37,22 +41,24 @@ export const HeaderContent = styled.div`
 
 export const DashboardTitle = styled.h1`
   margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-  color: hsl(var(--foreground));
+  font-size: ${({ theme }) => theme.fontSizes?.["2xl"]};
+  font-weight: ${({ theme }) => theme.fontWeights?.semibold};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 export const DashboardSubtitle = styled.p`
   margin: 0;
-  color: #6b7280;
-  font-size: 14px;
+  color: ${({ theme }) => theme.colors.default?.muted};
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 export const MainContentLayout = styled.div`
-  padding: 32px;
+  padding: ${({ theme }) => theme.spacing?.[8]};
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: ${({ theme }) => theme.spacing?.[6]};
   flex: 1;
   overflow: visible;
 `;
@@ -67,50 +73,50 @@ export const TableSection = styled.div`
 `;
 
 export const FilterCard = styled.div`
-  background: white;
-  border-radius: 16px;
-  border: 1px solid hsl(var(--border));
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.05),
-    0 2px 4px rgba(0, 0, 0, 0.08);
-  margin-top: 24px;
-  margin-bottom: 24px;
+  background: ${({ theme }) => theme.colors.default?.primaryBackground};
+  border-radius: ${({ theme }) => theme.borderRadius?.xl};
+  border: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
+  box-shadow: ${({ theme }) => theme.shadows?.md};
+  margin-top: ${({ theme }) => theme.spacing?.[6]};
+  margin-bottom: ${({ theme }) => theme.spacing?.[6]};
   overflow: visible;
-  transition: all 0.3s ease;
+  transition: ${({ theme }) => theme.transitions?.all};
   position: relative;
   z-index: 100;
 
   &:hover {
-    box-shadow:
-      0 8px 24px rgba(0, 0, 0, 0.08),
-      0 4px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: ${({ theme }) => theme.shadows?.lg};
     transform: translateY(-1px);
   }
 `;
 
 export const FilterCardHeader = styled.div`
-  padding: 24px 24px 0 24px;
-  border-bottom: 1px solid hsl(var(--border) / 0.5);
+  padding: ${({ theme }) => theme.spacing?.[6]}
+    ${({ theme }) => theme.spacing?.[6]} 0 ${({ theme }) => theme.spacing?.[6]};
+  border-bottom: 1px solid
+    ${({ theme }) => theme.colors.default?.mutedBackground};
 `;
 
 export const FilterCardTitle = styled.h2`
-  font-size: 18px;
-  font-weight: 600;
-  color: hsl(var(--foreground));
-  margin: 0 0 8px 0;
+  font-size: ${({ theme }) => theme.fontSizes?.lg};
+  font-weight: ${({ theme }) => theme.fontWeights?.semibold};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
+  margin: 0 0 ${({ theme }) => theme.spacing?.[2]} 0;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacing?.[3]};
 `;
 
 export const FilterCardSubtitle = styled.p`
-  font-size: 14px;
-  color: hsl(var(--muted-foreground));
-  margin: 0 0 16px 0;
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  color: ${({ theme }) => theme.colors.default?.muted};
+  font-family: ${({ theme }) => theme.fonts};
+  margin: 0 0 ${({ theme }) => theme.spacing?.[4]} 0;
 `;
 
 export const FilterContainer = styled.div<{ show: boolean }>`
-  padding: 24px;
+  padding: ${({ theme }) => theme.spacing?.[6]};
   background: transparent;
   display: ${(props) => (props.show ? "block" : "none")};
   position: relative;
@@ -119,11 +125,11 @@ export const FilterContainer = styled.div<{ show: boolean }>`
 `;
 
 export const SearchBarContainer = styled.div`
-  margin-bottom: 24px;
-  margin-top: 24px;
+  margin-bottom: ${({ theme }) => theme.spacing?.[6]};
+  margin-top: ${({ theme }) => theme.spacing?.[6]};
   position: relative;
   display: flex;
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacing?.[3]};
   align-items: center;
   z-index: 20;
 `;
@@ -135,26 +141,26 @@ export const SearchInputWrapper = styled.div`
 
 export const SearchIcon = styled.div`
   position: absolute;
-  left: 16px;
+  left: ${({ theme }) => theme.spacing?.[4]};
   top: 50%;
   transform: translateY(-50%);
-  color: hsl(var(--muted-foreground));
+  color: ${({ theme }) => theme.colors.default?.muted};
 `;
 
 export const FilterGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: ${({ theme }) => theme.spacing?.[4]};
+  margin-bottom: ${({ theme }) => theme.spacing?.[6]};
   position: relative;
   z-index: 30;
   isolation: isolate;
 
-  @media (min-width: 768px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints?.md}) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints?.lg}) {
     grid-template-columns: repeat(5, 1fr);
   }
 `;
@@ -162,59 +168,64 @@ export const FilterGrid = styled.div`
 export const FilterGroup = styled.div``;
 
 export const FilterLabel = styled.label`
-  font-size: 14px;
-  font-weight: 600;
-  color: hsl(var(--foreground));
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  font-weight: ${({ theme }) => theme.fontWeights?.semibold};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: ${({ theme }) => theme.spacing?.[2]};
+  margin-bottom: ${({ theme }) => theme.spacing?.[2]};
 `;
 
 export const ActiveFiltersSection = styled.div`
-  margin-top: 16px;
+  margin-top: ${({ theme }) => theme.spacing?.[4]};
   padding: 0;
   border-top: none;
 `;
 
 export const ActiveFiltersLabel = styled.div`
-  font-size: 14px;
-  font-weight: 600;
-  color: hsl(var(--foreground));
-  margin-bottom: 12px;
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  font-weight: ${({ theme }) => theme.fontWeights?.semibold};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
+  margin-bottom: ${({ theme }) => theme.spacing?.[3]};
 `;
 
 export const ActiveFiltersContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing?.[2]};
   align-items: center;
 `;
 
 export const FilterBadge = styled.div`
-  background-color: hsl(var(--primary) / 0.15);
-  color: hsl(var(--primary));
-  border: 1px solid hsl(var(--primary) / 0.3);
-  padding: 8px 12px;
+  background-color: ${({ theme }) => theme.colors.default?.secondaryBackground};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  border: 1px solid ${({ theme }) => theme.colors.default?.primary};
+  padding: ${({ theme }) => theme.spacing?.[2]}
+    ${({ theme }) => theme.spacing?.[3]};
   display: flex;
   align-items: center;
-  gap: 8px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
+  gap: ${({ theme }) => theme.spacing?.[2]};
+  border-radius: ${({ theme }) => theme.borderRadius?.full};
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  font-weight: ${({ theme }) => theme.fontWeights?.medium};
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 export const FilterBadgeClose = styled.button`
   border: none;
   background: none;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.borderRadius?.full};
   padding: 2px;
-  transition: background-color 0.3s ease;
-  color: hsl(var(--primary));
+  transition: ${({ theme }) => theme.transitions?.colors};
+  color: ${({ theme }) => theme.colors.default?.primary};
 
   &:hover {
-    background-color: hsl(var(--primary) / 0.2);
+    background-color: ${({ theme }) =>
+      theme.colors.default?.secondaryBackground};
   }
 `;
 
@@ -238,11 +249,12 @@ export const ClearAllButton = css`
 `;
 
 export const FilterResults = styled.div`
-  margin-top: 16px;
+  margin-top: ${({ theme }) => theme.spacing?.[4]};
   padding: 0;
   border-top: none;
-  font-size: 14px;
-  color: hsl(var(--muted-foreground));
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  color: ${({ theme }) => theme.colors.default?.muted};
+  font-family: ${({ theme }) => theme.fonts};
   text-align: right;
 `;
 
@@ -420,30 +432,31 @@ export const SearchInput = styled.input`
   padding-left: 48px;
   height: 48px;
   width: 100%;
-  background-color: hsl(var(--background));
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  color: hsl(var(--foreground));
-  font-size: 18px;
+  background-color: ${({ theme }) => theme.colors.default?.primaryBackground};
+  border: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
+  border-radius: ${({ theme }) => theme.borderRadius?.xl};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-size: ${({ theme }) => theme.fontSizes?.lg};
+  font-family: ${({ theme }) => theme.fonts};
 
   &:focus {
-    box-shadow: 0 0 0 2px hsl(var(--primary));
-    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.default?.primary};
+    border-color: ${({ theme }) => theme.colors.default?.primary};
     outline: none;
   }
 
   &::placeholder {
-    color: hsl(var(--muted-foreground));
+    color: ${({ theme }) => theme.colors.default?.muted};
   }
 
   &:disabled {
-    background-color: hsl(var(--muted) / 0.5);
-    color: hsl(var(--muted-foreground));
+    background-color: ${({ theme }) => theme.colors.default?.mutedBackground};
+    color: ${({ theme }) => theme.colors.default?.muted};
     cursor: not-allowed;
-    border-color: hsl(var(--border) / 0.5);
+    border-color: ${({ theme }) => theme.colors.default?.mutedBackground};
 
     &::placeholder {
-      color: hsl(var(--muted-foreground) / 0.7);
+      color: ${({ theme }) => theme.colors.default?.muted};
     }
   }
 `;
@@ -636,13 +649,14 @@ export const ErrorContainer = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  gap: 16px;
-  background-color: hsl(var(--background));
+  gap: ${({ theme }) => theme.spacing?.[4]};
+  background-color: ${({ theme }) => theme.colors.default?.primaryBackground};
 `;
 
 export const ErrorText = styled.div`
-  color: hsl(var(--destructive));
-  font-size: 16px;
+  color: ${({ theme }) => theme.colors.default?.destructive};
+  font-size: ${({ theme }) => theme.fontSizes?.base};
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 // Filter Dropdown Components
@@ -660,27 +674,29 @@ export const FilterDropdownSelectTrigger = styled.button`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  background-color: #ffffff;
-  padding: 0 12px;
-  font-size: 14px;
-  color: #374151;
+  border-radius: ${({ theme }) => theme.borderRadius?.md};
+  border: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
+  background-color: ${({ theme }) => theme.colors.default?.primaryBackground};
+  padding: 0 ${({ theme }) => theme.spacing?.[3]};
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: ${({ theme }) => theme.transitions?.all};
+  box-shadow: ${({ theme }) => theme.shadows?.sm};
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #2563eb;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.default?.primary};
     outline-offset: 2px;
   }
 
   &:hover {
-    background-color: #f3f4f6;
-    color: #1f2937;
-    border-color: #d1d5db;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: ${({ theme }) =>
+      theme.colors.default?.secondaryBackground};
+    color: ${({ theme }) => theme.colors.default?.primary};
+    border-color: ${({ theme }) => theme.colors.default?.secondary};
+    box-shadow: ${({ theme }) => theme.shadows?.md};
   }
 
   &:disabled {
@@ -690,8 +706,9 @@ export const FilterDropdownSelectTrigger = styled.button`
 `;
 
 export const FilterDropdownSelectValue = styled.span`
-  color: #374151;
-  font-weight: 500;
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-weight: ${({ theme }) => theme.fontWeights?.medium};
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 export const FilterDropdownSelectContent = styled.div`
@@ -704,27 +721,29 @@ export const FilterDropdownSelectContent = styled.div`
   min-width: 320px;
   max-width: calc(100vw - 32px);
   overflow-y: auto;
-  border-radius: 8px;
-  border: 1px solid hsl(var(--border));
-  background-color: white !important;
-  color: hsl(var(--foreground));
+  border-radius: ${({ theme }) => theme.borderRadius?.md};
+  border: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
+  background-color: ${({ theme }) =>
+    theme.colors.default?.primaryBackground} !important;
+  color: ${({ theme }) => theme.colors.default?.primary};
   opacity: 1 !important;
-  padding: 16px;
-  box-shadow:
-    0 10px 80px rgba(0, 0, 0, 0.12),
-    0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: ${({ theme }) => theme.spacing?.[4]};
+  box-shadow: ${({ theme }) => theme.shadows?.lg};
   margin-top: 4px;
   animation: none;
   pointer-events: auto;
+  font-family: ${({ theme }) => theme.fonts};
 
   &.filter-content {
-    background-color: white !important;
+    background-color: ${({ theme }) =>
+      theme.colors.default?.primaryBackground} !important;
     opacity: 1 !important;
   }
 `;
 
 export const SelectItemsContainer = styled.div`
-  padding: 8px 4px;
+  padding: ${({ theme }) => theme.spacing?.[2]}
+    ${({ theme }) => theme.spacing?.[1]};
 `;
 
 export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
@@ -734,29 +753,36 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
   cursor: pointer;
   user-select: none;
   align-items: center;
-  border-radius: 6px;
-  padding: 8px 12px;
-  font-size: 14px;
+  border-radius: ${({ theme }) => theme.borderRadius?.sm};
+  padding: ${({ theme }) => theme.spacing?.[2]}
+    ${({ theme }) => theme.spacing?.[3]};
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
   outline: none;
-  transition: all 0.2s ease;
-  color: hsl(var(--foreground));
-  font-weight: ${(props) => (props.selected ? "600" : "400")};
+  transition: ${({ theme }) => theme.transitions?.all};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
+  font-weight: ${(props) =>
+    props.selected
+      ? props.theme?.fontWeights?.semibold
+      : props.theme?.fontWeights?.normal};
 
   &:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    background-color: ${({ theme }) =>
+      theme.colors.default?.secondaryBackground};
+    color: ${({ theme }) => theme.colors.default?.primary};
   }
 
   &:focus {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    background-color: ${({ theme }) =>
+      theme.colors.default?.secondaryBackground};
+    color: ${({ theme }) => theme.colors.default?.primary};
   }
 
   ${(props) =>
     props.selected &&
     css`
-      background-color: hsl(var(--accent));
-      color: hsl(var(--accent-foreground));
+      background-color: ${props.theme?.colors.default?.secondaryBackground};
+      color: ${props.theme?.colors.default?.primary};
     `}
 `;
 
@@ -1147,15 +1173,18 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   right: 0;
   width: 440px;
   height: 100vh;
-  background: white;
-  border-left: 1px solid #e5e7eb;
+  background: ${({ theme }) =>
+    theme?.colors?.default?.primaryBackground || "white"};
+  border-left: 1px solid
+    ${({ theme }) => theme?.colors?.default?.mutedBackground};
   border-radius: 0;
   z-index: 1001;
   display: flex;
   flex-direction: column;
   animation: slideInFromRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+  box-shadow: ${({ theme }) => theme?.shadows?.xl};
+  font-family: ${({ theme }) => theme?.fonts};
 
   @keyframes slideInFromRight {
     from {
@@ -1168,14 +1197,9 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme?.breakpoints?.md}) {
     width: 100%;
     border-radius: 0;
-  }
-
-  .dark & {
-    background: #1f2937;
-    border-left: 1px solid #374151;
   }
 `;
 
@@ -1183,19 +1207,16 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f8fafc;
-  color: #1f2937;
+  background: ${({ theme }) => theme?.colors?.default?.secondaryBackground};
+  color: ${({ theme }) => theme?.colors?.default?.primary};
   border-radius: 0;
-  padding: 24px 32px;
-  border-bottom: 1px solid #e5e7eb;
+  padding: ${({ theme }) => theme?.spacing?.[6]}
+    ${({ theme }) => theme?.spacing?.[8]};
+  border-bottom: 1px solid
+    ${({ theme }) => theme?.colors?.default?.mutedBackground};
   flex-shrink: 0;
   position: relative;
-
-  .dark & {
-    background: #111827;
-    color: #f9fafb;
-    border-bottom: 1px solid #374151;
-  }
+  font-family: ${({ theme }) => theme?.fonts};
 `;
 
 export const FilterModalContent = styled.div<{ theme?: any }>`
