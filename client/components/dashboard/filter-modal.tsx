@@ -86,6 +86,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   onClearAllFilters,
   onToggleFilterSection,
   onApplyFilters,
+  theme,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sectionSearchTerms, setSectionSearchTerms] = useState<{
