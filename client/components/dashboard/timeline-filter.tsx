@@ -1,6 +1,8 @@
 "use client";
 import React, { useCallback } from "react";
+import { ThemeProvider } from "@emotion/react";
 import { ChevronDown } from "lucide-react";
+import { appTheme } from "@/styles/themes/appTheme";
 import {
   TimeLineFilterGroup,
   TimeLineSelectContainer,
