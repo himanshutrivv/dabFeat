@@ -733,7 +733,7 @@ export const FilterDropdownSelectContent = styled.div`
 `;
 
 export const SelectItemsContainer = styled.div`
-  padding: 8px 4px;
+  padding: ${({ theme }) => theme.spacing?.[2]} ${({ theme }) => theme.spacing?.[1]};
 `;
 
 export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
