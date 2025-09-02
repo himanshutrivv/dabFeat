@@ -669,9 +669,9 @@ export default function TaskManagementDashboard() {
     return (
       <>
         <Global styles={globalStyles()} />
-        <ErrorContainer>
-          <ErrorText>Error: {error}</ErrorText>
-          <RetryButton onClick={() => window.location.reload()}>
+        <ErrorContainer theme={theme}>
+          <ErrorText theme={theme}>Error: {error}</ErrorText>
+          <RetryButton theme={theme} onClick={() => window.location.reload()}>
             <RefreshCw size={16} />
             Retry
           </RetryButton>
@@ -814,15 +814,16 @@ export default function TaskManagementDashboard() {
                   </SearchBarContainer>
 
                   {activeFilters.length > 0 && (
-                    <ActiveFiltersSection>
-                      <ActiveFiltersLabel>Active Filters:</ActiveFiltersLabel>
-                      <ActiveFiltersContainer>
+                    <ActiveFiltersSection theme={theme}>
+                      <ActiveFiltersLabel theme={theme}>Active Filters:</ActiveFiltersLabel>
+                      <ActiveFiltersContainer theme={theme}>
                         {activeFilters.map((filter) => (
-                          <FilterBadge key={`${filter.key}-${filter.value}`}>
+                          <FilterBadge key={`${filter.key}-${filter.value}`} theme={theme}>
                             {filter.type === "manual" && "?? "}
                             {filter.type === "search" && "?? "}
                             {filter.label}: {filter.value}
                             <FilterBadgeClose
+                              theme={theme}
                               onClick={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
@@ -852,6 +853,7 @@ export default function TaskManagementDashboard() {
                           </FilterBadge>
                         ))}
                         <ClearAllFiltersButton
+                          theme={theme}
                           onClick={(e) => {
                             e.stopPropagation();
                             e.preventDefault();
@@ -865,7 +867,7 @@ export default function TaskManagementDashboard() {
                     </ActiveFiltersSection>
                   )}
 
-                  <FilterResults>
+                  <FilterResults theme={theme}>
                     Showing {filteredData.length} of {data?.tableData?.length}{" "}
                     results
                   </FilterResults>
@@ -873,7 +875,7 @@ export default function TaskManagementDashboard() {
               </FilterCard>
             )}
 
-            <TableSection>
+            <TableSection theme={theme}>
               <DashboardTable
                 data={filteredData}
                 columnData={data?.columnData || {}}
