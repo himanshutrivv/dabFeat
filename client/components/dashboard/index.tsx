@@ -817,10 +817,15 @@ export default function TaskManagementDashboard() {
 
                   {activeFilters.length > 0 && (
                     <ActiveFiltersSection theme={theme}>
-                      <ActiveFiltersLabel theme={theme}>Active Filters:</ActiveFiltersLabel>
+                      <ActiveFiltersLabel theme={theme}>
+                        Active Filters:
+                      </ActiveFiltersLabel>
                       <ActiveFiltersContainer theme={theme}>
                         {activeFilters.map((filter) => (
-                          <FilterBadge key={`${filter.key}-${filter.value}`} theme={theme}>
+                          <FilterBadge
+                            key={`${filter.key}-${filter.value}`}
+                            theme={theme}
+                          >
                             {filter.type === "manual" && "?? "}
                             {filter.type === "search" && "?? "}
                             {filter.label}: {filter.value}

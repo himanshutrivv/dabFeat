@@ -59,7 +59,10 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
           data-dropdown-container="true"
           onClick={handleContainerClick}
         >
-          <FilterDropdownSelectTrigger theme={theme} onClick={handleTriggerClick}>
+          <FilterDropdownSelectTrigger
+            theme={theme}
+            onClick={handleTriggerClick}
+          >
             <FilterDropdownSelectValue theme={theme}>
               {selectedValues.length === 0
                 ? `All ${label}`

@@ -269,7 +269,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     >
                       <FilterModalHeaderContent theme={theme}>
                         <Filter size={16} />
-                        <FilterModalTitle theme={theme} hasActive={hasActiveFilters}>
+                        <FilterModalTitle
+                          theme={theme}
+                          hasActive={hasActiveFilters}
+                        >
                           {label}
                         </FilterModalTitle>
                         {hasActiveFilters && (
@@ -306,7 +309,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
                         ) : (
                           <FilterModalManualContainer theme={theme}>
                             <FilterModalManualLabel theme={theme}>
-                              <FilterModalTypeIcon theme={theme}>🔍</FilterModalTypeIcon>
+                              <FilterModalTypeIcon theme={theme}>
+                                🔍
+                              </FilterModalTypeIcon>
                               Enter {label.toLowerCase()} value:
                             </FilterModalManualLabel>
                             <FilterModalManualInput
@@ -385,7 +390,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
                                   <FilterModalOptionText theme={theme}>
                                     {option}
                                   </FilterModalOptionText>
-                                  <FilterModalCheckbox theme={theme} selected={isSelected}>
+                                  <FilterModalCheckbox
+                                    theme={theme}
+                                    selected={isSelected}
+                                  >
                                     {isSelected && (
                                       <FilterModalCheckIcon
                                         theme={theme}
@@ -417,7 +425,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
         <FilterModalFooter theme={theme}>
           <FilterModalButtonContainer theme={theme}>
             {activeFilters.length > 0 && (
-              <FilterModalButton theme={theme} variant="outline" onClick={handleClearAll}>
+              <FilterModalButton
+                theme={theme}
+                variant="outline"
+                onClick={handleClearAll}
+              >
                 Clear All Filters ({activeFilters.length})
               </FilterModalButton>
             )}

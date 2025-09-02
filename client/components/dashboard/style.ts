@@ -20,8 +20,10 @@ export const MainContent = styled.div`
 
 export const Header = styled.div`
   background-color: ${({ theme }) => theme.colors.default?.primaryBackground};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
-  padding: ${({ theme }) => theme.spacing?.[4]} ${({ theme }) => theme.spacing?.[8]};
+  border-bottom: 1px solid
+    ${({ theme }) => theme.colors.default?.mutedBackground};
+  padding: ${({ theme }) => theme.spacing?.[4]}
+    ${({ theme }) => theme.spacing?.[8]};
   position: sticky;
   top: 0;
   z-index: 50;
@@ -39,7 +41,7 @@ export const HeaderContent = styled.div`
 
 export const DashboardTitle = styled.h1`
   margin: 0;
-  font-size: ${({ theme }) => theme.fontSizes?.['2xl']};
+  font-size: ${({ theme }) => theme.fontSizes?.["2xl"]};
   font-weight: ${({ theme }) => theme.fontWeights?.semibold};
   color: ${({ theme }) => theme.colors.default?.primary};
   font-family: ${({ theme }) => theme.fonts};
@@ -89,8 +91,10 @@ export const FilterCard = styled.div`
 `;
 
 export const FilterCardHeader = styled.div`
-  padding: ${({ theme }) => theme.spacing?.[6]} ${({ theme }) => theme.spacing?.[6]} 0 ${({ theme }) => theme.spacing?.[6]};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
+  padding: ${({ theme }) => theme.spacing?.[6]}
+    ${({ theme }) => theme.spacing?.[6]} 0 ${({ theme }) => theme.spacing?.[6]};
+  border-bottom: 1px solid
+    ${({ theme }) => theme.colors.default?.mutedBackground};
 `;
 
 export const FilterCardTitle = styled.h2`
@@ -199,7 +203,8 @@ export const FilterBadge = styled.div`
   background-color: ${({ theme }) => theme.colors.default?.secondaryBackground};
   color: ${({ theme }) => theme.colors.default?.primary};
   border: 1px solid ${({ theme }) => theme.colors.default?.primary};
-  padding: ${({ theme }) => theme.spacing?.[2]} ${({ theme }) => theme.spacing?.[3]};
+  padding: ${({ theme }) => theme.spacing?.[2]}
+    ${({ theme }) => theme.spacing?.[3]};
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing?.[2]};
@@ -219,7 +224,8 @@ export const FilterBadgeClose = styled.button`
   color: ${({ theme }) => theme.colors.default?.primary};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.default?.secondaryBackground};
+    background-color: ${({ theme }) =>
+      theme.colors.default?.secondaryBackground};
   }
 `;
 
@@ -686,7 +692,8 @@ export const FilterDropdownSelectTrigger = styled.button`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.default?.secondaryBackground};
+    background-color: ${({ theme }) =>
+      theme.colors.default?.secondaryBackground};
     color: ${({ theme }) => theme.colors.default?.primary};
     border-color: ${({ theme }) => theme.colors.default?.secondary};
     box-shadow: ${({ theme }) => theme.shadows?.md};
@@ -716,7 +723,8 @@ export const FilterDropdownSelectContent = styled.div`
   overflow-y: auto;
   border-radius: ${({ theme }) => theme.borderRadius?.md};
   border: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
-  background-color: ${({ theme }) => theme.colors.default?.primaryBackground} !important;
+  background-color: ${({ theme }) =>
+    theme.colors.default?.primaryBackground} !important;
   color: ${({ theme }) => theme.colors.default?.primary};
   opacity: 1 !important;
   padding: ${({ theme }) => theme.spacing?.[4]};
@@ -727,13 +735,15 @@ export const FilterDropdownSelectContent = styled.div`
   font-family: ${({ theme }) => theme.fonts};
 
   &.filter-content {
-    background-color: ${({ theme }) => theme.colors.default?.primaryBackground} !important;
+    background-color: ${({ theme }) =>
+      theme.colors.default?.primaryBackground} !important;
     opacity: 1 !important;
   }
 `;
 
 export const SelectItemsContainer = styled.div`
-  padding: ${({ theme }) => theme.spacing?.[2]} ${({ theme }) => theme.spacing?.[1]};
+  padding: ${({ theme }) => theme.spacing?.[2]}
+    ${({ theme }) => theme.spacing?.[1]};
 `;
 
 export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
@@ -744,7 +754,8 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
   user-select: none;
   align-items: center;
   border-radius: ${({ theme }) => theme.borderRadius?.sm};
-  padding: ${({ theme }) => theme.spacing?.[2]} ${({ theme }) => theme.spacing?.[3]};
+  padding: ${({ theme }) => theme.spacing?.[2]}
+    ${({ theme }) => theme.spacing?.[3]};
   font-size: ${({ theme }) => theme.fontSizes?.sm};
   outline: none;
   transition: ${({ theme }) => theme.transitions?.all};
@@ -756,12 +767,14 @@ export const FilterDropdownSelectItem = styled.div<{ selected?: boolean }>`
       : props.theme?.fontWeights?.normal};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.default?.secondaryBackground};
+    background-color: ${({ theme }) =>
+      theme.colors.default?.secondaryBackground};
     color: ${({ theme }) => theme.colors.default?.primary};
   }
 
   &:focus {
-    background-color: ${({ theme }) => theme.colors.default?.secondaryBackground};
+    background-color: ${({ theme }) =>
+      theme.colors.default?.secondaryBackground};
     color: ${({ theme }) => theme.colors.default?.primary};
   }
 
@@ -1160,8 +1173,10 @@ export const FilterModalContainer = styled.div<{ theme?: any }>`
   right: 0;
   width: 440px;
   height: 100vh;
-  background: ${({ theme }) => theme?.colors?.default?.primaryBackground || "white"};
-  border-left: 1px solid ${({ theme }) => theme?.colors?.default?.mutedBackground};
+  background: ${({ theme }) =>
+    theme?.colors?.default?.primaryBackground || "white"};
+  border-left: 1px solid
+    ${({ theme }) => theme?.colors?.default?.mutedBackground};
   border-radius: 0;
   z-index: 1001;
   display: flex;
@@ -1195,8 +1210,10 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
   background: ${({ theme }) => theme?.colors?.default?.secondaryBackground};
   color: ${({ theme }) => theme?.colors?.default?.primary};
   border-radius: 0;
-  padding: ${({ theme }) => theme?.spacing?.[6]} ${({ theme }) => theme?.spacing?.[8]};
-  border-bottom: 1px solid ${({ theme }) => theme?.colors?.default?.mutedBackground};
+  padding: ${({ theme }) => theme?.spacing?.[6]}
+    ${({ theme }) => theme?.spacing?.[8]};
+  border-bottom: 1px solid
+    ${({ theme }) => theme?.colors?.default?.mutedBackground};
   flex-shrink: 0;
   position: relative;
   font-family: ${({ theme }) => theme?.fonts};
