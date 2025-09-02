@@ -5,6 +5,7 @@ import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
 import { toast } from "sonner";
 import { globalStyles } from "@/styles/global";
+import { useThemeController } from "@/styles/ThemeControllerProvider";
 import {
   DashboardContainer,
   MainContent,
@@ -170,6 +171,7 @@ const transformFiltersToAPIFormat = (
 };
 
 export default function TaskManagementDashboard() {
+  const { theme } = useThemeController();
   const [data, setData] = useState<DashboardResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -693,7 +695,7 @@ export default function TaskManagementDashboard() {
   return (
     <>
       <Global styles={globalStyles()} />
-      <DashboardContainer>
+      <DashboardContainer theme={theme}>
         <MainContent>
           <MainContentLayout>
             {(hasSearchableColumns || hasFilterableColumns) && (
