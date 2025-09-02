@@ -904,6 +904,7 @@ export default function TaskManagementDashboard() {
             }));
           }}
           onApplyFilters={applyFiltersAndFetchData}
+          theme={theme}
         />
       </DashboardContainer>
     </>
