@@ -33,7 +33,12 @@ export const FontCard: React.FC<FontCardProps> = ({
 }) => {
   return (
     <CardWrapper>
-      <CardButton isSelected={isSelected} onClick={onClick} fontFamily={fontFamily} variant="default">
+      <CardButton
+        isSelected={isSelected}
+        onClick={onClick}
+        fontFamily={fontFamily}
+        variant="default"
+      >
         {isSelected && (
           <PremiumBadge variant="default">
             <Check size={12} />

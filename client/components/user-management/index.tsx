@@ -37,7 +37,7 @@ import { Button } from "@/styles/styled";
 
 const getUserManagementHeaders = (
   t: TFunction,
-  readOnly: boolean
+  readOnly: boolean,
 ): TableColumn[] => {
   const headersArray = t("lblUserManagementTableHeaders", {
     returnObjects: true,

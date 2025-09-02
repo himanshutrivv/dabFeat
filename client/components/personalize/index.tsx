@@ -35,7 +35,8 @@ import { FontCard } from "./font-card";
 const Personalize: React.FC = () => {
   const { currentTheme, currentFont, setTheme, setFont } = useThemeController();
 
-  const [selectedTheme, setSelectedTheme] = useState<ThemeVariantKey>(currentTheme);
+  const [selectedTheme, setSelectedTheme] =
+    useState<ThemeVariantKey>(currentTheme);
   const [selectedFont, setSelectedFont] = useState<FontVariant>(currentFont);
   const [isThemeSectionExpanded, setIsThemeSectionExpanded] = useState(false);
   const [isFontSectionExpanded, setIsFontSectionExpanded] = useState(false);
@@ -56,8 +57,14 @@ const Personalize: React.FC = () => {
 
   const getThemeColors = (variant: ThemeVariantKey) => {
     const themeData = themeVariants[variant].theme;
-    const colors = (themeData.colors as any)[variant] || themeData.colors.default;
-    return [colors.primary, colors.secondary, colors.primary, colors.primaryBackground];
+    const colors =
+      (themeData.colors as any)[variant] || themeData.colors.default;
+    return [
+      colors.primary,
+      colors.secondary,
+      colors.primary,
+      colors.primaryBackground,
+    ];
   };
 
   const getFontCategory = (variant: FontVariant) => {
@@ -101,30 +108,33 @@ const Personalize: React.FC = () => {
 
           <CollapsibleContent isExpanded={isThemeSectionExpanded}>
             <Grid>
-              {(Object.keys(themeVariants) as ThemeVariantKey[]).map((variant) => {
-                const themeData = themeVariants[variant];
-                const isSelected = selectedTheme === variant;
-                const icon = getThemeIcon(variant);
-                const colors = getThemeColors(variant);
-                const category = variant.charAt(0).toUpperCase() + variant.slice(1);
+              {(Object.keys(themeVariants) as ThemeVariantKey[]).map(
+                (variant) => {
+                  const themeData = themeVariants[variant];
+                  const isSelected = selectedTheme === variant;
+                  const icon = getThemeIcon(variant);
+                  const colors = getThemeColors(variant);
+                  const category =
+                    variant.charAt(0).toUpperCase() + variant.slice(1);
 
-                return (
-                  <ThemeCard
-                    key={variant}
-                    name={themeData.name}
-                    description={themeData.description}
-                    icon={icon}
-                    colors={colors}
-                    category={category}
-                    isSelected={isSelected}
-                    onClick={() => {
-                      setSelectedTheme(variant);
-                      setTheme(variant);
-                    }}
-                    variant={variant}
-                  />
-                );
-              })}
+                  return (
+                    <ThemeCard
+                      key={variant}
+                      name={themeData.name}
+                      description={themeData.description}
+                      icon={icon}
+                      colors={colors}
+                      category={category}
+                      isSelected={isSelected}
+                      onClick={() => {
+                        setSelectedTheme(variant);
+                        setTheme(variant);
+                      }}
+                      variant={variant}
+                    />
+                  );
+                },
+              )}
             </Grid>
           </CollapsibleContent>
         </Section>

@@ -142,10 +142,14 @@ export function AddUserModal({
               id="firstName"
               type="text"
               value={formData.firstName}
-              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, firstName: e.target.value })
+              }
               hasError={!!errors.firstName}
             />
-            {errors.firstName && <ErrorMessage>{errors.firstName}</ErrorMessage>}
+            {errors.firstName && (
+              <ErrorMessage>{errors.firstName}</ErrorMessage>
+            )}
           </FormGroup>
 
           <FormGroup>
@@ -154,7 +158,9 @@ export function AddUserModal({
               id="lastName"
               type="text"
               value={formData.lastName}
-              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, lastName: e.target.value })
+              }
               hasError={!!errors.lastName}
             />
             {errors.lastName && <ErrorMessage>{errors.lastName}</ErrorMessage>}
@@ -167,7 +173,9 @@ export function AddUserModal({
             id="email"
             type="email"
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
             hasError={!!errors.email}
           />
           {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
@@ -180,7 +188,9 @@ export function AddUserModal({
             type="tel"
             placeholder="+911234567890"
             value={formData.mobile}
-            onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, mobile: e.target.value })
+            }
             hasError={!!errors.mobile}
           />
           {errors.mobile && <ErrorMessage>{errors.mobile}</ErrorMessage>}

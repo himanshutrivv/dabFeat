@@ -1,4 +1,10 @@
-import { cardStyles, flexBetween, flexCenter, inputStyles, media } from "@/styles/styled";
+import {
+  cardStyles,
+  flexBetween,
+  flexCenter,
+  inputStyles,
+  media,
+} from "@/styles/styled";
 import styled from "@emotion/styled";
 
 export const Form = styled.form`
@@ -45,14 +51,17 @@ export const Container = styled.div``;
 export const Main = styled.main`
   max-width: 1280px;
   margin: 0 auto;
-  padding: ${({ theme }) => theme.spacing?.[8]} ${({ theme }) => theme.spacing?.[4]};
+  padding: ${({ theme }) => theme.spacing?.[8]}
+    ${({ theme }) => theme.spacing?.[4]};
 
   ${media.sm} {
-    padding: ${({ theme }) => theme.spacing?.[8]} ${({ theme }) => theme.spacing?.[6]};
+    padding: ${({ theme }) => theme.spacing?.[8]}
+      ${({ theme }) => theme.spacing?.[6]};
   }
 
   ${media.lg} {
-    padding: ${({ theme }) => theme.spacing?.[8]} ${({ theme }) => theme.spacing?.[8]};
+    padding: ${({ theme }) => theme.spacing?.[8]}
+      ${({ theme }) => theme.spacing?.[8]};
   }
 `;
 
@@ -63,7 +72,8 @@ export const Card = styled.div`
 
 export const CardHeader = styled.div`
   padding: ${({ theme }) => theme.spacing?.[6]};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
+  border-bottom: 1px solid
+    ${({ theme }) => theme.colors.default?.mutedBackground};
 `;
 
 export const CardHeaderTop = styled.div`
@@ -131,7 +141,8 @@ export const Badge = styled.span<{
 }>`
   display: inline-flex;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing?.[1]} ${({ theme }) => theme.spacing?.[2]};
+  padding: ${({ theme }) => theme.spacing?.[1]}
+    ${({ theme }) => theme.spacing?.[2]};
   font-size: ${({ theme }) => theme.fontSizes?.xs};
   font-weight: ${({ theme }) => theme.fontWeights?.medium};
   font-family: ${({ theme }) => theme.fonts};

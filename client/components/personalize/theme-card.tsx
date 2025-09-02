@@ -53,12 +53,16 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
           <IconSelectedWrapper isSelected={isSelected} variant={variant}>
             {icon}
           </IconSelectedWrapper>
-          {category && <CategoryBadge variant={variant}>{category}</CategoryBadge>}
+          {category && (
+            <CategoryBadge variant={variant}>{category}</CategoryBadge>
+          )}
         </CardHeader>
 
         <CardContent>
           <CardTitle variant={variant}>{name}</CardTitle>
-          {description && <CardDescription variant={variant}>{description}</CardDescription>}
+          {description && (
+            <CardDescription variant={variant}>{description}</CardDescription>
+          )}
         </CardContent>
 
         <ColorSection>

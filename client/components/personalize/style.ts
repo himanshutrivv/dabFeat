@@ -115,8 +115,9 @@ export const IconSelectedWrapper = styled.div<{
       : (theme.colors as any)[variant]?.mutedBackground};
   color: ${(props) =>
     props.isSelected
-      ? (({ theme, variant }) => (theme.colors as any)[variant]?.primaryBackground)
-      : (({ theme, variant }) => (theme.colors as any)[variant]?.primary)};
+      ? ({ theme, variant }) =>
+          (theme.colors as any)[variant]?.primaryBackground
+      : ({ theme, variant }) => (theme.colors as any)[variant]?.primary};
 `;
 
 export const SectionTitleText = styled.div``;
@@ -124,7 +125,8 @@ export const SectionTitleText = styled.div``;
 export const LargePreview = styled.div<{ fontFamily?: string }>`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
-  font-family: ${({ fontFamily, theme }) => (fontFamily ? fontFamily : theme.fonts)};
+  font-family: ${({ fontFamily, theme }) =>
+    fontFamily ? fontFamily : theme.fonts};
   color: ${({ theme }) => theme.colors.default.primary};
   font-family: ${(props) => props.fontFamily};
 `;
@@ -157,7 +159,8 @@ export const ChevronWrapper = styled.div<{ isExpanded: boolean }>`
 
   svg {
     transition: ${({ theme }) => theme.transitions.transform};
-    transform: ${(props) => (props.isExpanded ? "rotate(0deg)" : "rotate(180deg)")};
+    transform: ${(props) =>
+      props.isExpanded ? "rotate(0deg)" : "rotate(180deg)"};
   }
 
   &:hover {
@@ -169,7 +172,9 @@ export const ChevronWrapper = styled.div<{ isExpanded: boolean }>`
 export const CollapsibleContent = styled.div<{ isExpanded: boolean }>`
   display: grid;
   grid-template-rows: ${({ isExpanded }) => (isExpanded ? "1fr" : "0fr")};
-  transition: grid-template-rows 0.4s ease-in-out, opacity 0.3s ease-in-out;
+  transition:
+    grid-template-rows 0.4s ease-in-out,
+    opacity 0.3s ease-in-out;
   opacity: ${({ isExpanded }) => (isExpanded ? "1" : "0")};
   overflow: hidden;
   border-radius: 0 0 ${({ theme }) => theme.borderRadius["3xl"]}
@@ -177,7 +182,8 @@ export const CollapsibleContent = styled.div<{ isExpanded: boolean }>`
 
   > div {
     overflow: hidden;
-    padding: ${({ isExpanded, theme }) => (isExpanded ? theme.spacing[6] : "0")};
+    padding: ${({ isExpanded, theme }) =>
+      isExpanded ? theme.spacing[6] : "0"};
     transition: padding 0.3s ease-in-out;
   }
 `;
@@ -227,10 +233,11 @@ export const CardButton = styled.button<{
   border: 2px solid
     ${(props) =>
       props.isSelected
-        ? (({ theme }) => (theme.colors as any)[props.variant]?.primary)
-        : (({ theme }) => (theme.colors as any)[props.variant]?.mutedBackground)};
+        ? ({ theme }) => (theme.colors as any)[props.variant]?.primary
+        : ({ theme }) => (theme.colors as any)[props.variant]?.mutedBackground};
   border-radius: ${({ theme }) => theme.borderRadius.xl};
-  background-color: ${({ theme, variant }) => (theme.colors as any)[variant]?.primaryBackground};
+  background-color: ${({ theme, variant }) =>
+    (theme.colors as any)[variant]?.primaryBackground};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.all};
   text-align: left;
@@ -240,12 +247,14 @@ export const CardButton = styled.button<{
   overflow: hidden;
   box-shadow: ${(props) =>
     props.isSelected
-      ? (({ theme }) => theme.shadows["2xl"])
-      : (({ theme }) => theme.shadows.md)};
-  font-family: ${({ fontFamily, theme }) => (fontFamily ? fontFamily : theme.fonts)};
+      ? ({ theme }) => theme.shadows["2xl"]
+      : ({ theme }) => theme.shadows.md};
+  font-family: ${({ fontFamily, theme }) =>
+    fontFamily ? fontFamily : theme.fonts};
 
   &:hover {
-    border-color: ${({ theme, variant }) => (theme.colors as any)[variant]?.mutedBackground};
+    border-color: ${({ theme, variant }) =>
+      (theme.colors as any)[variant]?.mutedBackground};
     transform: translateY(-0.25rem);
     box-shadow: ${({ theme }) => theme.shadows["2xl"]};
   }
@@ -268,7 +277,8 @@ export const CardButton = styled.button<{
   }
 
   ${({ isSelected, theme }) =>
-    isSelected && `
+    isSelected &&
+    `
      box-shadow: ${theme.shadows["2xl"]}, 0 0 0 4px rgba(15, 23, 42, 0.1);
   `}
 `;
@@ -282,7 +292,8 @@ export const PremiumBadge = styled.div<{ variant: string }>`
   border-radius: ${({ theme }) => theme.borderRadius.full};
   background: linear-gradient(
     135deg,
-    ${({ theme, variant }) => (theme.colors as any)[variant]?.primaryBackground} 0%
+    ${({ theme, variant }) => (theme.colors as any)[variant]?.primaryBackground}
+      0%
   );
   color: ${({ theme, variant }) => (theme.colors as any)[variant]?.primary};
   display: flex;
@@ -313,8 +324,8 @@ export const IconWrapperSmall = styled.div<{ isSelected: boolean }>`
       : `linear-gradient(135deg, ${theme.colors.default.muted} 0%, ${theme.colors.default.secondary} 100%)`};
   color: ${(props) =>
     props.isSelected
-      ? (({ theme }) => theme.colors.default.primaryBackground)
-      : (({ theme }) => theme.colors.default.mutedBackground)};
+      ? ({ theme }) => theme.colors.default.primaryBackground
+      : ({ theme }) => theme.colors.default.mutedBackground};
 `;
 
 export const CategoryBadge = styled.span<{
@@ -323,10 +334,12 @@ export const CategoryBadge = styled.span<{
 }>`
   font-size: ${({ theme }) => theme.fontSizes.xs};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
-  font-family: ${({ fontFamily, theme }) => (fontFamily ? fontFamily : theme.fonts)};
+  font-family: ${({ fontFamily, theme }) =>
+    fontFamily ? fontFamily : theme.fonts};
   padding: ${({ theme }) => theme.spacing[1]} ${({ theme }) => theme.spacing[2]};
   border-radius: ${({ theme }) => theme.borderRadius.full};
-  background-color: ${({ theme, variant }) => (theme.colors as any)[variant]?.mutedBackground};
+  background-color: ${({ theme, variant }) =>
+    (theme.colors as any)[variant]?.mutedBackground};
   color: ${({ theme, variant }) => (theme.colors as any)[variant]?.primary};
 `;
 
@@ -339,7 +352,8 @@ export const CardTitle = styled.h3<{ fontFamily?: string; variant: string }>`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme, variant }) => (theme.colors as any)[variant]?.primary};
   margin: 0 0 ${({ theme }) => theme.spacing[1]} 0;
-  font-family: ${({ fontFamily, theme }) => (fontFamily ? fontFamily : theme.fonts)};
+  font-family: ${({ fontFamily, theme }) =>
+    fontFamily ? fontFamily : theme.fonts};
 `;
 
 export const CardDescription = styled.p<{
@@ -347,7 +361,8 @@ export const CardDescription = styled.p<{
   variant: string;
 }>`
   font-size: 0.625rem;
-  font-family: ${({ fontFamily, theme }) => (fontFamily ? fontFamily : theme.fonts)};
+  font-family: ${({ fontFamily, theme }) =>
+    fontFamily ? fontFamily : theme.fonts};
   color: ${({ theme, variant }) => (theme.colors as any)[variant]?.muted};
   margin: 0;
   line-height: 1.3;
@@ -381,7 +396,8 @@ export const ColorHeader = styled.div`
 export const ColorLabel = styled.span<{ fontFamily?: string; variant: string }>`
   font-size: 0.625rem;
   font-weight: ${({ theme }) => theme.fontWeights.medium};
-  font-family: ${({ fontFamily, theme }) => (fontFamily ? fontFamily : theme.fonts)};
+  font-family: ${({ fontFamily, theme }) =>
+    fontFamily ? fontFamily : theme.fonts};
   color: ${({ theme, variant }) => (theme.colors as any)[variant]?.muted};
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -406,7 +422,8 @@ export const ColorSwatch = styled.div<{ variant: string; color?: string }>`
   height: 0.75rem;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   background-color: ${(props) => props.color};
-  border: 1px solid ${({ theme, variant }) => (theme.colors as any)[variant]?.primaryBackground};
+  border: 1px solid
+    ${({ theme, variant }) => (theme.colors as any)[variant]?.primaryBackground};
   box-shadow: ${({ theme }) => theme.shadows.sm};
   transition: ${({ theme }) => theme.transitions.transform};
   position: relative;
