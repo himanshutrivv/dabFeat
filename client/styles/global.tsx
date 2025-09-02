@@ -26,6 +26,7 @@ export const globalStyles = () => css`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: ${theme.transitions.colors};
+    overflow: hidden !important;
   }
 
   input,
