@@ -121,11 +121,11 @@ export const FilterContainer = styled.div<{ show: boolean }>`
 `;
 
 export const SearchBarContainer = styled.div`
-  margin-bottom: 24px;
-  margin-top: 24px;
+  margin-bottom: ${({ theme }) => theme.spacing?.[6]};
+  margin-top: ${({ theme }) => theme.spacing?.[6]};
   position: relative;
   display: flex;
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacing?.[3]};
   align-items: center;
   z-index: 20;
 `;
