@@ -284,14 +284,15 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     </FilterModalItemHeader>
 
                     {isExpanded && (
-                      <FilterModalOptionsContainer>
+                      <FilterModalOptionsContainer theme={theme}>
                         {/* Section-specific search or manual input */}
                         {isSearchable ? (
-                          <FilterModalSectionSearchContainer>
-                            <FilterModalSectionSearchIcon>
+                          <FilterModalSectionSearchContainer theme={theme}>
+                            <FilterModalSectionSearchIcon theme={theme}>
                               <Search size={14} />
                             </FilterModalSectionSearchIcon>
                             <FilterModalSectionSearchInput
+                              theme={theme}
                               type="text"
                               placeholder={`Search ${label.toLowerCase()}...`}
                               value={sectionSearchTerms[key] || ""}
@@ -303,12 +304,13 @@ const FilterModal: React.FC<FilterModalProps> = ({
                             />
                           </FilterModalSectionSearchContainer>
                         ) : (
-                          <FilterModalManualContainer>
-                            <FilterModalManualLabel>
-                              <FilterModalTypeIcon>🔍</FilterModalTypeIcon>
+                          <FilterModalManualContainer theme={theme}>
+                            <FilterModalManualLabel theme={theme}>
+                              <FilterModalTypeIcon theme={theme}>🔍</FilterModalTypeIcon>
                               Enter {label.toLowerCase()} value:
                             </FilterModalManualLabel>
                             <FilterModalManualInput
+                              theme={theme}
                               type="text"
                               placeholder={`Type ${label.toLowerCase()} value...`}
                               value={manualFilterInputs[key] || ""}
@@ -324,7 +326,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                           </FilterModalManualContainer>
                         )}
 
-                        <FilterModalOptionsInner>
+                        <FilterModalOptionsInner theme={theme}>
                           {(() => {
                             const filteredSectionOptions =
                               getFilteredSectionOptions(
