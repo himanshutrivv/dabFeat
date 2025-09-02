@@ -3,9 +3,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Global } from "@emotion/react";
 import { Search, Filter, RefreshCw, X } from "lucide-react";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import { globalStyles } from "@/styles/global";
-import { appTheme } from "@/styles/themes/appTheme";
 import {
   DashboardContainer,
   MainContent,
@@ -529,33 +528,50 @@ export default function TaskManagementDashboard() {
 
       if (!startDate || !endDate) return { start, end };
 
-      const diffInMs = endDate.getTime() - startDate.getTime();
-      const maxDiffMs = 5 * 60 * 1000; // 5 minutes in milliseconds
+      const diffMs = endDate.getTime() - startDate.getTime();
+      const absDiffSec = Math.abs(Math.floor(diffMs / 1000));
+      const clamp = (n: number, min: number, max: number) =>
+        Math.min(max, Math.max(min, n));
+      const maxSec = 5 * 60; // 300 seconds
 
-      if (diffInMs > maxDiffMs) {
+      // If exactly same timestamp
+      if (diffMs === 0) {
+        toast.error("Start time and end time cannot be the same.");
         if (isStartChanged) {
-          // Adjust end time to be start + 5 minutes
-          const newEndDate = new Date(startDate.getTime() + maxDiffMs);
-          return { start, end: formatDateTimeForInput(newEndDate) };
+          const newEnd = new Date(startDate.getTime() + 1000);
+          return { start, end: formatDateTimeForInput(newEnd) };
         } else {
-          // Adjust start time to be end - 5 minutes
-          const newStartDate = new Date(endDate.getTime() - maxDiffMs);
-          return { start: formatDateTimeForInput(newStartDate), end };
+          const newStart = new Date(endDate.getTime() - 1000);
+          return { start: formatDateTimeForInput(newStart), end };
         }
       }
 
-      if (diffInMs < 0) {
+      // If start is after end, or end after start, handle using absolute diff
+      if (diffMs < 0) {
+        // start > end → adjust the non-edited value to ensure start < end
+        const desired = clamp(absDiffSec, 1, maxSec);
         if (isStartChanged) {
-          // Set end to start + 1 minute
-          const newEndDate = new Date(startDate.getTime() + 60000);
-          return { start, end: formatDateTimeForInput(newEndDate) };
+          const newEnd = new Date(startDate.getTime() + desired * 1000);
+          return { start, end: formatDateTimeForInput(newEnd) };
         } else {
-          // Set start to end - 1 minute
-          const newStartDate = new Date(endDate.getTime() - 60000);
-          return { start: formatDateTimeForInput(newStartDate), end };
+          const newStart = new Date(endDate.getTime() - desired * 1000);
+          return { start: formatDateTimeForInput(newStart), end };
         }
       }
 
+      // diffMs > 0 (end after start)
+      if (absDiffSec > maxSec) {
+        // Too large → clamp to exactly 5 minutes, preserving last edit
+        if (isStartChanged) {
+          const newEnd = new Date(startDate.getTime() + maxSec * 1000);
+          return { start, end: formatDateTimeForInput(newEnd) };
+        } else {
+          const newStart = new Date(endDate.getTime() - maxSec * 1000);
+          return { start: formatDateTimeForInput(newStart), end };
+        }
+      }
+
+      // Within (0, 300] seconds and chronological → valid as-is
       return { start, end };
     },
     [parseDateTimeFromInput, formatDateTimeForInput],
@@ -606,8 +622,8 @@ export default function TaskManagementDashboard() {
       console.log("Refreshing data with time range:", timeRange);
 
       const response = await srGetDashboardTableData({
-        bussId,
-        timeRange,
+        bussId: bussId || "default",
+        filterData: null,
       });
 
       console.log("Monitoring data refreshed:", response);
@@ -650,7 +666,7 @@ export default function TaskManagementDashboard() {
   if (error) {
     return (
       <>
-        <Global styles={globalStyles(appTheme)} />
+        <Global styles={globalStyles()} />
         <ErrorContainer>
           <ErrorText>Error: {error}</ErrorText>
           <RetryButton onClick={() => window.location.reload()}>
@@ -676,8 +692,7 @@ export default function TaskManagementDashboard() {
 
   return (
     <>
-      <Global styles={globalStyles(appTheme)} />
-      <Toaster />
+      <Global styles={globalStyles()} />
       <DashboardContainer>
         <MainContent>
           <MainContentLayout>
@@ -787,15 +802,9 @@ export default function TaskManagementDashboard() {
                     >
                       <RefreshCw
                         size={16}
-                        css={{
-                          animation: isRefreshing ? 'spin 1s linear infinite' : 'none',
-                          '@keyframes spin': {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '100%': { transform: 'rotate(360deg)' },
-                          },
-                        }}
+                        className={isRefreshing ? "animate-spin" : undefined}
                       />
-                      {isRefreshing ? 'Refreshing...' : 'Refresh'}
+                      {isRefreshing ? "Refreshing..." : "Refresh"}
                     </RefreshButton>
                   </SearchBarContainer>
 

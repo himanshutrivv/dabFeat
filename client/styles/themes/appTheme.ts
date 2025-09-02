@@ -1,23 +1,15 @@
 export type ColorPalette = {
-  background: string;
-  foreground: string;
-  card: string;
-  cardForeground: string;
   primary: string;
-  primaryForeground: string;
+  primaryBackground: string;
+
   secondary: string;
-  secondaryForeground: string;
-  accent: string;
-  accentForeground: string;
-  border: string;
-  popover?: string;
-  popoverForeground?: string;
-  muted?: string;
-  mutedForeground?: string;
+  secondaryBackground: string;
+
+  muted: string;
+  mutedBackground: string;
+
   destructive?: string;
-  destructiveForeground?: string;
-  input?: string;
-  ring?: string;
+  destructiveBackground: string;
 };
 
 export type AppTheme = {
@@ -33,6 +25,7 @@ export type AppTheme = {
   };
   fontSizes: {
     base: string;
+    xs: string;
     sm: string;
     lg: string;
     xl: string;
@@ -56,119 +49,108 @@ export type AppTheme = {
 export const appTheme: AppTheme = {
   colors: {
     default: {
-      background: "hsl(0, 0%, 98%)",
-      foreground: "hsl(215, 25%, 27%)",
-      card: "hsl(0, 0%, 100%)",
-      cardForeground: "hsl(215, 25%, 27%)",
-      popover: "hsl(0, 0%, 100%)",
-      popoverForeground: "hsl(215, 25%, 27%)",
       primary: "hsl(215, 25%, 27%)",
-      primaryForeground: "hsl(0, 0%, 98%)",
-      secondary: "hsl(210, 17%, 95%)",
-      secondaryForeground: "hsl(215, 25%, 27%)",
-      muted: "hsl(210, 17%, 95%)",
-      mutedForeground: "hsl(215, 13%, 55%)",
-      accent: "hsl(210, 17%, 95%)",
-      accentForeground: "hsl(215, 25%, 27%)",
-      destructive: "hsl(0, 84%, 60%)",
-      destructiveForeground: "hsl(0, 0%, 98%)",
-      border: "hsl(214, 20%, 88%)",
-      input: "hsl(214, 20%, 88%)",
-      ring: "hsl(215, 25%, 27%)",
+      primaryBackground: "hsl(0, 0%, 100%)",
+
+      secondary: "hsl(210, 17%, 40%)",
+      secondaryBackground: "hsl(210, 17%, 95%)",
+
+      muted: "hsl(210, 10%, 55%)",
+      mutedBackground: "hsl(210, 17%, 95%)",
+
+      destructive: "hsl(0, 72%, 50%)",
+      destructiveBackground: "hsl(0, 100%, 98%)",
     },
     dark: {
-      background: "hsl(222, 47%, 11%)",
-      foreground: "hsl(213, 31%, 91%)",
-      card: "hsl(222, 84%, 5%)",
-      cardForeground: "hsl(213, 31%, 91%)",
-      primary: "hsl(217, 91%, 60%)",
-      primaryForeground: "hsl(222, 47%, 11%)",
-      secondary: "hsl(217, 32%, 17%)",
-      secondaryForeground: "hsl(213, 31%, 91%)",
-      muted: "hsl(217, 32%, 17%)",
-      mutedForeground: "hsl(215, 20%, 65%)",
-      accent: "hsl(217, 32%, 17%)",
-      accentForeground: "hsl(213, 31%, 91%)",
-      border: "hsl(217, 32%, 17%)",
+      primary: "hsl(217, 91%, 62%)",
+      primaryBackground: "hsl(222, 27%, 12%)",
+
+      secondary: "hsl(218, 15%, 65%)",
+      secondaryBackground: "hsl(220, 20%, 18%)",
+
+      muted: "hsl(220, 10%, 55%)",
+      mutedBackground: "hsl(220, 15%, 15%)",
+
+      destructive: "hsl(0, 72%, 55%)",
+      destructiveBackground: "hsl(0, 62%, 20%)",
     },
     ocean: {
-      background: "hsl(200, 100%, 95%)",
-      foreground: "hsl(210, 40%, 20%)",
-      card: "hsl(200, 100%, 98%)",
-      cardForeground: "hsl(210, 40%, 20%)",
-      primary: "hsl(200, 80%, 50%)",
-      primaryForeground: "hsl(0, 0%, 100%)",
-      secondary: "hsl(200, 60%, 90%)",
-      secondaryForeground: "hsl(210, 40%, 20%)",
-      accent: "hsl(200, 80%, 60%)",
-      accentForeground: "hsl(0, 0%, 100%)",
-      border: "hsl(200, 60%, 85%)",
+      primary: "hsl(200, 75%, 50%)",
+      primaryBackground: "hsl(200, 100%, 97%)",
+
+      secondary: "hsl(200, 55%, 40%)",
+      secondaryBackground: "hsl(200, 55%, 90%)",
+
+      muted: "hsl(200, 20%, 45%)",
+      mutedBackground: "hsl(200, 40%, 95%)",
+
+      destructive: "hsl(0, 72%, 52%)",
+      destructiveBackground: "hsl(0, 100%, 95%)",
     },
     forest: {
-      background: "hsl(120, 30%, 95%)",
-      foreground: "hsl(120, 30%, 20%)",
-      card: "hsl(120, 30%, 98%)",
-      cardForeground: "hsl(120, 30%, 20%)",
-      primary: "hsl(120, 40%, 35%)",
-      primaryForeground: "hsl(0, 0%, 100%)",
-      secondary: "hsl(120, 30%, 85%)",
-      secondaryForeground: "hsl(120, 30%, 20%)",
-      accent: "hsl(120, 50%, 45%)",
-      accentForeground: "hsl(0, 0%, 100%)",
-      border: "hsl(120, 20%, 80%)",
-      muted: "hsl(120, 20%, 80%)",
+      primary: "hsl(125, 40%, 35%)",
+      primaryBackground: "hsl(125, 35%, 97%)",
+
+      secondary: "hsl(125, 30%, 30%)",
+      secondaryBackground: "hsl(125, 35%, 88%)",
+
+      muted: "hsl(125, 15%, 35%)",
+      mutedBackground: "hsl(125, 20%, 82%)",
+
+      destructive: "hsl(0, 70%, 52%)",
+      destructiveBackground: "hsl(0, 85%, 92%)",
     },
     sunset: {
-      background: "hsl(20, 80%, 95%)",
-      foreground: "hsl(20, 60%, 20%)",
-      card: "hsl(20, 80%, 98%)",
-      cardForeground: "hsl(20, 60%, 20%)",
-      primary: "hsl(20, 90%, 50%)",
-      primaryForeground: "hsl(0, 0%, 100%)",
-      secondary: "hsl(20, 80%, 85%)",
-      secondaryForeground: "hsl(20, 60%, 20%)",
-      accent: "hsl(25, 80%, 55%)",
-      accentForeground: "hsl(0, 0%, 100%)",
-      border: "hsl(20, 70%, 80%)",
+      primary: "hsl(20, 90%, 55%)",
+      primaryBackground: "hsl(20, 95%, 98%)",
+
+      secondary: "hsl(20, 65%, 40%)",
+      secondaryBackground: "hsl(20, 75%, 90%)",
+
+      muted: "hsl(20, 25%, 45%)",
+      mutedBackground: "hsla(20, 34.40%, 88.00%, 0.88)",
+
+      destructive: "hsl(0, 75%, 55%)",
+      destructiveBackground: "hsl(0, 95%, 95%)",
     },
     purple: {
-      background: "hsl(270, 50%, 98%)",
-      foreground: "hsl(270, 50%, 20%)",
-      card: "hsl(270, 50%, 100%)",
-      cardForeground: "hsl(270, 50%, 20%)",
-      primary: "hsl(270, 70%, 50%)",
-      primaryForeground: "hsl(0, 0%, 100%)",
-      secondary: "hsl(270, 40%, 90%)",
-      secondaryForeground: "hsl(270, 50%, 20%)",
-      accent: "hsl(270, 60%, 60%)",
-      accentForeground: "hsl(0, 0%, 100%)",
-      border: "hsl(270, 30%, 85%)",
+      primary: "hsl(270, 75%, 55%)",
+      primaryBackground: "hsl(270, 90%, 99%)",
+
+      secondary: "hsl(270, 50%, 40%)",
+      secondaryBackground: "hsl(270, 60%, 92%)",
+
+      muted: "hsl(270, 25%, 50%)",
+      mutedBackground: "hsl(270, 30%, 90%)",
+
+      destructive: "hsl(0, 70%, 52%)",
+      destructiveBackground: "hsl(0, 85%, 95%)",
     },
     minimal: {
-      background: "hsl(0, 0%, 100%)",
-      foreground: "hsl(0, 0%, 10%)",
-      card: "hsl(0, 0%, 100%)",
-      cardForeground: "hsl(0, 0%, 10%)",
       primary: "hsl(0, 0%, 0%)",
-      primaryForeground: "hsl(0, 0%, 100%)",
-      secondary: "hsl(0, 0%, 96%)",
-      secondaryForeground: "hsl(0, 0%, 10%)",
-      accent: "hsl(0, 0%, 80%)",
-      accentForeground: "hsl(0, 0%, 0%)",
-      border: "hsl(0, 0%, 90%)",
+      primaryBackground: "hsl(0, 0%, 100%)",
+
+      secondary: "hsl(0, 0%, 25%)",
+      secondaryBackground: "hsl(0, 0%, 95%)",
+
+      muted: "hsl(0, 0%, 40%)",
+      mutedBackground: "hsl(0, 0%, 92%)",
+
+      destructive: "hsl(0, 75%, 55%)",
+      destructiveBackground: "hsl(0, 0%, 98%)",
     },
     slate: {
-      background: "hsl(210, 20%, 95%)",
-      foreground: "hsl(210, 20%, 20%)",
-      card: "hsl(210, 20%, 98%)",
-      cardForeground: "hsl(210, 20%, 20%)",
-      primary: "hsl(210, 40%, 30%)",
-      primaryForeground: "hsl(0, 0%, 100%)",
-      secondary: "hsl(210, 20%, 85%)",
-      secondaryForeground: "hsl(210, 20%, 20%)",
-      accent: "hsl(210, 30%, 40%)",
-      accentForeground: "hsl(0, 0%, 100%)",
-      border: "hsl(210, 20%, 80%)",
+      primary: "hsl(210, 35%, 32%)",
+      primaryBackground: "hsl(210, 25%, 98%)",
+
+      secondary: "hsl(210, 25%, 28%)",
+      secondaryBackground: "hsl(210, 25%, 88%)",
+
+      muted: "hsl(210, 15%, 45%)",
+      mutedBackground: "hsl(210, 20%, 85%)",
+
+      destructive: "hsl(0, 72%, 55%)",
+      destructiveBackground: "hsl(0, 90%, 96%)",
     },
   },
   fonts: "Arial, Helvetica, sans-serif",
@@ -253,5 +235,5 @@ export const appTheme: AppTheme = {
 };
 
 declare module "@emotion/react" {
-  export interface Theme extends AppTheme {}
+  export interface Theme extends AppTheme { }
 }

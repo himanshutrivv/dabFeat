@@ -1,5 +1,5 @@
-import { appTheme } from "../../../styles/themes/appTheme";
 import styled from "@emotion/styled";
+import { appTheme } from "@/styles/themes/appTheme";
 
 const theme = appTheme; // Keep compatibility while using the new structure
 
@@ -45,7 +45,7 @@ export const StyledTable = styled.table`
   width: 100%;
   min-width: max-content;
   border-collapse: collapse;
-  font-family: ${theme.fonts.default};
+  font-family: ${theme.fonts};
 `;
 
 export const TableHeader = styled.thead`
@@ -85,10 +85,10 @@ export const TableRow = styled.tr<{ isEven: boolean }>`
   transform: translateY(0px);
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${theme.shadows.md};
-    z-index: 0;
-    position: relative;
+    background-color: ${(props) =>
+      props.isEven
+        ? theme.colors.default.card
+        : theme.colors.default.secondary};
   }
 `;
 
@@ -98,6 +98,7 @@ export const TableCell = styled.td<{ isClickable?: boolean }>`
   font-size: ${theme.fontSizes.sm};
   line-height: ${theme.lineHeights.normal};
   white-space: nowrap;
+  color: #374151;
   cursor: ${(props) => (props.isClickable ? "pointer" : "default")};
   user-select: ${(props) => (props.isClickable ? "none" : "text")};
 `;
@@ -137,11 +138,18 @@ export const PaginationButton = styled.button<{ isActive?: boolean }>`
   height: 40px;
   padding: ${theme.spacing[2]} ${theme.spacing[3]};
   background: ${(props) =>
-    props.isActive ? theme.colors.default.primary : theme.colors.default.background};
+    props.isActive
+      ? theme.colors.default.primary
+      : theme.colors.default.background};
   color: ${(props) =>
-    props.isActive ? theme.colors.default.primaryForeground : theme.colors.default.foreground};
+    props.isActive
+      ? theme.colors.default.primaryForeground
+      : theme.colors.default.foreground};
   border: 1px solid
-    ${(props) => (props.isActive ? theme.colors.default.primary : theme.colors.default.border)};
+    ${(props) =>
+      props.isActive
+        ? theme.colors.default.primary
+        : theme.colors.default.border};
   border-radius: ${theme.borderRadius.md};
   font-size: ${theme.fontSizes.sm};
   font-weight: ${theme.fontWeights.medium};

@@ -1,6 +1,8 @@
 "use client";
 import React, { useCallback } from "react";
+import { ThemeProvider } from "@emotion/react";
 import { ChevronDown } from "lucide-react";
+import { appTheme } from "@/styles/themes/appTheme";
 import {
   TimeLineFilterGroup,
   TimeLineSelectContainer,
@@ -11,8 +13,11 @@ import {
   TimeLineButton,
   TimeLineFilterSection,
   TimeLineFilterLabel,
+  TimeLineFilterInlineNote,
   TimeLineFilterInputGrid,
-  TimeLineFilterNote,
+  TimeLineTimeWithToggle,
+  TimeLineAmPmToggle,
+  TimeLineAmPmOption,
   TimeLineFilterButtonGrid,
 } from "./style";
 
@@ -85,6 +90,47 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
     [startDateTime, endDateTime, onStartDateTimeChange, onEndDateTimeChange],
   );
 
+  const getTimePart = useCallback(
+    (dt: string) => (dt ? dt.split(" ")[1] || "00:00:00" : "00:00:00"),
+    [],
+  );
+  const getMeridiem = useCallback((timePart: string) => {
+    const h = parseInt(timePart.split(":")[0] || "0", 10);
+    return h < 12 ? "AM" : "PM";
+  }, []);
+
+  const setMeridiem = useCallback(
+    (isStart: boolean, meridiem: "AM" | "PM") => {
+      const currentDateTime = isStart ? startDateTime : endDateTime;
+      const datePart = currentDateTime
+        ? currentDateTime.split(" ")[0]
+        : new Date().toLocaleDateString("en-GB");
+      const timePart = getTimePart(currentDateTime);
+      const [hStr, m = "00", s = "00"] = timePart.split(":");
+      let h = Math.min(23, Math.max(0, parseInt(hStr || "0", 10)));
+
+      if (meridiem === "AM") {
+        if (h === 12)
+          h = 0; // 12 AM -> 00
+        else if (h > 12) h -= 12;
+      } else {
+        if (h < 12) h += 12; // PM
+      }
+
+      const hh = String(h).padStart(2, "0");
+      const newDateTime = `${datePart} ${hh}:${m}:${s}`;
+      if (isStart) onStartDateTimeChange(newDateTime);
+      else onEndDateTimeChange(newDateTime);
+    },
+    [
+      startDateTime,
+      endDateTime,
+      onStartDateTimeChange,
+      onEndDateTimeChange,
+      getTimePart,
+    ],
+  );
+
   const handleButtonClick = useCallback(
     (e: React.MouseEvent, action: "reset" | "apply") => {
       e.stopPropagation();
@@ -98,100 +144,168 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
   );
 
   return (
-    <TimeLineFilterGroup>
-      <TimeLineSelectContainer data-dropdown-container>
-        <TimeLineSelectTrigger onClick={onToggle}>
-          <TimeLineSelectValue>
-            {startDateTime && endDateTime
-              ? "Custom Range"
-              : "Select Time Range"}
-          </TimeLineSelectValue>
-          <ChevronDown size={16} />
-        </TimeLineSelectTrigger>
-        {isOpen && (
-          <TimeLineFilterContent>
-            <TimeLineFilterSection>
-              <div>
-                <TimeLineFilterLabel>Start Date & Time</TimeLineFilterLabel>
-                <TimeLineFilterInputGrid>
-                  <TimeLineInput
-                    type="date"
-                    value={
-                      startDateTime
-                        ? startDateTime
-                          .split(" ")[0]
-                          .split("/")
-                          .reverse()
-                          .join("-")
-                        : ""
-                    }
-                    onClick={handleInputInteraction}
-                    onChange={(e) => handleDateChange(e, true)}
-                  />
-                  <TimeLineInput
-                    type="time"
-                    step="1"
-                    value={
-                      startDateTime
-                        ? startDateTime.split(" ")[1] || "00:00:00"
-                        : ""
-                    }
-                    onClick={handleInputInteraction}
-                    onChange={(e) => handleTimeChange(e, true)}
-                  />
-                </TimeLineFilterInputGrid>
-              </div>
-              <div>
-                <TimeLineFilterLabel>End Date & Time</TimeLineFilterLabel>
-                <TimeLineFilterInputGrid>
-                  <TimeLineInput
-                    type="date"
-                    value={
-                      endDateTime
-                        ? endDateTime
-                          .split(" ")[0]
-                          .split("/")
-                          .reverse()
-                          .join("-")
-                        : ""
-                    }
-                    onClick={handleInputInteraction}
-                    onChange={(e) => handleDateChange(e, false)}
-                  />
-                  <TimeLineInput
-                    type="time"
-                    step="1"
-                    value={
-                      endDateTime ? endDateTime.split(" ")[1] || "00:00:00" : ""
-                    }
-                    onClick={handleInputInteraction}
-                    onChange={(e) => handleTimeChange(e, false)}
-                  />
-                </TimeLineFilterInputGrid>
-              </div>
-              <TimeLineFilterNote>
-                Maximum time range: 5 minutes
-              </TimeLineFilterNote>
-              <TimeLineFilterButtonGrid>
-                <TimeLineButton
-                  size="sm"
-                  variant="outline"
-                  onClick={(e) => handleButtonClick(e, "reset")}
-                >
-                  Reset
-                </TimeLineButton>
-                <TimeLineButton
-                  size="sm"
-                  onClick={(e) => handleButtonClick(e, "apply")}
-                >
-                  Apply
-                </TimeLineButton>
-              </TimeLineFilterButtonGrid>
-            </TimeLineFilterSection>
-          </TimeLineFilterContent>
-        )}
-      </TimeLineSelectContainer>
-    </TimeLineFilterGroup>
+    <ThemeProvider theme={appTheme}>
+      <TimeLineFilterGroup>
+        <TimeLineSelectContainer data-dropdown-container>
+          <TimeLineSelectTrigger onClick={onToggle}>
+            <TimeLineSelectValue>
+              {startDateTime && endDateTime
+                ? "Custom Range"
+                : "Select Time Range"}
+            </TimeLineSelectValue>
+            <ChevronDown size={16} />
+          </TimeLineSelectTrigger>
+          {isOpen && (
+            <TimeLineFilterContent>
+              <TimeLineFilterSection>
+                <div>
+                  <TimeLineFilterLabel>
+                    Start Date & Time
+                    <TimeLineFilterInlineNote>
+                      (Maximum time range: 5 minutes)
+                    </TimeLineFilterInlineNote>
+                  </TimeLineFilterLabel>
+                  <TimeLineFilterInputGrid>
+                    <TimeLineInput
+                      type="date"
+                      value={
+                        startDateTime
+                          ? startDateTime
+                              .split(" ")[0]
+                              .split("/")
+                              .reverse()
+                              .join("-")
+                          : ""
+                      }
+                      onClick={handleInputInteraction}
+                      onChange={(e) => handleDateChange(e, true)}
+                    />
+                    <TimeLineTimeWithToggle>
+                      <TimeLineInput
+                        type="time"
+                        step="1"
+                        value={
+                          startDateTime
+                            ? startDateTime.split(" ")[1] || "00:00:00"
+                            : ""
+                        }
+                        onClick={handleInputInteraction}
+                        onChange={(e) => handleTimeChange(e, true)}
+                      />
+                      <TimeLineAmPmToggle
+                        onClick={handleInputInteraction as any}
+                      >
+                        {(() => {
+                          const mer = getMeridiem(getTimePart(startDateTime));
+                          return (
+                            <>
+                              <TimeLineAmPmOption
+                                active={mer === "AM"}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setMeridiem(true, "AM");
+                                }}
+                              >
+                                AM
+                              </TimeLineAmPmOption>
+                              <TimeLineAmPmOption
+                                active={mer === "PM"}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setMeridiem(true, "PM");
+                                }}
+                              >
+                                PM
+                              </TimeLineAmPmOption>
+                            </>
+                          );
+                        })()}
+                      </TimeLineAmPmToggle>
+                    </TimeLineTimeWithToggle>
+                  </TimeLineFilterInputGrid>
+                </div>
+                <div>
+                  <TimeLineFilterLabel>End Date & Time</TimeLineFilterLabel>
+                  <TimeLineFilterInputGrid>
+                    <TimeLineInput
+                      type="date"
+                      value={
+                        endDateTime
+                          ? endDateTime
+                              .split(" ")[0]
+                              .split("/")
+                              .reverse()
+                              .join("-")
+                          : ""
+                      }
+                      onClick={handleInputInteraction}
+                      onChange={(e) => handleDateChange(e, false)}
+                    />
+                    <TimeLineTimeWithToggle>
+                      <TimeLineInput
+                        type="time"
+                        step="1"
+                        value={
+                          endDateTime
+                            ? endDateTime.split(" ")[1] || "00:00:00"
+                            : ""
+                        }
+                        onClick={handleInputInteraction}
+                        onChange={(e) => handleTimeChange(e, false)}
+                      />
+                      <TimeLineAmPmToggle
+                        onClick={handleInputInteraction as any}
+                      >
+                        {(() => {
+                          const mer = getMeridiem(getTimePart(endDateTime));
+                          return (
+                            <>
+                              <TimeLineAmPmOption
+                                active={mer === "AM"}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setMeridiem(false, "AM");
+                                }}
+                              >
+                                AM
+                              </TimeLineAmPmOption>
+                              <TimeLineAmPmOption
+                                active={mer === "PM"}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setMeridiem(false, "PM");
+                                }}
+                              >
+                                PM
+                              </TimeLineAmPmOption>
+                            </>
+                          );
+                        })()}
+                      </TimeLineAmPmToggle>
+                    </TimeLineTimeWithToggle>
+                  </TimeLineFilterInputGrid>
+                </div>
+                <TimeLineFilterButtonGrid>
+                  <TimeLineButton
+                    size="sm"
+                    variant="outline"
+                    onClick={(e) => handleButtonClick(e, "reset")}
+                  >
+                    Reset
+                  </TimeLineButton>
+                  <TimeLineButton
+                    size="sm"
+                    onClick={(e) => handleButtonClick(e, "apply")}
+                  >
+                    Apply
+                  </TimeLineButton>
+                </TimeLineFilterButtonGrid>
+              </TimeLineFilterSection>
+            </TimeLineFilterContent>
+          )}
+        </TimeLineSelectContainer>
+      </TimeLineFilterGroup>
+    </ThemeProvider>
   );
 };
 
