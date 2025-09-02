@@ -146,17 +146,17 @@ export const SearchIcon = styled.div`
 export const FilterGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: ${({ theme }) => theme.spacing?.[4]};
+  margin-bottom: ${({ theme }) => theme.spacing?.[6]};
   position: relative;
   z-index: 30;
   isolation: isolate;
 
-  @media (min-width: 768px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints?.md}) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints?.lg}) {
     grid-template-columns: repeat(5, 1fr);
   }
 `;
