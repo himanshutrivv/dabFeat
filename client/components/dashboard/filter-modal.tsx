@@ -1,6 +1,8 @@
 "use client";
 import React, { useCallback, useState, useMemo } from "react";
+import { ThemeProvider } from "@emotion/react";
 import { Search, X, Filter, ChevronRight, Sparkles } from "lucide-react";
+import { appTheme } from "@/styles/themes/appTheme";
 import {
   FilterModalBackdrop,
   FilterModalContainer,
@@ -200,7 +202,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <>
+    <ThemeProvider theme={appTheme}>
       <FilterModalBackdrop onClick={onClose} />
       <FilterModalContainer
         data-modal-container
@@ -416,7 +418,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
           </FilterModalButtonContainer>
         </FilterModalFooter>
       </FilterModalContainer>
-    </>
+    </ThemeProvider>
   );
 };
 
