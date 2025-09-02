@@ -1192,19 +1192,14 @@ export const FilterModalHeader = styled.div<{ theme?: any }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f8fafc;
-  color: #1f2937;
+  background: ${({ theme }) => theme?.colors?.default?.secondaryBackground};
+  color: ${({ theme }) => theme?.colors?.default?.primary};
   border-radius: 0;
-  padding: 24px 32px;
-  border-bottom: 1px solid #e5e7eb;
+  padding: ${({ theme }) => theme?.spacing?.[6]} ${({ theme }) => theme?.spacing?.[8]};
+  border-bottom: 1px solid ${({ theme }) => theme?.colors?.default?.mutedBackground};
   flex-shrink: 0;
   position: relative;
-
-  .dark & {
-    background: #111827;
-    color: #f9fafb;
-    border-bottom: 1px solid #374151;
-  }
+  font-family: ${({ theme }) => theme?.fonts};
 `;
 
 export const FilterModalContent = styled.div<{ theme?: any }>`
