@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { ChevronDown } from "lucide-react";
+import { AppTheme } from "@/styles/themes/appTheme";
 import {
   FilterDropdownFilterGroup,
   FilterDropdownSelectContainer,
@@ -19,6 +20,7 @@ interface FilterDropdownProps {
   isOpen: boolean;
   onToggle: (columnKey: string) => void;
   onFilterChange: (columnKey: string, value: string) => void;
+  theme: AppTheme;
 }
 
 const FilterDropdown: React.FC<FilterDropdownProps> = ({
