@@ -668,27 +668,28 @@ export const FilterDropdownSelectTrigger = styled.button`
   justify-content: space-between;
   height: 40px;
   width: 100%;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  background-color: #ffffff;
-  padding: 0 12px;
-  font-size: 14px;
-  color: #374151;
+  border-radius: ${({ theme }) => theme.borderRadius?.md};
+  border: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
+  background-color: ${({ theme }) => theme.colors.default?.primaryBackground};
+  padding: 0 ${({ theme }) => theme.spacing?.[3]};
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: ${({ theme }) => theme.transitions?.all};
+  box-shadow: ${({ theme }) => theme.shadows?.sm};
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #2563eb;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.default?.primary};
     outline-offset: 2px;
   }
 
   &:hover {
-    background-color: #f3f4f6;
-    color: #1f2937;
-    border-color: #d1d5db;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: ${({ theme }) => theme.colors.default?.secondaryBackground};
+    color: ${({ theme }) => theme.colors.default?.primary};
+    border-color: ${({ theme }) => theme.colors.default?.secondary};
+    box-shadow: ${({ theme }) => theme.shadows?.md};
   }
 
   &:disabled {
