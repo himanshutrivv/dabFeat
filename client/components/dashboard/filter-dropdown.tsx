@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
+import { ThemeProvider } from "@emotion/react";
 import { ChevronDown } from "lucide-react";
+import { appTheme } from "@/styles/themes/appTheme";
 import {
   FilterDropdownFilterGroup,
   FilterDropdownSelectContainer,
@@ -49,51 +51,53 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
   };
 
   return (
-    <FilterDropdownFilterGroup>
-      <FilterDropdownSelectContainer
-        data-dropdown-container="true"
-        onClick={handleContainerClick}
-      >
-        <FilterDropdownSelectTrigger onClick={handleTriggerClick}>
-          <FilterDropdownSelectValue>
-            {selectedValues.length === 0
-              ? `All ${label}`
-              : `${selectedValues.length} selected`}
-          </FilterDropdownSelectValue>
-          <ChevronDown size={16} />
-        </FilterDropdownSelectTrigger>
+    <ThemeProvider theme={appTheme}>
+      <FilterDropdownFilterGroup>
+        <FilterDropdownSelectContainer
+          data-dropdown-container="true"
+          onClick={handleContainerClick}
+        >
+          <FilterDropdownSelectTrigger onClick={handleTriggerClick}>
+            <FilterDropdownSelectValue>
+              {selectedValues.length === 0
+                ? `All ${label}`
+                : `${selectedValues.length} selected`}
+            </FilterDropdownSelectValue>
+            <ChevronDown size={16} />
+          </FilterDropdownSelectTrigger>
 
-        {isOpen && (
-          <FilterDropdownSelectContent
-            className="filter-content"
-            onMouseDown={handleContentMouseDown}
-            onClick={handleContainerClick}
-          >
-            <SelectItemsContainer>
-              <FilterDropdownSelectItem
-                onClick={(e) => handleItemClick(e, "all")}
-                selected={selectedValues.length === 0}
-              >
-                All {label}
-              </FilterDropdownSelectItem>
+          {isOpen && (
+            <FilterDropdownSelectContent
+              className="filter-content"
+              onMouseDown={handleContentMouseDown}
+              onClick={handleContainerClick}
+            >
+              <SelectItemsContainer>
+                <FilterDropdownSelectItem
+                  onClick={(e) => handleItemClick(e, "all")}
+                  selected={selectedValues.length === 0}
+                >
+                  All {label}
+                </FilterDropdownSelectItem>
 
-              {options.map((option) => {
-                const isSelected = selectedValues.includes(option);
-                return (
-                  <FilterDropdownSelectItem
-                    key={option}
-                    onClick={(e) => handleItemClick(e, option)}
-                    selected={isSelected}
-                  >
-                    {option}
-                  </FilterDropdownSelectItem>
-                );
-              })}
-            </SelectItemsContainer>
-          </FilterDropdownSelectContent>
-        )}
-      </FilterDropdownSelectContainer>
-    </FilterDropdownFilterGroup>
+                {options.map((option) => {
+                  const isSelected = selectedValues.includes(option);
+                  return (
+                    <FilterDropdownSelectItem
+                      key={option}
+                      onClick={(e) => handleItemClick(e, option)}
+                      selected={isSelected}
+                    >
+                      {option}
+                    </FilterDropdownSelectItem>
+                  );
+                })}
+              </SelectItemsContainer>
+            </FilterDropdownSelectContent>
+          )}
+        </FilterDropdownSelectContainer>
+      </FilterDropdownFilterGroup>
+    </ThemeProvider>
   );
 };
 
