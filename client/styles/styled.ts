@@ -46,6 +46,7 @@ export const inputStyles = (theme: Theme) => css`
   background-color: ${theme.colors.default.primaryBackground};
   padding: ${theme.spacing[2]} ${theme.spacing[3]};
   font-size: ${theme.fontSizes.sm};
+  font-family: ${theme.fonts};
   color: ${theme.colors.default.primary};
   transition: ${theme.transitions.colors};
 
@@ -87,6 +88,11 @@ const baseButtonStyles = (theme: Theme) => css`
   border: none;
   text-decoration: none;
   position: relative;
+
+  &:hover {
+    background-color: ${theme.colors.default.muted};
+    color: ${theme.colors.default.primaryBackground};
+  }
 
   &:disabled {
     opacity: 0.5;
