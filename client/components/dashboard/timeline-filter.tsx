@@ -135,7 +135,8 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
 
 
   return (
-    <TimeLineFilterGroup>
+    <ThemeProvider theme={appTheme}>
+      <TimeLineFilterGroup>
       <TimeLineSelectContainer data-dropdown-container>
         <TimeLineSelectTrigger onClick={onToggle}>
           <TimeLineSelectValue>
@@ -286,7 +287,8 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
           </TimeLineFilterContent>
         )}
       </TimeLineSelectContainer>
-    </TimeLineFilterGroup>
+      </TimeLineFilterGroup>
+    </ThemeProvider>
   );
 };
 
