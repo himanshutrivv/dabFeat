@@ -643,13 +643,14 @@ export const ErrorContainer = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  gap: 16px;
-  background-color: hsl(var(--background));
+  gap: ${({ theme }) => theme.spacing?.[4]};
+  background-color: ${({ theme }) => theme.colors.default?.primaryBackground};
 `;
 
 export const ErrorText = styled.div`
-  color: hsl(var(--destructive));
-  font-size: 16px;
+  color: ${({ theme }) => theme.colors.default?.destructive};
+  font-size: ${({ theme }) => theme.fontSizes?.base};
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 // Filter Dropdown Components
