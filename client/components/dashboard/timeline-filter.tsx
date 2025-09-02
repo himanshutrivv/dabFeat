@@ -149,8 +149,8 @@ const TimelineFilter: React.FC<TimelineFilterProps> = ({
     <ThemeProvider theme={theme}>
       <TimeLineFilterGroup>
         <TimeLineSelectContainer data-dropdown-container>
-          <TimeLineSelectTrigger onClick={onToggle}>
-            <TimeLineSelectValue>
+          <TimeLineSelectTrigger theme={theme} onClick={onToggle}>
+            <TimeLineSelectValue theme={theme}>
               {startDateTime && endDateTime
                 ? "Custom Range"
                 : "Select Time Range"}
