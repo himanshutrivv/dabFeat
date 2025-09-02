@@ -112,7 +112,7 @@ export const FilterCardSubtitle = styled.p`
 `;
 
 export const FilterContainer = styled.div<{ show: boolean }>`
-  padding: 24px;
+  padding: ${({ theme }) => theme.spacing?.[6]};
   background: transparent;
   display: ${(props) => (props.show ? "block" : "none")};
   position: relative;
