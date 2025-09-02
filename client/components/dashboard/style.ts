@@ -164,13 +164,14 @@ export const FilterGrid = styled.div`
 export const FilterGroup = styled.div``;
 
 export const FilterLabel = styled.label`
-  font-size: 14px;
-  font-weight: 600;
-  color: hsl(var(--foreground));
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  font-weight: ${({ theme }) => theme.fontWeights?.semibold};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: ${({ theme }) => theme.spacing?.[2]};
+  margin-bottom: ${({ theme }) => theme.spacing?.[2]};
 `;
 
 export const ActiveFiltersSection = styled.div`
