@@ -196,16 +196,17 @@ export const ActiveFiltersContainer = styled.div`
 `;
 
 export const FilterBadge = styled.div`
-  background-color: hsl(var(--primary) / 0.15);
-  color: hsl(var(--primary));
-  border: 1px solid hsl(var(--primary) / 0.3);
-  padding: 8px 12px;
+  background-color: ${({ theme }) => theme.colors.default?.secondaryBackground};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  border: 1px solid ${({ theme }) => theme.colors.default?.primary};
+  padding: ${({ theme }) => theme.spacing?.[2]} ${({ theme }) => theme.spacing?.[3]};
   display: flex;
   align-items: center;
-  gap: 8px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
+  gap: ${({ theme }) => theme.spacing?.[2]};
+  border-radius: ${({ theme }) => theme.borderRadius?.full};
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  font-weight: ${({ theme }) => theme.fontWeights?.medium};
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 export const FilterBadgeClose = styled.button`
