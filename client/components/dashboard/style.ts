@@ -175,16 +175,17 @@ export const FilterLabel = styled.label`
 `;
 
 export const ActiveFiltersSection = styled.div`
-  margin-top: 16px;
+  margin-top: ${({ theme }) => theme.spacing?.[4]};
   padding: 0;
   border-top: none;
 `;
 
 export const ActiveFiltersLabel = styled.div`
-  font-size: 14px;
-  font-weight: 600;
-  color: hsl(var(--foreground));
-  margin-bottom: 12px;
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  font-weight: ${({ theme }) => theme.fontWeights?.semibold};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
+  margin-bottom: ${({ theme }) => theme.spacing?.[3]};
 `;
 
 export const ActiveFiltersContainer = styled.div`
