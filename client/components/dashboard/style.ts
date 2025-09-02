@@ -812,6 +812,7 @@ export const TimeLineSelectValue = styled.span<{ theme?: any }>`
   color: ${({ theme }) =>
     theme?.colors?.default?.foreground || "hsl(var(--foreground))"};
   font-weight: ${({ theme }) => theme?.fontWeights?.medium || "500"};
+  font-family: ${({ theme }) => theme?.fonts || "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto"};
 `;
 
 export const TimeLineSelectContent = styled.div<{ theme?: any }>`
@@ -855,19 +856,7 @@ export const TimeLineInput = styled.input<{ theme?: any }>`
   border-radius: 12px;
   color: hsl(var(--foreground));
   font-size: 14px;
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    Noto Sans,
-    Ubuntu,
-    Cantarell,
-    Helvetica Neue,
-    Arial,
-    "Apple Color Emoji",
-    "Segoe UI Emoji";
+  font-family: ${({ theme }) => theme?.fonts || "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'"};
   transition:
     box-shadow 0.2s ease,
     border-color 0.2s ease;
@@ -876,7 +865,7 @@ export const TimeLineInput = styled.input<{ theme?: any }>`
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
   &:hover {
-    border-color: hsl(var(--accent));
+    border-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
   }
 
   &:focus {
@@ -941,19 +930,13 @@ export const TimeLineButton = styled.button<{
         `;
       default:
         return css`
-          background: linear-gradient(
-            135deg,
-            hsl(215, 25%, 27%) 0%,
-            hsl(215, 25%, 20%) 100%
-          );
-          color: #ffffff;
-          border: 1px solid hsl(215, 25%, 35%);
+          background-color: ${props.theme?.colors?.default?.primary ||
+          "hsl(var(--primary))"};
+          color: ${props.theme?.colors?.default?.primaryForeground ||
+          "hsl(var(--primary-foreground))"};
           &:hover {
-            background: linear-gradient(
-              135deg,
-              hsl(215, 25%, 35%) 0%,
-              hsl(215, 25%, 27%) 100%
-            );
+            background-color: ${props.theme?.colors?.default?.primary ||
+            "hsl(var(--primary))"} / 0.9;
           }
         `;
     }
@@ -1682,7 +1665,7 @@ export const FilterModalSectionSearchInput = styled.input<{
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
   &:hover {
-    border-color: hsl(var(--accent));
+    border-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
   }
 
   &:focus {
@@ -1835,7 +1818,7 @@ export const FilterModalManualInput = styled.input<{ theme?: any }>`
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
   &:hover {
-    border-color: hsl(var(--accent));
+    border-color: ${({ theme }) => theme?.colors?.default?.accent || "hsl(var(--accent))"};
   }
 
   &:focus {
