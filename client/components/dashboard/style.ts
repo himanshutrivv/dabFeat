@@ -699,8 +699,9 @@ export const FilterDropdownSelectTrigger = styled.button`
 `;
 
 export const FilterDropdownSelectValue = styled.span`
-  color: #374151;
-  font-weight: 500;
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-weight: ${({ theme }) => theme.fontWeights?.medium};
+  font-family: ${({ theme }) => theme.fonts};
 `;
 
 export const FilterDropdownSelectContent = styled.div`
