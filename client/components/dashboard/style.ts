@@ -94,19 +94,21 @@ export const FilterCardHeader = styled.div`
 `;
 
 export const FilterCardTitle = styled.h2`
-  font-size: 18px;
-  font-weight: 600;
-  color: hsl(var(--foreground));
-  margin: 0 0 8px 0;
+  font-size: ${({ theme }) => theme.fontSizes?.lg};
+  font-weight: ${({ theme }) => theme.fontWeights?.semibold};
+  color: ${({ theme }) => theme.colors.default?.primary};
+  font-family: ${({ theme }) => theme.fonts};
+  margin: 0 0 ${({ theme }) => theme.spacing?.[2]} 0;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacing?.[3]};
 `;
 
 export const FilterCardSubtitle = styled.p`
-  font-size: 14px;
-  color: hsl(var(--muted-foreground));
-  margin: 0 0 16px 0;
+  font-size: ${({ theme }) => theme.fontSizes?.sm};
+  color: ${({ theme }) => theme.colors.default?.muted};
+  font-family: ${({ theme }) => theme.fonts};
+  margin: 0 0 ${({ theme }) => theme.spacing?.[4]} 0;
 `;
 
 export const FilterContainer = styled.div<{ show: boolean }>`
