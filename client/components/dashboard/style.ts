@@ -89,8 +89,8 @@ export const FilterCard = styled.div`
 `;
 
 export const FilterCardHeader = styled.div`
-  padding: 24px 24px 0 24px;
-  border-bottom: 1px solid hsl(var(--border) / 0.5);
+  padding: ${({ theme }) => theme.spacing?.[6]} ${({ theme }) => theme.spacing?.[6]} 0 ${({ theme }) => theme.spacing?.[6]};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.default?.mutedBackground};
 `;
 
 export const FilterCardTitle = styled.h2`
