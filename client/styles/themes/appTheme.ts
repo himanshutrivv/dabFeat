@@ -25,6 +25,7 @@ export type AppTheme = {
   };
   fontSizes: {
     base: string;
+    xs: string;
     sm: string;
     lg: string;
     xl: string;
