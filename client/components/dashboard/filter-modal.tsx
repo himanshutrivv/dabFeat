@@ -414,14 +414,14 @@ const FilterModal: React.FC<FilterModalProps> = ({
           </FilterModalSectionContent>
         </FilterModalContent>
 
-        <FilterModalFooter>
-          <FilterModalButtonContainer>
+        <FilterModalFooter theme={theme}>
+          <FilterModalButtonContainer theme={theme}>
             {activeFilters.length > 0 && (
-              <FilterModalButton variant="outline" onClick={handleClearAll}>
+              <FilterModalButton theme={theme} variant="outline" onClick={handleClearAll}>
                 Clear All Filters ({activeFilters.length})
               </FilterModalButton>
             )}
-            <FilterModalButton onClick={handleApplyFilters}>
+            <FilterModalButton theme={theme} onClick={handleApplyFilters}>
               Apply Filters
             </FilterModalButton>
           </FilterModalButtonContainer>
