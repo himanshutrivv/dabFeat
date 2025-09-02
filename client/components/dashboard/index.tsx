@@ -696,23 +696,23 @@ export default function TaskManagementDashboard() {
     <>
       <Global styles={globalStyles()} />
       <DashboardContainer theme={theme}>
-        <MainContent>
-          <MainContentLayout>
+        <MainContent theme={theme}>
+          <MainContentLayout theme={theme}>
             {(hasSearchableColumns || hasFilterableColumns) && (
-              <FilterCard>
-                <FilterCardHeader>
-                  <FilterCardTitle>
+              <FilterCard theme={theme}>
+                <FilterCardHeader theme={theme}>
+                  <FilterCardTitle theme={theme}>
                     <Filter size={20} />
                     Filter & Search
                   </FilterCardTitle>
-                  <FilterCardSubtitle>
+                  <FilterCardSubtitle theme={theme}>
                     Filter your data by categories, search through records, or
                     set time ranges to find exactly what you need
                   </FilterCardSubtitle>
                 </FilterCardHeader>
 
-                <FilterContainer show={true}>
-                  <FilterGrid>
+                <FilterContainer show={true} theme={theme}>
+                  <FilterGrid theme={theme}>
                     <TimelineFilter
                       startDateTime={startDateTime}
                       endDateTime={endDateTime}
@@ -759,12 +759,13 @@ export default function TaskManagementDashboard() {
                     </FilterGroup>
                   </FilterGrid>
 
-                  <SearchBarContainer>
-                    <SearchInputWrapper>
-                      <SearchIcon>
+                  <SearchBarContainer theme={theme}>
+                    <SearchInputWrapper theme={theme}>
+                      <SearchIcon theme={theme}>
                         <Search size={20} />
                       </SearchIcon>
                       <SearchInput
+                        theme={theme}
                         type="text"
                         placeholder={
                           hasSearchableColumns
@@ -784,6 +785,7 @@ export default function TaskManagementDashboard() {
                       />
                     </SearchInputWrapper>
                     <SearchButton
+                      theme={theme}
                       onClick={
                         hasSearchableColumns ? handleSearchClick : undefined
                       }
@@ -798,6 +800,7 @@ export default function TaskManagementDashboard() {
                       Search
                     </SearchButton>
                     <RefreshButton
+                      theme={theme}
                       onClick={handleRefreshClick}
                       disabled={isRefreshing}
                       title="Refresh monitoring data (current time - 15 minutes)"
