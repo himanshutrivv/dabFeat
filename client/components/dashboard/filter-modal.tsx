@@ -70,6 +70,7 @@ interface FilterModalProps {
   onClearAllFilters: () => void;
   onToggleFilterSection: (key: string) => void;
   onApplyFilters: () => Promise<void>;
+  theme: AppTheme;
 }
 
 const FilterModal: React.FC<FilterModalProps> = ({
